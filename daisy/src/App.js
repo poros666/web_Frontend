@@ -1,10 +1,13 @@
 import React from 'react';
+import { Button } from "antd"
+import "antd/dist/antd.css"
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <Button type="primary"> antd按钮测试1 </Button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
