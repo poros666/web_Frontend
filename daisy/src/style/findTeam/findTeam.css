@@ -1,0 +1,33 @@
+#TurnPage{
+    text-align: center;
+}
+
+#Title{
+    text-align: left;
+    color: darkturquoise;
+    font-size: 25px;
+}
+
+#Content{
+    text-align: left;
+    font-size: 15px;
+}
+
+#matchName{
+    font-size: 30px;
+    float: left;;
+}
+
+img{
+    text-align: center;
+}
+
+h2{
+    text-align: left;
+    color: darkturquoise;
+}
+
+h3{
+    text-align: left;
+    color: darkturquoise;
+}
