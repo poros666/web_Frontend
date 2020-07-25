@@ -18,7 +18,6 @@ export default class AdminIndex extends Component {
                     <img src={logo} alt="logo"/>
                     <h1>DAISY 后台</h1>
                 </div>
-
               </Header>
               <Layout>
                 <Sider width={200} className="site-layout-background">
