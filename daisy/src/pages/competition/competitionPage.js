@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Button, Col, Row, Space } from "antd"
+import { Col, Pagination, Button } from "antd"
+import 'antd/dist/antd.css'
 import Footer from '../../components/comm/Footer'
 import Header from '../../components/comm/HeaderNav'
-import Helper from '../../components/comm/FloatHelper'
-
+//import Helper from '../../components/comm/FloatHelper'
+import './style/competitionPage.css'
+import TextArea from 'antd/lib/input/TextArea'
 
 export default class CompetitionPage extends Component 
 {
@@ -12,25 +14,14 @@ export default class CompetitionPage extends Component
         return (
             <div class='CompetitionPage'>
                 <Header></Header>
-                    <Row>
-                    <Col span={8}>
-                        <this.competitionImage></this.competitionImage>
-                    </Col>
-                    <Col span={8}>
-                        <this.competitionName></this.competitionName>
-                    </Col>
-                    <Col span={8}>
-                        <this.findTeamBotton></this.findTeamBotton>
-                    </Col>
-                </Row>
-                <Col span={20} offset={2}>
-                    <this.competitionInformation></this.competitionInformation>
-                </Col>
-                <Col span={20} offset={2}>
-                    <this.raiseDiscuss></this.raiseDiscuss>
-                </Col>
-                <Col span={20} offset={2}>
-                    <this.discussList></this.discussList>
+                <this.competitionImage></this.competitionImage>
+                <this.competitionName></this.competitionName>
+                <this.findTeamBotton></this.findTeamBotton>
+                <this.competitionInformation></this.competitionInformation>
+                <this.raiseDiscuss></this.raiseDiscuss>
+                <this.discussList></this.discussList>
+                <Col offset={8}>
+                    <Pagination showQuickJumper defaultCurrent={1} total={500}/>
                 </Col>
                 <Footer></Footer>
             </div>
@@ -39,7 +30,7 @@ export default class CompetitionPage extends Component
 
     competitionImage()  {
         return (
-            <div>
+            <div className='comPageImageBox'>
                 <image>比赛图片</image>
             </div>
         )
@@ -49,7 +40,7 @@ export default class CompetitionPage extends Component
     competitionName()
     {
         return (
-            <div>
+            <div className='comPageNameBox'>
                 <h1>比赛名字</h1>
             </div>
         )
@@ -57,7 +48,7 @@ export default class CompetitionPage extends Component
 
     findTeamBotton(){
         return (
-            <div>
+            <div className='comPageFindTeamBox'>
                 <Button>组队</Button>
             </div>
         )
@@ -66,23 +57,41 @@ export default class CompetitionPage extends Component
 
     competitionInformation()
     {
-        return <h1>比赛简介</h1>
+        return(
+            <div className='comPageIntrouduceBox'>
+                <h1>比赛简介</h1>
+                <p>
+                    阿巴阿巴阿巴<br/>
+                    阿巴阿巴阿巴<br/>
+                    阿巴阿巴阿巴<br/>
+                    阿巴阿巴阿巴<br/>
+                </p>
+            </div>
+        )
     }
 
     raiseDiscuss()
     {
-        return <input></input>
+        return (
+            <div className='comPageDiscussBox'>
+                <TextArea
+                placeholder="‘在此输入你的讨论内容’"
+                autoSize={{ minRows: 5, maxRows: 20 }}
+                allowClear
+                ></TextArea>
+            </div>
+        )
     }
 
     discussList()
     {
         return (
-            <ul>
-                <li>23333333333</li>
-                <li>23333333333</li>
-                <li>23333333333</li>
-                <li>23333333333</li>
-            </ul>
+            <div className='comPageDiscussBorad'>
+                <div className='comPageDiscussTextBox'></div>
+                <div className='comPageDiscussTextBox'></div>
+                <div className='comPageDiscussTextBox'></div>
+                <div className='comPageDiscussTextBox'></div>
+            </div>
         )
     }
 }
