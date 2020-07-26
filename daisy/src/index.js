@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 //import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Community from './pages/community/community';
+//import Community from './pages/community/Community';
+import ReadPost from './pages/community/ReadPost'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Community />
+    <ReadPost />
   </React.StrictMode>,
   document.getElementById('root')
 );

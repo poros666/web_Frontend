@@ -7,9 +7,10 @@ import CommunityContent from './CommunityContent'
 export default class Community extends Component {
     render() {
         return (
-            <div>
+            <div >
                 <HeaderNav/>
                 <FloatHelper/>
+
                 <CommunityContent/>
                 <Footer/>
             </div>

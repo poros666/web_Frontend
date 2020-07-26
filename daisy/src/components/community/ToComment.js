@@ -1,4 +1,7 @@
+//这里整了一个评论框
+
 import React from 'react';
+//import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import moment from 'moment';
@@ -17,10 +20,7 @@ const CommentList = ({ comments }) => (
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
-      <TextArea rows={1} onChange={onChange} value={value}  style={{width: '100%', resize: 'none'}} placeholder="标题"/>
-      <br/>
-      <br/>
-      <TextArea rows={8} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} placeholder="正文"/>
+      <TextArea rows={4} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} />
     </Form.Item>
     <Form.Item>
       <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
@@ -30,7 +30,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
-export default class CreatePost extends React.Component {
+export default class ToComment extends React.Component {
   state = {
     comments: [],
     submitting: false,

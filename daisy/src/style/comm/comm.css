@@ -1,0 +1,16 @@
+.Body{
+    margin: 50px 50px 50px 50px;
+    background: #ececec;
+}
+
+.site-card-border-less-wrapper {
+    padding: 30px;
+    background: #ececec;
+  }
+
+  .middle{
+    margin: 10px 50px 10px 50px;
+}
+.backcolor{
+    background-color: #ececec;
+}
