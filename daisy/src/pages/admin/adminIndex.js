@@ -7,7 +7,6 @@ import '../../style/admin.css'
 import logo from './xiaohua.png'
 import {Route, Link } from 'react-router-dom';
 import { adminRoutes } from '../../routes/index'
-import CompManagement from './compManagement';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -30,9 +29,14 @@ export default class AdminIndex extends Component {
                     defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderRight: 0 }}
                   >
-                    <Menu.Item key="1"><Link to="/admin/comp">比赛管理</Link></Menu.Item>
+                    {
+                      adminRoutes.map((item,index)=>{
+                        return (<Menu.Item key={index}><Link to={item.path}>{item.title}</Link></Menu.Item>)
+                      })
+                    }
+                    {/* <Menu.Item key="1"><Link to="/admin/comp">比赛管理</Link></Menu.Item>
                     <Menu.Item key="2"><Link to="/admin/dealreport">处理举报</Link></Menu.Item>
-                    <Menu.Item key="3"><Link to="/admin/usermanagement">用户管理</Link></Menu.Item>
+                    <Menu.Item key="3"><Link to="/admin/usermanagement">用户管理</Link></Menu.Item> */}
                   </Menu>
                 </Sider>
                 <Layout style={{ padding: '16px' }}>              
@@ -44,7 +48,12 @@ export default class AdminIndex extends Component {
                       minHeight: 280,
                     }}
                   >
-                    <Route path="/admin/comp" component={CompManagement}/>
+                    {
+                      adminRoutes.map((item,index)=>{
+                        return (<Route key={index} path={item.path} component={item.component}/>)
+                      })
+                    }
+                    {/* <Route path="/admin/comp" component={CompManagement}/> */}
                   </Content>
                 </Layout>
               </Layout>

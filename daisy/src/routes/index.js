@@ -9,19 +9,19 @@ export const mainRoutes = [{
     component: PageNotFound
 }]
 
-export const adminRoutes = [{
-    path: "/admin",
-    component: AdminIndex
-},
+export const adminRoutes = [
 {
     path: "/admin/comp",
+    title: "比赛管理",
     component: CompManagement
 },
 {
     path: "/admin/dealreport",
+    title: "处理举报",
     component: DealReport
 },
 {
     path: "/admin/usermanagement",
+    title: "用户管理",
     component: UserManagement
 }]
