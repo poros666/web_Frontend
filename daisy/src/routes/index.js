@@ -1,4 +1,4 @@
-import AdminIndex from "../pages/admin/adminIndex";
+//import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
 import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
