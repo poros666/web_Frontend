@@ -1,24 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-<<<<<<< HEAD
-<<<<<<< HEAD
-//import App from './App';
-import * as serviceWorker from './serviceWorker';
-//import Community from './pages/community/Community';
-import ReadPost from './pages/community/ReadPost'
-
-ReactDOM.render(
-  <React.StrictMode>
-    <ReadPost />
-  </React.StrictMode>,
-=======
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
 import * as serviceWorker from './serviceWorker'
 import { HashRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import { mainRoutes } from './routes/index'
 import { adminRoutes } from './routes/index'
-import AdminIndex from './pages/admin/adminIndex';
+import AdminIndex from './pages/admin/adminIndex'
 
 ReactDOM.render(
   <Router>
@@ -30,7 +17,6 @@ ReactDOM.render(
       <Redirect to="/404"/>
     </Switch>
   </Router>,
->>>>>>> cfe0ac5eda60f4ddf3140623aec71881da60db56
   document.getElementById('root')
 );
 
