@@ -1,21 +1,52 @@
+import { Comment, Avatar, Form, Button, List, Input } from 'antd';
+import moment from 'moment';
 import React, { Component } from 'react'
-import {Input} from 'antd'
-import { Button} from 'antd'
+import { UserOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 
-export default class PublishPost extends Component {
+const CommentList = ({ comments }) => (
+  <List
+    dataSource={comments}
+    header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
+    itemLayout="horizontal"
+    renderItem={props => <Comment {...props} />}
+  />
+);
+
+const Editor = () => (
+  <>
+    <Form.Item>
+      <TextArea rows={1} placeholder='帖子标题'/>
+    </Form.Item>
+    <Form.Item>
+      <TextArea rows={4} placeholder='帖子内容'/>
+    </Form.Item>
+    <Form.Item>
+      <Button>
+        发布帖子
+      </Button>
+    </Form.Item>
+  </>
+);
+
+export default class publishPost extends Component {
     render() {
         return (
             <>
-            <h3>创建帖子</h3>
-            <div>
-                <TextArea rows={1} placeholder='发帖标题'/>
-                <Button shape='round'>插入图片</Button>
-                <br/>
-                <TextArea rows={5} placeholder='发帖内容'/>
-            </div>
-            </>
+            <Comment
+              author={<p id='UserName'>UserName</p>}
+              avatar={
+                <Avatar size={56}
+                  icon={<UserOutlined />} 
+                  alt="Han Solo"
+                />
+              }
+              content={
+                <Editor/>
+              }
+            />
+          </>
         )
     }
 }

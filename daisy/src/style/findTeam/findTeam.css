@@ -1,3 +1,12 @@
+#PublishPost{
+    background-color:lightcyan;
+}
+
+#PostList{
+    background-color: rgb(212, 236, 252);
+    height:800px;
+}
+
 #TurnPage{
     text-align: center;
 }
@@ -10,24 +19,43 @@
 
 #Content{
     text-align: left;
-    font-size: 15px;
+    font-size: 12px;
 }
 
-#matchName{
-    font-size: 30px;
-    float: left;;
+#UserInfo{
+    text-align: center;
 }
+
+#UserName{
+    font-size:15px;
+    color:blue;
+    text-align: centet;
+}
+
+#UserName:hover{
+    color:rgb(73, 73, 214);
+}
+
+#Post{
+    height: 1000px;
+}
+
+.site-page-header-ghost-wrapper {
+    background-color: lightcyan;
+    padding: 24px;
+  }
 
 img{
     text-align: center;
 }
 
 h2{
-    text-align: left;
+    text-align: center;
     color: darkturquoise;
 }
 
 h3{
     text-align: left;
-    color: darkturquoise;
+    color: darkblue;
+    font-size:20px;
 }
