@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 <<<<<<< HEAD
+<<<<<<< HEAD
 //import App from './App';
 import * as serviceWorker from './serviceWorker';
 //import Community from './pages/community/Community';
