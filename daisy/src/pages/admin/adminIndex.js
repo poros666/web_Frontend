@@ -1,14 +1,11 @@
 //@author poros666 2020/7/25
 
 import React, { Component } from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
 import '../../style/admin.css'
 import logo from './xiaohua.png'
 import {Route, Link } from 'react-router-dom';
 import { adminRoutes } from '../../routes/index'
-
-const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 export default class AdminIndex extends Component {
