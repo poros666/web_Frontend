@@ -35,6 +35,7 @@ export const mainRoutes = [{
     title: "主页",
     component: Homepage
 },
+
 {
     path: "/post",
     title: "post",
