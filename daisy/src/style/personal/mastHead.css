@@ -1,0 +1,9 @@
+.mastHead{
+    text-align: center;
+    padding: 30px;
+    background: #ececec;
+}
+#mastHead_card{
+    margin: 0 auto;
+    width: 1000px;
+}
