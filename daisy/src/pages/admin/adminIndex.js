@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Layout, Menu } from 'antd';
-import '../../style/admin.css'
+import '../../style/admin/admin.css'
 import logo from './xiaohua.png'
 import {Route, Link } from 'react-router-dom';
 import { adminRoutes } from '../../routes/index'
