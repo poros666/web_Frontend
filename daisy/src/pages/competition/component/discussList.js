@@ -21,6 +21,78 @@ const data = [
       username: 'maoge',
       description:'zzzzzz我睡着了 但是我没有摸鱼'
     },
+    {
+      username: 'zhangsan',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+    },
+    {
+      username: 'lisi',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'kuanye',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'maoge',
+      description:'zzzzzz我睡着了 但是我没有摸鱼'
+    },
+    {
+      username: 'zhangsan',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+    },
+    {
+      username: 'lisi',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'kuanye',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'maoge',
+      description:'zzzzzz我睡着了 但是我没有摸鱼'
+    },
+    {
+      username: 'zhangsan',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+    },
+    {
+      username: 'lisi',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'kuanye',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'maoge',
+      description:'zzzzzz我睡着了 但是我没有摸鱼'
+    },
+    {
+      username: 'zhangsan',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+    },
+    {
+      username: 'lisi',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'kuanye',
+      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+      username: 'maoge',
+      description:'zzzzzz我睡着了 但是我没有摸鱼'
+    },
   ];
 
 
@@ -34,6 +106,12 @@ export default class DiscussList extends Component {
                     <List
                         style={{width: '100%', resize: 'none'}}
                         itemLayout="horizontal"
+                        pagination={{
+                          onChange: page => {
+                            console.log(page);
+                          },
+                          pageSize: 10,position:"bottom"
+                        }}
                         dataSource={data}
                         renderItem={item => (
                         <List.Item>

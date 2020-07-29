@@ -19,9 +19,6 @@ export default class SearchCompetitionPage extends Component{
                 <SortChoose/>
                 <CompetitionList/>
                 </Col>
-                <Col offset={8}>
-                <Pagination showQuickJumper defaultCurrent={1} total={500}></Pagination>
-                </Col>
                 <Footer></Footer>
             </div>
         )

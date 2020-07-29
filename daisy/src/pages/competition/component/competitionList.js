@@ -49,6 +49,12 @@ export default class CompetitionList extends Component {
             <List
               itemLayout="vertical"
               size="large"
+              pagination={{
+                onChange: page => {
+                  console.log(page);
+                },
+                pageSize: 3,position:"both"
+              }}
               dataSource={listData}
               renderItem={item => (
                 <List.Item>

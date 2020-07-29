@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Col, Pagination, Row } from "antd"
+import { Col,  Row } from "antd"
 import 'antd/dist/antd.css'
 import Footer from '../../components/comm/Footer'
 import Header from '../../components/comm/HeaderNav'
@@ -34,9 +34,6 @@ export default class CompetitionPage extends Component
                 <CompetitionInformation/>
                 <RaiseDiscuss/>
                 <DiscussList/>
-                </Col>
-                <Col offset={8}>
-                    <Pagination showQuickJumper defaultCurrent={1} total={500}/>
                 </Col>
                 <Footer></Footer>
             </div>
