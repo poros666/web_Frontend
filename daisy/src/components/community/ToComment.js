@@ -52,7 +52,7 @@ export default class ToComment extends React.Component {
         value: '',
         comments: [
           {
-            author: 'Han Solo',
+            author: 'Han DDDolo',
             avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
             content: <p>{this.state.value}</p>,
             datetime: moment().fromNow(),
