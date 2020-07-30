@@ -5,12 +5,12 @@ import Footer from '../../components/comm/Footer'
 import Header from '../../components/comm/HeaderNav'
 //import Helper from '../../components/comm/FloatHelper'
 
-import CompetitionImage from './component/competitionImage'
-import CompetitionName from './component/competitionName'
-import FindTeamBotton from './component/findTeamButton'
-import CompetitionInformation from './component/competitionInformation'
-import RaiseDiscuss from './component/raiseDiscuss'
-import DiscussList from './component/discussList'
+import CompetitionImage from '../../components/competition/competitionImage'
+import CompetitionName from '../../components/competition/competitionName'
+import FindTeamBotton from '../../components/competition/findTeamButton'
+import CompetitionInformation from '../../components/competition/competitionInformation'
+import RaiseDiscuss from '../../components/competition/raiseDiscuss'
+import DiscussList from '../../components/competition/discussList'
 
 export default class CompetitionPage extends Component 
 {

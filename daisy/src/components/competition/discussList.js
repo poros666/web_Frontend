@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Avatar ,Space,Button} from 'antd';
+import { List, Avatar ,Space,Button, Pagination} from 'antd';
 import 'antd/dist/antd.css';
 
 const data = [
@@ -96,8 +96,8 @@ const data = [
   ];
 
 
-export default class DiscussList extends Component {
-    render() {
+export default class DiscussList extends Component { 
+  render() {
         return (
             <div>
                 <SortDiscuss/>
@@ -110,7 +110,8 @@ export default class DiscussList extends Component {
                           onChange: page => {
                             console.log(page);
                           },
-                          pageSize: 10,position:"bottom"
+                          pageSize: 10,position:"bottom",
+                          defaultCurrent: 1
                         }}
                         dataSource={data}
                         renderItem={item => (
@@ -125,7 +126,7 @@ export default class DiscussList extends Component {
                     />
             </div>
         )
-    }
+  }
 }
 
 
