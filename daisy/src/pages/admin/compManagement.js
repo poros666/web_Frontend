@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Highlighter from "react-highlight-words"
-import { Card, Table, Button, Tag, Space, Input, DatePicker } from "antd"
+import { Card, Table, Button, Tag, Space, Input, Popconfirm } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 
 export default class CompManagement extends Component {
@@ -100,7 +100,18 @@ export default class CompManagement extends Component {
           <Space size="middle">
             {/* <a href="">编辑 {record.name}</a> */}
             <Button>编辑</Button>
-            <Button danger>删除</Button>
+            <Popconfirm
+              title="确认删除此项？"
+              onCancel={() => {
+                console.log("cancel")
+              }}
+              onConfirm={() => {
+                console.log("confirm")
+                //此处调用删除api
+              }}
+            >
+              <Button danger>删除</Button>
+            </Popconfirm>
           </Space>
         ),
       },
@@ -116,7 +127,7 @@ export default class CompManagement extends Component {
         tags: ["未开始"],
       },
       {
-        key: "1",
+        key: "2",
         name: "poros",
         start: "2020/4/14",
         end: "2020/5/14",
@@ -124,7 +135,7 @@ export default class CompManagement extends Component {
         tags: ["未开始"],
       },
       {
-        key: "1",
+        key: "3",
         name: "John Brown",
         start: "2021/3/14",
         end: "2021/4/14",
@@ -132,7 +143,7 @@ export default class CompManagement extends Component {
         tags: ["进行中"],
       },
       {
-        key: "1",
+        key: "4",
         name: "rich brain",
         start: "2020/3/15",
         end: "2020/4/15",
@@ -140,7 +151,7 @@ export default class CompManagement extends Component {
         tags: ["未开始"],
       },
       {
-        key: "1",
+        key: "5",
         name: "John Brown",
         start: "2021/6/15",
         end: "2021/7/15",
@@ -154,7 +165,7 @@ export default class CompManagement extends Component {
         title="比赛管理"
         extra={
           <div>
-            <Button type="primary" style={{ marginRight: 20 }}>
+            <Button type="primary" style={{ marginRight: 20 }} onClick={()=>this.props.history.push("/admin/comp/edit")}>
               Add
             </Button>
             <Button
@@ -191,6 +202,7 @@ export default class CompManagement extends Component {
   }
 
   onSelectChange = (selectedRowKeys) => {
+    console.log("selectedRowKeys changed: ", selectedRowKeys)
     this.setState({ selectedRowKeys })
   }
 
