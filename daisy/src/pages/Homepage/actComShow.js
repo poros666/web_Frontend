@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import {Layout,Row, Col,Divider, Space} from 'antd'
+import {Layout,Row, Col, Space} from 'antd'
 import 'antd/dist/antd.css'
 import ActivityShow from './ActivityShow'
 import CompShow from'./CompShow'
-
-const { Header, Footer, Sider, Content } = Layout;
 
 class ActComShow extends Component {
     // state = {  }

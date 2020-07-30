@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Layout, List, Avatar, Space, Button, Menu, Breadcrumb} from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined, UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Layout, List, Avatar, Space,Menu} from 'antd';
+import { MessageOutlined, LikeOutlined, StarOutlined} from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
@@ -30,7 +30,7 @@ class CommunityShow extends Component {
     state = {  }
     render() { 
         return ( 
-            <div style={{ height: '5500px' , margin:'40px 150px' }}>
+            <div style={{ height: '4500px' , margin:'40px 150px' }}>
                 <Layout>
                     <Layout>
                         <Header>
