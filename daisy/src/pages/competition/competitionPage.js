@@ -3,7 +3,7 @@ import { Col,  Row } from "antd"
 import 'antd/dist/antd.css'
 import Footer from '../../components/comm/Footer'
 import Header from '../../components/comm/HeaderNav'
-//import Helper from '../../components/comm/FloatHelper'
+import Helper from '../../components/comm/FloatHelper'
 
 import CompetitionImage from '../../components/competition/competitionImage'
 import CompetitionName from '../../components/competition/competitionName'
@@ -18,7 +18,8 @@ export default class CompetitionPage extends Component
     {
         return (
             <div class='CompetitionPage'>
-                <Header></Header>
+                <Header/>
+                <Helper/>
                 <Row gutter={16} align={"middle"}>
                     <Col span={7} offset={2}>
                         <CompetitionImage/>
@@ -35,7 +36,7 @@ export default class CompetitionPage extends Component
                 <RaiseDiscuss/>
                 <DiscussList/>
                 </Col>
-                <Footer></Footer>
+                <Footer/>
             </div>
         )
     }
