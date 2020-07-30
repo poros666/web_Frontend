@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../../style/personal/mastHead.css'
-import {Card,Avatar, AutoComplete} from 'antd'
+import {Card,Avatar} from 'antd'
 import {UserOutlined,EditOutlined} from '@ant-design/icons'
 
 export default class MastHead extends Component {

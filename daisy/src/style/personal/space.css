@@ -1,7 +1,7 @@
-#personalSpace{
+.space{
     background-color: #ececec;
 }
-#perSpace_tabs {
+.space_tabs {
     width: 1000px;
     margin: 0 auto;
     height: 500px;
