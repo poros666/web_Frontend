@@ -3,6 +3,12 @@ import 'antd/dist/antd.css';
 import { Card,Avatar,Space,Button } from 'antd';
 import '../../style/comm/comm.css'
 export default class Post extends Component {
+    constructor(){
+        this.state={
+            data:getData()
+        }
+    }
+
     render() {
         return (
             <div className='site-card-border-less-wrapper'>
@@ -11,9 +17,11 @@ export default class Post extends Component {
                     bordered={false} 
                     extra={//之后可以用button之类的包装一下做成超链接
                         //这里的头像要动态生成
-                        <>
-                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />                     
-                        </>
+                        <div align="right">
+                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                            <p>i is kk i think cry</p>                      
+                        </div>
+
                         }
                 >
                 <p>Card content</p>
@@ -46,3 +54,29 @@ function Func() {
       </Space>
     );
   }
+
+  function getData(){
+     return sourceData
+  }
+
+  const sourceData=[
+      {
+        title:"Card title" ,
+        bordered:false ,
+        extra:
+        //之后可以用button之类的包装一下做成超链接
+            //这里的头像要动态生成
+            (
+            <div align="right">
+                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                <p>i is kk i think cry</p>                      
+            </div>
+            ),
+        content:(
+            <p>Card content</p>,
+            <p>Card content</p>,
+            <p>Card content</p>
+        )
+            
+      }
+  ]

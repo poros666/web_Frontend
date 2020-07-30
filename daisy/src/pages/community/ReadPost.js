@@ -10,13 +10,14 @@ import { Comment, Avatar,Tooltip, List } from 'antd';
 import 'antd/dist/antd.css';
 import moment from 'moment';
 import '../../style/comm/comm.css'
-import {BrowserRouter as Router ,Route,Link} from  'react-router-dom'
 
 
 export default class ReadPost extends Component {
     constructor(props){
       super(props)
-      this.state={ }
+      this.state={
+        data:getData()
+       }
     }
 
 
@@ -42,8 +43,6 @@ export default class ReadPost extends Component {
                 {
                     //本体
                 }
-
-
                 <div className='Body'>  
                     <div className='middle'>
                         <Post/>
@@ -60,28 +59,23 @@ export default class ReadPost extends Component {
                         }
                         <List
                             className="comment-list"
-                            header={`${data.length} replies`}
+                            header={`${this.state.data.length} replies`}
                             itemLayout="horizontal"
-                            dataSource={data}//这里的数据源处理一下以后尝试自动生成帖子                    
+                            dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
                             renderItem={item => (
                             <li>
                                 <Comment
                                 className='middle'
-                                actions={item.actions}
+                                actions={ [<span key="comment-list-reply-to-0" onClick={submitComment}>Reply to</span>]}
                                 author={item.author}
-                                avatar={item.avatar}
+                                avatar={
+                                  item.avatar}
                                 content={item.content}
                                 datetime={item.datetime}
                                 />
                             </li>
                             )}
                         />,
-                        <ExampleComment>
-                            <ExampleComment>
-                                <ExampleComment />
-                                <ExampleComment />
-                            </ExampleComment>
-                        </ExampleComment>,
                     </div>
                 </div>
 
@@ -100,33 +94,14 @@ export default class ReadPost extends Component {
 
 
 
-const ExampleComment = ({ children }) => (
-    <Comment
-      actions={[<span key="comment-nested-reply-to">Reply to</span>]}
-      author={<p>Han Solo</p>}
-      avatar={
-        <Avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          alt="Han Solo"
-        />
-      }
-      content={
-        <p>
-          We supply a series of design principles, practical patterns and high quality design
-          resources (Sketch and Axure).
-        </p>
-      }
-    >
-      {children}
-    </Comment>
-  );
-  
 
 
 
-const data = [
+
+
+
+const sourceData = [
     {
-      actions: [<span key="comment-list-reply-to-0">Reply to</span>],
       author: 'Han Solo',
       avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
       content: (
@@ -151,8 +126,7 @@ const data = [
       ),
     },
     {
-      actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-      author: 'Han Solo',
+      author: 'kk',
       avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
       content: (
         <p>
@@ -176,3 +150,17 @@ const data = [
       ),
     },
   ];
+
+  
+
+
+  function getData(){
+    //这里应该要从远端获取这里先随便写一个
+    return sourceData
+  }
+
+
+  
+function submitComment(){
+  console.log("yes")
+}
