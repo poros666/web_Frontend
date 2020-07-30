@@ -46,7 +46,6 @@ class Homepage extends Component {
                 <BackToTop/>
                 <FloatHelper/>
                 <Footer/>
-
             </div>
         )
     }

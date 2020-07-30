@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import {Layout,Row, Col,Divider, Menu, Breadcrumb} from 'antd'
 import 'antd/dist/antd.css'
+import ActivityShow from './ActivityShow'
+import CompShow from'./CompShow'
 
 class actComShow extends Component {
     // state = {  }
@@ -12,21 +14,13 @@ class actComShow extends Component {
                     actComShow
                 </Divider>
                 <Row>
-                    <Col flex={2}>2 / 5</Col>
-                    <Col flex={3}>3 / 5</Col>
-                        {/* <div class='competitionShow'>
-                            <button id='moreComp'>更多</button>
-                            <button id='swapComp'>换一换</button>
-                            <div class='clearFix'></div>
+                    <Col flex={2}>
+                        <ActivityShow/>
+                    </Col>
 
-                            <div class='compList'>
-                                <li>competition competition competition 1 </li>
-                                <li>competition competition competition 2 </li>
-                                <li>competition competition competition 3 </li>
-                                <li>competition competition competition 4 </li>
-                            </div>
-                        </div> */}
-                    
+                    <Col flex={3}>
+                        <CompShow/>
+                    </Col>                 
                 </Row>
             </div>
           );
