@@ -1,13 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import * as serviceWorker from './serviceWorker'
+import { HashRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import { mainRoutes } from './routes/index'
+import { adminRoutes } from './routes/index'
+import AdminIndex from './pages/admin/adminIndex'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <Switch>
+      <Route path="/admin" render={routeProps=><AdminIndex {...routeProps} />}/>
+      {mainRoutes.map(route=>{
+        return <Route key={route.path} {...route}/>
+      })}
+      <Redirect to="/404"/>
+    </Switch>
+  </Router>,
   document.getElementById('root')
 );
 

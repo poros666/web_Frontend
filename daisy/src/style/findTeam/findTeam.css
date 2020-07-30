@@ -3,8 +3,8 @@
 }
 
 #PostList{
-    background-color: rgb(212, 236, 252);
-    height:800px;
+    background-color: snow;
+    height:65%;
 }
 
 #TurnPage{
@@ -38,6 +38,10 @@
 
 #Post{
     height: 1000px;
+}
+
+#Apply{
+    text-align: center;
 }
 
 .site-page-header-ghost-wrapper {
