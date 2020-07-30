@@ -6,9 +6,7 @@ import BackToTop from '../components/comm/BackToTop'
 import Footer from '../components/comm/Footer'
 import HeaderNav from '../components/comm/HeaderNav'
 import FloatHelper from '../components/comm/FloatHelper'
-import actComShow from './Homepage/actComShow'
-import ActivityShow from './Homepage/ActivityShow'
-import CompShow from'./Homepage/CompShow'
+import ActComShow from './Homepage/ActComShow'
 import CommunityShow from'./Homepage/CommunityShow'
 import '../style/homepage.css'
 
@@ -30,18 +28,7 @@ class Homepage extends Component {
         return (
             <div>
                 <HeaderNav/>
-                <div class='actComShow' > 
-                    {/* ant栅栏：左边为活动展示区，右边为比赛展示区 */}
-                    <actComShow/>
-                    <Row>
-                        <Col flex={2}>2 / 5</Col>
-                        <Col flex={3}>3 / 5</Col>
-                    </Row>
-                    {/* <div class='activityShow'>
-                        <li>activityShow </li>
-                        <img src="../public/activityPicture.jpg" alt="该图片未加载成功"></img>
-                    </div>*/}
-                </div>
+                <ActComShow/>
                 <CommunityShow/>
                 <BackToTop/>
                 <FloatHelper/>

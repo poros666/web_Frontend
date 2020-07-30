@@ -1,30 +1,35 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import {Layout,Row, Col,Divider, Menu, Breadcrumb} from 'antd'
+import {Layout,Row, Col,Divider, Space} from 'antd'
 import 'antd/dist/antd.css'
 import ActivityShow from './ActivityShow'
 import CompShow from'./CompShow'
 
-class actComShow extends Component {
+const { Header, Footer, Sider, Content } = Layout;
+
+class ActComShow extends Component {
     // state = {  }
     render() { 
         return (
-            <div>
-                <Divider orientation="left" style={{ color: '#333', fontWeight: 'normal' }}>
+            <div style={{height: '450px', margin:'40px 150px',border:'2px gray solid'}}>
+                {/* <Divider orientation="left" style={{ color: '#333', fontWeight: 'normal' }}>
                     actComShow
-                </Divider>
-                <Row>
-                    <Col flex={2}>
-                        <ActivityShow/>
-                    </Col>
+                </Divider> */}
+                <Space size='100px'>
+                    <Row>
+                        <Col flex={2}>
+                            <ActivityShow/>
+                        </Col>
 
-                    <Col flex={3}>
-                        <CompShow/>
-                    </Col>                 
-                </Row>
+                        <Col flex={3}>
+                            <CompShow/>
+                        </Col>                 
+                    </Row>
+                </Space>
+
             </div>
           );
     }
 }
  
-export default actComShow;
+export default ActComShow;
