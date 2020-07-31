@@ -9,22 +9,29 @@ class ActComShow extends Component {
     // state = {  }
     render() { 
         return (
-            <div style={{height: '450px', margin:'40px 150px',border:'2px gray solid'}}>
-                {/* <Divider orientation="left" style={{ color: '#333', fontWeight: 'normal' }}>
-                    actComShow
-                </Divider> */}
-                <Space size='100px'>
-                    <Row>
-                        <Col flex={2}>
-                            <ActivityShow/>
-                        </Col>
+            <div style={{height: '450px', margin:'40px 150px'
+            // ,border:'2px gray solid'
+            }}>
+                
+                {/* 24栅栏 2:3 → 9:15 */}
+                <Row>
+                    <Col span={10} offset={0}>
+                        <ActivityShow/>
+                    </Col>
+                    <Col span={12} offset={2}>
+                        <CompShow/>
+                    </Col>
+                </Row>
 
-                        <Col flex={3}>
-                            <CompShow/>
-                        </Col>                 
-                    </Row>
-                </Space>
+                {/* <Row>
+                    <Col flex={2}>
+                        <ActivityShow/>
+                    </Col>
 
+                    <Col flex={3}>
+                        <CompShow/>
+                    </Col>                 
+                </Row> */}
             </div>
           );
     }

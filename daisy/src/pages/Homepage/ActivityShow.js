@@ -9,13 +9,15 @@ class ActivityShow extends Component {
     state = {  }
     render() { 
         return ( 
-            <div style={{height: '400px',width:'400px',margin:'10px 10px'}}>
+            // <div style={{height: '400px',width:'400px',padding:'10px 10px',margin:'10px 10px'}}>
+            <div style={{height: '400px',margin:'10px 10px'}}>
                 <Layout>
                     <Content>
                     <img
-                        width={272}
+                        width={400}
+                        height={300}
                         alt="logo"
-                        src='.\communityPicture.jpg'
+                        src='./activityPicture_1.png'
                      />
                     </Content>
                     <Footer>

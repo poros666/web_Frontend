@@ -30,7 +30,7 @@ class CommunityShow extends Component {
     state = {  }
     render() { 
         return ( 
-            <div style={{ height: '4500px' , margin:'40px 150px' }}>
+            <div style={{ height: '5300px' , margin:'40px 150px' }}>
                 <Layout>
                     <Layout>
                         <Header>
