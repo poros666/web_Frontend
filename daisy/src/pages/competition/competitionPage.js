@@ -12,8 +12,13 @@ import CompetitionInformation from '../../components/competition/competitionInfo
 import RaiseDiscuss from '../../components/competition/raiseDiscuss'
 import DiscussList from '../../components/competition/discussList'
 
+
 export default class CompetitionPage extends Component 
 {
+    constructor(props){
+        super(props);
+    }
+
     render() 
     {
         return (
@@ -26,21 +31,24 @@ export default class CompetitionPage extends Component
                     </Col>
                     <Col span={6}>
                         <CompetitionName/>
+                        <div>
+                            {this.props.match.params.compID}
+                        </div>
                     </Col>
                     <Col span={7}>
-                        <FindTeamBotton/>
+                        <FindTeamBotton compID={this.props.match.params.compID}/>
                     </Col>
                 </Row>
                 <Col offset={2} span={20}>
                 <CompetitionInformation/>
-                <RaiseDiscuss/>
-                <DiscussList/>
+                <RaiseDiscuss compID={this.props.match.params.compID}/>
+                <DiscussList compID={this.props.match.params.compID}/>
                 </Col>
                 <Footer/>
             </div>
         )
     }
 
-   
+  
    
 }

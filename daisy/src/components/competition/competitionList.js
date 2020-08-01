@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {List} from 'antd'
 import 'antd/dist/antd.css';
+import { Link } from 'react-router-dom';
 
 const listData = [
     {
-        href: 'https://ant.design',
+        ID:1,
         logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
         competitionname: 'ant design part 1',
         description:
@@ -13,7 +14,7 @@ const listData = [
           'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
     },
     {
-        href: 'https://ant.design',
+        ID:2,
         logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
         competitionname: 'ant design part 1',
         description:
@@ -22,7 +23,7 @@ const listData = [
           'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
     },
     {
-        href: 'https://ant.design',
+        ID:3,
         logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
         competitionname: 'ant design part 1',
         description:
@@ -31,7 +32,7 @@ const listData = [
           'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
     },
     {
-        href: 'https://ant.design',
+        ID:4,
         logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
         competitionname: 'ant design part 1',
         description:
@@ -64,7 +65,8 @@ export default class CompetitionList extends Component {
                       src={item.logosrc}
                     />
                     <List.Item.Meta
-                    title={<a href={item.href}>{item.competitionname}</a>}
+                    title={<Link to={"/compPage/"+item.ID}>{item.competitionname}</Link>
+                    }
                     description={item.description}
                     />
                     {item.content}
@@ -73,5 +75,15 @@ export default class CompetitionList extends Component {
             />
             </div>
         )
+    }
+
+    handleChangePage(CompID)
+    {
+      this.context.router.push(
+        {
+          path:'#/compPage/'+CompID,
+          ID:CompID
+        }
+      )
     }
 }

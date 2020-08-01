@@ -94,10 +94,12 @@ const data = [
       description:'zzzzzz我睡着了 但是我没有摸鱼'
     },
   ];
-
+var discussList=[]
 
 export default class DiscussList extends Component { 
+
   render() {
+    getDiscussList(this.props.compID)
         return (
             <div>
                 <SortDiscuss/>
@@ -113,11 +115,12 @@ export default class DiscussList extends Component {
                           pageSize: 10,position:"bottom",
                           defaultCurrent: 1
                         }}
-                        dataSource={data}
+                        dataSource={discussList}
                         renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
                                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                                //之后要改成用户页面路径
                                 title={<a href="https://ant.design">{item.username}</a>}
                                 description={<p>{item.description}</p>}
                             />
@@ -129,6 +132,11 @@ export default class DiscussList extends Component {
   }
 }
 
+
+function getDiscussList(ID)//这里用来查询
+{
+    discussList=data
+}
 
 function SortDiscuss() {
     return (

@@ -51,7 +51,7 @@ export const mainRoutes = [{
     component: Community
 },
 {
-    path: "/compPage",
+    path: "/compPage/:compID",
     title: "比赛页面",
     component: CompetitionPage
 },
