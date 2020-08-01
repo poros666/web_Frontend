@@ -1,0 +1,14 @@
+.comPageImageBox{height: 200px;width: 25%;background-color: yellow;float: left;margin-left: 10%;}
+.comPageImageBox img{size: auto;align-self: center;}
+
+.comPageNameBox{height: 200px;width: 30%;background-color: blue;float: left;}
+.comPageNameBox h1{color: red;text-align: center;size: 100px;}
+
+.comPageFindTeamBox{height: 200px;width: 25%;background-color: black;float: left;margin-right: 10%;}
+
+.comPageIntrouduceBox {height: 400px;width:80%;margin: 0 auto;}
+
+.comPageDiscussBox {height: 300px;width: 80%;margin: 0 auto;}
+
+.comPageDiscussBorad{width: 80%;margin: 0 auto;}
+.comPageDiscussTextBox{height: 200px;width: 99%;margin: 0 auto; border: 5px solid cadetblue;}

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class FloatHelper extends Component {
+export default class DealReport extends Component {
     render() {
         return (
             <div>
-                <h1>this is FloatHelper</h1>
+                <h1>this is deal report</h1>
             </div>
         )
     }
