@@ -30,6 +30,10 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
+
+
+
+
 export default class ToComment extends React.Component {
   state = {
     comments: [],
@@ -68,6 +72,9 @@ export default class ToComment extends React.Component {
       value: e.target.value,
     });
   };
+
+
+
 
   render() {
     const { comments, submitting, value } = this.state;

@@ -14,17 +14,66 @@ export default class Community extends Component {
     constructor(props){
         super(props)
  //       console.log('载入data数据')
+      //改为数据请求
+      
+      //再这里绑定元数据
+      this.createPost=this.createPost.bind(this)
+ 
+
+
+
+      var sourceData = [
+        {
+          Uid:110,
+          Pid:1,
+          avatarSrc:'boss',
+          title: 'Ant Design Title 1',
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+        },
+        {
+          Uid:110,
+          Pid:2,
+          avatarSrc:'boss',
+          title: 'Ant Design Title 2',
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+        },
+        {
+          Uid:110,
+          Pid:3,
+          avatarSrc:'boss',
+          title: 'Ant Design Title 3',
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+        },
+        {
+          Uid:110,
+          Pid:4,
+          avatarSrc:'boss',
+          title: 'Ant Design Title 4',
+          description:'zzzzzz我睡着了 但是我没有摸鱼'
+        },
+      ];
+
+
+
+
         this.State={
-          data:getData()
+          data:sourceData
         }
     }
-    componentWillMount(){
-//      console.log('componentWillMount')
-    }
+    // componentWillMount(){
+    // }
 
     componentDidMount(){
  //     console.log('componentDidMount')
     }
+
+    createPost(title,content){
+      console.log(title)
+      console.log(content)
+    }
+    
 
     render() {
 //        console.log('mounting')
@@ -49,35 +98,47 @@ export default class Community extends Component {
                         <br/>
                         <br/>
 
+
                               <List
                                   itemLayout="horizontal"
                                   dataSource={this.State.data}
                                   renderItem={item => (
-                                  <List.Item>
-                                      <List.Item.Meta
-                                        avatar={
-                                          //这里的这个路径之后要改
+                                    <List.Item>
+                                        <List.Item.Meta
+                                          avatar={
 
-                                          //一定记得要改哦
+                                            //头像的来源和指向的地址
+                                            <a href={"#/ReadPost/"+item.Uid}>
+                                              <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
+                                            </a>
+                                          }
 
-                                          <a href={"#/ReadPost/"+item.Uid}>
 
-                                          <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
-                                          </a>
-                                        }
 
-                                          title={<a href ={"#/ReadPost/"+item.Pid}>{item.title}</a>}
 
-                                          description={<p>{item.description}</p>}
-                                          
-                                      />
-                                  </List.Item>
+                                          //帖子的名字和指向的地址，传一个pid，post_id
+                                            title={<a href ={"#/ReadPost/"+item.Pid}>{item.title}</a>}
+
+
+
+                                            description={<p>{item.description}</p>}
+                                            
+                                        />
+                                    </List.Item>
                                   )}
                               />
 
 
-                        <TurnPage/>             
-                        <CreatePost/>
+
+
+                        <TurnPage/>       
+
+
+                        <CreatePost
+                          createPost={this.createPost}
+                        />
+
+
                     </div>                
 
 
@@ -111,46 +172,8 @@ function SortPost() {
   }
 
 
-//再这里绑定元数据
-const sourceData = [
-  {
-    Uid:110,
-    Pid:1,
-    avatarSrc:'boss',
-    title: 'Ant Design Title 1',
-    description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-  },
-  {
-    Uid:110,
-    Pid:2,
-    avatarSrc:'boss',
-    title: 'Ant Design Title 2',
-    description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-  },
-  {
-    Uid:110,
-    Pid:3,
-    avatarSrc:'boss',
-    title: 'Ant Design Title 3',
-    description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-  },
-  {
-    Uid:110,
-    Pid:4,
-    avatarSrc:'boss',
-    title: 'Ant Design Title 4',
-    description:'zzzzzz我睡着了 但是我没有摸鱼'
-  },
-];
 
 
-
-function getData(){
-  //这里应该要从远端获取这里先随便写一个
-  return sourceData
-}
 
 
   

@@ -6,31 +6,83 @@ import '../../style/comm/comm.css'
 import Post from '../../components/community/Post'
 import ToComment from '../../components/community/ToComment'
 import 'antd/dist/antd.css';
-import { Comment, Avatar,Tooltip, List } from 'antd';
+import { Comment,Tooltip, List } from 'antd';
 import 'antd/dist/antd.css';
 import moment from 'moment';
 import '../../style/comm/comm.css'
 
 
+
+
 export default class ReadPost extends Component {
     constructor(props){
       super(props)
+      let tempId=this.props.match.params.id
+
+      //这里根据tempid请求数据
+      const sourceData = [
+        {
+          author: 'Han Solo',
+          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          content: (
+            <p>
+              We supply a series of design principles, practical patterns and high quality design
+              resources (Sketch and Axure), to help people create their product prototypes beautifully and
+              efficiently.
+            </p>
+          ),
+          datetime: (
+            <Tooltip
+              title={moment()
+                .subtract(1, 'days')
+                .format('YYYY-MM-DD HH:mm:ss')}
+            >
+              <span>
+                {moment()
+                  .subtract(1, 'days')
+                  .fromNow()}
+              </span>
+            </Tooltip>
+          ),
+        },
+        {
+          author: 'kk',
+          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          content: (
+            <p>
+              We supply a series of design principles, practical patterns and high quality design
+              resources (Sketch and Axure), to help people create their product prototypes beautifully and
+              efficiently.
+            </p>
+          ),
+          datetime: (
+            <Tooltip
+              title={moment()
+                .subtract(2, 'days')
+                .format('YYYY-MM-DD HH:mm:ss')}
+            >
+              <span>
+                {moment()
+                  .subtract(2, 'days')
+                  .fromNow()}
+              </span>
+            </Tooltip>
+          ),
+        },
+      ];
+
       this.state={
-        data:getData()
+        data:sourceData,
+        Pid:tempId
        }
     }
 
 
-    componentDidMount(){
-//      console.log(this.props)
-      let tempId=this.props.match.params.id
- //     console.log(tempId)
-      this.setState(
-        {
-          id:tempId
-        }
-      )
-      //至此为止我们接收到了冬天传过来了id，接着就是根据id取到值
+    componentWillMount(){
+
+
+
+      //至此为止我们接收到了动态传过来了id，接着就是根据id取到值
 
 
     }
@@ -45,18 +97,14 @@ export default class ReadPost extends Component {
                 }
                 <div className='Body'>  
                     <div className='middle'>
-                        <Post/>
-                        <ToComment/>
-                        {
-                            //这个tocomment是之后要用来输入回复的，然后点击下面的Reply也要能够自动跳出来这样的一个框
-                        }
 
-                        {
-                        //                    <Comment/>
-                        }
-                        {
-                            //我还不知道怎么做哪个自动的分级
-                        }
+
+                        <Post postId={this.state.Pid}/>
+
+
+                        <ToComment/>
+
+
                         <List
                             className="comment-list"
                             header={`${this.state.data.length} replies`}
@@ -68,8 +116,7 @@ export default class ReadPost extends Component {
                                 className='middle'
                                 actions={ [<span key="comment-list-reply-to-0" onClick={submitComment}>Reply to</span>]}
                                 author={item.author}
-                                avatar={
-                                  item.avatar}
+                                avatar={item.avatar}
                                 content={item.content}
                                 datetime={item.datetime}
                                 />
@@ -78,8 +125,6 @@ export default class ReadPost extends Component {
                         />,
                     </div>
                 </div>
-
-
 
 
                 {
@@ -100,64 +145,12 @@ export default class ReadPost extends Component {
 
 
 
-const sourceData = [
-    {
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content: (
-        <p>
-          We supply a series of design principles, practical patterns and high quality design
-          resources (Sketch and Axure), to help people create their product prototypes beautifully and
-          efficiently.
-        </p>
-      ),
-      datetime: (
-        <Tooltip
-          title={moment()
-            .subtract(1, 'days')
-            .format('YYYY-MM-DD HH:mm:ss')}
-        >
-          <span>
-            {moment()
-              .subtract(1, 'days')
-              .fromNow()}
-          </span>
-        </Tooltip>
-      ),
-    },
-    {
-      author: 'kk',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content: (
-        <p>
-          We supply a series of design principles, practical patterns and high quality design
-          resources (Sketch and Axure), to help people create their product prototypes beautifully and
-          efficiently.
-        </p>
-      ),
-      datetime: (
-        <Tooltip
-          title={moment()
-            .subtract(2, 'days')
-            .format('YYYY-MM-DD HH:mm:ss')}
-        >
-          <span>
-            {moment()
-              .subtract(2, 'days')
-              .fromNow()}
-          </span>
-        </Tooltip>
-      ),
-    },
-  ];
+
+
 
   
 
 
-  function getData(){
-    //这里应该要从远端获取这里先随便写一个
-    return sourceData
-  }
 
 
   

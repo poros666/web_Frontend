@@ -44,7 +44,7 @@ export default class SearchCompetitionPage extends Component{
         return(
             <div className='informationBox'>
                 <div className='imageBox'>
-                    <img></img>
+                    <img alt=""></img>
                 </div>
                 <div className='nameBox'>
                     <h1>比赛名称</h1>
