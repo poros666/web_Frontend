@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Highlighter from "react-highlight-words"
 import { Card, Table, Button, Tag, Space, Input, Popconfirm } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
+import CollectionsPage from "./compEditPop"
 
 export default class CompManagement extends Component {
   constructor(props) {
@@ -165,9 +166,7 @@ export default class CompManagement extends Component {
         title="比赛管理"
         extra={
           <div>
-            <Button type="primary" style={{ marginRight: 20 }} onClick={()=>this.props.history.push("/admin/comp/edit")}>
-              Add
-            </Button>
+            <CollectionsPage />
             <Button
               type="primary"
               onClick={this.reload}
@@ -188,6 +187,15 @@ export default class CompManagement extends Component {
       </Card>
     )
   }
+
+
+
+
+
+
+
+
+
 
   //刷新
   reload = () => {

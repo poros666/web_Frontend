@@ -9,7 +9,6 @@ import FindTeam from "../pages/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
-import CompEdit from "../pages/admin/compEdit";
 
 
 export const adminRoutes = [{
@@ -27,11 +26,7 @@ export const adminRoutes = [{
     title: "用户管理",
     component: UserManagement
 },
-{
-    path: "/admin/comp/edit/:id?",
-    isShow:false,
-    component: CompEdit
-}]
+]
 
 export const mainRoutes = [{
     path: '/404',
