@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Card,Tabs,Button} from 'antd'
-import "../../style/personal/messageCenter.css"
 
 const {TabPane}=Tabs;
 

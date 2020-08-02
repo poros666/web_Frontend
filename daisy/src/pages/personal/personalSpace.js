@@ -1,32 +1,36 @@
 import React, { Component } from 'react'
+import {Route, Link} from "react-router-dom";
 import MastHead from '../../components/personal/mastHead'
 import HeaderNav from '../../components/comm/HeaderNav'
-import {Tabs} from 'antd'
-import '../../style/personal/space.css'
-import MyTeam from '../../components/personal/myTeam'
-import MyComp from '../../components/personal/myComp'
-import MyColle from '../../components/personal/myColle'
+import {Layout,Menu} from 'antd'
+import '../../style/personal/personalSpace.css'
+import { personalRoutes } from '../../routes/index'
 
-const {TabPane} =Tabs
+const { Header, Content,} = Layout;
 
-export default class PersonalSpace extends Component {
-    render() {
-        return (
-            <div className='space'>
-                <HeaderNav/>
-                <MastHead/>
-                <Tabs defaultActiveKey="1" centered className='space_tabs'>
-                    <TabPane tab="我的队伍" key="1">
-                      <MyTeam/>
-                    </TabPane>
-                    <TabPane tab="我的比赛" key="2">
-                      <MyComp/>
-                    </TabPane>
-                    <TabPane tab="我的收藏" key="3">
-                      <MyColle/>
-                    </TabPane>
-                </Tabs>
-            </div>
-        )
-    }
+export default class PersonalSpace extends Component {  
+  render() {
+    return (
+      <Layout>
+        <Header><HeaderNav/></Header>
+        <Content className="perspace_content">
+          <div><MastHead/></div>
+          <Menu mode="horizontal">
+          {
+            personalRoutes.map((item,index)=>{
+            return (<Menu.Item key={index}><Link to={item.path}>{item.title}</Link></Menu.Item>)
+            })
+          }
+          </Menu>
+          <Content>
+          {
+            personalRoutes.map((item,index)=>{
+              return (<Route key={index} path={item.path} component={item.component}/>)
+            })
+          }
+          </Content>
+        </Content>
+      </Layout>
+    )
+  }
 }

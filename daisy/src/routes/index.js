@@ -10,6 +10,18 @@ import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
 
+import MessageIndex from "../pages/message/messageIndex";
+import Reply from "../pages/message/reply";
+import CompNotice from "../pages/message/compNotice";
+import Apply from "../pages/message/apply";
+import SystemNotice from "../pages/message/systemNotice";
+import TeamMessage from "../pages/message/teamMessage";
+import PrivateLetter from "../pages/message/privateLetter";
+import PersonalCenter from "../pages/personal/personalSpace";
+import MyTeam from "../pages/personal/myTeam"
+import MyComp from "../pages/personal/myComp"
+import MyColle from "../pages/personal/myColle"
+
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -59,4 +71,51 @@ export const mainRoutes = [{
     path: "/searchCompPage",
     title: "寻找队伍",
     component: SearchCompetitionPage
+}]
+
+export const messageRoutes = [{
+    path: "/message/system",
+    title: "系统公告",
+    component: SystemNotice
+},
+{
+    path: "/message/comp",
+    title: "比赛通知",
+    component: CompNotice
+},
+{
+    path: "/message/reply",
+    title: "回复我的",
+    component: Reply
+},
+{
+    path: "/message/letter",
+    title: "私信",
+    component: PrivateLetter
+},
+{
+    path: "/message/team",
+    title: "队伍消息",
+    component: TeamMessage
+},
+{
+    path: "/message/apply",
+    title: "组队申请",
+    component: Apply
+}]
+
+export const personalRoutes = [{
+    path: "/personal/team",
+    title: "我的队伍",
+    component: MyTeam
+},
+{
+    path: "/personal/comp",
+    title: "我的比赛",
+    component: MyComp
+},
+{
+    path: "/personal/colle",
+    title: "我的收藏",
+    component: MyColle
 }]

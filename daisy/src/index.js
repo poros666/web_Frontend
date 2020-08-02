@@ -6,11 +6,15 @@ import { HashRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import { mainRoutes } from './routes/index'
 import { adminRoutes } from './routes/index'
 import AdminIndex from './pages/admin/adminIndex'
+import MessageIndex from './pages/message/messageIndex'
+import PersonalSpace from './pages/personal/personalSpace'
 
 ReactDOM.render(
   <Router>
     <Switch>
       <Route path="/admin" render={routeProps=><AdminIndex {...routeProps} />}/>
+      <Route path="/message" render={routeProps=><MessageIndex {...routeProps} />}/>
+      <Route path="/personal" render={routeProps=><PersonalSpace {...routeProps} />}/>
       {mainRoutes.map(route=>{
         return <Route key={route.path} {...route}/>
       })}

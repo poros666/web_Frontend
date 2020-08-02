@@ -3,10 +3,7 @@ import MastHead from '../../components/personal/mastHead'
 import HeaderNav from '../../components/comm/HeaderNav'
 import '../../style/personal/space.css'
 import {Tabs} from 'antd'
-import MyTeam from '../../components/personal/myTeam'
-import MyComp from '../../components/personal/myComp'
-import MyColle from '../../components/personal/myColle'
-import MyInform from '../../components/personal/myInform'
+
 
 const {TabPane} =Tabs
 
