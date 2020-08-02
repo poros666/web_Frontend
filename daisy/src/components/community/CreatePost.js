@@ -30,16 +30,27 @@ const Editor = ({ onChange,onChangeTitle, onSubmit, submitting, value,valuetitle
 );
 
 export default class CreatePost extends React.Component {
+  constructor(props){
+    super(props)
 
+    //获取登陆账号的内容
+      var  tempAlt='我是石头皇帝'
+      var  tempSrc='strange'
+   
+
+    this.state={
+      comments: [],
+      submitting: false,
+      value: '',
+      valuetitle:'',
+      avatarSrc:tempSrc,
+      avatarAlt:tempAlt
+    }
+  }
 
   
 
-  state = {
-    comments: [],
-    submitting: false,
-    value: '',
-    valuetitle:''
-  };
+
 
   handleSubmit = () => {
     
@@ -59,7 +70,14 @@ export default class CreatePost extends React.Component {
 
     //在这里调用父组件的函数
 
+
+
     this.props.createPost(this.state.valuetitle,this.state.value)
+    
+    this.setState({
+      submitting: false,
+    });
+
     
 
   };
@@ -76,18 +94,28 @@ export default class CreatePost extends React.Component {
     });
   };
 
+
+
   render() {
     const { comments, submitting, value,valuetitle } = this.state;
+    
+
 
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           avatar={
+            <a href={"#/ReadPost/"+1}>
             <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
-            />
+              src={require("../../img/avatar/"+this.state.avatarSrc+".jpg")}
+              alt={this.state.avatarAlt}
+            >
+
+            </Avatar>
+          </a>
+
+         
           }
           content={
             <Editor

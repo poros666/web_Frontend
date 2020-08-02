@@ -4,7 +4,6 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
-import moment from 'moment';
 
 const { TextArea } = Input;
 
@@ -50,21 +49,13 @@ export default class ToComment extends React.Component {
       submitting: true,
     });
 
-    setTimeout(() => {
-      this.setState({
-        submitting: false,
-        value: '',
-        comments: [
-          {
-            author: 'Han DDDolo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: <p>{this.state.value}</p>,
-            datetime: moment().fromNow(),
-          },
-          ...this.state.comments,
-        ],
-      });
-    }, 1000);
+    this.props.createComment(this.state.value)
+
+    this.setState({
+      submitting: false,
+    });
+
+
   };
 
   handleChange = e => {
