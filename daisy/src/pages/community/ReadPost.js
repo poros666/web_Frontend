@@ -6,11 +6,11 @@ import '../../style/comm/comm.css'
 import Post from '../../components/community/Post'
 import ToComment from '../../components/community/ToComment'
 import 'antd/dist/antd.css';
-import { Comment,Tooltip, List } from 'antd';
+import { Tooltip } from 'antd';
 import 'antd/dist/antd.css';
 import moment from 'moment';
 import '../../style/comm/comm.css'
-
+import  CommentList from '../../components/community/CommentList'
 
 
 
@@ -104,25 +104,9 @@ export default class ReadPost extends Component {
 
                         <ToComment/>
 
+                        <CommentList/>
 
-                        <List
-                            className="comment-list"
-                            header={`${this.state.data.length} replies`}
-                            itemLayout="horizontal"
-                            dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
-                            renderItem={item => (
-                            <li>
-                                <Comment
-                                className='middle'
-                                actions={ [<span key="comment-list-reply-to-0" onClick={submitComment}>Reply to</span>]}
-                                author={item.author}
-                                avatar={item.avatar}
-                                content={item.content}
-                                datetime={item.datetime}
-                                />
-                            </li>
-                            )}
-                        />,
+                       
                     </div>
                 </div>
 
@@ -152,8 +136,3 @@ export default class ReadPost extends Component {
 
 
 
-
-  
-function submitComment(){
-  console.log("yes")
-}
