@@ -43,19 +43,10 @@ export default class CreatePost extends React.Component {
 
   handleSubmit = () => {
     
-    console.log(this.state.value)
-    console.log(this.state.valuetitle)
-  
 
     if (this.state.value==='' || this.state.valuetitle==='') {
       return;
     }
-
-
-
-
-
-
 
     this.setState({
       submitting: true,
@@ -69,7 +60,7 @@ export default class CreatePost extends React.Component {
     //在这里调用父组件的函数
 
     this.props.createPost(this.state.valuetitle,this.state.value)
-
+    
 
   };
 
