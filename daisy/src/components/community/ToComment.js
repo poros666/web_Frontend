@@ -30,6 +30,10 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
+
+
+
+
 export default class ToComment extends React.Component {
   state = {
     comments: [],
@@ -52,7 +56,7 @@ export default class ToComment extends React.Component {
         value: '',
         comments: [
           {
-            author: 'Han Solo',
+            author: 'Han DDDolo',
             avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
             content: <p>{this.state.value}</p>,
             datetime: moment().fromNow(),
@@ -68,6 +72,9 @@ export default class ToComment extends React.Component {
       value: e.target.value,
     });
   };
+
+
+
 
   render() {
     const { comments, submitting, value } = this.state;
@@ -95,4 +102,3 @@ export default class ToComment extends React.Component {
     );
   }
 }
-

@@ -38,7 +38,7 @@ const AdvancedSearchForm = () => {
     const children = [];
 
     children.push(
-      <Col span={5} key={0}>
+      <Col span={6} key={0}>
         <Form.Item
           name={`小队名称`}
           label={`小队名称`}
@@ -55,7 +55,7 @@ const AdvancedSearchForm = () => {
     );
 
     children.push(
-      <Col span={5} key={1}>
+      <Col span={6} key={1}>
         <Form.Item
           name={`从属比赛`}
           label={`从属比赛`}
@@ -71,7 +71,23 @@ const AdvancedSearchForm = () => {
     );
 
     children.push(
-      <Col span={3.5} key={2}>
+      <Col span={6} key={2}>
+        <Form.Item
+          name={`队长名称`}
+          label={`队长名称`}
+          rules={[
+            {
+              required: false,
+            },
+          ]}
+        >
+          <Input placeholder="队长名称" disabled/>
+        </Form.Item>
+      </Col>,
+    );
+
+    children.push(
+      <Col span={4} key={3}>
         <Form.Item
           name={`当前人数`}
           label={`当前人数`}
@@ -83,39 +99,6 @@ const AdvancedSearchForm = () => {
           ]}
         >
           <InputNumber min={1}/>
-        </Form.Item>
-      </Col>,
-    );
-
-    children.push(
-      <Col span={5} key={3}>
-        <Form.Item
-          name={`小队名称`}
-          label={`小队名称`}
-          rules={[
-            {
-              required: true,
-              message: '该项为必填项',
-            },
-          ]}
-        >
-          <Input placeholder="输入小队名称" />
-        </Form.Item>
-      </Col>,
-    );
-
-    children.push(
-      <Col span={5} key={4}>
-        <Form.Item
-          name={`队长名称`}
-          label={`队长名称`}
-          rules={[
-            {
-              required: false,
-            },
-          ]}
-        >
-          <Input placeholder="队长名称" disabled/>
         </Form.Item>
       </Col>,
     );

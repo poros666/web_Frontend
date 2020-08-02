@@ -1,10 +1,14 @@
-#PublishPost{
-    background-color:lightcyan;
+#WebPage{
+    margin:50px 50px 50px 50px
 }
 
 #PostList{
     background-color: snow;
     height:65%;
+}
+
+#Search{
+    margin: 50px 50px;
 }
 
 #TurnPage{
@@ -45,7 +49,6 @@
 }
 
 .site-page-header-ghost-wrapper {
-    background-color: lightcyan;
     padding: 24px;
   }
 

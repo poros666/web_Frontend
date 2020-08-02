@@ -4,7 +4,7 @@ import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
-import Post from "../pages/findteam/Post";
+import Post from "../pages/findteam/PostPage";
 import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";

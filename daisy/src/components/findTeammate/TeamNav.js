@@ -1,6 +1,7 @@
 import { PageHeader, Button, Descriptions } from 'antd';
 import { Input } from 'antd';
 import React, { Component } from 'react'
+import '../../style/findTeam/findTeam.css'
 
 export default class teamNav extends Component {
   render() {
@@ -17,7 +18,7 @@ export default class teamNav extends Component {
           </Descriptions>
         </PageHeader>
       </div>
-      <div>
+      <div id='Search'>
       <Search placeholder='输入比赛搜索名称' enterButton/>
       </div>
       </>
