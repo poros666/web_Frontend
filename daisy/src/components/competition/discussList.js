@@ -104,7 +104,7 @@ export default class DiscussList extends Component {
       currentData:[],
       total: data.length,
       pageSize: 5,
-      pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
+      pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
     
   }
@@ -120,6 +120,8 @@ export default class DiscussList extends Component {
     console.log("page:",page);
     this.setState({
       pageNumber: page
+    }, () => {
+      window.location.hash = `#/compPage/${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     this.setState((state)=>{
     for(let i=0;i<state.pageSize;i++){
@@ -161,7 +163,7 @@ export default class DiscussList extends Component {
                     <Col offset={9}>
                     <Pagination 
                       showQuickJumper 
-                      defaultCurrent={this.state.pageNumber} 
+                      current={this.state.pageNumber}
                       defaultPageSize={this.state.pageSize} 
                       total={this.state.total}
                       onChange={this.onPageChange} 

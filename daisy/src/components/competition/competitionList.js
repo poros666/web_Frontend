@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import {List} from 'antd'
+import {List,Col, Pagination} from 'antd'
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
 
-const listData = [
+const data = [
     {
         ID:1,
         logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
@@ -44,19 +44,54 @@ const listData = [
 
 
 export default class CompetitionList extends Component {
+  constructor(props)
+  {
+    super(props)
+    this.state={
+      currentData:[],
+      total: data.length,
+      pageSize: 3,
+      pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
+     }
+    
+  }
+  componentDidMount() {
+    this.handleAnchor() //页面刷新时回到刷新前的page
+  }
+  handleAnchor() {
+    this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
+  }
+
+  onPageChange=(page,pageSize)=>{
+    console.log("page:",page);
+    this.setState({
+      pageNumber: page
+    }, () => {
+      window.location.hash = `#/searchCompPage/pagenum=${page}`; //设置当前页面的hash值为当前page页数
+    })
+    this.setState((state)=>{
+    for(let i=0;i<state.pageSize;i++){
+      state.currentData.pop();
+    }
+    for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
+      state.currentData.push(data[i]);
+    }
+      return{
+        currentData:state.currentData,
+      }
+    }
+   );
+ }
+
+
+
     render() {
         return (
             <div>
             <List
               itemLayout="vertical"
               size="large"
-              pagination={{
-                onChange: page => {
-                  console.log(page);
-                },
-                pageSize: 3,position:"both"
-              }}
-              dataSource={listData}
+              dataSource={this.state.currentData}
               renderItem={item => (
                 <List.Item>
                     <img
@@ -65,7 +100,7 @@ export default class CompetitionList extends Component {
                       src={item.logosrc}
                     />
                     <List.Item.Meta
-                    title={<Link to={"/compPage/"+item.ID}>{item.competitionname}</Link>
+                    title={<Link to={"/compPage/"+item.ID+"=id"}>{item.competitionname}</Link>
                     }
                     description={item.description}
                     />
@@ -73,6 +108,15 @@ export default class CompetitionList extends Component {
                 </List.Item>
               )}
             />
+             <Col offset={9}>
+                    <Pagination 
+                      showQuickJumper 
+                      current={this.state.pageNumber}
+                      defaultPageSize={this.state.pageSize} 
+                      total={this.state.total}
+                      onChange={this.onPageChange} 
+                    />
+                    </Col>
             </div>
         )
     }
