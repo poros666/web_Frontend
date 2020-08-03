@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Avatar ,Space,Button, Pagination} from 'antd';
+import { List, Avatar ,Space,Button, Pagination, Col} from 'antd';
 import 'antd/dist/antd.css';
 
 const data = [
@@ -94,12 +94,50 @@ const data = [
       description:'zzzzzz我睡着了 但是我没有摸鱼'
     },
   ];
-var discussList=[]
+
 
 export default class DiscussList extends Component { 
+  constructor(props)
+  {
+    super(props)
+    this.state={
+      currentData:[],
+      total: data.length,
+      pageSize: 5,
+      pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
+     }
+    
+  }
+
+  componentDidMount() {
+    this.handleAnchor() //页面刷新时回到刷新前的page
+  }
+  handleAnchor() {
+    this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
+  }
+
+  onPageChange=(page,pageSize)=>{
+    console.log("page:",page);
+    this.setState({
+      pageNumber: page
+    })
+    this.setState((state)=>{
+    for(let i=0;i<state.pageSize;i++){
+      state.currentData.pop();
+    }
+    for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
+      state.currentData.push(data[i]);
+    }
+      return{
+        currentData:state.currentData,
+      }
+    }
+   );
+ }
+
+
 
   render() {
-    getDiscussList(this.props.compID)
         return (
             <div>
                 <SortDiscuss/>
@@ -108,14 +146,7 @@ export default class DiscussList extends Component {
                     <List
                         style={{width: '100%', resize: 'none'}}
                         itemLayout="horizontal"
-                        pagination={{
-                          onChange: page => {
-                            console.log(page);
-                          },
-                          pageSize: 10,position:"bottom",
-                          defaultCurrent: 1
-                        }}
-                        dataSource={discussList}
+                        dataSource={this.state.currentData}
                         renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
@@ -127,16 +158,21 @@ export default class DiscussList extends Component {
                         </List.Item>
                         )}
                     />
+                    <Col offset={9}>
+                    <Pagination 
+                      showQuickJumper 
+                      defaultCurrent={this.state.pageNumber} 
+                      defaultPageSize={this.state.pageSize} 
+                      total={this.state.total}
+                      onChange={this.onPageChange} 
+                    />
+                    </Col>
             </div>
         )
   }
 }
 
 
-function getDiscussList(ID)//这里用来查询
-{
-    discussList=data
-}
 
 function SortDiscuss() {
     return (
