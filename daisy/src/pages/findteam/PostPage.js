@@ -2,7 +2,6 @@ import HeaderNav from '../../components/comm/HeaderNav'
 import TeamNav from '../../components/findTeammate/TeamNav'
 import Footer from '../../components/comm/Footer'
 import React, { Component } from 'react'
-import { Layout } from 'antd';
 import '../../style/findTeam/findTeam.css'
 import { Divider } from 'antd';
 import Post from '../../components/findTeammate/Post'

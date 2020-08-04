@@ -1,4 +1,4 @@
-import { PageHeader, Button, Descriptions } from 'antd';
+import { PageHeader,Descriptions } from 'antd';
 import { Input } from 'antd';
 import React, { Component } from 'react'
 import '../../style/findTeam/findTeam.css'
