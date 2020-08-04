@@ -1,4 +1,4 @@
-import AdminIndex from "../pages/admin/adminIndex";
+//import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
 import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
@@ -9,6 +9,7 @@ import FindTeam from "../pages/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
+import ReadPost from "../pages/community/ReadPost";
 
 
 export const adminRoutes = [{
@@ -30,7 +31,8 @@ export const adminRoutes = [{
 
 export const mainRoutes = [{
     path: '/404',
-    component: PageNotFound},
+    component: PageNotFound
+},
 {
     path: "/home",
     title: "主页",
@@ -48,9 +50,14 @@ export const mainRoutes = [{
     component: FindTeam
 },
 {
-    path: "/community",
+    path: "/Community",
     title: "社区",
     component: Community
+},
+{
+    path: "/ReadPost/:id",
+    title:"社区动态",
+    component: ReadPost
 },
 {
     path: "/compPage",

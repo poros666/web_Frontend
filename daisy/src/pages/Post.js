@@ -31,7 +31,7 @@ export default class Post extends Component {
                     <br/>
                     <br/>
                     <br/>
-                    <a id='UserName'>发帖人用户名</a>
+                    <a id='UserName' href='www.baidu.com'>发帖人用户名</a>
                     </div>
                     </Sider>
                     <Layout>

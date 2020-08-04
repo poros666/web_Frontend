@@ -5,21 +5,92 @@ import { SearchOutlined } from "@ant-design/icons"
 import CollectionsPage from "./compEditPop"
 
 export default class CompManagement extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedRowKeys: [], //多选
-      loading: false, //载入
-      searchText: "", //搜索文字
-      searchedColumn: "", //搜出来的行
-    }
-  }
+    render() {
 
-  render() {
-    const { loading, selectedRowKeys } = this.state
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
+        const columns = [
+            {
+              title: 'Name',
+              dataIndex: 'name',
+              key: 'name',
+              render: text => <a href='www.baidu.com'>{text}</a>,
+            },
+            {
+              title: 'Age',
+              dataIndex: 'age',
+              key: 'age',
+            },
+            {
+              title: 'Address',
+              dataIndex: 'address',
+              key: 'address',
+            },
+            {
+              title: 'Tags',
+              key: 'tags',
+              dataIndex: 'tags',
+              render: tags => (
+                <>
+                  {tags.map(tag => {
+                    let color = tag.length > 5 ? 'geekblue' : 'green';
+                    if (tag === 'loser') {
+                      color = 'volcano';
+                    }
+                    return (
+                      <Tag color={color} key={tag}>
+                        {tag.toUpperCase()}
+                      </Tag>
+                    );
+                  })}
+                </>
+              ),
+            },
+            {
+              title: 'Action',
+              key: 'action',
+              render: (text, record) => (
+                <Space size="middle">
+                  <a href='www.baidu.com'>Invite {record.name}</a>
+                  <a href='www.baidu.com'>Delete</a>
+                </Space>
+              ),
+            },
+        ]
+          
+          const data = [
+            {
+              key: '1',
+              name: 'John Brown',
+              age: 32,
+              address: 'New York No. 1 Lake Park',
+              tags: ['nice', 'developer'],
+            },
+            {
+              key: '2',
+              name: 'Jim Green',
+              age: 42,
+              address: 'London No. 1 Lake Park',
+              tags: ['loser'],
+            },
+            {
+              key: '3',
+              name: 'Joe Black',
+              age: 32,
+              address: 'Sidney No. 1 Lake Park',
+              tags: ['cool', 'teacher'],
+            },
+          ]
+          
+        
+        return (
+            <Card 
+                title="比赛管理"
+                extra={
+                    <Button type="primary" size="small">发布新比赛</Button>
+                }
+            >
+                <Table columns={columns} bordered dataSource={data}/>
+            </Card>
+        )
     }
     const hasSelected = selectedRowKeys.length > 0
 
