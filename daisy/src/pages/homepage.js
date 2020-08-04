@@ -1,35 +1,11 @@
-import React, { Component,BackTop } from 'react'
-import ReactDOM from 'react-dom'
-import 'antd/dist/antd.css'
-import Footer from '../components/comm/Footer'
-import HeaderNav from '../components/comm/HeaderNav'
-import FloatHelper from '../components/comm/FloatHelper'
-import TopBar from './Homepage/TopBar'
-import CompShow from'./Homepage/CompShow'
+import React, { Component } from 'react'
 
-class Homepage extends Component {
-    state = {
-        collapsed: false,
-        mode: 'inline',
-    };
- 
-    toggle = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    }
-
+export default class Homepage extends Component {
     render() {
         return (
             <div>
-                <HeaderNav/>
-                <TopBar/>
-                <CompShow/>
-                <FloatHelper/>
-                <Footer/>
+                <h1>this is Homepage</h1>
             </div>
         )
     }
 }
-
-export default Homepage

@@ -17,9 +17,6 @@ import  CommentList from '../../components/community/CommentList'
 export default class ReadPost extends Component {
     constructor(props){
       super(props)
-
-      this.createComment=this.createComment.bind(this)
-
       let tempId=this.props.match.params.id
 
       //这里根据tempid请求数据
@@ -81,15 +78,13 @@ export default class ReadPost extends Component {
     }
 
 
-    // componentWillMount(){
-
-    //   //至此为止我们接收到了动态传过来了id，接着就是根据id取到值
+    componentWillMount(){
 
 
-    // }
 
-    createComment(content){
-      console.log(content)
+      //至此为止我们接收到了动态传过来了id，接着就是根据id取到值
+
+
     }
 
     render() {
@@ -106,9 +101,10 @@ export default class ReadPost extends Component {
 
                         <Post postId={this.state.Pid}/>
 
-                        <ToComment createComment={this.createComment}/>
 
-                        <CommentList postId={this.state.Pid}/>
+                        <ToComment/>
+
+                        <CommentList/>
 
                        
                     </div>
@@ -137,6 +133,3 @@ export default class ReadPost extends Component {
 
 
   
-
-
-

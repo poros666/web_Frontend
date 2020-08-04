@@ -7,8 +7,6 @@ import '../../style/comm/comm.css'
 
 
  function getPostContent(Pid){
-    //do something
-  
   }
 
 
@@ -27,8 +25,8 @@ export default class Post extends Component {
             title:"Card title" ,
             content:"this is the card content for testing",
             bordered:false ,
-            authorName: "i is kk i think cry",
-            authorUid: 132,
+            authorName: "test example",
+            authorUid: 111,
             authorAvatar: "boss",
             }
         ]
@@ -42,15 +40,14 @@ export default class Post extends Component {
     render() {
         return (
             <div className='site-card-border-less-wrapper'>
-                <Card
-                    
+                <Card    
                     title={this.state.data[0].title}
                     bordered={this.state.data[0].bordered} 
                     extra={//之后可以用button之类的包装一下做成超链接
                         //这里的头像要动态生成
                         <div align="right">
 
-                        <a href={"#/ReadPost/"+this.state.data[0].authorUid}>
+                        <a href={"#/PostPage/"+this.state.data[0].authorUid}>
                             <Avatar src={require("../../img/avatar/"+this.state.data[0].authorAvatar+".jpg")}></Avatar>
                         </a>
                                         
@@ -67,16 +64,9 @@ export default class Post extends Component {
                    { this.state.data[0].content}
                 </p>
                 </Card>
-                
                 <br/>
                 <Func/>
-
             </div>
-        //     <div className="site-card-border-less-wrapper">
-
-        //         <p>注释里面就别检查了8</p>
-        //    
-        //   </div>
         )
     }
 }
@@ -86,7 +76,7 @@ export default class Post extends Component {
 function Func() {
     return (
       <Space>
-        <Button ghost><p style={{color:'black'}}>点赞</p></Button>
+        <Button ghost><p style={{color:'black'}}>申请进入小队</p></Button>
         <Button ghost><p style={{color:'black'}}>收藏</p></Button>
         <Button ghost><p style={{color:'black'}}>分享</p></Button>
         <Button ghost><p style={{color:'black'}}>举报</p></Button>     
