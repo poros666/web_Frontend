@@ -1,9 +1,7 @@
-//这里整了一个评论框
-
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
+import moment from 'moment';
 
 const { TextArea } = Input;
 
@@ -19,21 +17,21 @@ const CommentList = ({ comments }) => (
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} />
+      <br/>
+      <TextArea onChange={onChange} value={value} 
+                style={{width: '90%', resize: 'none'}}  allowClear={true} 
+                autoSize={{ minRows: 6, maxRows: 12 }}
+                placeholder="在此输入讨论内容"/>
     </Form.Item>
     <Form.Item>
       <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
-        Add Comment
+        Raise Discuss
       </Button>
     </Form.Item>
   </>
 );
 
-
-
-
-
-export default class ToComment extends React.Component {
+export default class RaiseDiscuss extends React.Component {
   state = {
     comments: [],
     submitting: false,
@@ -49,13 +47,21 @@ export default class ToComment extends React.Component {
       submitting: true,
     });
 
-    this.props.createComment(this.state.value)
-
-    this.setState({
-      submitting: false,
-    });
-
-
+    setTimeout(() => {
+      this.setState({
+        submitting: false,
+        value: '',
+        comments: [
+          {
+            author: 'Han Solo',
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            content: <p>{this.state.value}</p>,
+            datetime: moment().fromNow(),
+          },
+          ...this.state.comments,
+        ],
+      });
+    }, 1000);
   };
 
   handleChange = e => {
@@ -63,9 +69,6 @@ export default class ToComment extends React.Component {
       value: e.target.value,
     });
   };
-
-
-
 
   render() {
     const { comments, submitting, value } = this.state;

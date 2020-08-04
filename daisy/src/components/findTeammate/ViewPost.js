@@ -18,7 +18,7 @@ export default class ViewPost extends Component {
                     <Avatar size={60} icon={<UserOutlined />} id='UserIcon'/>
                     <br/>
                     <br/>
-                    <a id='UserName'>发帖人用户名</a>
+                    <a id='UserName' href='www.baidu.com'>发帖人用户名</a>
                     <br/>
                     <br/>
                     </div>

@@ -2,23 +2,70 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import { Card,Avatar,Space,Button } from 'antd';
 import '../../style/comm/comm.css'
+
+
+
+
+ function getPostContent(Pid){
+    //do something
+  
+  }
+
+
 export default class Post extends Component {
+    
+    constructor(props){
+        super(props)
+
+
+        var tempId=this.props.postId
+        
+        getPostContent(tempId)
+                
+        const sourceData=[
+            {
+            title:"Card title" ,
+            content:"this is the card content for testing",
+            bordered:false ,
+            authorName: "i is kk i think cry",
+            authorUid: 132,
+            authorAvatar: "boss",
+            }
+        ]
+
+
+        this.state={
+            data:sourceData
+        }
+    }
+    
     render() {
         return (
             <div className='site-card-border-less-wrapper'>
-                <Card 
-                    title="Card title" 
-                    bordered={false} 
+                <Card
+                    
+                    title={this.state.data[0].title}
+                    bordered={this.state.data[0].bordered} 
                     extra={//之后可以用button之类的包装一下做成超链接
                         //这里的头像要动态生成
-                        <>
-                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />                     
-                        </>
+                        <div align="right">
+
+                        <a href={"#/ReadPost/"+this.state.data[0].authorUid}>
+                            <Avatar src={require("../../img/avatar/"+this.state.data[0].authorAvatar+".jpg")}></Avatar>
+                        </a>
+                                        
+                        <p>{this.state.data[0].authorName}</p>
+
+                        </div>
                         }
                 >
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
+
+                {
+                    //下面是帖子的内容部分
+                }
+                <p>
+                   { this.state.data[0].content}
+                </p>
                 </Card>
                 
                 <br/>
@@ -46,3 +93,4 @@ function Func() {
       </Space>
     );
   }
+
