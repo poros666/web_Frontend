@@ -11,6 +11,7 @@ import CompetitionPage from "../pages/competition/competitionPage";
 import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
+import ReadPost from "../pages/community/ReadPost"
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -60,7 +61,7 @@ export const mainRoutes = [{
     component: ReadPost
 },
 {
-    path: "/compPage",
+    path: "/compPage/:compID",
     title: "比赛页面",
     component: CompetitionPage
 },
