@@ -1,3 +1,5 @@
+//可增加项：antd自动完成，该功能将热门搜索列表显示并自动填充
+
 import React, { Component } from 'react'
 import { Input, Select } from 'antd';
 

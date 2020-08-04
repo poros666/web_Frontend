@@ -9,7 +9,8 @@ import FindTeam from "../pages/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
-import searchPage from "../pages/search/searchPage";
+import SearchPage from "../pages/search/searchPage";
+import SearchResult from "../pages/search/searchResult";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -64,6 +65,11 @@ export const mainRoutes = [{
 {
     path: "/search",
     title: "搜索页面",
-    component: searchPage
+    component: SearchPage
+},
+{
+    path: "/searchResult",
+    title: "搜索结果页面",
+    component: SearchResult
 },
 ]

@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { List, Divider, Layout } from 'antd';
+import { FireOutlined } from '@ant-design/icons';
 
 export default class HotSearch extends Component {
     render() {
@@ -47,7 +48,7 @@ export default class HotSearch extends Component {
                 <Layout className="hotSearchBox" style={{ width: '86%', margin: '5% 7%', padding: '0 20px' }}>
                     <Content style={{ padding: '0 5px' }}>
                         
-                        <Divider orientation="left">热门搜索</Divider>
+                        <Divider orientation="left"><FireOutlined/>热门搜索</Divider>
                         
                         <List
                         grid={{ column: '3' }}
