@@ -21,6 +21,7 @@ class HeaderNav extends Component {
         const { current } = this.state;
         return (
             <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                
                 <Menu.Item key="home" icon={<MailOutlined />}>
                     <a href="localhost:3000/#/home" target="_blank" rel="noopener noreferrer">
                         首页
@@ -41,7 +42,7 @@ class HeaderNav extends Component {
                 <Search
                     placeholder="input search text"
                     onSearch={value => console.log(value)}
-                    style={{ width: 200 }}
+                    style={{ width: 400 }}
                 />
 
                 <SubMenu icon={<SettingOutlined />} title="我的">

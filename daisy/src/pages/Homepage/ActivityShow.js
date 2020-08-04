@@ -17,7 +17,7 @@ class ActivityShow extends Component {
                         width={400}
                         height={300}
                         alt="logo"
-                        src='./activityPicture_1.png'
+                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
                      />
                     </Content>
                     <Footer>

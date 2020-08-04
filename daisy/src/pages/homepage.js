@@ -4,8 +4,8 @@ import 'antd/dist/antd.css'
 import Footer from '../components/comm/Footer'
 import HeaderNav from '../components/comm/HeaderNav'
 import FloatHelper from '../components/comm/FloatHelper'
-import ActComShow from './Homepage/ActComShow'
-import CommunityShow from'./Homepage/CommunityShow'
+import TopBar from './Homepage/TopBar'
+import CompShow from'./Homepage/CompShow'
 import '../style/homepage.css'
 
 class Homepage extends Component {
@@ -24,8 +24,8 @@ class Homepage extends Component {
         return (
             <div>
                 <HeaderNav/>
-                <ActComShow/>
-                <CommunityShow/>
+                <TopBar/>
+                <CompShow/>
                 <FloatHelper/>
                 <Footer/>
             </div>
