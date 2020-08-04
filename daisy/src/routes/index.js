@@ -1,4 +1,4 @@
-import AdminIndex from "../pages/admin/adminIndex";
+//import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
 import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
@@ -21,7 +21,11 @@ import PersonalCenter from "../pages/personal/personalSpace";
 import MyTeam from "../pages/personal/myTeam"
 import MyComp from "../pages/personal/myComp"
 import MyColle from "../pages/personal/myColle"
+import Editinform from "../pages/personal/editInform"
 
+import SearchPage from "../pages/search/searchPage";
+import SearchResult from "../pages/search/searchResult";
+import ReadPost from "../pages/community/ReadPost"
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -42,7 +46,8 @@ export const adminRoutes = [{
 
 export const mainRoutes = [{
     path: '/404',
-    component: PageNotFound},
+    component: PageNotFound
+},
 {
     path: "/home",
     title: "主页",
@@ -60,12 +65,17 @@ export const mainRoutes = [{
     component: FindTeam
 },
 {
-    path: "/community",
+    path: "/Community",
     title: "社区",
     component: Community
 },
 {
-    path: "/compPage",
+    path: "/ReadPost/:id",
+    title:"社区动态",
+    component: ReadPost
+},
+{
+    path: "/compPage/:compID",
     title: "比赛页面",
     component: CompetitionPage
 },
@@ -73,7 +83,19 @@ export const mainRoutes = [{
     path: "/searchCompPage",
     title: "寻找队伍",
     component: SearchCompetitionPage
-}]
+},
+{
+    path: "/search",
+    title: "搜索页面",
+    component: SearchPage
+},
+{
+    path: "/searchResult",
+    title: "搜索结果页面",
+    component: SearchResult
+},
+]
+
 
 export const messageRoutes = [{
     path: "/message/system",
