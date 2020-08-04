@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import logo from '../../pages/admin/xiaohua.png'
+import searchLogoBar from '../../components/search/searchLogoBar.png'
 
 export default class LogoBar extends Component {
     render() {
 
 
         return (
-            <div className="logo" style={{margin: '5%'}}>
-                    <img src={logo} width="180" height="132" alt="logo"/>
+            <div className="searchLogoBar" style={{ marginTop: '5%', marginBottom: '-3%'}}>
+                    <img src={searchLogoBar} width="337" height="126" alt="logo"/>
             </div>
         )
     }
