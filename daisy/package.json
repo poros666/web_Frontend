@@ -22,7 +22,7 @@
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
-      "no-unused-vars":"off"
+      "no-unused-vars": "off"
     }
   },
   "browserslist": {
@@ -37,5 +37,4 @@
       "last 1 safari version"
     ]
   }
-
 }
