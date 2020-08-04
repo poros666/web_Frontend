@@ -26,7 +26,8 @@ export const adminRoutes = [{
     path: "/admin/usermanagement",
     title: "用户管理",
     component: UserManagement
-}]
+},
+]
 
 export const mainRoutes = [{
     path: '/404',
