@@ -89,8 +89,8 @@ const AdvancedSearchForm = () => {
     children.push(
       <Col span={4} key={3}>
         <Form.Item
-          name={`当前人数`}
-          label={`当前人数`}
+          name={`人数上限`}
+          label={`人数上限`}
           rules={[
             {
               required: true,
