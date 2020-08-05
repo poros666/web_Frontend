@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import { Card,Avatar,Space,Button } from 'antd';
 import '../../style/comm/comm.css'
+import CollectionsPageReport from "../../components/comm/report"
 
 
 
@@ -89,7 +90,7 @@ function Func() {
         <Button ghost><p style={{color:'black'}}>点赞</p></Button>
         <Button ghost><p style={{color:'black'}}>收藏</p></Button>
         <Button ghost><p style={{color:'black'}}>分享</p></Button>
-        <Button ghost><p style={{color:'black'}}>举报</p></Button>     
+        <CollectionsPageReport/>     
       </Space>
     );
   }
