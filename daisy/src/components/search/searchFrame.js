@@ -18,7 +18,7 @@ export default class SearchFrame extends Component {
         }
 
         return (
-            <div style={{margin: '5%'}}>
+            <div style={{ marginLeft: '22%' }}>
                 <Select defaultValue="综合" style={{ width: '80px' }} onChange={handleChange}>
                 <Option value="综合">综合</Option>
                 <Option value="比赛">比赛</Option>

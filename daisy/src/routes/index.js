@@ -22,7 +22,8 @@ import PersonalCenter from "../pages/personal/personalSpace";
 import MyTeam from "../pages/personal/myTeam"
 import MyComp from "../pages/personal/myComp"
 import MyColle from "../pages/personal/myColle"
-
+import SearchPage from "../pages/search/searchPage";
+import SearchResult from "../pages/search/searchResult";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -79,7 +80,18 @@ export const mainRoutes = [{
     path: "/searchCompPage",
     title: "寻找队伍",
     component: SearchCompetitionPage
-}]
+},
+{
+    path: "/search",
+    title: "搜索页面",
+    component: SearchPage
+},
+{
+    path: "/searchResult",
+    title: "搜索结果页面",
+    component: SearchResult
+}
+]
 
 export const messageRoutes = [{
     path: "/message/system",
