@@ -7,7 +7,7 @@ import {Space,Button} from 'antd';
 import 'antd/dist/antd.css';
 import TurnPage from '../../components/comm/TurnPage'
 import PostList from '../../components/community/PostList'
-import Test from '../../components/community/Test'
+//import Test from '../../components/community/Test'
 
 export default class Community extends Component {
     constructor(props){
@@ -115,8 +115,6 @@ export default class Community extends Component {
 
 
                 <Footer/>
-                <Test/>
-
             </div>
         )
     }
