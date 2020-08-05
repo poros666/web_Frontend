@@ -82,7 +82,7 @@ export default class CommunityContent extends Component {
       currentData:[],
       total: 50,
       pageSize: 1,
-      pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
+      pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
   }
@@ -98,6 +98,8 @@ export default class CommunityContent extends Component {
     console.log("page:",page);
     this.setState({
       pageNumber: page
+    }, () => {
+      window.location.hash = `#/findteam/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     this.setState((state)=>{
     if(state.pageNumber%2==1){
