@@ -28,7 +28,7 @@ class HeaderNav extends Component {
                     </a>
                 </Menu.Item>
                 <Menu.Item key="compPage" icon={<AppstoreOutlined />}>
-                    <a href="localhost:3000/#/searchCompPage" target="_blank" rel="noopener noreferrer">
+                    <a href="localhost:3000/#/allCompPage" target="_blank" rel="noopener noreferrer">
                         比赛
                     </a>
                 </Menu.Item>

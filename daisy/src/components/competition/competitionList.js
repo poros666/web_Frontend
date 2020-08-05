@@ -67,7 +67,7 @@ export default class CompetitionList extends Component {
     this.setState({
       pageNumber: page
     }, () => {
-      window.location.hash = `#/searchCompPage/pagenum=${page}`; //设置当前页面的hash值为当前page页数
+      window.location.hash = `#/allCompPage/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     this.setState((state)=>{
     for(let i=0;i<state.pageSize;i++){
@@ -100,7 +100,11 @@ export default class CompetitionList extends Component {
                       src={item.logosrc}
                     />
                     <List.Item.Meta
-                    title={<Link to={"/compPage/"+item.ID+"=id"}>{item.competitionname}</Link>
+                    title={<Link to={{pathname:"/compPage/"+item.ID+"=id",
+                                      query:{
+                                        id:item.ID,
+                                        name:item.competitionname
+                                      }}}>{item.competitionname}</Link>
                     }
                     description={item.description}
                     />

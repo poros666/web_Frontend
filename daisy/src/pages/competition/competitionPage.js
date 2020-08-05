@@ -16,11 +16,17 @@ import DiscussList from '../../components/competition/discussList'
 export default class CompetitionPage extends Component 
 {
     constructor(props){
-        super(props);
+        super(props)
+        this.state={
+            id:this.props.location.query.id,
+            name:this.props.location.query.name
+        }
     }
 
     render() 
     {
+       
+
         return (
             <div class='CompetitionPage'>
                 <Header/>
@@ -33,6 +39,7 @@ export default class CompetitionPage extends Component
                         <CompetitionName/>
                         <div>
                             {this.props.match.params.compID}
+                            {this.state.name}{this.state.id}
                         </div>
                     </Col>
                     <Col span={7}>
