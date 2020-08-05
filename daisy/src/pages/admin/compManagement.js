@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import Highlighter from "react-highlight-words"
 import { Card, Table, Button, Tag, Space, Input, Popconfirm } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
-import CollectionsPage from "./compEditPop"
+import CollectionsPage from "../../components/admin/compEditPop"
+import CollectionsPageReport from "../../components/comm/report"
 
 export default class CompManagement extends Component {
   constructor(props) {
@@ -167,6 +168,7 @@ export default class CompManagement extends Component {
         extra={
           <div>
             <CollectionsPage />
+            <CollectionsPageReport />
             <Button
               type="primary"
               onClick={this.reload}
