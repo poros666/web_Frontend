@@ -5,7 +5,7 @@ import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
 import Post from "../pages/Post";
-import FindTeam from "../pages/FindTeam";
+import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
@@ -21,7 +21,8 @@ import PersonalCenter from "../pages/personal/personalSpace";
 import MyTeam from "../pages/personal/myTeam"
 import MyComp from "../pages/personal/myComp"
 import MyColle from "../pages/personal/myColle"
-
+import SearchPage from "../pages/search/searchPage";
+import SearchResult from "../pages/search/searchResult";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -73,7 +74,18 @@ export const mainRoutes = [{
     path: "/searchCompPage",
     title: "寻找队伍",
     component: SearchCompetitionPage
-}]
+},
+{
+    path: "/search",
+    title: "搜索页面",
+    component: SearchPage
+},
+{
+    path: "/searchResult",
+    title: "搜索结果页面",
+    component: SearchResult
+},
+]
 
 export const messageRoutes = [{
     path: "/message/system",

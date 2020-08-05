@@ -10,12 +10,12 @@ export default class EasySearchFrame extends Component {
         };
 
         return (
-            <div style={{margin: '5%'}}>
+            <div style={{marginLeft: '20%' }}>
                 <Search
                     placeholder="搜搜看你感兴趣的内容吧～"
                     onSearch={value => console.log(value)}
-                    style={{ width: '65%'}}
-                    allowClear 
+                    style={{ width: '75%'}}
+                    allowClear
                     onChange={onChange}
                 />
             </div>
