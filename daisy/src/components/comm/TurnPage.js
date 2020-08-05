@@ -15,4 +15,3 @@ export default class TurnPage extends Component {
         )
     }
 }
-

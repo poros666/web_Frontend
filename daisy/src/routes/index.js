@@ -4,8 +4,9 @@ import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
-import Post from "../pages/Post";
-import FindTeam from "../pages/FindTeam";
+import Post from "../pages/findteam/PostPage";
+import ReadPost from "../pages/community/ReadPost"
+import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
@@ -60,6 +61,11 @@ export const mainRoutes = [{
     component: Post
 },
 {
+    path: "/readPost",
+    title: "动态",
+    component: ReadPost
+},
+{
     path: "/findTeam",
     title: "寻找队伍",
     component: FindTeam
@@ -70,11 +76,14 @@ export const mainRoutes = [{
     component: Community
 },
 {
+<<<<<<< HEAD
     path: "/ReadPost/:id",
     title:"社区动态",
     component: ReadPost
 },
 {
+=======
+>>>>>>> 0838117cec091bad7894980f0431a0ab766d04fd
     path: "/compPage/:compID",
     title: "比赛页面",
     component: CompetitionPage
