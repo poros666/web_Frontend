@@ -1,0 +1,8 @@
+.login-card{
+    position: relative;
+    width: 500px;
+    height: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
