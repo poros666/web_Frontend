@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { List, Avatar ,Space,Button, Pagination, Col} from 'antd';
+import { List, Avatar ,Space,Button, Pagination, Col, Row} from 'antd';
 import 'antd/dist/antd.css';
+import CollectionsPageReport from '../../components/comm/report'
 
 const data = [
     {
@@ -150,6 +151,7 @@ export default class DiscussList extends Component {
                         itemLayout="horizontal"
                         dataSource={this.state.currentData}
                         renderItem={item => (
+                        <div>
                         <List.Item>
                             <List.Item.Meta
                                 avatar={
@@ -159,8 +161,14 @@ export default class DiscussList extends Component {
                                 }
                                 title={<a href="#/ReadPost">{item.username}</a>}
                                 description={<p>{item.description}</p>}
-                            />
+                            />     
                         </List.Item>
+                        <Row>
+                        <Button ghost><p style={{color:'black'}}>点赞</p></Button>
+                        <Button ghost><p style={{color:'black'}}>收藏</p></Button>
+                        <CollectionsPageReport/>
+                        </Row>
+                        </div>
                         )}
                     />
                     <Col offset={9}>
