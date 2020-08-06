@@ -20,8 +20,8 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
       <br/>
       <TextArea onChange={onChange} value={value} 
                 style={{width: '90%', resize: 'none'}}  allowClear={true} 
-                autoSize={{ minRows: 6, maxRows: 12 }}
-                placeholder="在此输入讨论内容"/>
+                autoSize={{ minRows: 6, maxRows: 10 }}  maxLength="1000"
+                placeholder="在此输入讨论内容(1000字以内)"/>
     </Form.Item>
     <Form.Item>
       <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">

@@ -11,16 +11,12 @@ import FindTeamBotton from '../../components/competition/findTeamButton'
 import CompetitionInformation from '../../components/competition/competitionInformation'
 import RaiseDiscuss from '../../components/competition/raiseDiscuss'
 import DiscussList from '../../components/competition/discussList'
-
+import SubscriptionButton from '../../components/competition/subscriptionButton'
 
 export default class CompetitionPage extends Component 
 {
     constructor(props){
         super(props)
-        this.state={
-            id:this.props.location.query.id,
-            name:this.props.location.query.name
-        }
     }
 
     render() 
@@ -39,11 +35,11 @@ export default class CompetitionPage extends Component
                         <CompetitionName/>
                         <div>
                             {this.props.match.params.compID}
-                            {this.state.name}{this.state.id}
                         </div>
                     </Col>
                     <Col span={7}>
                         <FindTeamBotton compID={this.props.match.params.compID}/>
+                        <SubscriptionButton compID={this.props.match.params.compID}/>
                     </Col>
                 </Row>
                 <Col offset={2} span={20}>

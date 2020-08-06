@@ -152,9 +152,12 @@ export default class DiscussList extends Component {
                         renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                //之后要改成用户页面路径
-                                title={<a href="https://ant.design">{item.username}</a>}
+                                avatar={
+                                  <a href={"#/ReadPost"}>
+                                    <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'></Avatar>
+                                  </a>
+                                }
+                                title={<a href="#/ReadPost">{item.username}</a>}
                                 description={<p>{item.description}</p>}
                             />
                         </List.Item>

@@ -23,9 +23,9 @@ class Homepage extends Component {
         return (
             <div>
                 <HeaderNav/>
+                <FloatHelper/>
                 <TopBar/>
                 <CompShow/>
-                <FloatHelper/>
                 <Footer/>
             </div>
         )
