@@ -1,3 +1,6 @@
+//
+// made by ykn
+//
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
@@ -13,23 +16,51 @@ const CommentList = ({ comments }) => (
   />
 );
 
+const onFinish = values => {
+  console.log('Success:', values);
+};
+
+const onFinishFailed = errorInfo => {
+  console.log('Failed:', errorInfo);
+};
+
+
+
 const Editor = ({ onChange,onChangeTitle, onSubmit, submitting, value,valuetitle }) => (
-  <>
-    <Form.Item>
+  <Form
+    name="basic"
+    onFinish={onFinish}
+    onFinishFailed={onFinishFailed}
+  >
+    <Form.Item
+       rules={[
+        {
+          required: true,
+          message: '请输入标题!',
+        },
+      ]}
+    >
       <TextArea name='T_title' rows={1} onChange={onChangeTitle} value={valuetitle}  style={{width: '100%', resize: 'none'}} placeholder="标题"/>
       <br/>
       <br/>
       <TextArea name='T_content' rows={8} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} placeholder="正文"/>
     </Form.Item>
-    <Form.Item>
+    <Form.Item
+      rules={[
+        {
+          required: true,
+          message: '请输入正文！',
+        },
+      ]}
+    >
       <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
         Add Comment
       </Button>
     </Form.Item>
-  </>
+  </Form>
 );
 
-export default class CreatePost extends React.Component {
+export default class CreateMoment extends React.Component {
   constructor(props){
     super(props)
 
@@ -56,6 +87,9 @@ export default class CreatePost extends React.Component {
     
 
     if (this.state.value==='' || this.state.valuetitle==='') {
+
+      
+
       return;
     }
 
@@ -72,7 +106,7 @@ export default class CreatePost extends React.Component {
 
 
 
-    this.props.createPost(this.state.valuetitle,this.state.value)
+    this.props.createMoment(this.state.valuetitle,this.state.value)
     
     this.setState({
       submitting: false,
@@ -106,7 +140,7 @@ export default class CreatePost extends React.Component {
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           avatar={
-            <a href={"#/ReadPost/"+1}>
+            <a href={"#/Moment/"+1}>
             <Avatar
               src={require("../../img/avatar/"+this.state.avatarSrc+".jpg")}
               alt={this.state.avatarAlt}
@@ -114,8 +148,6 @@ export default class CreatePost extends React.Component {
 
             </Avatar>
           </a>
-
-         
           }
           content={
             <Editor

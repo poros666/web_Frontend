@@ -1,3 +1,6 @@
+//
+// made by ykn
+//
 import { Comment, List } from 'antd';
 
 import React, { Component } from 'react'
@@ -17,7 +20,7 @@ export default class CommentList extends Component {
     constructor(props){
         super(props)
 
-        var tempId=this.props.postId
+        var tempId=this.props.momentId
   
 
         this.submitComment=this.submitComment.bind(this)

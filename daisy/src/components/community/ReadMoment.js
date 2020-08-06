@@ -1,3 +1,6 @@
+//
+// made by ykn
+//
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import { Card,Avatar,Space,Button } from 'antd';
@@ -7,21 +10,21 @@ import CollectionsPageReport from "../comm/report"
 
 
 
- function getPostContent(Pid){
+ function getMomentContent(Pid){
     //do something
   
   }
 
 
-export default class Post extends Component {
+export default class ReadMoment extends Component {
     
     constructor(props){
         super(props)
 
 
-        var tempId=this.props.postId
+        var tempId=this.props.momentId
         
-        getPostContent(tempId)
+        getMomentContent(tempId)
                 
         const sourceData=[
             {
@@ -51,7 +54,7 @@ export default class Post extends Component {
                         //这里的头像要动态生成
                         <div align="right">
 
-                        <a href={"#/ReadPost/"+this.state.data[0].authorUid}>
+                        <a href={"#/Moment/"+this.state.data[0].authorUid}>
                             <Avatar src={require("../../img/avatar/"+this.state.data[0].authorAvatar+".jpg")}></Avatar>
                         </a>
                                         

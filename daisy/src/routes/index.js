@@ -56,11 +56,7 @@ export const mainRoutes = [{
     title: "post",
     component: Post
 },
-{
-    path: "/Moment",
-    title: "动态",
-    component: Moment
-},
+
 {
     path: "/findTeam",
     title: "寻找队伍",
@@ -70,6 +66,11 @@ export const mainRoutes = [{
     path: "/community",
     title: "社区",
     component: Community
+},
+{
+    path: "/Moment",
+    title: "动态",
+    component: Moment
 },
 {
     path: "/compPage/:compID",
