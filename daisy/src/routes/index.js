@@ -5,7 +5,7 @@ import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
 import Post from "../pages/findteam/PostPage";
-import ReadPost from "../pages/community/ReadPost"
+import Moment from "../pages/community/Moment"
 import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
@@ -57,9 +57,9 @@ export const mainRoutes = [{
     component: Post
 },
 {
-    path: "/readPost",
+    path: "/Moment",
     title: "动态",
-    component: ReadPost
+    component: Moment
 },
 {
     path: "/findTeam",

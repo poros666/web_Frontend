@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import FloatHelper from '../../components/comm/FloatHelper'
-import CreatePost from '../../components/community/CreatePost'
+import CreatePost from '../../components/community/CreateMoment'
 import {Space,Button} from 'antd';
 import 'antd/dist/antd.css';
 import TurnPage from '../../components/comm/TurnPage'
-import PostList from '../../components/community/PostList'
+import PostList from '../../components/community/MomentList'
 //import Test from '../../components/community/Test'
 
 export default class Community extends Component {
@@ -92,8 +92,6 @@ export default class Community extends Component {
 
                         <PostList/>
                             
-
-                        <TurnPage/>       
 
 
                         <CreatePost

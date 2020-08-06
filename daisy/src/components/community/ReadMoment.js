@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import { Card,Avatar,Space,Button } from 'antd';
 import '../../style/comm/comm.css'
-import CollectionsPageReport from "../../components/comm/report"
+import CollectionsPageReport from "../comm/report"
 
 
 

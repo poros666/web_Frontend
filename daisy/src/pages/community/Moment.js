@@ -3,7 +3,7 @@ import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import FloatHelper from '../../components/comm/FloatHelper'
 import '../../style/comm/comm.css'
-import Post from '../../components/community/Post'
+import Post from '../../components/community/ReadMoment'
 import ToComment from '../../components/community/ToComment'
 import 'antd/dist/antd.css';
 import { Tooltip } from 'antd';
