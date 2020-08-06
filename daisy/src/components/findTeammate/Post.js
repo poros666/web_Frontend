@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import { Card,Avatar,Space,Button } from 'antd';
 import '../../style/comm/comm.css'
+import PostPageReport from '../findTeammate/report'
 
 
 
@@ -79,7 +80,7 @@ function Func() {
         <Button ghost><p style={{color:'black'}}>申请进入小队</p></Button>
         <Button ghost><p style={{color:'black'}}>收藏</p></Button>
         <Button ghost><p style={{color:'black'}}>分享</p></Button>
-        <Button ghost><p style={{color:'black'}}>举报</p></Button>     
+        <PostPageReport/>
       </Space>
     );
   }
