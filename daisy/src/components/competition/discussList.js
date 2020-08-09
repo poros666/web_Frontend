@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { List, Avatar ,Space,Button, Pagination, Col, Row} from 'antd';
+import { List, Avatar ,Space,Button, Pagination, Col, Popover} from 'antd';
 import 'antd/dist/antd.css';
-import CollectionsPageReport from '../../components/comm/report'
+import { StarOutlined, LikeOutlined } from '@ant-design/icons';
+import Report from './Report'
 
 const data = [
     {
@@ -102,6 +103,8 @@ export default class DiscussList extends Component {
   {
     super(props)
     this.state={
+      compID:this.props.compID,
+      sortMethod:1,
       currentData:[],
       total: data.length,
       pageSize: 5,
@@ -124,6 +127,7 @@ export default class DiscussList extends Component {
     }, () => {
       window.location.hash = `#/compPage/${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
+    this.requestForData(this.state.pageNumber,this.state.compID,this.state.sortMethod)
     this.setState((state)=>{
     for(let i=0;i<state.pageSize;i++){
       state.currentData.pop();
@@ -138,21 +142,41 @@ export default class DiscussList extends Component {
    );
  }
 
+  onLikeClick(UID){}
 
+  onStarClick(UID){}
+
+  requestForData(pageNumber,compID,sortMethod){}
 
   render() {
         return (
             <div>
-                <SortDiscuss/>
+                <Space>
+                  <p>sort by:</p>       
+                  <Button type="primary" onClick={()=>{this.setState({sortMethod:1})}}>Time</Button>
+                  <Button type="primary" onClick={()=>{this.setState({sortMethod:2})}}>Likes</Button>
+                  <Button type="primary" onClick={()=>{this.setState({sortMethod:3})}}>Stars</Button>     
+                </Space>
                 <br/>
                 <br/>
                     <List
                         style={{width: '100%', resize: 'none'}}
                         itemLayout="horizontal"
                         dataSource={this.state.currentData}
-                        renderItem={item => (
+                        renderItem={item => 
                         <div>
-                        <List.Item>
+                        <List.Item
+                        actions={[
+                          <Popover content={<p>Star</p>}>
+                            <StarOutlined onClick={this.onStarClick}/>
+                            {123}
+                          </Popover>,
+                          <Popover content={<p>Like</p>}>
+                            <LikeOutlined onClick={this.onLikeClick}/>
+                            {123}
+                          </Popover>,
+                          <Report/>
+                          ]}>
                             <List.Item.Meta
                                 avatar={
                                   <a href={"#/ReadPost"}>
@@ -163,13 +187,8 @@ export default class DiscussList extends Component {
                                 description={<p>{item.description}</p>}
                             />     
                         </List.Item>
-                        <Row>
-                        <Button ghost><p style={{color:'black'}}>点赞</p></Button>
-                        <Button ghost><p style={{color:'black'}}>收藏</p></Button>
-                        <CollectionsPageReport/>
-                        </Row>
                         </div>
-                        )}
+                        }
                     />
                     <Col offset={9}>
                     <Pagination 
@@ -184,16 +203,3 @@ export default class DiscussList extends Component {
         )
   }
 }
-
-
-
-function SortDiscuss() {
-    return (
-      <Space>
-          <p>sort by:</p>       
-        <Button type="primary">time</Button>
-        <Button type="primary">like</Button>
-        <Button type="primary">Favorites</Button>     
-      </Space>
-    );
-  }
