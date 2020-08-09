@@ -1,27 +1,74 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Layout, Pagination } from 'antd';
+import { Layout, Carousel, Card} from 'antd';
 
-const { Footer, Content } = Layout;
+const { Header,Footer, Content } = Layout;
+const { Meta,Grid } = Card;
+const contentStyle = {
+    color: '#fff',
+    lineHeight: '40px',
+  };
 
 class ActivityShow extends Component {
     state = {  }
     render() { 
         return ( 
-            // <div style={{height: '400px',width:'400px',padding:'10px 10px',margin:'10px 10px'}}>
-            <div style={{height: '400px',margin:'10px 10px'}}>
+             <div style={{height: '400px',margin:'10px 10px'}}>
                 <Layout>
                     <Content>
-                    <img
-                        width={400}
-                        height={300}
-                        alt="logo"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                     />
+                        <Carousel effect="fade">
+                            <div>
+                                <img
+                                    height={360}
+                                    width={450}
+                                    alt="logo"
+                                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                                />
+                                <h3 style={contentStyle}>1</h3>
+                            </div>
+                            <div>
+                                <img 
+                                    height={360}
+                                    width={450}
+                                    alt="example" 
+                                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" 
+                                />
+                                <h3 style={contentStyle}>2</h3>
+                            </div>
+                            <div>
+                                <img
+                                    height={360}
+                                    width={450}
+                                    alt="example"
+                                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                                />
+                            
+                                <h3 style={contentStyle}>3</h3>
+                            </div>
+                            <div>
+                                <img
+                                    height={360}
+                                    width={450}
+                                    alt="logo"
+                                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                                    title={<a href ={"#/personal"}>{"我的"}</a>}
+                                />
+                                <h3 style={contentStyle}>4</h3>
+                            </div>
+                            <div>
+                                <img
+                                    height={360}
+                                    width={450}
+                                    alt="example"
+                                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                                />
+                                <h3 style={contentStyle}>5</h3>
+                            </div>
+                        </Carousel>
                     </Content>
-                    <Footer>
-                        <Pagination size="small" total={50} /> </Footer>
+                    <Header style={{height: '40px'}}>
+                    </Header>
                 </Layout>                
             </div>
          );

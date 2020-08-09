@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Layout, List,  Space,Menu} from 'antd';
+import { Layout, List, Space, Row, Col, Button} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined} from '@ant-design/icons';
 
-const { SubMenu } = Menu;
+
 const { Header, Footer, Sider, Content } = Layout;
 const listData = [];
 const IconText = ({ icon, text }) => (
@@ -32,19 +32,29 @@ class CompShow extends Component {
         return ( 
             <div style={{ height: '5300px' , margin:'40px 150px' }}>
                 <Layout>
-                    <Layout>
-                        <Header>
-                            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                                <Menu.Item key="1">比赛</Menu.Item>
-                                {/* <Menu.Item key="3" style={{float:'right'}}>更多</Menu.Item> */}
-                                <Menu.Item key="2" style={{float:'right'}}>换一换</Menu.Item>
-                            </Menu>
-                            {/* <div  color='white'>
-                                <Button type="text" style={{float:'right'}}>Text Button</Button>
-                                <Button type="text" style={{float:'right'}}>Text Button</Button>
-                            </div> */}
+                    <Header>
+                        <Content>
+                            <Row>
+                                <Col span={2} offset={0}>
+                                    <Button type="link">                    
+                                        <a href="#/searchCompPage/pagenum" target="_blank" rel="noopener noreferrer">
+                                            比赛</a>
+                                    </Button>
+                                </Col>
+                                <Col span={2} offset={15}>
+                                    <Button type="primary" style={{float:'right',top:'15px'}}>换一换</Button>
+                                </Col>
+                                <Col span={2} offset={0}>
+                                    <Button type="primary" style={{float:'right',top:'15px'}}>
+                                        <a href="#/searchCompPage/pagenum" target="_blank" rel="noopener noreferrer">
+                                            更多</a>
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Content>
+                    </Header>
 
-                        </Header>
+                    <Layout>
                         <Content>
                             {/* 从'List'开始调用 ant内容-List-竖排列表样式
                                 根据需求进行修改 */}
@@ -52,7 +62,7 @@ class CompShow extends Component {
                                 itemLayout="vertical"
                                 size="large"
 
-                                //pagination 将展示区分页
+                                // pagination 将展示区分页
                                 // pagination={{
                                 // onChange: page => {
                                 //     console.log(page);
@@ -74,7 +84,6 @@ class CompShow extends Component {
                                     <img
                                         width={272}
                                         alt="logo"
-                                        // src='compPicture.jpg'
                                         src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
                                     />
                                     }
@@ -89,14 +98,11 @@ class CompShow extends Component {
                                 )}
                             />
                         </Content>
-                        {/* <Footer>
-                        </Footer> */}
-
+                        
+                        <Sider>
+                            <li>比赛排行榜</li>
+                        </Sider>
                     </Layout>
-
-                    <Sider>
-                        <li>比赛排行榜</li>
-                    </Sider>
                 </Layout>
             </div>
          );
