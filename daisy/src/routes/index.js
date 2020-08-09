@@ -24,6 +24,10 @@ import MyComp from "../pages/personal/myComp"
 import MyColle from "../pages/personal/myColle"
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
+import SearchContent from "../components/search/searchContent";
+import SearchContentComp from "../components/search/searchContentComp";
+import SearchContentComm from "../components/search/searchContentComm";
+import SearchContentUsr from "../components/search/searchContentUsr";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -93,25 +97,49 @@ export const mainRoutes = [{
 }
 ]
 
-export const messageRoutes = [{
-    path: "/message/system",
-    title: "系统公告",
-    component: SystemNotice
+export const searchRoutes = [
+{
+    path: "/searchResult/type=mixed",
+    title: "综合",
+    component: SearchContent
 },
+{
+    path: "/searchResult/type=comp",
+    title: "比赛",
+    component: SearchContentComp
+},
+{
+    path: "/searchResult/type=comm",
+    title: "社区",
+    component: SearchContentComm
+},
+{
+    path: "/searchResult/type=usr",
+    title: "用户",
+    component: SearchContentUsr
+}
+]
+
+export const messageRoutes = [
 {
     path: "/message/comp",
     title: "比赛通知",
     component: CompNotice
 },
 {
-    path: "/message/reply",
-    title: "回复我的",
-    component: Reply
+    path: "/message/system",
+    title: "系统公告",
+    component: SystemNotice
 },
 {
     path: "/message/letter",
     title: "私信",
     component: PrivateLetter
+},
+{
+    path: "/message/reply",
+    title: "回复我的",
+    component: Reply
 },
 {
     path: "/message/team",

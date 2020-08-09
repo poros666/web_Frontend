@@ -5,9 +5,6 @@ export default class EasySearchFrame extends Component {
     render() {
 
         const { Search } = Input;
-        const onChange = e => {
-            console.log(e);
-        };
 
         return (
             <div style={{marginLeft: '22%'}}>
@@ -16,7 +13,7 @@ export default class EasySearchFrame extends Component {
                     onSearch={value => console.log(value)}
                     style={{ width: '68%'}}
                     allowClear 
-                    onChange={onChange}
+                    //accesskey="s"
                 />
             </div>
         )
