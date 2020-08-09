@@ -54,22 +54,6 @@ export default class RaiseDiscuss extends React.Component {
     this.setState({
       submitting: true,
     });
-
-    setTimeout(() => {
-      this.setState({
-        submitting: false,
-        value: '',
-        comments: [
-          {
-            author: 'Han Solo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: <p>{this.state.value}</p>,
-            datetime: moment().fromNow(),
-          },
-          ...this.state.comments,
-        ],
-      });
-    }, 1000);
   };
 
   handleChange = e => {

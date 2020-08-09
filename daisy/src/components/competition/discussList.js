@@ -3,7 +3,7 @@ import { List, Avatar ,Space,Button, Pagination, Col, Popover} from 'antd';
 import 'antd/dist/antd.css';
 import { StarOutlined, LikeOutlined } from '@ant-design/icons';
 import Report from './Report'
-
+import moment from 'moment'
 const data = [
     {
       username: 'zhangsan',
@@ -175,7 +175,7 @@ export default class DiscussList extends Component {
                             <LikeOutlined onClick={this.onLikeClick}/>
                             {123}
                           </Popover>,
-                          <Report/>
+                          <Report ReportUID='test1' ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
                           ]}>
                             <List.Item.Meta
                                 avatar={
