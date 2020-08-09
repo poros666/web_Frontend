@@ -1,45 +1,64 @@
-//
-// made by ykn
-//
-//用来将在沙盒里面的数据再次实际运用
-
-
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css';
+import { Form, Input, Button } from 'antd';
 
-import { Button } from 'antd';
 
-export default class test extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            renderAdComponent: false
-        };
-        this.onClickHandler = this.onClickHandler.bind(this);
-    }
-  
-    onClickHandler() {
-        this.setState({renderAdComponent: !this.state.renderAdComponent})
-    }
-  
+
+const Demo = () => {
+
+
+  return (
+    <Form
+    
+      name="basic"
+      initialValues={{
+        remember: true,
+      }}
+    >
+      <Form.Item
+       name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your username!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+              name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+      >
+        <Input/>
+      </Form.Item>
+
+
+      <Form.Item >
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+};
+
+
+
+
+export default class Test extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.onClickHandler}>
-                    我是button
-                    </Button>
-                {this.state.renderAdComponent ? <AdComponent/> : null}
+                <Demo/>
             </div>
-        );
+        )
     }
 }
-
-function AdComponent(){
-    return(
-        <div>
-            <p>我是内容</p>
-        </div>
-      
-    )
-}
-
-

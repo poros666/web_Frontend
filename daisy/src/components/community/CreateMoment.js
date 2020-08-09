@@ -16,23 +16,16 @@ const CommentList = ({ comments }) => (
   />
 );
 
-const onFinish = values => {
-  console.log('Success:', values);
-};
-
-const onFinishFailed = errorInfo => {
-  console.log('Failed:', errorInfo);
-};
 
 
 
-const Editor = ({ onChange,onChangeTitle, onSubmit, submitting, value,valuetitle }) => (
+const Editor = ({ onChange,onChangeTitle, onSubmit, value,valuetitle }) => (
   <Form
     name="basic"
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
   >
+
     <Form.Item
+      name='title'
        rules={[
         {
           required: true,
@@ -41,11 +34,10 @@ const Editor = ({ onChange,onChangeTitle, onSubmit, submitting, value,valuetitle
       ]}
     >
       <TextArea name='T_title' rows={1} onChange={onChangeTitle} value={valuetitle}  style={{width: '100%', resize: 'none'}} placeholder="标题"/>
-      <br/>
-      <br/>
-      <TextArea name='T_content' rows={8} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} placeholder="正文"/>
     </Form.Item>
+
     <Form.Item
+      name='content'
       rules={[
         {
           required: true,
@@ -53,10 +45,15 @@ const Editor = ({ onChange,onChangeTitle, onSubmit, submitting, value,valuetitle
         },
       ]}
     >
-      <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
+    <TextArea name='T_content' rows={8} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} placeholder="正文"/>
+    </Form.Item>
+
+    <Form.Item>
+      <Button htmlType="submit" onClick={onSubmit} type="primary">
         Add Comment
       </Button>
     </Form.Item>
+
   </Form>
 );
 
@@ -154,7 +151,6 @@ export default class CreateMoment extends React.Component {
               onChange={this.handleChange}
               onChangeTitle={this.handleChangeTitle}
               onSubmit={this.handleSubmit}
-              submitting={submitting}
               value={value}
               valuetitle={valuetitle}
             />

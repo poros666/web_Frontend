@@ -10,7 +10,7 @@ import 'antd/dist/antd.css';
 import TurnPage from '../../components/comm/TurnPage'
 import MomentList from '../../components/community/MomentList'
 import CreateMoment from '../../components/community/CreateMoment'
-//import Test from '../../components/community/Test'
+import Test from '../../components/community/Test'
 
 export default class Community extends Component {
     constructor(props){
@@ -100,6 +100,8 @@ export default class Community extends Component {
                         <CreateMoment
                           createMoment={this.createMoment}
                         />
+
+                        {/* <Test/> */}
 
 
                     </div>                
