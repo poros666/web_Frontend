@@ -24,6 +24,8 @@ import MyComp from "../pages/personal/myComp"
 import MyColle from "../pages/personal/myColle"
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
+import Login from "../pages/login";
+import Register from "../pages/register";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -90,6 +92,16 @@ export const mainRoutes = [{
     path: "/searchResult",
     title: "搜索结果页面",
     component: SearchResult
+},
+{
+    path: "/login",
+    title: "登录",
+    component: Login
+},
+{
+    path: "/register",
+    title: "注册",
+    component: Register
 }
 ]
 
