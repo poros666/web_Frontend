@@ -11,6 +11,7 @@ import 'antd/dist/antd.css';
 import moment from 'moment';
 import '../../style/comm/comm.css'
 import  ToComment from '../../components/community/ToComment'
+import ReportButton from './ReportButton'
 
 
 
@@ -103,19 +104,31 @@ export default class CommentList extends Component {
                                 <Comment
                                 className='middle'
                                 actions={ 
-                                    [<span
+                                    [
+
+                                    <span
                                         key="comment-list-reply-to-0" 
                                         onClick={this.submitComment}
                                         >                                           
                                         Reply to
-                                        {this.state.renderAdComponent ? <ToComment/> : null}
+                                    </span>,
+                                    <>
+                                      <ReportButton/>
+                                    </>,
+                                    <span>
+                                      {this.state.renderAdComponent ? <ToComment/> : null}
                                     </span>
+
+
 
                                     ]}
                                 author={item.author}
                                 avatar={item.avatar}
                                 content={item.content}
-                                datetime={item.datetime}>
+                                datetime={item.datetime}
+                                >
+                                                             
+                                
                                     
                                     <List
                                         className="comment-list"
@@ -126,16 +139,6 @@ export default class CommentList extends Component {
                                         <li>
                                             <Comment
                                             className='middle'
-                                            actions={ 
-                                                [<span
-                                                    key="comment-list-reply-to-0" 
-                                                    onClick={this.submitComment}
-                                                    >                                           
-                                                    Reply to
-                                                    {this.state.renderAdComponent ? <ToComment/> : null}
-                                                </span>
-            
-                                                ]}
                                             author={item.author}
                                             avatar={item.avatar}
                                             content={item.content}

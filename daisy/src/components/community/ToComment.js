@@ -20,8 +20,16 @@ const CommentList = ({ comments }) => (
 );
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
-  <>
-    <Form.Item>
+  <Form>
+    <Form.Item
+       name='title'
+       rules={[
+        {
+          required: true,
+          message: '请输入评论内容!',
+        },
+      ]}
+    >
       <TextArea rows={4} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} />
     </Form.Item>
     <Form.Item>
@@ -29,7 +37,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
         Add Comment
       </Button>
     </Form.Item>
-  </>
+  </Form>
 );
 
 

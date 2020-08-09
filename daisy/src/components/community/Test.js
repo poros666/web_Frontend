@@ -1,3 +1,6 @@
+//基本上是模拟一个沙盒的情况
+
+
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';

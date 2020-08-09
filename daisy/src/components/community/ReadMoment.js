@@ -2,13 +2,22 @@
 // made by ykn
 //
 import React, { Component } from 'react'
-import 'antd/dist/antd.css';
-import { Card,Avatar,Space,Button } from 'antd';
+import 'antd/dist/antd.css'
+import { Card,Avatar,Space,Button } from 'antd'
 import '../../style/comm/comm.css'
-import CollectionsPageReport from "../comm/report"
+import { MessageOutlined, LikeOutlined, StarOutlined,ShareAltOutlined,AlertOutlined } from '@ant-design/icons'
+import ReportButton from './ReportButton'
 
 
 
+
+const IconText = ({ icon, text }) => (
+    <Space>
+      {React.createElement(icon)}
+      {text}
+    </Space>
+  );
+  
 
  function getMomentContent(Pid){
     //do something
@@ -18,6 +27,7 @@ import CollectionsPageReport from "../comm/report"
 
 export default class ReadMoment extends Component {
     
+
     constructor(props){
         super(props)
 
@@ -62,7 +72,24 @@ export default class ReadMoment extends Component {
 
                         </div>
                         }
-                >
+                    actions={[
+                        <Button type='text'>
+                            <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />
+                        </Button>,
+
+                        <Button type='text'>
+                            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />
+                        </Button>,
+
+                        <Button type='text'>
+                            <IconText icon={ShareAltOutlined} text="分享" key="list-vertical-share-o" />
+                        </Button>,
+
+                        <ReportButton/>,
+
+                        ]}
+                    >
+                
 
                 {
                     //下面是帖子的内容部分
@@ -70,10 +97,10 @@ export default class ReadMoment extends Component {
                 <p>
                    { this.state.data[0].content}
                 </p>
+
                 </Card>
                 
                 <br/>
-                <Func/>
 
             </div>
         //     <div className="site-card-border-less-wrapper">
@@ -86,15 +113,4 @@ export default class ReadMoment extends Component {
 }
 
 
-
-function Func() {
-    return (
-      <Space>
-        <Button ghost><p style={{color:'black'}}>点赞</p></Button>
-        <Button ghost><p style={{color:'black'}}>收藏</p></Button>
-        <Button ghost><p style={{color:'black'}}>分享</p></Button>
-        <CollectionsPageReport/>     
-      </Space>
-    );
-  }
 

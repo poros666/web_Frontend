@@ -2,7 +2,17 @@
 // made by ykn
 //
 import React, { Component } from 'react'
-import { List, Avatar,Col, Pagination } from 'antd';
+import { List, Avatar,Col, Pagination,Space } from 'antd';
+import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+
+
+const IconText = ({ icon, text }) => (
+  <Space>
+    {React.createElement(icon)}
+    {text}
+  </Space>
+);
+
 
 export default class MomentList extends Component {
     constructor(props){
@@ -179,7 +189,14 @@ export default class MomentList extends Component {
                     itemLayout="horizontal"
                     dataSource={this.state.currentData}
                     renderItem={item => (
-                      <List.Item>
+                      <List.Item
+                          key={item.title}
+                          actions={[
+                                    <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
+                                    <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
+                                    <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+                                  ]}
+                                  >
                           <List.Item.Meta
                             avatar={
 
@@ -195,6 +212,7 @@ export default class MomentList extends Component {
                               description={<p>{item.description}</p>}
                               
                           />
+
                       </List.Item>
                     )}
                   />
