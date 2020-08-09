@@ -1,8 +1,7 @@
 import React, { Component } from "react"
-import NormalLoginForm from "../components/comm/loginForm"
+import NormalLoginForm from "../components/login/loginForm"
 import { Card } from "antd"
 import "../style/logincard.css"
-import Footer from "../components/comm/Footer"
 
 export default class Login extends Component {
   render() {
