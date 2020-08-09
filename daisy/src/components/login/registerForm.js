@@ -19,35 +19,109 @@ const { Option } = Select
 const AutoCompleteOption = AutoComplete.Option
 const options = [
   {
-    value: 'zhejiang',
-    label: 'Zhejiang',
+    value: 'middle',
+    label: '中学',
     children: [
       {
-        value: 'hangzhou',
-        label: 'Hangzhou',
+        value: 'junior',
+        label: '初中',
         children: [
           {
-            value: 'xihu',
-            label: 'West Lake',
+            value: '7',
+            label: '初一',
           },
+          {
+            value: '8',
+            label: '初二',
+          },
+          {
+            value: '9',
+            label: '初三',
+          }
         ],
       },
+      {
+        value: 'senior',
+        label: '高中',
+        children: [
+          {
+            value: '10',
+            label: '高一',
+          },
+          {
+            value: '11',
+            label: '高二',
+          },
+          {
+            value: '12',
+            label: '高三',
+          }
+        ],
+      }     
     ],
   },
   {
-    value: 'jiangsu',
-    label: 'Jiangsu',
+    value: 'university',
+    label: '大学',
     children: [
       {
-        value: 'nanjing',
-        label: 'Nanjing',
+        value: 'undergraduate',
+        label: '本科生',
         children: [
           {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
+            value: 'u1',
+            label: '大一',
           },
+          {
+            value: 'u2',
+            label: '大二',
+          },
+          {
+            value: 'u3',
+            label: '大三',
+          },
+          {
+            value: 'u4',
+            label: '大四',
+          }
         ],
       },
+      {
+        value: 'postgraduate',
+        label: '硕士生',
+        children: [
+          {
+            value: 'p1',
+            label: '研一',
+          },
+          {
+            value: 'p2',
+            label: '研二',
+          },
+          {
+            value: 'p3',
+            label: '研三',
+          },
+          {
+            value: 'p4',
+            label: '研四',
+          }
+        ],
+      },
+      {
+        value: 'doctoral',
+        label: '博士生',
+        children: [
+          {
+            value: 'd',
+            label: '在读博士生',
+          },
+          {
+            value: 'phd',
+            label: '毕业博士生',
+          }
+        ],
+      }
     ],
   },
 ]
@@ -153,6 +227,7 @@ const RegistrationForm = () => {
             message: "请输入您的邮箱",
           },
         ]}
+        hasFeedback
       >
         <Input />
       </Form.Item>
@@ -166,6 +241,7 @@ const RegistrationForm = () => {
             message: "请输入您的手机号",
           },
         ]}
+        hasFeedback
       >
         <Input
           addonBefore={prefixSelector}
@@ -224,6 +300,7 @@ const RegistrationForm = () => {
             message: "请输入您的姓名",
           },
         ]}
+        hasFeedback
       >
         <Input />
       </Form.Item>
@@ -286,15 +363,16 @@ const RegistrationForm = () => {
 
       <Form.Item
         name="grade"
-        label="年级"
+        label="学历"
+        extra="选择最相近的!"
         rules={[
           {
             required: true,
-            message: "请选择您的年级",
+            message: "请选择您的学历",
           },
         ]}
       >
-        <Cascader options={options} placeholder="请选择年级" />
+        <Cascader options={options} placeholder="请选择学历" />
       </Form.Item>
 
       <Form.Item
@@ -375,10 +453,12 @@ const RegistrationForm = () => {
           我已阅读并同意 <a href="">《用户协议》</a> 及<a href="">《须知》</a>
         </Checkbox>
       </Form.Item>
+      <br></br>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          Register
+          注册
         </Button>
+        &nbsp;&nbsp;&nbsp;已有账号？<a href="#/login">现在登录！</a>
       </Form.Item>
     </Form>
   )

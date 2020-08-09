@@ -51,12 +51,12 @@ const NormalLoginForm = () => {
           忘记密码？
         </a>
       </Form.Item>
-
+        
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
           登录
         </Button>
-        Or <a href="">现在注册！</a>
+        &nbsp;&nbsp;&nbsp;没有账号？<a href="#/register">现在注册！</a>
       </Form.Item>
     </Form>
   );
