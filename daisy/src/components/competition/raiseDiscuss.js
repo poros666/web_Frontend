@@ -15,8 +15,16 @@ const CommentList = ({ comments }) => (
 );
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
-  <>
-    <Form.Item>
+  <Form
+  name="basic">
+    <Form.Item
+     name='discusscontent'
+     rules={[
+       {
+         required: true,
+         message: '请输入内容！',
+       },
+     ]}>
       <br/>
       <TextArea onChange={onChange} value={value} 
                 style={{width: '90%', resize: 'none'}}  allowClear={true} 
@@ -28,7 +36,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
         Raise Discuss
       </Button>
     </Form.Item>
-  </>
+  </Form>
 );
 
 export default class RaiseDiscuss extends React.Component {
