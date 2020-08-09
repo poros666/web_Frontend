@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import {Layout,Row, Col, Space} from 'antd'
+import {Row, Col} from 'antd'
 import 'antd/dist/antd.css'
 import ActivityShow from './ActivityShow'
 import CommunityShow from'./CommunityShow'
