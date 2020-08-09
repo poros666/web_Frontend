@@ -4,7 +4,7 @@ import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
-import Post from "../pages/findteam/PostPage";
+import PostPage from "../pages/findteam/PostPage";
 import ReadPost from "../pages/community/ReadPost"
 import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
@@ -52,9 +52,9 @@ export const mainRoutes = [{
 },
 
 {
-    path: "/post",
-    title: "post",
-    component: Post
+    path: "/postpage",
+    title: "寻找队伍帖",
+    component: PostPage
 },
 {
     path: "/readPost",
