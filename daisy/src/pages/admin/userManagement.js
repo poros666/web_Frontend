@@ -9,7 +9,7 @@ export default class CompManagement extends Component {
         title="管理用户"
         extra={
           <div>
-            <Input size="large" placeholder="large size" prefix={<UserOutlined />} style={{ marginRight: 20, marginBottom: 20}}/>
+            <Input size="large" placeholder="请输入用户id" prefix={<UserOutlined />} style={{ marginRight: 20, marginBottom: 20}}/>
             <Button type="primary" style={{ marginBlock: 20 , float: "right"}}>
               查找
             </Button>

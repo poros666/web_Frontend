@@ -3,13 +3,12 @@ import Highlighter from "react-highlight-words"
 import { Card, Table, Button, Tag, Space, Input, Popconfirm } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import CollectionsPage from "../../components/admin/compEditPop"
-import CollectionsPageReport from "../../components/comm/report"
+import CompDetail from "../../components/admin/compDetail"
 
 export default class CompManagement extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedRowKeys: [], //多选
       loading: false, //载入
       searchText: "", //搜索文字
       searchedColumn: "", //搜出来的行
@@ -17,12 +16,6 @@ export default class CompManagement extends Component {
   }
 
   render() {
-    const { loading, selectedRowKeys } = this.state
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    }
-    const hasSelected = selectedRowKeys.length > 0
 
     const columns = [
       {
@@ -100,8 +93,7 @@ export default class CompManagement extends Component {
         key: "action",
         render: (text, record) => (
           <Space size="middle">
-            {/* <a href="">编辑 {record.name}</a> */}
-            <Button>编辑</Button>
+            <CompDetail />
             <Popconfirm
               title="确认删除此项？"
               onCancel={() => {
@@ -168,14 +160,11 @@ export default class CompManagement extends Component {
         extra={
           <div>
             <CollectionsPage />
-            <CollectionsPageReport />
             <Button
               type="primary"
               onClick={this.reload}
-              disabled={loading}
-              loading={loading}
             >
-              Reload
+              刷新
             </Button>
           </div>
         }
@@ -184,7 +173,6 @@ export default class CompManagement extends Component {
           columns={columns}
           bordered
           dataSource={data}
-          rowSelection={rowSelection}
         />
       </Card>
     )
