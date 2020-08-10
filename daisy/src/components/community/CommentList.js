@@ -14,8 +14,6 @@ import  ToComment from '../../components/community/ToComment'
 import ReportButton from './ReportButton'
 
 
-
-
 export default class CommentList extends Component {
 
     constructor(props){
@@ -80,79 +78,73 @@ export default class CommentList extends Component {
         this.state={
           data:sourceData,
           Pid:tempId,
-          renderAdComponent: false
-
+          renderAdComponent: [],
          }
+
+        
       }
 
       submitComment(){
         console.log('yes')
-        this.setState({renderAdComponent: !this.state.renderAdComponent})
-
+        this.setState({renderAdComponent: !this.state.renderAdComponent[0]})
       }
 
-    render() {
+    render() {      
+        console.log(this.state.renderAdComponent)
         return (
             <div>
                  <List
-                            className="comment-list"
-                            header={`${this.state.data.length} replies`}
-                            itemLayout="horizontal"
-                            dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
-                            renderItem={item => (
-                            <li>
-                                <Comment
-                                className='middle'
-                                actions={ 
-                                    [
+                  className="comment-list"
+                  header={`${this.state.data.length} replies`}
+                  itemLayout="horizontal"
+                  dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
+                  renderItem={item => (
+                  <li>
+                      <Comment
+                      className='middle'
+                      actions={ 
+                          [
+                            <span
+                                key="comment-list-reply-to-0" 
+                                onClick={this.submitComment}
+                                >                                           
+                                Reply to
+                            </span>,
+                            <>
+                              <ReportButton/>
+                            </>,
+                            <span>
+                              {this.state.renderAdComponent[0] ? <ToComment/> : null}
+                            </span>
+                          ]}
+                      author={item.author}
+                      avatar={item.avatar}
+                      content={item.content}
+                      datetime={item.datetime}
+                      >
+                          <List
+                              className="comment-list"
+                              header={`${this.state.data.length} replies`}
+                              itemLayout="horizontal"
+                              dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
+                              renderItem={item => (
+                              <li>
+                                  <Comment
+                                  className='middle'
+                                  author={item.author}
+                                  avatar={item.avatar}
+                                  content={item.content}
+                                  datetime={item.datetime}>
+                                      
+                                  </Comment>
+                                  
+                              </li>
+                              )}
+                          />
 
-                                    <span
-                                        key="comment-list-reply-to-0" 
-                                        onClick={this.submitComment}
-                                        >                                           
-                                        Reply to
-                                    </span>,
-                                    <>
-                                      <ReportButton/>
-                                    </>,
-                                    <span>
-                                      {this.state.renderAdComponent ? <ToComment/> : null}
-                                    </span>
-
-
-
-                                    ]}
-                                author={item.author}
-                                avatar={item.avatar}
-                                content={item.content}
-                                datetime={item.datetime}
-                                >
-                                                             
-                                
-                                    
-                                    <List
-                                        className="comment-list"
-                                        header={`${this.state.data.length} replies`}
-                                        itemLayout="horizontal"
-                                        dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
-                                        renderItem={item => (
-                                        <li>
-                                            <Comment
-                                            className='middle'
-                                            author={item.author}
-                                            avatar={item.avatar}
-                                            content={item.content}
-                                            datetime={item.datetime}>
-                                                
-                                            </Comment>
-                                            
-                                        </li>
-                                        )}
-                                    />
-
-                                </Comment>
-                            </li>
-                            )}
+                      </Comment>
+                  </li>
+                  )}
                 />
             </div>
         )
