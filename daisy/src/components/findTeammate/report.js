@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-import { Button, Modal, Form, Input, Checkbox, Row, Col } from "antd"
+import React, { useState,Component } from "react"
+import { Modal, Form, Input, Checkbox, Row, Col, Popover } from "antd"
+import { WarningOutlined} from "@ant-design/icons"
 
 const layout = {
   labelCol: {
@@ -11,7 +12,7 @@ const layout = {
 }
 
 //添加举报的弹出框
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time }) => {
   const [form] = Form.useForm()
   return (
     <Modal
@@ -49,7 +50,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         tags: ["未处理"], */}
         <Form.Item
           name="time"
-          label="举报时间（自动生成，没想好实现）"
+          label="举报时间"
           rules={[
             {
               required: true,
@@ -57,11 +58,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder={Time} disabled/>
         </Form.Item>
         <Form.Item
           name="reporter_id"
-          label="举报者id（自动生成要传参）"
+          label="您的用户id"
           rules={[
             {
               required: true,
@@ -69,11 +70,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder={ReporterUID} disabled/>
         </Form.Item>
         <Form.Item
           name="target_id"
-          label="被举报者id（自动生成要传参）"
+          label="被举报用户id"
           rules={[
             {
               required: true,
@@ -81,7 +82,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder={ReportUID} disabled/>
         </Form.Item>
         <Form.Item name="description" label="举报内容">
           <Input.TextArea
@@ -163,7 +164,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 }
 
 //调用按钮
-const CollectionsPageReport = () => {
+const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
@@ -173,24 +174,31 @@ const CollectionsPageReport = () => {
   }
 
   return (
-    <div>
-      <Button
-        ghost
+    <Popover content={<p>report</p>}>
+      <WarningOutlined
         onClick={() => {
           setVisible(true)
         }}
-      >
-      <p style={{color:'black'}}>举报</p>
-      </Button>
+      />
       <CollectionCreateForm
         visible={visible}
         onCreate={onCreate}
         onCancel={() => {
           setVisible(false)
         }}
+        ReportUID={ReportUID}
+        ReporterUID={ReporterUID}
+        Time={Time}
       />
-    </div>
+    </Popover>
   )
 }
 
-export default CollectionsPageReport
+
+export default class Report extends Component {
+  render() {
+    return (
+        <CollectionsPageReport ReportUID={this.props.ReportUID} ReporterUID={this.props.ReporterUID} Time={this.props.Time}/>
+    )
+  }
+}
