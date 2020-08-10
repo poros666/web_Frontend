@@ -1,36 +1,41 @@
 import React, { Component } from 'react'
-import {Route, Link} from "react-router-dom";
+import {Route} from "react-router-dom";
 import MastHead from '../../components/personal/mastHead'
 import HeaderNav from '../../components/comm/HeaderNav'
-import {Layout,Menu} from 'antd'
+import {Layout} from 'antd'
 import '../../style/personal/personalSpace.css'
 import { personalRoutes } from '../../routes/index'
+import OtherMenuItem from '../../components/personal/otherMenuItem'
+import MyMenuItem from '../../components/personal/myMenuItem'
 
-const { Header, Content,} = Layout;
+const { Content,} = Layout;
 
 export default class PersonalSpace extends Component {  
   render() {
+    {/*role=true是用户本人的视角 role=false是其他人的视角 */}
+    const role=true
+
     return (
-      <Layout>
-        <Header><HeaderNav/></Header>
-        <Content className="perspace_content">
-          <div><MastHead/></div>
-          <Menu mode="horizontal">
-          {
-            personalRoutes.map((item,index)=>{
-            return (<Menu.Item key={index}><Link to={item.path}>{item.title}</Link></Menu.Item>)
-            })
-          }
-          </Menu>
-          <Content>
-          {
-            personalRoutes.map((item,index)=>{
-              return (<Route key={index} path={item.path} component={item.component}/>)
-            })
-          }
+      <div>
+        <div><HeaderNav/></div>
+        <Layout>
+          <Content className="perspace_content">
+            <div><MastHead/></div>
+            {/*选择渲染不同的menu组件*/}
+            {role?<MyMenuItem/>:<OtherMenuItem/>}
+            
+            <Content>
+            {
+              personalRoutes.map((item,index)=>{
+                return (<Route key={index} path={item.path} component={item.component}/>)
+              })
+            }
+            </Content>
           </Content>
-        </Content>
-      </Layout>
+        </Layout>
+        
+      </div>
+      
     )
   }
 }
