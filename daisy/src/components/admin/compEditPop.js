@@ -1,36 +1,35 @@
-import React, { useState } from 'react';
-import { Button, Modal, Form, Input, Radio } from 'antd';
-
+import React, { useState } from "react"
+import { Button, Modal, Form, Input, Radio } from "antd"
 
 const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+}
 
 //添加比赛的弹出框
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
   return (
     <Modal
       visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
+      title="添加新比赛"
+      okText="确定创建"
+      cancelText="取消"
       onCancel={onCancel}
       onOk={() => {
         form
           .validateFields()
-          .then(values => {
-            form.resetFields();
-            onCreate(values);
+          .then((values) => {
+            form.resetFields()
+            onCreate(values)
           })
-          .catch(info => {
-            console.log('Validate Failed:', info);
-          });
+          .catch((info) => {
+            console.log("Validate Failed:", info)
+          })
       }}
     >
       <Form
@@ -38,7 +37,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="form_add_in_modal"
         initialValues={{
-          modifier: 'public',
+          tags: "not_started",
         }}
       >
         {/* name= "John Brown"
@@ -48,11 +47,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         tags= ["未开始"] */}
         <Form.Item
           name="name"
-          label="name"
+          label="比赛名字"
           rules={[
             {
               required: true,
-              message: '请输入比赛名称',
+              message: "请输入比赛名称",
             },
           ]}
         >
@@ -60,11 +59,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         </Form.Item>
         <Form.Item
           name="start"
-          label="start"
+          label="开始时间"
           rules={[
             {
               required: true,
-              message: '请输入比赛开始时间',
+              message: "请输入比赛开始时间",
             },
           ]}
         >
@@ -72,11 +71,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         </Form.Item>
         <Form.Item
           name="end"
-          label="end"
+          label="结束时间"
           rules={[
             {
               required: true,
-              message: '请输入比赛结束时间',
+              message: "请输入比赛结束时间",
             },
           ]}
         >
@@ -84,50 +83,58 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         </Form.Item>
         <Form.Item
           name="sponsor"
-          label="sponsor"
+          label="比赛主办方"
           rules={[
             {
               required: true,
-              message: '请输入比赛主办方名称',
+              message: "请输入比赛主办方名称",
             },
           ]}
         >
           <Input />
         </Form.Item>
-        
-        <Form.Item name="description" label="Description">
-          <Input type="textarea" />
+
+        <Form.Item name="description" label="比赛简介">
+          <Input.TextArea
+            allowClear={true}
+            autoSize={{ minRows: 3, maxRows: 30 }}
+            placeholder="在此输入比赛简介"
+          />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
-        <Form.Item name="modifier" className="collection-create-form_last-form-item">
+        <Form.Item
+          name="tags"
+          className="collection-create-form_last-form-item"
+        >
           <Radio.Group>
-            <Radio value="public">Public</Radio>
-            <Radio value="private">Private</Radio>
+            <Radio value="not_started">未开始</Radio>
+            <Radio value="running">进行中</Radio>
+            <Radio value="over">已结束</Radio>
           </Radio.Group>
         </Form.Item>
       </Form>
     </Modal>
-  );
-};
+  )
+}
 
-//按钮
+//调用按钮
 const CollectionsPage = () => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
 
-  const onCreate = values => {
-    console.log('Received values of form: ', values);
+  const onCreate = (values) => {
+    console.log("Received values of form: ", values)
     //处理数据
-    setVisible(false);
-  };
+    setVisible(false)
+  }
 
   return (
     <div>
       <Button
         type="primary"
         onClick={() => {
-          setVisible(true);
+          setVisible(true)
         }}
-        style={{marginBottom: 10}}
+        style={{ marginBottom: 10 }}
       >
         Add
       </Button>
@@ -135,11 +142,11 @@ const CollectionsPage = () => {
         visible={visible}
         onCreate={onCreate}
         onCancel={() => {
-          setVisible(false);
+          setVisible(false)
         }}
       />
     </div>
-  );
-};
+  )
+}
 
 export default CollectionsPage

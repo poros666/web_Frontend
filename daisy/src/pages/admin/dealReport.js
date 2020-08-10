@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Highlighter from "react-highlight-words"
 import { Card, Table, Button, Tag, Space, Input, DatePicker } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
+import ReportDetail from "../../components/admin/reportDetail"
 
 export default class CompManagement extends Component {
   constructor(props) {
@@ -127,8 +128,7 @@ export default class CompManagement extends Component {
         key: "action",
         render: (text, record) => (
           <Space size="middle">
-            {/* <a href="">编辑 {record.name}</a> */}
-            <Button>查看详情</Button>
+            <ReportDetail />
           </Space>
         ),
       },
