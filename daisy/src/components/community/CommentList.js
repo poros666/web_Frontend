@@ -12,16 +12,26 @@ import moment from 'moment';
 import '../../style/comm/comm.css'
 import  ToComment from '../../components/community/ToComment'
 import ReportButton from './ReportButton'
+import Item from 'antd/lib/list/Item';
+import { Collapse } from 'antd';
+
+
+
+const { Panel } = Collapse;
+
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+
 
 
 export default class CommentList extends Component {
 
     constructor(props){
         super(props)
-
         var tempId=this.props.momentId
-  
-
         this.submitComment=this.submitComment.bind(this)
         //这里根据tempid请求数据
         const sourceData = [
@@ -74,23 +84,51 @@ export default class CommentList extends Component {
             ),
           },
         ];
+
   
         this.state={
+          renderAdComponent:[],
           data:sourceData,
           Pid:tempId,
-          renderAdComponent: [],
          }
 
-        
+
       }
 
-      submitComment(){
+      
+
+      componentDidMount(){
+        this.updateADComp()
+      }
+
+      updateADComp(){
+        let temp=this.state.data.length
+        for(let i=0;i<temp;i++){
+          this.setState((state)=>{
+            state.renderAdComponent.push(false)
+          })
+          console.log(this.state.renderAdComponent)
+        }
+      }
+
+
+
+      submitComment(i){
         console.log('yes')
-        this.setState({renderAdComponent: !this.state.renderAdComponent[0]})
+        this.setState({renderAdComponent: !this.state.renderAdComponent})
       }
 
     render() {      
-        console.log(this.state.renderAdComponent)
+      //初始化render数组状态
+        let list=this.state.data.map((item,i)=>(
+          <Item
+           key={i}
+
+           >
+
+          </Item>
+        ))
+
         return (
             <div>
                  <List
@@ -99,7 +137,7 @@ export default class CommentList extends Component {
                   itemLayout="horizontal"
                   dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
                   renderItem={item => (
-                  <li>
+                  <li key="">
                       <Comment
                       className='middle'
                       actions={ 
@@ -114,8 +152,9 @@ export default class CommentList extends Component {
                               <ReportButton/>
                             </>,
                             <span>
-                              {this.state.renderAdComponent[0] ? <ToComment/> : null}
-                            </span>
+                              {this.state.renderAdComponent ? <ToComment/> : null}
+                            </span>,
+                            
                           ]}
                       author={item.author}
                       avatar={item.avatar}
@@ -135,9 +174,7 @@ export default class CommentList extends Component {
                                   avatar={item.avatar}
                                   content={item.content}
                                   datetime={item.datetime}>
-                                      
                                   </Comment>
-                                  
                               </li>
                               )}
                           />
