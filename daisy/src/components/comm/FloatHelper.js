@@ -26,7 +26,7 @@ export default class FloatHelper extends Component {
                     </Affix>
                 </div> */}
 
-                <div style={{ height: '0vh', padding: 8 }}>
+                <div style={{ height: '8vh', padding: 8 }}>
                     <BackTop visibilityHeight={0}>
                     <div style={styleBackTop}>up</div>
                     </BackTop>

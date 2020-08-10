@@ -99,7 +99,7 @@ class CompShow extends Component {
                             />
                         </Content>
                         
-                        <Sider>
+                        <Sider >
                             <li>比赛排行榜</li>
                         </Sider>
                     </Layout>
