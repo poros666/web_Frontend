@@ -39,6 +39,7 @@ export default class CompetitionPage extends Component
                     </Col>
                     <Col span={7}>
                         <FindTeamBotton compID={this.props.match.params.compID}/>
+                        <br/>
                         <SubscriptionButton compID={this.props.match.params.compID}/>
                     </Col>
                 </Row>

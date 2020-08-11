@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Avatar ,Space,Button, Pagination, Col, Popover} from 'antd';
+import { List, Avatar ,Space,Radio, Pagination, Col, Popover} from 'antd';
 import 'antd/dist/antd.css';
 import { StarOutlined, LikeOutlined } from '@ant-design/icons';
 import Report from './Report'
@@ -152,10 +152,12 @@ export default class DiscussList extends Component {
         return (
             <div>
                 <Space>
-                  <p>sort by:</p>       
-                  <Button type="primary" onClick={()=>{this.setState({sortMethod:1})}}>Time</Button>
-                  <Button type="primary" onClick={()=>{this.setState({sortMethod:2})}}>Likes</Button>
-                  <Button type="primary" onClick={()=>{this.setState({sortMethod:3})}}>Stars</Button>     
+                <h3>sort by:</h3>
+                <Radio.Group defaultValue="a" buttonStyle="solid">
+                    <Radio.Button value="a">Time</Radio.Button>
+                    <Radio.Button value="b">Likes</Radio.Button>
+                    <Radio.Button value="c">Stars</Radio.Button>
+                </Radio.Group>
                 </Space>
                 <br/>
                 <br/>

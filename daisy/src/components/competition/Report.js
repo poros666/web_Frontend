@@ -50,39 +50,42 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         tags: ["未处理"], */}
         <Form.Item
           name="time"
-          label={Time}
+          label="举报时间"
           rules={[
             {
               required: true,
               message: "#",
             },
           ]}
+          initialValue={Time}
         >
-          <Input />
+          <Input/>
         </Form.Item>
         <Form.Item
           name="reporter_id"
-          label={ReporterUID}
+          label="举报者ID"
           rules={[
             {
               required: true,
               message: "#",
             },
           ]}
+          initialValue={ReporterUID}
         >
-          <Input />
+          <Input/>
         </Form.Item>
         <Form.Item
           name="target_id"
-          label={ReportUID}
+          label="被举报者ID"
           rules={[
             {
               required: true,
               message: "#",
             },
           ]}
+          initialValue={ReportUID}
         >
-          <Input />
+          <Input/>
         </Form.Item>
         <Form.Item name="description" label="举报内容">
           <Input.TextArea
