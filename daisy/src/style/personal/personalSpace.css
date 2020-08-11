@@ -1,6 +1,9 @@
-.perspace_content {
+.whole_page{
+    background-color:#f0f2f5;
+    height: 100%;
+}
+#perspace_content {
     width: 1000px;
     margin: 0 auto;
-    height: 500px;
     background-color: white;
 }

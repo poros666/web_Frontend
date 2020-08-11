@@ -3,7 +3,7 @@ import {Card,Row,Col} from 'antd'
 import '../../style/personal/myItem.css'
 import {StarOutlined} from '@ant-design/icons'
 
-export default class MyColle extends Component {
+export default class UserColle extends Component {
     render() {
         return (
             <div className="myitem">

@@ -3,7 +3,7 @@ import {Card,Row,Col,Avatar} from 'antd'
 import '../../style/personal/myItem.css'
 import {EditOutlined} from '@ant-design/icons'
 
-export default class MyTeam extends Component {
+export default class UserTeam extends Component {
     render() {
         return (
             <div className="myitem">

@@ -18,15 +18,15 @@ import Apply from "../pages/message/apply";
 import SystemNotice from "../pages/message/systemNotice";
 import TeamMessage from "../pages/message/teamMessage";
 import PrivateLetter from "../pages/message/privateLetter";
-import PersonalCenter from "../pages/personal/personalSpace";
-import MyTeam from "../pages/personal/myTeam"
-import MyComp from "../pages/personal/myComp"
-import MyColle from "../pages/personal/myColle"
+import UserTeam from "../pages/personal/userTeam"
+import UserComp from "../pages/personal/userComp"
+import UserColle from "../pages/personal/userColle"
+import UserInform from "../pages/personal/userInform"
+import UserPost from "../pages/personal/userPost"
 import Editinform from "../pages/personal/editInform"
 
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
-import ReadPost from "../pages/community/ReadPost"
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -76,14 +76,11 @@ export const mainRoutes = [{
     component: Community
 },
 {
-<<<<<<< HEAD
     path: "/ReadPost/:id",
     title:"社区动态",
     component: ReadPost
 },
 {
-=======
->>>>>>> 0838117cec091bad7894980f0431a0ab766d04fd
     path: "/compPage/:compID",
     title: "比赛页面",
     component: CompetitionPage
@@ -103,7 +100,11 @@ export const mainRoutes = [{
     title: "搜索结果页面",
     component: SearchResult
 },
-]
+{
+    path: "/editinform",
+    title: "编辑个人资料",
+    component: Editinform
+}]
 
 
 export const messageRoutes = [{
@@ -139,16 +140,26 @@ export const messageRoutes = [{
 
 export const personalRoutes = [{
     path: "/personal/team",
-    title: "我的队伍",
-    component: MyTeam
+    title: "队伍",
+    component: UserTeam
 },
 {
     path: "/personal/comp",
-    title: "我的比赛",
-    component: MyComp
+    title: "比赛",
+    component: UserComp
 },
 {
     path: "/personal/colle",
-    title: "我的收藏",
-    component: MyColle
+    title: "收藏",
+    component: UserColle
+},
+{
+    path: "/personal/inform",
+    title: "资料",
+    component: UserInform
+},
+{
+    path: "/personal/post",
+    title: "发布",
+    component: UserPost
 }]

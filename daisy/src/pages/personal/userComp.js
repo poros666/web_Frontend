@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Card,Row,Col} from 'antd'
 import '../../style/personal/myItem.css'
 
-export default class MyComp extends Component {
+export default class UserComp extends Component {
     render() {
         return (
             <div className="myitem">

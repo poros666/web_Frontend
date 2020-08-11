@@ -1,12 +1,15 @@
-.buttons{
-    text-align: center;
-}
-.site-card-border-less-wrapper {
-    padding: 30px;
-    background: #ececec;
+.pagecontent{
+  background-color:#f0f2f5;
 }
 #ed_card{
   margin: 0 auto;
   width: 1000px;
 }
-  
+.saveButtons{
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 200px;
+}
+.saveButtons Button{
+  margin-left: 20px;
+}
