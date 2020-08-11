@@ -18,17 +18,15 @@ import Apply from "../pages/message/apply";
 import SystemNotice from "../pages/message/systemNotice";
 import TeamMessage from "../pages/message/teamMessage";
 import PrivateLetter from "../pages/message/privateLetter";
-import UserTeam from "../pages/personal/userTeam"
-import UserComp from "../pages/personal/userComp"
-import UserColle from "../pages/personal/userColle"
+import PersonalCenter from "../pages/personal/personalSpace";
+import MyTeam from "../pages/personal/myTeam"
+import MyComp from "../pages/personal/myComp"
+import MyColle from "../pages/personal/myColle"
 import Editinform from "../pages/personal/editInform"
-import UserPost from "../pages/personal/userPost"
-import UserInform from "../pages/personal/userInform";
-import TeamDetail from "../pages/personal/teamDetail"
 
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
-
+import ReadPost from "../pages/community/ReadPost"
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -78,11 +76,14 @@ export const mainRoutes = [{
     component: Community
 },
 {
+<<<<<<< HEAD
     path: "/ReadPost/:id",
     title:"社区动态",
     component: ReadPost
 },
 {
+=======
+>>>>>>> 0838117cec091bad7894980f0431a0ab766d04fd
     path: "/compPage/:compID",
     title: "比赛页面",
     component: CompetitionPage
@@ -102,16 +103,7 @@ export const mainRoutes = [{
     title: "搜索结果页面",
     component: SearchResult
 },
-{
-    path:"/editinform",
-    tittle:"编辑个人信息",
-    component:Editinform
-},
-{
-    path: "/team/:teamID",
-    title: "队伍详情",
-    component: TeamDetail
-}]
+]
 
 
 export const messageRoutes = [{
@@ -145,30 +137,18 @@ export const messageRoutes = [{
     component: Apply
 }]
 
-
-export const personalRoutes = [
-{
+export const personalRoutes = [{
     path: "/personal/team",
-    title: "队伍",
-    component: UserTeam
+    title: "我的队伍",
+    component: MyTeam
 },
 {
     path: "/personal/comp",
-    title: "比赛",
-    component: UserComp
+    title: "我的比赛",
+    component: MyComp
 },
 {
     path: "/personal/colle",
-    title: "收藏",
-    component: UserColle
-},
-{
-    path:"/personal/post",
-    tittle:"发布",
-    component:UserPost
-},
-{
-    path:"/personal/inform",
-    tittle:"资料",
-    component:UserInform
+    title: "我的收藏",
+    component: MyColle
 }]
