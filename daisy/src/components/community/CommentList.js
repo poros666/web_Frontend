@@ -12,8 +12,9 @@ import moment from 'moment';
 import '../../style/comm/comm.css'
 import  ToComment from '../../components/community/ToComment'
 import ReportButton from './ReportButton'
-import Item from 'antd/lib/list/Item';
 import { Collapse } from 'antd';
+import 'antd/dist/antd.css';
+
 
 
 
@@ -33,6 +34,7 @@ export default class CommentList extends Component {
         super(props)
         var tempId=this.props.momentId
         this.submitComment=this.submitComment.bind(this)
+        this.childCreateComment=this.childCreateComment.bind(this)
         //这里根据tempid请求数据
         const sourceData = [
           {
@@ -84,67 +86,65 @@ export default class CommentList extends Component {
             ),
           },
         ];
-
-  
         this.state={
           renderAdComponent:[],
           data:sourceData,
           Pid:tempId,
          }
-
-
+         this.updateADComp()
       }
 
-      
-
       componentDidMount(){
-        this.updateADComp()
+        //
       }
 
       updateADComp(){
         let temp=this.state.data.length
+        console.log(temp)
         for(let i=0;i<temp;i++){
-          this.setState((state)=>{
-            state.renderAdComponent.push(false)
+          let tmp=this.state.renderAdComponent
+          tmp.push(false)
+          this.setState({
+            renderAdComponent:tmp
           })
-          console.log(this.state.renderAdComponent)
         }
+        console.log(this.state.renderAdComponent)
       }
 
+      childCreateComment(content){
+        this.props.createComment(content)
+      }
 
+      submitComment(index){
+        console.log(index)
+        console.log("i am clicked")
+        this.changeRenderADComp(index)
+      }
 
-      submitComment(i){
-        console.log('yes')
-        this.setState({renderAdComponent: !this.state.renderAdComponent})
+      changeRenderADComp(index){
+        let ans=this.state.renderAdComponent
+        ans[index]=!ans[index]
+        this.setState({
+          renderAdComponent:ans
+        })
       }
 
     render() {      
       //初始化render数组状态
-        let list=this.state.data.map((item,i)=>(
-          <Item
-           key={i}
-
-           >
-
-          </Item>
-        ))
-
+      let objArr=this.state.data
         return (
-            <div>
-                 <List
-                  className="comment-list"
-                  header={`${this.state.data.length} replies`}
-                  itemLayout="horizontal"
-                  dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
-                  renderItem={item => (
-                  <li key="">
+            <div id="firstLayer">
+                {
+                  objArr.map((item,index)=>(
+                    <li >
                       <Comment
                       className='middle'
                       actions={ 
                           [
-                            <span
+                            <span 
+                                className="replyList"
                                 key="comment-list-reply-to-0" 
-                                onClick={this.submitComment}
+                                onClick={this.submitComment.bind(this,index)}
                                 >                                           
                                 Reply to
                             </span>,
@@ -152,7 +152,7 @@ export default class CommentList extends Component {
                               <ReportButton/>
                             </>,
                             <span>
-                              {this.state.renderAdComponent ? <ToComment/> : null}
+                              {this.state.renderAdComponent[index] ? <ToComment createComment={this.childCreateComment}/> : null}
                             </span>,
                             
                           ]}
@@ -161,28 +161,33 @@ export default class CommentList extends Component {
                       content={item.content}
                       datetime={item.datetime}
                       >
-                          <List
-                              className="comment-list"
-                              header={`${this.state.data.length} replies`}
-                              itemLayout="horizontal"
-                              dataSource={this.state.data}//这里的数据源处理一下以后尝试自动生成帖子                    
-                              renderItem={item => (
+                        {
+                            objArr.map((item,index)=>(
                               <li>
-                                  <Comment
-                                  className='middle'
-                                  author={item.author}
-                                  avatar={item.avatar}
-                                  content={item.content}
-                                  datetime={item.datetime}>
-                                  </Comment>
-                              </li>
-                              )}
-                          />
-
+                                <Comment
+                                className='middle'
+                                actions={ 
+                                    [
+                                      <>
+                                        <ReportButton/>
+                                      </>,
+                                    ]}
+                                author={item.author}
+                                avatar={item.avatar}
+                                content={item.content}
+                                datetime={item.datetime}
+                                >
+                                </Comment>
+                              </li>))
+                        }
+                           
                       </Comment>
-                  </li>
-                  )}
-                />
+                    </li>
+                  ))
+                }
+
+
+                 
             </div>
         )
     }

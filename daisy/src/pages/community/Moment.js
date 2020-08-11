@@ -111,7 +111,10 @@ export default class Moment extends Component {
 
                         <ToComment createComment={this.createComment}/>
 
-                        <CommentList momentId={this.state.Pid}/>
+                        <CommentList 
+                        momentId={this.state.Pid} 
+                        createComment={this.createComment}
+                        />
 
                        
                     </div>

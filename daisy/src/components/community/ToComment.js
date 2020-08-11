@@ -21,6 +21,7 @@ const CommentList = ({ comments }) => (
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <Form>
+    
     <Form.Item
        name='title'
        rules={[
@@ -39,10 +40,6 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </Form.Item>
   </Form>
 );
-
-
-
-
 
 export default class ToComment extends React.Component {
   state = {
@@ -65,8 +62,6 @@ export default class ToComment extends React.Component {
     this.setState({
       submitting: false,
     });
-
-
   };
 
   handleChange = e => {
@@ -75,12 +70,8 @@ export default class ToComment extends React.Component {
     });
   };
 
-
-
-
   render() {
     const { comments, submitting, value } = this.state;
-
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
