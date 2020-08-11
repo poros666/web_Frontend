@@ -2,29 +2,44 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import { BackTop, Affix,Button, Popover } from 'antd'
 
+const styleHelper = {
+    height: 40,
+    width: 70,
+    lineHeight: '0px',
+    borderRadius: 4,
+    backgroundColor: '#1088e9',
+    color: '#fff',
+    // textAlign: 'center',
+    // verticalAlign: 'middle',
+    fontSize: 15,
+  };
+
 const styleBackTop = {
     height: 40,
-    width: 40,
+    width: 70,
     lineHeight: '40px',
     borderRadius: 4,
     backgroundColor: '#1088e9',
     color: '#fff',
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 15,
   };
 
 export default class FloatHelper extends Component {
+    
     render() { 
         return ( 
             <div>
-                {/*  客服 固定悬浮口  有问题
-                 <div style={{ height: '600vh', padding: 8 }}>
-                    <Affix offsetBottom={250} style={{ position: 'absolute', left: '1200px' }}>
-                        <Button>
-                         Affix bottom    
-                        </Button>
-                    </Affix>
-                </div> */}
+                <div>
+                <Affix style={{ position: 'fixed', top: 580, left: 1380 }}>
+                    <Button type="primary" 
+                    // onClick={() => setBottom(bottom + 10)}
+                    style={styleHelper}
+                    >
+                    Helper
+                    </Button>
+                </Affix>
+                </div>
 
                 <div style={{ height: '8vh', padding: 8 }}>
                     <BackTop visibilityHeight={0}>
@@ -35,43 +50,3 @@ export default class FloatHelper extends Component {
          );
     }
 }
-
-// const content=(
-//     <div>
-//         <p>Content</p>
-//         <p>Content</p>
-//     </div> 
-//     );
-
-// export default class FloatHelper extends Component {
-//     state = {
-//         visible: false,
-//       };
-    
-//     hide = () => {
-//         this.setState({
-//           visible: false,
-//         });
-//       };
-    
-//     handleVisibleChange = visible => {
-//         this.setState({ visible });
-//       };
-
-//     render() {
-//         return (
-//             <Affix offsetTop={300} onChange={affixed => console.log(affixed)}>
-//                 <Popover
-//                     content={content}
-//                     placement="rightTop"
-//                     getPopupContainer={triggerNode => triggerNode.parentNode}
-//                     trigger="click"
-//                     visible={this.state.visible}
-//                     onVisibleChange={this.handleVisibleChange}
-//                 >
-//                     <Button type="primary">Click me</Button>
-//                 </Popover>
-//             </Affix>
-//         )
-//     }
-// }

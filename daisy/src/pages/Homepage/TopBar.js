@@ -9,7 +9,7 @@ class TopBar extends Component {
     // state = {  }
     render() { 
         return (
-            <div style={{height: '450px', margin:'40px 150px'
+            <div style={{height: '450px', margin:'60px 150px 40px 150px'
             // ,border:'2px gray solid'
             }}>
                 

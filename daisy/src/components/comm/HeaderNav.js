@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
-import { Layout, Menu, Input, Space} from 'antd'
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons'
+import { Layout, Menu, Input, Space,Divider} from 'antd'
+import { LayoutOutlined,SelectOutlined, CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
 // import logo from './logo2.png'
 // import logo from './logo3.png'
@@ -72,17 +72,17 @@ class HeaderNav extends Component {
                             <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal" 
                             // style={{ height:'50px',top:'-40px'}} 
                             >
-                            <Menu.Item key="home" icon={<MailOutlined />}>
+                            <Menu.Item key="home" icon={<HomeOutlined />}>
                                 <a href="#/home" target="_blank" rel="noopener noreferrer">
                                     首页
                                 </a>
                             </Menu.Item>
-                            <Menu.Item key="compPage" icon={<AppstoreOutlined />}>
+                            <Menu.Item key="compPage" icon={<RadarChartOutlined />}>
                                 <a href="#/searchCompPage" target="_blank" rel="noopener noreferrer">
                                     比赛
                                 </a>
                             </Menu.Item>
-                            <Menu.Item key="community" icon={<AppstoreOutlined />}>
+                            <Menu.Item key="community" icon={<LayoutOutlined />}>
                                 <a href="#/community" target="_blank" rel="noopener noreferrer">
                                     社区
                                 </a>
@@ -98,7 +98,7 @@ class HeaderNav extends Component {
                             />
                             
 
-                            <SubMenu icon={<SettingOutlined />} 
+                            <SubMenu icon={<UserOutlined />} 
                             
                             title={"我的"}>
                                 <Menu.Item key="userTeam">
@@ -121,7 +121,7 @@ class HeaderNav extends Component {
                                 </Menu.Item>
                             </SubMenu>
 
-                            <SubMenu icon={<SettingOutlined />} 
+                            <SubMenu icon={<CommentOutlined />} 
                             title={"消息"
                             // <a href ={"#/message"}>{"消息"}</a>
                                 }>
@@ -155,14 +155,16 @@ class HeaderNav extends Component {
                                         组队申请
                                     </a></Menu.Item>
                             </SubMenu>
-                            <Menu.Item key="signOut" icon={<MailOutlined />}>
+                            <Menu.Item key="signOut" icon={<LoginOutlined />}>
                                     登出
                             </Menu.Item>
                         </Menu>
                         </div>
                     </Space>
                 </Layout>
-                
+                <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:23 }}/>
+                <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:23 }}/>
+                <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:24 }}/>
             </div>
         )
     }
