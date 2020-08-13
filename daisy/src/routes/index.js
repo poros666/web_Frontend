@@ -24,15 +24,12 @@ import MyComp from "../pages/personal/myComp"
 import MyColle from "../pages/personal/myColle"
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
-<<<<<<< HEAD
 import Login from "../pages/login";
 import Register from "../pages/register";
-=======
 import SearchContent from "../components/search/searchContent";
 import SearchContentComp from "../components/search/searchContentComp";
 import SearchContentComm from "../components/search/searchContentComm";
 import SearchContentUsr from "../components/search/searchContentUsr";
->>>>>>> zhw
 
 export const adminRoutes = [{
     path: "/admin/comp",
