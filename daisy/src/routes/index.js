@@ -5,7 +5,8 @@ import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
 import PostPage from "../pages/findteam/PostPage";
-import ReadPost from "../pages/community/ReadPost"
+import Post from "../pages/findteam/PostPage";
+import Moment from "../pages/community/Moment"
 import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
@@ -62,11 +63,7 @@ export const mainRoutes = [{
     title: "寻找队伍帖",
     component: PostPage
 },
-{
-    path: "/readPost",
-    title: "动态",
-    component: ReadPost
-},
+
 {
     path: "/findTeam",
     title: "寻找队伍",
@@ -76,6 +73,11 @@ export const mainRoutes = [{
     path: "/community",
     title: "社区",
     component: Community
+},
+{
+    path: "/Moment",
+    title: "动态",
+    component: Moment
 },
 {
     path: "/compPage/:compID",

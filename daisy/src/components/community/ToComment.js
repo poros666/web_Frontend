@@ -1,3 +1,6 @@
+//
+// made by ykn
+//
 //这里整了一个评论框
 
 import React from 'react';
@@ -17,8 +20,17 @@ const CommentList = ({ comments }) => (
 );
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
-  <>
-    <Form.Item>
+  <Form>
+    
+    <Form.Item
+       name='title'
+       rules={[
+        {
+          required: true,
+          message: '请输入评论内容!',
+        },
+      ]}
+    >
       <TextArea rows={4} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} />
     </Form.Item>
     <Form.Item>
@@ -26,12 +38,8 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
         Add Comment
       </Button>
     </Form.Item>
-  </>
+  </Form>
 );
-
-
-
-
 
 export default class ToComment extends React.Component {
   state = {
@@ -54,8 +62,6 @@ export default class ToComment extends React.Component {
     this.setState({
       submitting: false,
     });
-
-
   };
 
   handleChange = e => {
@@ -64,12 +70,8 @@ export default class ToComment extends React.Component {
     });
   };
 
-
-
-
   render() {
     const { comments, submitting, value } = this.state;
-
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
