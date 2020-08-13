@@ -10,9 +10,16 @@ const layout = {
   },
 }
 
-//添加比赛的弹出框
+//编辑比赛的弹出框
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
+  const nameValidate =(rule, value, callback)=>{
+    if(value> 100){
+      callback("价格不能大于100")
+    }else{
+      callback()
+    }
+  }
   return (
     <Modal
       visible={visible}
@@ -53,6 +60,9 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
               required: true,
               message: "请输入比赛名称",
             },
+            {
+              validator: nameValidate
+            }
           ]}
         >
           <Input />
