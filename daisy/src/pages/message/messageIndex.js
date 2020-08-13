@@ -16,8 +16,8 @@ export default class MessageIndex extends Component{
                 <Sider width={200} className="site-layout-background">
                   <Menu
                     mode="inline"
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
+                    //defaultSelectedKeys={['1']}
+                    //defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderRight: 0 }}
                   >
                     <p style={{textAlign:"center",fontSize:20,paddingTop:30}}><MailOutlined/>  消息中心</p>
