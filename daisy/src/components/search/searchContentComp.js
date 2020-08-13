@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { List, Avatar } from 'antd';
+import { List, Avatar, Form, Radio, Layout } from 'antd';
+import { FireOutlined, LikeOutlined, FieldTimeOutlined, CommentOutlined, BellOutlined } from '@ant-design/icons';
 
 const data = [
   {
@@ -17,9 +18,38 @@ const data = [
 ];
 
 export default class SearchContentComp extends Component {
+
+
+  state = {
+    value: 1,
+  };
+
+onChange = e => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+};
     render() {
 
         return (
+
+              <Layout>
+              <Form
+              layout="inline"
+              className="components-table-demo-control-bar"
+              style={{ marginBottom: 16, marginLeft: 20 }}
+            >
+              <Form.Item label="">
+                <Radio.Group
+                    onChange={this.onChange} value={this.state.value}
+                >
+                  <Radio value={1}><FieldTimeOutlined/>最新发布</Radio>
+                  <Radio value={2}><CommentOutlined/>最多评论</Radio>
+                  <Radio value={3}><BellOutlined/>最多订阅</Radio>
+                </Radio.Group>
+              </Form.Item>
+            </Form>
 
             <List
                 itemLayout="horizontal"
@@ -33,7 +63,9 @@ export default class SearchContentComp extends Component {
                     />
                 </List.Item>
                 )}
-            />
+            />                
+              </Layout>
+
         );
     }
 }

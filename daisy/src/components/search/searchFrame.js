@@ -28,7 +28,7 @@ export default class SearchFrame extends Component {
 
                 <Search
                     placeholder="搜搜看你感兴趣的内容吧～"
-                    onSearch={value => console.log(value)}
+                    onSearch={value => console.log(value)}                    
                     style={{ width: '65%'}}
                     allowClear 
                     onChange={onChange}
