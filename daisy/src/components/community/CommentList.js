@@ -14,7 +14,7 @@ import  ToComment from '../../components/community/ToComment'
 import ReportButton from './ReportButton'
 import { Collapse } from 'antd';
 import 'antd/dist/antd.css';
-
+import '../../style/community/Comment.css'
 
 
 
@@ -134,9 +134,10 @@ export default class CommentList extends Component {
       let objArr=this.state.data
         return (
             <div id="firstLayer">
+              {/* <p className="childComment">我是kkkkkkkkkkkk</p> */}
                 {
                   objArr.map((item,index)=>(
-                    <li >
+                    <li style={{listStyle:"none"}}>
                       <Comment
                       className='middle'
                       actions={ 
@@ -152,7 +153,7 @@ export default class CommentList extends Component {
                               <ReportButton/>
                             </>,
                             <span>
-                              {this.state.renderAdComponent[index] ? <ToComment createComment={this.childCreateComment}/> : null}
+                              {this.state.renderAdComponent[index] ? <ToComment  className="childComment" createComment={this.childCreateComment}/> : null}
                             </span>,
                             
                           ]}
