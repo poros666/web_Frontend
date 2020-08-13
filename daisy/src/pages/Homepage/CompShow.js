@@ -37,7 +37,7 @@ class CompShow extends Component {
                             <Row>
                                 <Col span={2} offset={0}>
                                     <Button type="link">                    
-                                        <a href="#/searchCompPage/pagenum" target="_blank" rel="noopener noreferrer">
+                                        <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
                                             比赛</a>
                                     </Button>
                                 </Col>
@@ -46,7 +46,7 @@ class CompShow extends Component {
                                 </Col>
                                 <Col span={2} offset={0}>
                                     <Button type="primary" style={{float:'right',top:'15px'}}>
-                                        <a href="#/searchCompPage/pagenum" target="_blank" rel="noopener noreferrer">
+                                        <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
                                             更多</a>
                                     </Button>
                                 </Col>

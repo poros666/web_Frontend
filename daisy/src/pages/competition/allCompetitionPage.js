@@ -7,13 +7,10 @@ import CompetitionList from '../../components/competition/competitionList'
 import { Col} from 'antd'
 import 'antd/dist/antd.css'
 
-
-
-export default class SearchCompetitionPage extends Component{
-    
+export default class AllCompetitionPage extends Component {
     render(){
         return (
-            <div class='searchCompetitionPage'>
+            <div class='allCompetitionPage'>
                 <Header/>
                 <Helper/>
                 <Col offset={2} span={20}>
@@ -24,5 +21,4 @@ export default class SearchCompetitionPage extends Component{
             </div>
         )
     }
-
 }

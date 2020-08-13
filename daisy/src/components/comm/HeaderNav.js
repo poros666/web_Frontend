@@ -30,7 +30,7 @@ class HeaderNav extends Component {
                         </a>
                     </Menu.Item>
                     <Menu.Item key="compPage" icon={<AppstoreOutlined />}>
-                        <a href="#/searchCompPage" target="_blank" rel="noopener noreferrer">
+                        <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
                             比赛
                         </a>
                     </Menu.Item>

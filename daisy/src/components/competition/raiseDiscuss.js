@@ -15,20 +15,28 @@ const CommentList = ({ comments }) => (
 );
 
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
-  <>
-    <Form.Item>
+  <Form
+  name="basic">
+    <Form.Item
+     name='discusscontent'
+     rules={[
+       {
+         required: true,
+         message: '请输入内容！',
+       },
+     ]}>
       <br/>
       <TextArea onChange={onChange} value={value} 
                 style={{width: '90%', resize: 'none'}}  allowClear={true} 
-                autoSize={{ minRows: 6, maxRows: 12 }}
-                placeholder="在此输入讨论内容"/>
+                autoSize={{ minRows: 6, maxRows: 10 }}  maxLength="1000"
+                placeholder="在此输入讨论内容(1000字以内)"/>
     </Form.Item>
     <Form.Item>
       <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
         Raise Discuss
       </Button>
     </Form.Item>
-  </>
+  </Form>
 );
 
 export default class RaiseDiscuss extends React.Component {
@@ -46,22 +54,6 @@ export default class RaiseDiscuss extends React.Component {
     this.setState({
       submitting: true,
     });
-
-    setTimeout(() => {
-      this.setState({
-        submitting: false,
-        value: '',
-        comments: [
-          {
-            author: 'Han Solo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: <p>{this.state.value}</p>,
-            datetime: moment().fromNow(),
-          },
-          ...this.state.comments,
-        ],
-      });
-    }, 1000);
   };
 
   handleChange = e => {

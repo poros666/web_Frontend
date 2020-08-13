@@ -10,7 +10,7 @@ import Moment from "../pages/community/Moment"
 import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
-import SearchCompetitionPage from "../pages/competition/searchCompetitionPage";
+import AllCompetitionPage from "../pages/competition/allCompetitionPage";
 
 import MessageIndex from "../pages/message/messageIndex";
 import Reply from "../pages/message/reply";
@@ -85,11 +85,6 @@ export const mainRoutes = [{
     component: CompetitionPage
 },
 {
-    path: "/searchCompPage",
-    title: "寻找队伍",
-    component: SearchCompetitionPage
-},
-{
     path: "/search",
     title: "搜索页面",
     component: SearchPage
@@ -108,8 +103,12 @@ export const mainRoutes = [{
     path: "/register",
     title: "注册",
     component: Register
-}
-]
+},
+{
+    path: "/allCompPage",
+    title: "比赛列表",
+    component: AllCompetitionPage
+}]
 
 export const searchRoutes = [
 {
