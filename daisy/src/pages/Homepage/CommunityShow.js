@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import { Layout, Button, List, Avatar,Space, Row, Col } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined} from '@ant-design/icons';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import 'antd/dist/antd.css'
+import { Layout, Button, List, Avatar,Space, Row, Col } from 'antd'
+import { MessageOutlined, LikeOutlined, StarOutlined} from '@ant-design/icons'
 import '../../style/homepage.css'
+// import reqwest from 'reqwest'
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -11,136 +12,156 @@ const IconText = ({ icon, text }) => (
       {text}
     </Space>
   );
-const count = 4;
+  
+const count = 3;
 const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
-
 const { Header, Footer, Sider, Content } = Layout;
+ 
+const sourceData = [
+    {
+    Uid:111,
+    Pid:11,
+    avatarSrc:'bear',
+    title: '一文看懂前端和后端开发:从入门到放弃',
+    description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+    },
+    {
+    Uid:112,
+    Pid:12,
+    avatarSrc:'pig',
+    title: 'Linux网络数据转发平面的变迁-从内核协议栈到DPDK/XDP',
+    description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
 
-class CommunnityShow extends Component {
+    },
+    {
+    Uid:113,
+    Pid:13,
+    avatarSrc:'roo',
+    title: '对于新技术栈落地和架构思维的建议',
+    description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+
+    },
+    {
+    Uid:114,
+    Pid:15,
+    avatarSrc:'eeyore',
+    title: '一文看懂前端和后端开发:从入门到放弃',
+    description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+    },
+    // {
+    // Uid:116,
+    // Pid:16,
+    // avatarSrc:'boss',
+    // title: '关于链表，你该了解这些！',
+    // description:'Ant Design, a design language for '
+
+    // },
+    // {
+    // Uid:115,
+    // Pid:17,
+    // avatarSrc:'strange',
+    // title: '数据库的乐观锁和悲观锁并非真实的锁',
+    // description:'Ant Design, a design language for '
+    // },
+];
+
+function limitTxt(txt,count) {
+    var str = txt;
+    if(txt.length>count){
+        str = str.substr(0,count) + '...' ;
+    }
+    return str;
+}
+
+class CommunityShow extends Component {
     constructor(props){
         super(props)
 
-        var sourceData = [
-            {
-            Uid:111,
-            Pid:11,
-            avatarSrc:'bear',
-            title: '一文看懂前端和后端开发:从入门到放弃',
-            description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-            },
-            {
-            Uid:112,
-            Pid:12,
-            avatarSrc:'pig',
-            title: 'Linux网络数据转发平面的变迁-从内核协议栈到DPDK/XDP',
-            description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-            },
-            {
-            Uid:113,
-            Pid:13,
-            avatarSrc:'roo',
-            title: '对于新技术栈落地和架构思维的建议',
-            description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-            },
-            // {
-            // Uid:114,
-            // Pid:15,
-            // avatarSrc:'eeyore',
-            // title: '一文看懂前端和后端开发:从入门到放弃',
-            // description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-            // },
-            // {
-            // Uid:116,
-            // Pid:16,
-            // avatarSrc:'boss',
-            // title: '关于链表，你该了解这些！',
-            // description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-            // },
-            // {
-            // Uid:115,
-            // Pid:17,
-            // avatarSrc:'strange',
-            // title: '数据库的乐观锁和悲观锁并非真实的锁',
-            // description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-            // },
-        ];
-
-        this.State={
-            // initSwitching: true,
-            // switching: false,
+        this.state={
+            initSwitching: true,
+            switching: false,
             data:sourceData
         }
+    }
 
-
-    //     componentDidMount() {
-    //         this.getData(res => {
-    //             this.setState({
-    //                 initLoading: false,
-    //                 data: res.results,
-    //                 list: res.results,
-    //             });
-    //         });
-    //     }
-
-    //     getData = callback => {
-    //         reqwest({
-    //             url: fakeDataUrl,
-    //             type: 'json',
-    //             method: 'get',
-    //             contentType: 'application/json',
-    //             success: res => {
-    //                 callback(res);
-    //             },
-    //         });
-    //     };
-
-    //     onSwitch(){
+    // componentDidMount() {
+    //     this.getData(res => {
     //         this.setState({
-    //             loading: true,
-    //             list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
+    //             initSwitching: false,
+    //             data: res.results,
+    //             list: res.results,
     //         });
-    //         this.getData(res => {
-    //             const data = this.state.data.concat(res.results);
-    //             this.setState(
-    //                 {
-    //                 data,
-    //                 list: data,
-    //                 loading: false,
-    //                 },
-    //                 () => {
-    //                 // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-    //                 // In real scene, you can using public method of react-virtualized:
-    //                 // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-    //                 window.dispatchEvent(new Event('resize'));
-    //                 },
-    //             );
-    //         });
-    //       };
+    //     });
+    // }
+
+    // getData = callback => {
+    //     reqwest({
+    //         url: fakeDataUrl,
+    //         type: 'json',
+    //         method: 'get',
+    //         contentType: 'application/json',
+    //         success: res => {
+    //             callback(res);
+    //         },
+    //     });
+    // };
+
+    getRandom(n){
+        var newList=[],id;
+        var len=sourceData.length;
+        for(var i=0;i<n;i++){
+            // id=Math.floor(Math.random()*len);
+            id = Math.ceil(Math.random()*len);
+            if(newList.indexOf(sourceData[id]) === -1){
+                newList.push(sourceData[id]);
+            }
+            else{
+                i= i - 1;
+                continue;
+            }
+        }
+        return newList;
+    }
+
+    onSwitch() {
+        let data1=this.getRandom(count)
+        console.log(this.state.data);
+        this.setState({
+            switching: true,
+            data:data1,
+            // list: this.state.data.concat([...new Array(count)].map(() => ({ switching: true, name: {} }))),
+            // list: this.state.list.splice(0,3,data1),
+        });
+        // console.log( this.state.data[2]);
+        // this.getData(res => {
+        //     const data = this.state.data.concat(res.results);
+        //     this.setState(
+        //     {
+        //         data,
+        //         list: data,
+        //         switching: false,
+        //         },
+        //         () => {        
+        //         //重置窗口的offsetTop以便显示地板下的虚拟化演示。
+        //         //在实际场景中，您可以使用react-virtualized的公共方法：
+        //         // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+        //         window.dispatchEvent(new Event('resize'));
+        //         },
+        //     );
+        // });
     }
 
     render() {
-        // const { initSwitching, switching, list } = this.state;
-        // const switchMore =
-        //   !initSwitching && !switching ? (
-        //     <div
-        //       style={{
-        //         textAlign: 'center',
-        //         marginTop: 12,
-        //         height: 32,
-        //         lineHeight: '32px',
-        //       }}
-        //     >
-        //       <Button onClick={this.onLoadMore}>switching more</Button>
-        //     </div>
-        //   ) : null;
+        const { initSwitching, switching, list } = this.state
+        const switchMore =!initSwitching && !switching
+            // !initSwitching && !switching ? (
+            //     <div>
+            //     </div>
+            // ) : null;
 
         return ( 
             // <div style={{height: '400px',width:'600px',margin:'10px 10px',float:'right'}}>
-            <div style={{height: '400px',margin:'10px 10px'}}>
-
+            <div style={{height: '400px',margin:'10px'}}>
                 <Layout>
                     <Header theme='light'>
                         <Content>
@@ -165,13 +186,15 @@ class CommunnityShow extends Component {
                             </Row>
                         </Content>
                     </Header>
-                    <Content style={{padding:'20px'}}>
+                    <Content style={{paddingLeft:'30px',paddingRight:'30px'}}>
                         <List
+                            // bordered={true}
+                            switching={initSwitching}
+                            switchMore={switchMore}
                             itemLayout="horizontal"
-                            dataSource={this.State.data}
+                            dataSource={this.state.data}
                             renderItem={item => (
                             <List.Item
-                                
                                 actions={[
                                     <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
                                     <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
@@ -180,15 +203,17 @@ class CommunnityShow extends Component {
                             >
 
                                 <List.Item.Meta
+
+                                //帖子的名字和指向的地址，传一个pid，post_id
+                                title={<a href ={"#/ReadPost/"+item.Pid} target="_blank" rel="noopener noreferrer">{item.title}</a>}
+                                // description={<p>{item.description}</p>}
+                                description={<p>{limitTxt(item.description,50)}</p>}
                                 avatar={
                                     <a href={"#/ReadPost/"+item.Uid}>
                                       <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
                                     </a>
                                   }
 
-                                //帖子的名字和指向的地址，传一个pid，post_id
-                                title={<a href ={"#/ReadPost/"+item.Pid} target="_blank" rel="noopener noreferrer">{item.title}</a>}
-                                description={<p>{item.description}</p>}
                                 />
                             </List.Item>
                             )}
@@ -200,4 +225,4 @@ class CommunnityShow extends Component {
     }
 }
  
-export default CommunnityShow;
+export default CommunityShow;

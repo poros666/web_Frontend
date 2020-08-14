@@ -87,8 +87,7 @@ class HeaderNav extends Component {
                                     社区
                                 </a>
                             </Menu.Item>
-                            
-                        
+                                                    
                             <Search 
                                 placeholder={this.state.inputSearch}
                                 onChange={this.inputChange.bind(this)}

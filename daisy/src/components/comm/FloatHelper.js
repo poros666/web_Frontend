@@ -11,7 +11,7 @@ const styleHelper = {
     color: '#fff',
     // textAlign: 'center',
     // verticalAlign: 'middle',
-    fontSize: 15,
+    fontSize: 14,
   };
 
 const styleBackTop = {
