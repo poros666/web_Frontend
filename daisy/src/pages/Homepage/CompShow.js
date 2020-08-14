@@ -142,8 +142,10 @@ class CompShow extends Component {
                             <Row>
                                 <Col span={2} offset={22}>
                                     <Button type="link" style={{fontSize:20,float:'right'}}>
-                                        <a href="#/searchCompPage/pagenum" target="_blank" rel="noopener noreferrer">
-                                            更多比赛>>></a>
+                                        <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
+                                            更多比赛
+                                            {/* >>> */}
+                                            </a>
                                     </Button>
                                 </Col>
                             </Row>

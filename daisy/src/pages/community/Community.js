@@ -67,6 +67,7 @@ export default class Community extends Component {
         
             <div >
                 <HeaderNav/>
+                <div style={{height:'80px'}}/>
                 <FloatHelper/>
 
 

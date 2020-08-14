@@ -12,6 +12,7 @@ export default class AllCompetitionPage extends Component {
         return (
             <div class='allCompetitionPage'>
                 <Header/>
+                <div style={{height:'80px'}}/>
                 <Helper/>
                 <Col offset={2} span={20}>
                 <SortChoose/>

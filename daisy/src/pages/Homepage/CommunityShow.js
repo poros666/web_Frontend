@@ -4,7 +4,6 @@ import 'antd/dist/antd.css'
 import { Layout, Button, List, Avatar,Space, Row, Col } from 'antd'
 import { MessageOutlined, LikeOutlined, StarOutlined} from '@ant-design/icons'
 import '../../style/homepage.css'
-// import reqwest from 'reqwest'
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -205,7 +204,7 @@ class CommunityShow extends Component {
                                 <List.Item.Meta
 
                                 //帖子的名字和指向的地址，传一个pid，post_id
-                                title={<a href ={"#/ReadPost/"+item.Pid} target="_blank" rel="noopener noreferrer">{item.title}</a>}
+                                title={<a href ={"#/Moment/"+item.Pid} target="_blank" rel="noopener noreferrer">{item.title}</a>}
                                 // description={<p>{item.description}</p>}
                                 description={<p>{limitTxt(item.description,50)}</p>}
                                 avatar={

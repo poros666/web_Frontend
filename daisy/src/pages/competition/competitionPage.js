@@ -26,6 +26,7 @@ export default class CompetitionPage extends Component
         return (
             <div class='CompetitionPage'>
                 <Header/>
+                <div style={{height:'90px'}}/>
                 <Helper/>
                 <Row gutter={16} align={"middle"}>
                     <Col span={7} offset={2}>

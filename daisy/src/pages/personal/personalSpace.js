@@ -12,7 +12,10 @@ export default class PersonalSpace extends Component {
   render() {
     return (
       <Layout>
-        <Header><HeaderNav/></Header>
+        {/* <Header><HeaderNav/></Header> */}
+        <HeaderNav/>
+        <div style={{height:'50px'}}/>
+
         <Content className="perspace_content">
           <div><MastHead/></div>
           <Menu mode="horizontal">

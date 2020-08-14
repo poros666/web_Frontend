@@ -12,6 +12,7 @@ export default class MessageIndex extends Component{
         return(
           <Layout>
               <HeaderNav/>
+              <div style={{height:'50px'}}/>
               <Layout>
                 <Sider width={200} className="site-layout-background">
                   <Menu

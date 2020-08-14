@@ -100,6 +100,12 @@ class HeaderNav extends Component {
                             <SubMenu icon={<UserOutlined />} 
                             
                             title={"我的"}>
+                                
+                                <Menu.Item key="userHome">
+                                    <a href="#/personal" target="_blank" rel="noopener noreferrer">
+                                        个人主页
+                                    </a>
+                                </Menu.Item>
                                 <Menu.Item key="userTeam">
                                     <a href="#/personal/team" target="_blank" rel="noopener noreferrer">
                                         我的队伍
@@ -114,9 +120,6 @@ class HeaderNav extends Component {
                                     <a href="#/personal/colle" target="_blank" rel="noopener noreferrer">
                                         我的收藏
                                     </a>
-                                </Menu.Item>
-                                <Menu.Item key="userPost">
-                                        我的发布
                                 </Menu.Item>
                             </SubMenu>
 

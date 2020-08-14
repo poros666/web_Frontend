@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Layout, Carousel, Card} from 'antd';
+import { Layout, Carousel} from 'antd';
 import './activityShow.css'
 
 const { Header,Footer, Content } = Layout;
 const contentStyle = {
     color: '#fff',
     height:'40px',
-  };
+};
+  
+function limitTxt(txt,count) {
+    var str = txt;
+    if(txt.length>count){
+        str = str.substr(0,count) + '...' ;
+    }
+    return str;
+}
 
 var sourceData = [
     {
@@ -21,25 +29,25 @@ var sourceData = [
         Uid:122,
         Pid:22,
         imgSrc:'actPic2',
-        title: 'Find thousands of extensions, plug-ins, scripts'
+        title: '世界银行称穷人需要钱'
     },
     {
         Uid:123,
         Pid:23,
         imgSrc:'actPic3',
-        title: 'language for background applications'
+        title: '男子坚持偷窃十年 只为加入监狱合唱团'
     },
     {
         Uid:124,
         Pid:24,
         imgSrc:'actPic4',
-        title: 'applications, is refined by Ant UED Team'
+        title: '牛人用砖头造一辆“宝马”车，宝马公司一看乐了：送你辆真的'
     },
     {
         Uid:125,
         Pid:25,
         imgSrc:'actPic5',
-        title: 'Ant Design, a design language for'
+        title: '机会来了！最便宜的兰博基尼，价格一出引起全场骚动'
     },
 ]
 class ActivityShow extends Component {
@@ -72,28 +80,23 @@ class ActivityShow extends Component {
                         >
                             {this.state.slides.map(function(slide){
                                 return(
-                                    <div key={slide}
-                                        style={{
-                                            textAlign: 'center',
-                                        }}
-                                    >
+                                    <div key={slide}>
                                         <a href={"#/ReadPost/"+slide.Uid} target="_blank" rel="noopener noreferrer">
                                             <img 
                                                 height={370}
                                                 width={450}
                                                 src={require("../../img/activity/"+slide.imgSrc+".jpg")}
+                                                // src={"../../img/activity/"+slide.imgSrc+".jpg"}
                                             />
                                             <div style={{
-                                                    position: 'absolute', bottom:'50px',
+                                                    position: 'absolute', 
+                                                    bottom:'50px',
                                                     fontSize:20,
                                                     color:'white',
                                                     // textAlign: 'center',
-                                                    // verticalAlign:'middle',
-                                                    // margin:'0,auto',
+                                                    // left:'10px',
                                             }}>
-                                                <p>
-                                                    {slide.title}
-                                                </p>
+                                                {limitTxt(slide.title,20)}
                                             </div>
                                         </a>
                                         <div style={contentStyle}></div> 

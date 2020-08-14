@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
-import { BackTop, Affix,Button, Popover } from 'antd'
+import { BackTop, Affix,Button, Popover} from 'antd'
 
 const styleHelper = {
     height: 40,
@@ -27,7 +27,8 @@ const styleBackTop = {
 
 const content=(
     <div>
-       <a>客服</a><br/>
+       <a>客服</a>
+       <br/><br/>
        <a>帮助中心</a>
     </div> 
     );
@@ -85,18 +86,22 @@ export default class FloatHelper extends Component {
     };
     render() { 
         return ( 
-            <div>
+            <div style={{position:'fixed', zIndex: 2}}>
                 <div>
                 <Affix style={{ position: 'fixed', top: 580, left: 1380 }}>
                     <Popover
+                        
                         content={content}
                         placement="rightTop"
+                        // arrowPointAtCenter
                         getPopupContainer={triggerNode => triggerNode.parentNode}
-                        trigger="click"
+                        trigger="hover"
                         visible={this.state.visible}
                         onVisibleChange={this.handleVisibleChange}
                     >
-                        <Button type="primary">Click me</Button>
+                        <Button type="primary" style={styleHelper}>
+                            Helper
+                        </Button>
                     </Popover>
                 </Affix>
                 </div>
