@@ -24,6 +24,8 @@ import UserColle from "../pages/personal/userColle"
 import UserInform from "../pages/personal/userInform"
 import UserPost from "../pages/personal/userPost"
 import Editinform from "../pages/personal/editInform"
+import EditTeam from "../pages/personal/editTeam"
+import Collection from "../pages/personal/collection"
 
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
@@ -104,6 +106,16 @@ export const mainRoutes = [{
     path: "/editinform",
     title: "编辑个人资料",
     component: Editinform
+},
+{
+    path: "/editTeam/:teamID",
+    title: "编辑小队",
+    component: EditTeam
+},
+{
+    path: "/collection/:fileID",
+    title: "收藏夹",
+    component: Collection
 }]
 
 

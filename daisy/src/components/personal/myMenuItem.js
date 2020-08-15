@@ -24,7 +24,7 @@ export default class MyMenuItem extends Component {
                     </Menu.Item>
                     <Menu.Item  key="post">
                         <Link to="/personal/post">
-                            我的资料
+                            我的发布
                         </Link>
                     </Menu.Item>
                 </Menu>

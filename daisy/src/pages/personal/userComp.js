@@ -1,28 +1,59 @@
 import React, { Component } from 'react'
-import {Card,Row,Col} from 'antd'
-import '../../style/personal/myItem.css'
+import {Card,List,Col} from 'antd'
+
+const compData = [
+  {
+      ID:1,
+      competitionname: 'comp 1',
+      description:
+        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+  },
+  {
+      ID:2,
+      competitionname: 'comp 2',
+      description:
+        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+  },
+  {
+      ID:3,
+      competitionname: 'comp 3',
+      description:
+        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+  },
+  {
+      ID:4,
+      competitionname: 'comp 4',
+      description:
+        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+  }]
 
 export default class UserComp extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      data:compData
+    }
+  }
     render() {
         return (
-            <div className="myitem">
-              <Row gutter={16}>
-                <Col span={8}>
-                  <Card title="比赛1" className='myitem_card'>
-                    balabalabala
-                  </Card>
-                </Col>
-                <Col span={8}>
-                  <Card title="比赛2" className='myitem_card'>
-                    ababaabaaba
-                  </Card>
-                </Col>
-                <Col span={8}>
-                  <Card title="比赛3" className='myitem_card'>
-                    balabalabalaabaabaaba
-                  </Card>
-                </Col>
-              </Row>
+            <div>
+              <List
+                style={{margin:20}}
+                grid={{ gutter: 20, column: 3 }}
+                dataSource={this.state.data}
+                renderItem={item => (
+                    <List.Item>
+                        <Card
+                        title={
+                            <a href={"#/compPage/"+item.ID+"=id"+item.ID}>
+                                {item.competitionname}
+                            </a>
+                        }>
+                            {item.description}
+                        </Card>
+                    </List.Item>
+                )}
+                />
             </div>
         )
     }

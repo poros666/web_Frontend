@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import {Button,Card,Descriptions,Divider,Avatar} from 'antd'
+import {Button,Card,Descriptions,Divider,Avatar,Input} from 'antd'
 import '../../style/personal/editInform.css'
 import HeaderNav from '../../components/comm/HeaderNav'
-import TextArea from 'antd/lib/input/TextArea'
+
+const { TextArea } = Input;
 
 
 export default class EditInform extends Component {
