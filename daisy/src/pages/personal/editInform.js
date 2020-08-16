@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Button,Card,Descriptions,Divider,Avatar,Input} from 'antd'
+import {Button,Card,Descriptions,Divider,Avatar,Input,Upload} from 'antd'
+import {UploadOutlined} from '@ant-design/icons'
 import '../../style/personal/editInform.css'
 import HeaderNav from '../../components/comm/HeaderNav'
 
@@ -41,6 +42,11 @@ export default class EditInform extends Component {
                                 <Avatar 
                                 size={128}
                                 src={this.state.icon} />
+                                <Upload name="logo" action="/upload.do" listType="picture">
+                                    <Button>
+                                        <UploadOutlined /> 点击上传
+                                    </Button>
+                                </Upload>
                             </Descriptions.Item>
                         </Descriptions>
                         
@@ -205,13 +211,23 @@ export default class EditInform extends Component {
                             </Descriptions.Item>
                         </Descriptions>
                         <div className='saveButtons'>
-                            <Button type='primary'>保存</Button>
-                            <Button>取消</Button>
+                            <Button 
+                            type='primary'
+                            onClick={this.saveEdit}
+                            >
+                                保存
+                            </Button>
+                            <a href='#/personal'>
+                                <Button>取消</Button>
+                            </a>
                         </div>
                     </Card>
                 </div>
             </div>
         )
+    }
+    saveEdit(){
+        //保存数据
     }
     inputChange(e){
         let o={}

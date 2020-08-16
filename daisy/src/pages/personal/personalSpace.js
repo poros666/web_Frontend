@@ -24,14 +24,18 @@ export default class PersonalSpace extends Component {
       <div className='whole_page'>
         <HeaderNav/>
         <div id="perspace_content">
-          <div><MastHead role={this.state.role}/></div>
-          {this.state.role?<MyMenuItem/>:<OtherMenuItem/>}
-          <div>
-          {
-            personalRoutes.map((item,index)=>{
-              return (<Route key={index} path={item.path} component={item.component}/>)
-            })
-          }
+          <div id='mastHead'>
+            <MastHead role={this.state.role}/>
+          </div>
+          <div id='menuItem'>
+            {this.state.role?<MyMenuItem/>:<OtherMenuItem/>}
+            <div>
+            {
+              personalRoutes.map((item,index)=>{
+                return (<Route key={index} path={item.path} component={item.component}/>)
+              })
+            }
+            </div>
           </div>
         </div>
       </div>
