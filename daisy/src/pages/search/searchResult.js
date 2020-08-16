@@ -14,12 +14,15 @@ import EasySearchFrame from '../../components/search/easySearchFrame'
 import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import SearchAssort from '../../components/search/searchAssort'
+import LogoBar from '../../components/search/logoBar'
 
 export default class SearchResult extends Component {
     render() {
         return (
             <div >
                 <HeaderNav/>
+
+                <LogoBar/>
 
                 <EasySearchFrame/>
 

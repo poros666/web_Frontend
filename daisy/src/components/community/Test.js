@@ -1,42 +1,46 @@
-//用来将在沙盒里面的数据再次实际运用
+//基本上是模拟一个沙盒的情况
 
 
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css';
+import { Form, Input, Button } from 'antd';
+import { Collapse } from 'antd';
+const { Panel } = Collapse;
 
-import { Button } from 'antd';
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
 
-export default class test extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            renderAdComponent: false
-        };
-        this.onClickHandler = this.onClickHandler.bind(this);
-    }
-  
-    onClickHandler() {
-        this.setState({renderAdComponent: !this.state.renderAdComponent})
-    }
-  
+const Demo = () => {
+
+
+  return (
+    <Collapse accordion>
+    <Panel header="This is panel header 1" key="1">
+      <p>{text}</p>
+    </Panel>
+    <Panel header="This is panel header 2" key="2">
+      <p>{text}</p>
+    </Panel>
+    <Panel header="This is panel header 3" key="3">
+      <p>{text}</p>
+    </Panel>
+    </Collapse>
+  );
+};
+
+
+
+
+export default class Test extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.onClickHandler}>
-                    我是button
-                    </Button>
-                {this.state.renderAdComponent ? <AdComponent/> : null}
+                <Demo/>
             </div>
-        );
+        )
     }
 }
-
-function AdComponent(){
-    return(
-        <div>
-            <p>我是内容</p>
-        </div>
-      
-    )
-}
-
-

@@ -3,6 +3,8 @@ import {Button,Card,Descriptions,Divider,Avatar,Input,Upload} from 'antd'
 import {UploadOutlined} from '@ant-design/icons'
 import '../../style/personal/editInform.css'
 import HeaderNav from '../../components/comm/HeaderNav'
+import Footer from '../../components/comm/Footer'
+
 
 const { TextArea } = Input;
 
@@ -32,7 +34,7 @@ export default class EditInform extends Component {
 
     render() {
         return (
-            <div>
+            <div id='whole_page'>
                 <HeaderNav/>
                 <div className='pagecontent'>
                     <Card id='ed_card' title="修改个人资料" bordered={false}>
@@ -223,6 +225,7 @@ export default class EditInform extends Component {
                         </div>
                     </Card>
                 </div>
+                <Footer/>
             </div>
         )
     }

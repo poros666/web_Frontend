@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {Card,Badge,Avatar,Input, Descriptions, Button} from 'antd'
 import HeaderNav from '../../components/comm/HeaderNav'
 import '../../style/personal/editteam.css'
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined } from '@ant-design/icons'
+import Footer from '../../components/comm/Footer'
 
 const { TextArea } = Input;
 
@@ -47,9 +48,9 @@ export default class EditTeam extends Component{
     }
     render(){
         return(
-            <div>
+            <div id='editteam_page'>
                 <HeaderNav/>
-                <div className='edteam_content'>
+                <div id='edteam_content'>
                     <Card
                     id='editteam_card'>
                         <p>teamID:{this.props.match.params.teamID}</p>
@@ -124,6 +125,7 @@ export default class EditTeam extends Component{
                         </div>
                     </Card>
                 </div>
+                <Footer/>
             </div>
         )
     }

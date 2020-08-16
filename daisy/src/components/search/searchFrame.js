@@ -18,7 +18,7 @@ export default class SearchFrame extends Component {
         }
 
         return (
-            <div style={{margin: '5%'}}>
+            <div style={{ marginLeft: '22%' }}>
                 <Select defaultValue="综合" style={{ width: '80px' }} onChange={handleChange}>
                 <Option value="综合">综合</Option>
                 <Option value="比赛">比赛</Option>
@@ -28,7 +28,7 @@ export default class SearchFrame extends Component {
 
                 <Search
                     placeholder="搜搜看你感兴趣的内容吧～"
-                    onSearch={value => console.log(value)}
+                    onSearch={value => console.log(value)}                    
                     style={{ width: '65%'}}
                     allowClear 
                     onChange={onChange}

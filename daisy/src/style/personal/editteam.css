@@ -1,9 +1,12 @@
-.edteam_content{
+#editteam_page{
     background-color:#f0f2f5;
-    height: 700px;
+    height: 100%;
+}
+#edteam_content{
+    margin-top: 60px;
+    height: 100%;
 }
 #editteam_card{
-    margin-top: 50%;
     margin: 0 auto;
     width: 1000px;
 }

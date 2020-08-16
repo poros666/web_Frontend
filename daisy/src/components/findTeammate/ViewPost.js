@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import { List, Avatar } from 'antd';
 import{  Pagination  } from 'antd';
 import 'antd/dist/antd.css';
 import { Divider } from 'antd';
-
+import PostPage from '../../pages/findteam/PostPage'
 
 const PostNum=4;
 
@@ -67,9 +68,9 @@ const data_1= [
     },
     {
       Uid:111,
-      Pid:4,
+      Pid:5,
       avatarSrc:'strange',
-      title: 'Ant Design Title 4',
+      title: 'Ant Design Title 5',
       description:'我没睡觉也没摸鱼但我就是写不出'
     },
   ];
@@ -82,7 +83,7 @@ export default class CommunityContent extends Component {
       currentData:[],
       total: 50,
       pageSize: 1,
-      pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
+      pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
   }
@@ -95,9 +96,10 @@ export default class CommunityContent extends Component {
   }
 
   onPageChange=(page,pageSize)=>{
-    console.log("page:",page);
     this.setState({
       pageNumber: page
+    }, () => {
+      window.location.hash = `#/findteam/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     this.setState((state)=>{
     if(state.pageNumber%2==1){
@@ -139,11 +141,19 @@ export default class CommunityContent extends Component {
                             <List.Item.Meta
                                  avatar={
                                   //头像的来源和指向的地址
-                                  <a href={"#/Post/"+item.Uid}>
+                                  <animateTransform href={"#/PostPage/"+item.Uid}>
                                     <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
-                                  </a>
+                                  </animateTransform>
                                 }
-                                title={<a href ={"#/Post/"+item.Pid}>{item.title}</a>}
+                                title={<Link to={
+                                  {
+                                    pathname:`/PostPage`,
+                                    query:{
+                                      Pid:item.Pid,
+                                    },
+                                    state:{dataSource:agriculturalListData}
+                                  }
+                                }>{item.title}</Link>}
                                 description={<p>{item.description}</p>}
                             />
                         </List.Item>

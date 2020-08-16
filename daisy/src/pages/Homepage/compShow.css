@@ -1,0 +1,14 @@
+/* #compTitle{
+} */
+
+a:link {color:black} 
+/* 未访问的链接 */
+
+a:visited {color: #020202} 
+/* 已访问的链接 */
+
+a:hover {color: #0066ff} 
+/* 鼠标移动到链接上 */
+
+a:active {color: #4d4dc4} 
+/* 选定的链接 */

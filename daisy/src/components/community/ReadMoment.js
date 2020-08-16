@@ -1,26 +1,40 @@
+//
+// made by ykn
+//
 import React, { Component } from 'react'
-import 'antd/dist/antd.css';
-import { Card,Avatar,Space,Button } from 'antd';
+import 'antd/dist/antd.css'
+import { Card,Avatar,Space,Button } from 'antd'
 import '../../style/comm/comm.css'
+import { MessageOutlined, LikeOutlined, StarOutlined,ShareAltOutlined,AlertOutlined } from '@ant-design/icons'
+import ReportButton from './ReportButton'
 
 
 
 
- function getPostContent(Pid){
+const IconText = ({ icon, text }) => (
+    <Space>
+      {React.createElement(icon)}
+      {text}
+    </Space>
+  );
+  
+
+ function getMomentContent(Pid){
     //do something
   
   }
 
 
-export default class Post extends Component {
+export default class ReadMoment extends Component {
     
+
     constructor(props){
         super(props)
 
 
-        var tempId=this.props.postId
+        var tempId=this.props.momentId
         
-        getPostContent(tempId)
+        getMomentContent(tempId)
                 
         const sourceData=[
             {
@@ -50,7 +64,7 @@ export default class Post extends Component {
                         //这里的头像要动态生成
                         <div align="right">
 
-                        <a href={"#/ReadPost/"+this.state.data[0].authorUid}>
+                        <a href={"#/Moment/"+this.state.data[0].authorUid}>
                             <Avatar src={require("../../img/avatar/"+this.state.data[0].authorAvatar+".jpg")}></Avatar>
                         </a>
                                         
@@ -58,7 +72,24 @@ export default class Post extends Component {
 
                         </div>
                         }
-                >
+                    actions={[
+                        <Button type='text'>
+                            <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />
+                        </Button>,
+
+                        <Button type='text'>
+                            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />
+                        </Button>,
+
+                        <Button type='text'>
+                            <IconText icon={ShareAltOutlined} text="分享" key="list-vertical-share-o" />
+                        </Button>,
+
+                        <ReportButton/>,
+
+                        ]}
+                    >
+                
 
                 {
                     //下面是帖子的内容部分
@@ -66,10 +97,10 @@ export default class Post extends Component {
                 <p>
                    { this.state.data[0].content}
                 </p>
+
                 </Card>
                 
                 <br/>
-                <Func/>
 
             </div>
         //     <div className="site-card-border-less-wrapper">
@@ -82,15 +113,4 @@ export default class Post extends Component {
 }
 
 
-
-function Func() {
-    return (
-      <Space>
-        <Button ghost><p style={{color:'black'}}>点赞</p></Button>
-        <Button ghost><p style={{color:'black'}}>收藏</p></Button>
-        <Button ghost><p style={{color:'black'}}>分享</p></Button>
-        <Button ghost><p style={{color:'black'}}>举报</p></Button>     
-      </Space>
-    );
-  }
 

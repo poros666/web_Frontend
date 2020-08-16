@@ -51,7 +51,7 @@ export default class HotSearch extends Component {
                         <Divider orientation="left"><FireOutlined/>热门搜索</Divider>
                         
                         <List
-                        grid={{ column: '3' }}
+                        grid={{ column: '4' }}
                         size='large'
                         dataSource={data}
                         renderItem={item => (

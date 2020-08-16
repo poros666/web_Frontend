@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { List, Avatar ,Space,Button, Pagination, Col} from 'antd';
+import { List, Avatar ,Space,Radio, Pagination, Col, Popover} from 'antd';
 import 'antd/dist/antd.css';
-
+import { StarOutlined, LikeOutlined } from '@ant-design/icons';
+import Report from './Report'
+import moment from 'moment'
 const data = [
     {
       username: 'zhangsan',
@@ -101,6 +103,8 @@ export default class DiscussList extends Component {
   {
     super(props)
     this.state={
+      compID:this.props.compID,
+      sortMethod:1,
       currentData:[],
       total: data.length,
       pageSize: 5,
@@ -123,6 +127,7 @@ export default class DiscussList extends Component {
     }, () => {
       window.location.hash = `#/compPage/${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
+    this.requestForData(this.state.pageNumber,this.state.compID,this.state.sortMethod)
     this.setState((state)=>{
     for(let i=0;i<state.pageSize;i++){
       state.currentData.pop();
@@ -137,28 +142,55 @@ export default class DiscussList extends Component {
    );
  }
 
+  onLikeClick(UID){}
 
+  onStarClick(UID){}
+
+  requestForData(pageNumber,compID,sortMethod){}
 
   render() {
         return (
             <div>
-                <SortDiscuss/>
+                <Space>
+                <h3>sort by:</h3>
+                <Radio.Group defaultValue="a" buttonStyle="solid">
+                    <Radio.Button value="a">Time</Radio.Button>
+                    <Radio.Button value="b">Likes</Radio.Button>
+                    <Radio.Button value="c">Stars</Radio.Button>
+                </Radio.Group>
+                </Space>
                 <br/>
                 <br/>
                     <List
                         style={{width: '100%', resize: 'none'}}
                         itemLayout="horizontal"
                         dataSource={this.state.currentData}
-                        renderItem={item => (
-                        <List.Item>
+                        renderItem={item => 
+                        <div>
+                        <List.Item
+                        actions={[
+                          <Popover content={<p>Star</p>}>
+                            <StarOutlined onClick={this.onStarClick}/>
+                            {123}
+                          </Popover>,
+                          <Popover content={<p>Like</p>}>
+                            <LikeOutlined onClick={this.onLikeClick}/>
+                            {123}
+                          </Popover>,
+                          <Report ReportUID='test1' ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
+                          ]}>
                             <List.Item.Meta
-                                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                //之后要改成用户页面路径
-                                title={<a href="https://ant.design">{item.username}</a>}
+                                avatar={
+                                  <a href={"#/ReadPost"}>
+                                    <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'></Avatar>
+                                  </a>
+                                }
+                                title={<a href="#/ReadPost">{item.username}</a>}
                                 description={<p>{item.description}</p>}
-                            />
+                            />     
                         </List.Item>
-                        )}
+                        </div>
+                        }
                     />
                     <Col offset={9}>
                     <Pagination 
@@ -173,16 +205,3 @@ export default class DiscussList extends Component {
         )
   }
 }
-
-
-
-function SortDiscuss() {
-    return (
-      <Space>
-          <p>sort by:</p>       
-        <Button type="primary">time</Button>
-        <Button type="primary">like</Button>
-        <Button type="primary">Favorites</Button>     
-      </Space>
-    );
-  }

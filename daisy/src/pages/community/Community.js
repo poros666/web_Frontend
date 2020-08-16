@@ -1,12 +1,15 @@
+//
+// made by ykn
+//
 import React, { Component } from 'react'
 import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import FloatHelper from '../../components/comm/FloatHelper'
-import CreatePost from '../../components/community/CreatePost'
 import {Space,Button} from 'antd';
 import 'antd/dist/antd.css';
 import TurnPage from '../../components/comm/TurnPage'
-import PostList from '../../components/community/PostList'
+import MomentList from '../../components/community/MomentList'
+import CreateMoment from '../../components/community/CreateMoment'
 import Test from '../../components/community/Test'
 
 export default class Community extends Component {
@@ -16,7 +19,7 @@ export default class Community extends Component {
       //改为数据请求
       
       //再这里绑定元数据
-      this.createPost=this.createPost.bind(this)
+      this.createMoment=this.createMoment.bind(this)
     }
     // componentWillMount(){
     // }
@@ -28,7 +31,7 @@ export default class Community extends Component {
  
     //组件功能实现
 
-    createPost(title,content){
+    createMoment(title,content){
 
       //传递json到服务端
       console.log(title)
@@ -64,6 +67,7 @@ export default class Community extends Component {
         
             <div >
                 <HeaderNav/>
+                <div style={{height:'80px'}}/>
                 <FloatHelper/>
 
 
@@ -90,15 +94,15 @@ export default class Community extends Component {
                         <br/>
                         <br/>
 
-                        <PostList/>
+                        <MomentList/>
                             
 
-                        <TurnPage/>       
 
-
-                        <CreatePost
-                          createPost={this.createPost}
+                        <CreateMoment
+                          createMoment={this.createMoment}
                         />
+
+                        {/* <Test/> */}
 
 
                     </div>                
@@ -115,8 +119,6 @@ export default class Community extends Component {
 
 
                 <Footer/>
-                <Test/>
-
             </div>
         )
     }

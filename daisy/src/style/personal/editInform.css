@@ -1,5 +1,8 @@
-.pagecontent{
+#whole_page{
   background-color:#f0f2f5;
+}
+.pagecontent{
+  margin-top:60px;
 }
 #ed_card{
   margin: 0 auto;

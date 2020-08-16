@@ -7,8 +7,8 @@ import '../../style/personal/personalSpace.css'
 import { personalRoutes } from '../../routes/index'
 import OtherMenuItem from '../../components/personal/otherMenuItem'
 import MyMenuItem from '../../components/personal/myMenuItem'
+import Footer from '../../components/comm/Footer'
 
-const { Header, Content,} = Layout;
 
 export default class PersonalSpace extends Component {  
   constructor(props){
@@ -38,6 +38,7 @@ export default class PersonalSpace extends Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     )
   }

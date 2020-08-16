@@ -3,6 +3,8 @@ import {Card,Button,Input,List} from 'antd'
 import {EditOutlined,CheckOutlined,StarFilled} from '@ant-design/icons'
 import '../../style/personal/collection.css'
 import HeaderNav from '../../components/comm/HeaderNav'
+import Footer from '../../components/comm/Footer'
+
 
 
 const colleData=[
@@ -107,6 +109,7 @@ export default class Colletion extends Component {
                 <HeaderNav/>
                 <div id='collection_content'>
                     <Card 
+                    id='colle_card'
                     title={
                        this.displayTittle()
                     }
@@ -134,6 +137,7 @@ export default class Colletion extends Component {
                         />
                     </Card>
                 </div>
+                <Footer/>
             </div>
         )
     }

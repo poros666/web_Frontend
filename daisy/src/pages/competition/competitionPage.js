@@ -11,19 +11,22 @@ import FindTeamBotton from '../../components/competition/findTeamButton'
 import CompetitionInformation from '../../components/competition/competitionInformation'
 import RaiseDiscuss from '../../components/competition/raiseDiscuss'
 import DiscussList from '../../components/competition/discussList'
-
+import SubscriptionButton from '../../components/competition/subscriptionButton'
 
 export default class CompetitionPage extends Component 
 {
     constructor(props){
-        super(props);
+        super(props)
     }
 
     render() 
     {
+       
+
         return (
             <div class='CompetitionPage'>
                 <Header/>
+                <div style={{height:'90px'}}/>
                 <Helper/>
                 <Row gutter={16} align={"middle"}>
                     <Col span={7} offset={2}>
@@ -37,6 +40,8 @@ export default class CompetitionPage extends Component
                     </Col>
                     <Col span={7}>
                         <FindTeamBotton compID={this.props.match.params.compID}/>
+                        <br/>
+                        <SubscriptionButton compID={this.props.match.params.compID}/>
                     </Col>
                 </Row>
                 <Col offset={2} span={20}>
