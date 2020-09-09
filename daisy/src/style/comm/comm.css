@@ -1,15 +1,10 @@
-.Body{
-    margin: 80px 10% 10% 10%;
+.momentBody{
+    margin: 80px 15% 5% 15%;
     background: #ececec;
 }
-
-.site-card-border-less-wrapper {
-    background: #ececec;
-  }
-
-  .middle{
+.momentMiddle{
     margin: 10px 50px 10px 50px;
 }
-.backcolor{
+.momentbackcolor{
     background-color: #ececec;
 }
