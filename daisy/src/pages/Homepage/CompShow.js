@@ -22,7 +22,7 @@ function limitTxt(txt,count) {
     return str;
 };
 
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 15; i++) {
     listData.push({
         
     ID: i+1,
@@ -32,6 +32,8 @@ for (let i = 0; i < 25; i++) {
         '2020-08-16',
     endTime:
         '2020-09-24',
+    host:
+        '同济大学软件学院',
     content:
         '为深入实施工业互联网创新发展战略，持续提升工业互联网创新能力，支撑服务实体经济数字化转型，定于2020年7月-12月举办第二届中国工业互联网大赛（以下简称“大赛”）。大赛由工业和信息化部和浙江省人民政府联合主办。为深入实施工业互联网创新发展战略，持续提升工业互联网创新能力，支撑服务实体经济数字化转型，定于2020年7月-12月举办第二届中国工业互联网大赛（以下简称“大赛”）。大赛由工业和信息化部和浙江省人民政府联合主办。为深入实施工业互联网创新发展战略，持续提升工业互联网创新能力，支撑服务实体经济数字化转型，定于2020年7月-12月举办第二届中国工业互联网大赛（以下简称“大赛”）。大赛由工业和信息化部和浙江省人民政府联合主办。',
     });
@@ -41,7 +43,7 @@ class CompShow extends Component {
     state = {  }
     render() { 
         return ( 
-            <div style={{ height: '5300px' , margin:'40px 150px' }}>
+            <div style={{ margin:'50px 150px' }}>
                 <Layout>
                     <Header>
                         <Content>
@@ -95,11 +97,11 @@ class CompShow extends Component {
                                     ]}
                                     extra={
                                         <div>
-                                            <img
-                                                width={272}
-                                                alt="logo"
-                                                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                                            />
+                                            <Tag icon={<CalendarOutlined />} color="success">开始时间：{item.startTime}</Tag>
+                                            <br></br>
+                                            <Tag icon={<CalendarOutlined />} color="success">结束时间：{item.endTime}</Tag>
+                                            <br></br>
+                                            <Button key="subscriptComp" icon={<StarTwoTone/>}>订阅</Button>
                                         </div>
                                     }
                                 >
@@ -118,19 +120,22 @@ class CompShow extends Component {
                                     }
                                     description={
                                         <div>
-                                            <Row>
+                                            <div style={{textAlign:"center"}}>
+                                                <p>{item.host}</p>
+                                            </div>
+                                            {limitTxt(item.content,200)}
+                                            {/* <Row>
                                                 <Col span={3} offset={9}>
                                                     <Tag icon={<CalendarOutlined />} color="success">{item.startTime}  ———  {item.endTime}</Tag>
                                                 </Col>
                                                 <Col span={2} offset={9}>
                                                     <Button key="subscriptComp" icon={<StarTwoTone/>}>订阅</Button>
                                                 </Col>
-                                            </Row>
+                                            </Row> */}
                                         </div>
                                     }
                                 />
                                 
-                                {limitTxt(item.content,200)}
                                 </List.Item>
                                 
                                 )}

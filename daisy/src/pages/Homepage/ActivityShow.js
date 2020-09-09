@@ -72,7 +72,7 @@ class ActivityShow extends Component {
         };
 
         return ( 
-             <div style={{height: '400px',margin:'10px 10px'}}>
+             <div style={{height: '100%', margin:'10px 10px'}}>
                 <Layout>
                     <Content>
                         <Carousel 
@@ -81,13 +81,13 @@ class ActivityShow extends Component {
                             {this.state.slides.map(function(slide){
                                 return(
                                     <div key={slide}>
-                                        <a href={"#/ReadPost/"+slide.Uid} target="_blank" rel="noopener noreferrer">
-                                            <img 
-                                                height={370}
-                                                width={450}
+                                        {/* <a href={"#/ReadPost/"+slide.Uid} target="_blank" rel="noopener noreferrer"> */}
+                                               <img 
+                                                width='auto'
+                                                height='100%'
                                                 src={require("../../img/activity/"+slide.imgSrc+".jpg")}
                                                 // src={"../../img/activity/"+slide.imgSrc+".jpg"}
-                                            />
+                                                /> 
                                             <div style={{
                                                     position: 'absolute', 
                                                     bottom:'50px',
@@ -98,7 +98,7 @@ class ActivityShow extends Component {
                                             }}>
                                                 {limitTxt(slide.title,20)}
                                             </div>
-                                        </a>
+                                        {/* </a> */}
                                         <div style={contentStyle}></div> 
                                     </div>
                                 )

@@ -33,43 +33,6 @@ const content=(
     </div> 
     );
 
-// export default class FloatHelper extends Component {
-//     state = {
-//         visible: false,
-//       };
-   
-//     hide = () => {
-//         this.setState({
-//           visible: false,
-//         });
-//     };
-   
-//     handleVisibleChange = visible => {
-//         this.setState({ visible });
-//     };
-
-//     render() {
-//         return (
-//             <Affix offsetTop={300} onChange={affixed => console.log(affixed)}>
-//                 <Popover
-//                     content={content}
-//                     placement="rightTop"
-//                     getPopupContainer={triggerNode => triggerNode.parentNode}
-//                     trigger="click"
-//                     visible={this.state.visible}
-//                     onVisibleChange={this.handleVisibleChange}
-//                 >
-//                     <Button type="primary">Click me</Button>
-//                 </Popover>
-//                 <BackTop visibilityHeight={0}>
-//                    <div style={styleBackTop}>up</div>
-//                 </BackTop>
-//             </Affix>
-//         )
-//     }
-// }
-
-
 export default class FloatHelper extends Component {
     state = {
         visible: false,
@@ -87,10 +50,19 @@ export default class FloatHelper extends Component {
     render() { 
         return ( 
             <div style={{position:'fixed', zIndex: 2}}>
-                <div>
-                <Affix style={{ position: 'fixed', top: 580, left: 1380 }}>
+                <div 
+                // style={{ position:'relative'}}
+                >
+                    <BackTop visibilityHeight={0}>
+                    <div style={styleBackTop}>up</div>
+                    </BackTop>
+                </div>
+                
+                <div 
+                // style={{position:'absolute',top:90,left:400}}
+                >
+                <Affix offsetBottom={120}>
                     <Popover
-                        
                         content={content}
                         placement="rightTop"
                         // arrowPointAtCenter
@@ -104,12 +76,6 @@ export default class FloatHelper extends Component {
                         </Button>
                     </Popover>
                 </Affix>
-                </div>
-
-                <div style={{ height: '8vh', padding: 8 }}>
-                    <BackTop visibilityHeight={0}>
-                    <div style={styleBackTop}>up</div>
-                    </BackTop>
                 </div>
             </div>
          );
