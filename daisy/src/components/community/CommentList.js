@@ -133,7 +133,7 @@ export default class CommentList extends Component {
       //初始化render数组状态
       let objArr=this.state.data
         return (
-            <div id="firstLayer">
+            <div>
               {/* <p className="childComment">我是kkkkkkkkkkkk</p> */}
                 {
                   objArr.map((item,index)=>(

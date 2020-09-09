@@ -2,7 +2,7 @@
 // made by ykn
 //
 import React, { Component } from 'react'
-import { List, Avatar,Col, Pagination,Space } from 'antd';
+import { List, Avatar,Col, Pagination,Space,Button } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
 
@@ -185,6 +185,20 @@ export default class MomentList extends Component {
     render() {
         return (
             <div>
+              
+                <Space>
+                <p>sort by:</p>       
+                <Button type="primary" onClick={sortByTime}>time</Button>
+                <Button type="primary" onClick={sortByLike}>like</Button>
+                <Button type="primary" onClick={sortByComments}>comments</Button>
+                <Button type="primary" onClick={sortByFavorites}>Favorites</Button>     
+                </Space>
+
+                <div>
+                  <p></p>
+                </div>
+
+
                   <List
                     itemLayout="horizontal"
                     dataSource={this.state.currentData}
@@ -228,4 +242,22 @@ export default class MomentList extends Component {
             </div>
         )
     }
+}
+
+
+
+function sortByTime(){
+  console.log('sortByTime')
+}
+
+function sortByLike(){
+  console.log('sortByLike')
+}
+
+function sortByComments(){
+  console.log('sortByComments')
+}
+
+function sortByFavorites(){
+  console.log('sortByFavorites')
 }

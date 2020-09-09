@@ -97,14 +97,14 @@ export default class Moment extends Component {
 
     render() {
         return (
-            <div className='backcolor'>
+            <div className='momentBackcolor'>
                 <HeaderNav/>
                 <FloatHelper/>
                 {
                     //本体
                 }
-                <div className='Body'>  
-                    <div className='middle'>
+                <div className='momentBody'>  
+                    <div className='momentMiddle'>
 
 
                         <ReadMoment momentId={this.state.Pid}/>

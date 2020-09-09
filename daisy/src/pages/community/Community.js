@@ -66,8 +66,10 @@ export default class Community extends Component {
 
         
             <div >
-                <HeaderNav/>
-                <div style={{height:'80px'}}/>
+                <HeaderNav/>{/*头*/}
+
+                <div style={{height:'80px'}}/>                {/* 适当留白 */}
+
                 <FloatHelper/>
 
 
@@ -77,18 +79,12 @@ export default class Community extends Component {
 
 
 
-                    <div style={{padding:'0 50px'}}>
+                    <div style={{padding:'0 15%'}}>
 
                         {
                           //这里比较简单就直接写死在html里面，不做额外的子组件了
                         }
-                        <Space>
-                            <p>sort by:</p>       
-                          <Button type="primary" onClick={sortByTime}>time</Button>
-                          <Button type="primary" onClick={sortByLike}>like</Button>
-                          <Button type="primary" onClick={sortByComments}>comments</Button>
-                          <Button type="primary" onClick={sortByFavorites}>Favorites</Button>     
-                        </Space>
+                     
 
 
                         <br/>
@@ -126,25 +122,6 @@ export default class Community extends Component {
 
 
 
-}
-
-
-
-
-function sortByTime(){
-  console.log('sortByTime')
-}
-
-function sortByLike(){
-  console.log('sortByLike')
-}
-
-function sortByComments(){
-  console.log('sortByComments')
-}
-
-function sortByFavorites(){
-  console.log('sortByFavorites')
 }
 
 
