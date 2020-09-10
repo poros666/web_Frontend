@@ -150,7 +150,7 @@ export default class DiscussList extends Component {
 
   render() {
         return (
-            <div>
+            <div className='DiscussListBox'>
                 <Space>
                 <h3>sort by:</h3>
                 <Radio.Group defaultValue="a" buttonStyle="solid">

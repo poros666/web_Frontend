@@ -13,6 +13,8 @@ import RaiseDiscuss from '../../components/competition/raiseDiscuss'
 import DiscussList from '../../components/competition/discussList'
 import SubscriptionButton from '../../components/competition/subscriptionButton'
 
+import '../../style/competition/competition.css'
+
 export default class CompetitionPage extends Component 
 {
     constructor(props){
@@ -24,19 +26,17 @@ export default class CompetitionPage extends Component
        
 
         return (
-            <div class='CompetitionPage'>
+            <div className='CompetitionPage'>
                 <Header/>
                 <div style={{height:'90px'}}/>
                 <Helper/>
-                <Row gutter={16} align={"middle"}>
+                <div className={'CompetitionNameBox'}>
+                <Row gutter={16} align={"middle"} >
                     <Col span={7} offset={2}>
                         <CompetitionImage/>
                     </Col>
                     <Col span={6}>
                         <CompetitionName/>
-                        <div>
-                            {this.props.match.params.compID}
-                        </div>
                     </Col>
                     <Col span={7}>
                         <FindTeamBotton compID={this.props.match.params.compID}/>
@@ -44,9 +44,10 @@ export default class CompetitionPage extends Component
                         <SubscriptionButton compID={this.props.match.params.compID}/>
                     </Col>
                 </Row>
+                </div>
                 <Col offset={2} span={20}>
                 <CompetitionInformation/>
-                <RaiseDiscuss compID={this.props.match.params.compID}/>
+                <RaiseDiscuss compID={this.props.match.params.compID} className={'RaiseDiscuss'}/>
                 <DiscussList compID={this.props.match.params.compID}/>
                 </Col>
                 <Footer/>
