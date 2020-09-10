@@ -4,6 +4,7 @@ import { Card, Table, Button, Tag, Space, Input, Popconfirm } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import CollectionsPage from "../../components/admin/compEditPop"
 import CompDetail from "../../components/admin/compDetail"
+import CompNotice from "../../components/admin/compNoticePop"
 
 export default class CompManagement extends Component {
   constructor(props) {
@@ -94,6 +95,7 @@ export default class CompManagement extends Component {
         render: (text, record) => (
           <Space size="middle">
             <CompDetail />
+            <CompNotice />
             <Popconfirm
               title="确认删除此项？"
               onCancel={() => {

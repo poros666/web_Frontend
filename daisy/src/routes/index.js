@@ -35,6 +35,7 @@ import SearchContent from "../components/search/searchContent";
 import SearchContentComp from "../components/search/searchContentComp";
 import SearchContentComm from "../components/search/searchContentComm";
 import SearchContentUsr from "../components/search/searchContentUsr";
+import DeliverSystemAnnouncement from "../pages/admin/deliverSystemAnnouncement";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -50,6 +51,11 @@ export const adminRoutes = [{
     path: "/admin/usermanagement",
     title: "用户管理",
     component: UserManagement
+},
+{
+    path: "/admin/sysannounce",
+    title: "发布系统公告",
+    component: DeliverSystemAnnouncement
 },
 ]
 
