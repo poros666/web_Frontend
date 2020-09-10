@@ -5,15 +5,23 @@ import PublishPost from '../../components/findTeammate/PublishPost'
 import Footer from '../../components/comm/Footer'
 import { Divider } from 'antd';
 import PostList from '../../components/findTeammate/ViewPost'
+import FloatHelper from '../../components/comm/FloatHelper'
 import '../../style/findTeam/findTeam.css'
 
 export default class FindTeam extends Component {
+    constructor(props){//接收比赛页面传递的比赛数据
+        super(props)
+  
+        this.state={
+          match:this.props.match.params.matchname
+         }
+      }
     render() {
         return (
             <>
                 <HeaderNav/>
                 <br/><br/>
-                <TeamNav/>
+                <TeamNav matchName='睡觉摸鱼大赛'/>
                 <Divider/>
                 <div id='WebPage'>
                     <div id='PostList'>
@@ -21,9 +29,10 @@ export default class FindTeam extends Component {
                     </div>
                     <br/>
                     <Divider/>
-                    <div id='PublishPost'><PublishPost/></div>
+                    <div id='PublishPost'><PublishPost matchName='睡觉摸鱼大赛'/></div>
                     <br/>
                     </div>
+                <FloatHelper/>
                 <Footer/>
             </>
         )

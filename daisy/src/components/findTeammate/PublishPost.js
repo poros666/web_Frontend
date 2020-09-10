@@ -28,6 +28,14 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
   </>
 );
 
+/*模拟已登录用户数据*/
+const data={
+    Uid:100,
+    avatarSrc:'strange',
+    Username:'帅哥学霸ykn',
+    matchName:'睡觉摸鱼大赛'
+  }
+
 
 /*填写小队信息*/
 const AdvancedSearchForm = () => {
@@ -35,7 +43,8 @@ const AdvancedSearchForm = () => {
   const [form] = Form.useForm();
   
   const getFields = () => {
-    const children = [];
+
+    const children = [];//用于记录比赛信息
 
     children.push(
       <Col span={6} key={0}>
@@ -65,7 +74,7 @@ const AdvancedSearchForm = () => {
             },
           ]}
         >
-          <Input placeholder="比赛名称" disabled/>
+          <Input placeholder={data.matchName} disabled/>
         </Form.Item>
       </Col>,
     );
@@ -81,7 +90,7 @@ const AdvancedSearchForm = () => {
             },
           ]}
         >
-          <Input placeholder="队长名称" disabled/>
+          <Input placeholder={data.Username} disabled/>
         </Form.Item>
       </Col>,
     );
@@ -145,11 +154,21 @@ const AdvancedSearchForm = () => {
 };
 
 export default class CreatePost extends React.Component {
-  state = {
-    comments: [],
-    submitting: false,
-    value: '',
-  };
+
+    /*接收比赛名称*/
+    constructor(props){
+      super(props)
+  
+      var tempName=this.props.matchName
+
+      this.state={
+        comments: [],
+        submitting: false,
+        value: '',
+        matchName:tempName
+      }
+  }
+
 
   handleSubmit = () => {
     if (!this.state.value) {
@@ -160,6 +179,7 @@ export default class CreatePost extends React.Component {
       submitting: true,
     });
 
+    /*这部分模拟信息发送，之后用后端api*/
     setTimeout(() => {
       this.setState({
         submitting: false,
@@ -192,8 +212,7 @@ export default class CreatePost extends React.Component {
         <Comment
           avatar={
             <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
+              src={require("../../img/avatar/"+data.avatarSrc+".jpg")}
             />
           }
           content={

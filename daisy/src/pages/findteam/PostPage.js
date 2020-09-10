@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import '../../style/findTeam/findTeam.css'
 import { Divider} from 'antd';
 import Post from '../../components/findTeammate/Post'
+import FloatHelper from '../../components/comm/FloatHelper'
 import '../../style/comm/comm.css'
 import 'antd/dist/antd.css';
 
@@ -13,8 +14,6 @@ export default class PostPage extends Component {
 
     constructor(props){
         super(props)
-
-        console.log(this.props.match.params)
   
         this.state={
           Pid:this.props.match.params.id
@@ -41,9 +40,8 @@ export default class PostPage extends Component {
                     <Post postId={this.state.Pid}/>
                 </div>
                 <Divider/>
-                <div>
-                    <Footer/>
-                </div>
+                <FloatHelper/>
+                <Footer/>
                 </div>
             </div>
         )

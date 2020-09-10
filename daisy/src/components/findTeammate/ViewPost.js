@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import { List, Avatar } from 'antd';
 import{  Pagination  } from 'antd';
 import 'antd/dist/antd.css';
 import { Divider } from 'antd';
-import PostPage from '../../pages/findteam/PostPage'
 
 const PostNum=4;
 
