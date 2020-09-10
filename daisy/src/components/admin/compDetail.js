@@ -11,7 +11,7 @@ const layout = {
 }
 
 //编辑比赛的弹出框
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel,record }) => {
   const [form] = Form.useForm()
   const nameValidate =(rule, value, callback)=>{
     if(value> 100){
@@ -20,6 +20,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
       callback()
     }
   }
+  console.log("hi", record)
   return (
     <Modal
       visible={visible}
@@ -65,7 +66,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             }
           ]}
         >
-          <Input />
+          <Input placeholder={record.Record.name}/>
         </Form.Item>
         <Form.Item
           name="start"
@@ -77,7 +78,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder={record.Record.start}/>
         </Form.Item>
         <Form.Item
           name="end"
@@ -89,7 +90,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder={record.Record.end}/>
         </Form.Item>
         <Form.Item
           name="sponsor"
@@ -101,7 +102,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder={record.Record.sponsor}/>
         </Form.Item>
 
         <Form.Item name="description" label="比赛简介">
@@ -128,7 +129,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 }
 
 //调用按钮
-const CompDetail = () => {
+const CompDetail = (e) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
@@ -153,6 +154,7 @@ const CompDetail = () => {
         onCancel={() => {
           setVisible(false)
         }}
+        record = {e}
       />
     </div>
   )

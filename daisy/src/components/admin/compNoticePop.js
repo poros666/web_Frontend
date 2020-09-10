@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Modal, Form, Input, Radio } from 'antd'
+import moment from 'moment'
 
 const layout = {
   labelCol: {
@@ -11,7 +12,7 @@ const layout = {
 }
 
 //编辑比赛通知的弹出框
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel,name, id }) => {
   const [form] = Form.useForm()
   const nameValidate = (rule, value, callback) => {
     if (value > 100) {
@@ -20,6 +21,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
       callback()
     }
   }
+
   return (
     <Modal
       visible={visible}
@@ -38,25 +40,27 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             console.log('Validate Failed:', info)
           })
       }}>
+        <div></div>
       <Form
         form={form}
         layout='vertical'
         name='form_notice_in_modal'
         initialValues={{
           tags: 'not_started',
-          name: '传值！',
-          id: 'chuanhzi',
         }}>
         {/* name= "John Brown"
         start= "2020/3/14"
         end= "2020/4/14"
         sponsor= "同济大学"
         tags= ["未开始"] */}
-        <Form.Item name='name' label='所属比赛名字(只读)'>
-          <Input readonly='readonly' />
+        <Form.Item name='name' label='所属比赛名字'>
+          <Input placeholder={name} disabled/>
         </Form.Item>
-        <Form.Item name='id' label='所属比赛ID(只读)'>
-          <Input readonly='readonly' />
+        <Form.Item name='id' label='所属比赛ID'>
+          <Input placeholder={id} disabled/>
+        </Form.Item>
+        <Form.Item name='time' label='发布时间'>
+          <Input placeholder={moment().format("YYYY-MM-DD HH:mm:ss")} disabled/>
         </Form.Item>
         <Form.Item
           name='title'
@@ -92,7 +96,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 }
 
 //调用按钮
-const CompNotice = () => {
+const CompNotice = (e) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
@@ -100,7 +104,7 @@ const CompNotice = () => {
     //处理数据
     setVisible(false)
   }
-
+  // console.log("here" ,e.Record)
   return (
     <div>
       <Button
@@ -116,6 +120,8 @@ const CompNotice = () => {
         onCancel={() => {
           setVisible(false)
         }}
+        name={e.Record.name}
+        id={e.Record.id}
       />
     </div>
   )

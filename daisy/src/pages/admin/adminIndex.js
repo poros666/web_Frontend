@@ -12,10 +12,10 @@ export default class AdminIndex extends Component {
     render() {
         return (
             <Layout>
-              <Header className="header">
+              <Header className="header" style={{background:'#99cccc',height:"7%"}}>
                 <div className="logo">
                     <img src={logo} alt="logo"/>
-                    <h1>DAISY 后台</h1>
+                    <h1 style={{color:"black"}}>DAISY 后台</h1>
                 </div>
               </Header>
               <Layout>

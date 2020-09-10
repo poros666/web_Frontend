@@ -20,6 +20,13 @@ export default class CompManagement extends Component {
 
     const columns = [
       {
+        title: "比赛id",
+        dataIndex: "id",
+        key: "id",
+        render: (text) => <a>{text}</a>,
+        ...this.getColumnSearchProps("id"),
+      },
+      {
         title: "比赛名字",
         dataIndex: "name",
         key: "name",
@@ -94,8 +101,8 @@ export default class CompManagement extends Component {
         key: "action",
         render: (text, record) => (
           <Space size="middle">
-            <CompDetail />
-            <CompNotice />
+            <CompDetail Record={record}/>
+            <CompNotice Record={record}/>
             <Popconfirm
               title="确认删除此项？"
               onCancel={() => {
@@ -116,6 +123,7 @@ export default class CompManagement extends Component {
     const data = [
       {
         key: "1",
+        id: "1",
         name: "John Brown",
         start: "2020/3/14",
         end: "2020/4/14",
@@ -124,6 +132,7 @@ export default class CompManagement extends Component {
       },
       {
         key: "2",
+        id: "132",
         name: "poros",
         start: "2020/4/14",
         end: "2020/5/14",
@@ -132,6 +141,7 @@ export default class CompManagement extends Component {
       },
       {
         key: "3",
+        id: "13245",
         name: "John Brown",
         start: "2021/3/14",
         end: "2021/4/14",
@@ -140,6 +150,7 @@ export default class CompManagement extends Component {
       },
       {
         key: "4",
+        id: "1sad",
         name: "rich brain",
         start: "2020/3/15",
         end: "2020/4/15",
@@ -148,6 +159,7 @@ export default class CompManagement extends Component {
       },
       {
         key: "5",
+        id: "1sad2",
         name: "John Brown",
         start: "2021/6/15",
         end: "2021/7/15",
