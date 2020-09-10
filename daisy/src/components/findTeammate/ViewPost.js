@@ -141,19 +141,11 @@ export default class CommunityContent extends Component {
                             <List.Item.Meta
                                  avatar={
                                   //头像的来源和指向的地址
-                                  <animateTransform href={"#/PostPage/"+item.Uid}>
+                                  <a href={"#/personal"}>
                                     <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
-                                  </animateTransform>
+                                  </a>
                                 }
-                                title={<Link to={
-                                  {
-                                    pathname:`/PostPage`,
-                                    query:{
-                                      Pid:item.Pid,
-                                    },
-                                    state:{dataSource:agriculturalListData}
-                                  }
-                                }>{item.title}</Link>}
+                                title={<a href={"#/PostPage/"+item.Pid}>{item.title}</a>}
                                 description={<p>{item.description}</p>}
                             />
                         </List.Item>

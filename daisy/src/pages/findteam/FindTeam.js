@@ -12,6 +12,7 @@ export default class FindTeam extends Component {
         return (
             <>
                 <HeaderNav/>
+                <br/><br/>
                 <TeamNav/>
                 <Divider/>
                 <div id='WebPage'>

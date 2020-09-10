@@ -3,10 +3,8 @@ import TeamNav from '../../components/findTeammate/TeamNav'
 import Footer from '../../components/comm/Footer'
 import React, { Component } from 'react'
 import '../../style/findTeam/findTeam.css'
-import { Divider } from 'antd';
+import { Divider} from 'antd';
 import Post from '../../components/findTeammate/Post'
-import { Tooltip } from 'antd';
-import moment from 'moment';
 import '../../style/comm/comm.css'
 import 'antd/dist/antd.css';
 
@@ -15,13 +13,13 @@ export default class PostPage extends Component {
 
     constructor(props){
         super(props)
-        //let tempId=this.props.match.params.id
+
+        console.log(this.props.match.params)
   
         this.state={
-          Pid:this.props.location.query.Pid
+          Pid:this.props.match.params.id
          }
       }
-  
   
       componentWillMount(){
   
@@ -33,19 +31,20 @@ export default class PostPage extends Component {
       }
     render() {
         return (
-            <div id='WebPage'>
             <div>
                 <HeaderNav/>
+                <br/><br/>
                 <TeamNav/>
-            </div>
-            <Divider/>
-            <div>
-                <Post postId={this.state.Pid}/>
-            </div>
-            <Divider/>
-            <div>
-                <Footer/>
-            </div>
+                <div id='WebPage'>
+                <Divider/>
+                <div>
+                    <Post postId={this.state.Pid}/>
+                </div>
+                <Divider/>
+                <div>
+                    <Footer/>
+                </div>
+                </div>
             </div>
         )
     }

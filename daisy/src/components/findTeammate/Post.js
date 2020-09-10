@@ -84,18 +84,6 @@ export default class Post extends Component {
 
         //初始化模拟数据，后面会删除
         init()
-                
-        const sourceData=[
-            {
-            title:"Card title" ,
-            content:"this is the card content for testing",
-            bordered:false,
-            authorName: "test example",
-            authorUid: 111,
-            authorAvatar: "boss",
-            }
-        ]
-
 
         this.state={
             data:SourceDataList[getPostContent(tempId)]
@@ -112,11 +100,11 @@ export default class Post extends Component {
                         //这里的头像要动态生成
                         <div align="right">
 
-                        <a href={"#/PostPage/"+this.state.data.authorUid}>
+                        <a href={"#/personal"}>
                             <Avatar src={require("../../img/avatar/"+this.state.data.authorAvatar+".jpg")}></Avatar>
                         </a>
-                                        
-                        <p>{this.state.data.authorName}</p>
+                        <br/>                
+                        <a href={"#/personal"}>{this.state.data.authorName}</a>
 
                         </div>
                         }

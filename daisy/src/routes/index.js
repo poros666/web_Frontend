@@ -5,7 +5,6 @@ import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
 import PostPage from "../pages/findteam/PostPage";
-import Post from "../pages/findteam/PostPage";
 import Moment from "../pages/community/Moment"
 import FindTeam from "../pages/findteam/FindTeam";
 import Community from "../pages/community/Community";
@@ -64,7 +63,7 @@ export const mainRoutes = [{
 },
 
 {
-    path: "/postpage",
+    path: "/postpage/:id",
     title: "寻找队伍帖",
     component: PostPage
 },

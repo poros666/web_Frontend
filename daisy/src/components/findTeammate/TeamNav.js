@@ -8,7 +8,7 @@ export default class teamNav extends Component {
     const { Search } = Input;
     return (
     <>
-      <div className="site-page-header-ghost-wrapper">
+      <div id="site-page-header-ghost-wrapper">
         <PageHeader
           ghost={false}
           title="比赛名称"
