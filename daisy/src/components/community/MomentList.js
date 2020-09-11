@@ -4,6 +4,7 @@
 import React, { Component } from 'react'
 import { List, Avatar,Col, Pagination,Space } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import Item from 'antd/lib/list/Item';
 
 
 const IconText = ({ icon, text }) => (
@@ -12,6 +13,9 @@ const IconText = ({ icon, text }) => (
     {text}
   </Space>
 );
+
+
+
 
 
 export default class MomentList extends Component {
@@ -25,14 +29,20 @@ export default class MomentList extends Component {
           Pid:1,
           avatarSrc:'boss',
           title: '我最讨厌汇编了',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
         },
         {
           Uid:110,
           Pid:2,
           avatarSrc:'boss',
           title: 'Ant Design Title 2',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -40,7 +50,10 @@ export default class MomentList extends Component {
           Pid:3,
           avatarSrc:'boss',
           title: 'Ant Design Title 3',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -48,21 +61,30 @@ export default class MomentList extends Component {
           Pid:4,
           avatarSrc:'boss',
           title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼'
+          description:'zzzzzz我睡着了 但是我没有摸鱼',
+          stars:123,
+          likes:32,
+          comments:5,
         },
         {
           Uid:110,
           Pid:1,
           avatarSrc:'boss',
           title: '当然c也很讨厌',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
         },
         {
           Uid:110,
           Pid:2,
           avatarSrc:'boss',
           title: 'Ant Design Title 2',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -70,7 +92,10 @@ export default class MomentList extends Component {
           Pid:3,
           avatarSrc:'boss',
           title: '总而言之要写课设的就讨厌',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -78,21 +103,30 @@ export default class MomentList extends Component {
           Pid:4,
           avatarSrc:'boss',
           title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼'
+          description:'zzzzzz我睡着了 但是我没有摸鱼',
+          stars:123,
+          likes:32,
+          comments:5,
         },
         {
           Uid:110,
           Pid:1,
           avatarSrc:'boss',
           title: 'Ant Design Title 1',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
         },
         {
           Uid:110,
           Pid:2,
           avatarSrc:'boss',
           title: 'Ant Design Title 2',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -100,7 +134,10 @@ export default class MomentList extends Component {
           Pid:3,
           avatarSrc:'boss',
           title: 'Ant Design Title 3',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -108,21 +145,30 @@ export default class MomentList extends Component {
           Pid:4,
           avatarSrc:'boss',
           title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼'
+          description:'zzzzzz我睡着了 但是我没有摸鱼',
+          stars:123,
+          likes:32,
+          comments:5,
         },
         {
           Uid:110,
           Pid:1,
           avatarSrc:'boss',
           title: '啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
         },
         {
           Uid:110,
           Pid:2,
           avatarSrc:'boss',
           title: '不是 就 你一定要喊吗？',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -130,7 +176,10 @@ export default class MomentList extends Component {
           Pid:3,
           avatarSrc:'boss',
           title: '。。。。',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
+          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
+          stars:123,
+          likes:32,
+          comments:5,
 
         },
         {
@@ -138,14 +187,17 @@ export default class MomentList extends Component {
           Pid:4,
           avatarSrc:'boss',
           title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼'
+          description:'zzzzzz我睡着了 但是我没有摸鱼',
+          stars:123,
+          likes:32,
+          comments:5,
         },
       ];
         this.state={
           data:sourceData,
           currentData:[],
-          total:sourceData.length,//这里的total也是要获取的数据
-          pageSize: sourceData.length/4,
+          total:16,//这里的total也是要获取的数据
+          pageSize: 10,
           pageNumber:parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
         }
     }
@@ -165,14 +217,23 @@ export default class MomentList extends Component {
         window.location.hash = `#/Community/pagenum=${page}`; //设置当前页面的hash值为当前page页数
       })
       this.setState((state)=>{
-      for(let i=0;i<state.pageSize;i++){
-        state.currentData.pop()
-      }
-      
-      for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
-        console.log(i)
-        state.currentData.push(this.state.data[i])
-      }
+        for(let i=0;i<state.pageSize;i++){
+          state.currentData.pop()
+        }
+        
+
+
+
+        //这里要负责接受数据
+        for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
+          console.log(i)
+          state.currentData.push(this.state.data[i])
+        }
+
+
+
+
+
         return{
           currentData:state.currentData,
         }
@@ -192,9 +253,9 @@ export default class MomentList extends Component {
                       <List.Item
                           key={item.title}
                           actions={[
-                                    <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                                    <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                                    <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+                                    <IconText icon={StarOutlined} text={item.stars} key="list-vertical-star-o" />,
+                                    <IconText icon={LikeOutlined} text={item.likes} key="list-vertical-like-o" />,
+                                    <IconText icon={MessageOutlined} text={item.comments} key="list-vertical-message" />,
                                   ]}
                                   >
                           <List.Item.Meta

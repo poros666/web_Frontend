@@ -23,7 +23,7 @@ export default class Moment extends Component {
 
       this.createComment=this.createComment.bind(this)
 
-      let tempId=this.props.match.params.id
+      let tempId=this.props.match.params.id;
 
       //这里根据tempid请求数据
       const sourceData = [
@@ -92,7 +92,16 @@ export default class Moment extends Component {
     // }
 
     createComment(content){
-      console.log(content)
+      var mydate=new Date();
+      
+      var json={
+        commnterid:123,
+        momentid:this.state.Pid,
+        cont:content,
+        time:mydate.toLocaleTimeString(),
+      }
+     
+      console.log(json);
     }
 
     render() {

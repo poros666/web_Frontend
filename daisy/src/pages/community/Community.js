@@ -31,28 +31,23 @@ export default class Community extends Component {
  
     //组件功能实现
 
-    createMoment(title,content){
+    createMoment(tit,cont){
 
+      var myDate=new Date();
       //传递json到服务端
-      console.log(title)
-      console.log(content)
+      var json=[
+        {
+          account:"account",
+          title:tit,
+          content:cont,
+          time:myDate.toLocaleTimeString(),
+        }
+
+      ]
+
+      console.log(json);
     }
 
-    sortByTime(){
-      console.log('sortByTime')
-    }
-
-    sortByLike(){
-      console.log('sortByLike')
-    }
-
-    sortByComments(){
-      console.log('sortByComments')
-    }
-
-    sortByFavorites(){
-      console.log('sortByFavorites')
-    }
 
 
 
@@ -67,7 +62,7 @@ export default class Community extends Component {
         
             <div >
                 <HeaderNav/>
-                <div style={{height:'80px'}}/>
+                <div style={{height:'50px'}}/>
                 <FloatHelper/>
 
 
@@ -77,18 +72,18 @@ export default class Community extends Component {
 
 
 
-                    <div style={{padding:'0 50px'}}>
+                    <div style={{padding:'0% 15% 5% 15%'}}>
 
                         {
                           //这里比较简单就直接写死在html里面，不做额外的子组件了
                         }
-                        <Space>
+                        {/* <Space>
                             <p>sort by:</p>       
                           <Button type="primary" onClick={sortByTime}>time</Button>
                           <Button type="primary" onClick={sortByLike}>like</Button>
                           <Button type="primary" onClick={sortByComments}>comments</Button>
                           <Button type="primary" onClick={sortByFavorites}>Favorites</Button>     
-                        </Space>
+                        </Space> */}
 
 
                         <br/>
