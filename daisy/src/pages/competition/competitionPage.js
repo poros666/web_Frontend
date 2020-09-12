@@ -28,8 +28,9 @@ export default class CompetitionPage extends Component
         return (
             <div className='CompetitionPage'>
                 <Header/>
-                <div style={{height:'90px'}}/>
+                <div style={{height:'50px'}}/>
                 <Helper/>
+            <div className='CompetionContentBox'>
                 <div className={'CompetitionNameBox'}>
                 <Row gutter={16} align={"middle"} >
                     <Col span={7} offset={2}>
@@ -38,7 +39,7 @@ export default class CompetitionPage extends Component
                     <Col span={6}>
                         <CompetitionName/>
                     </Col>
-                    <Col span={7}>
+                    <Col span={6}>
                         <FindTeamBotton compID={this.props.match.params.compID}/>
                         <br/>
                         <SubscriptionButton compID={this.props.match.params.compID}/>
@@ -50,6 +51,8 @@ export default class CompetitionPage extends Component
                 <RaiseDiscuss compID={this.props.match.params.compID} className={'RaiseDiscuss'}/>
                 <DiscussList compID={this.props.match.params.compID}/>
                 </Col>
+            </div>
+            <div style={{height:'50px'}}/>
                 <Footer/>
             </div>
         )

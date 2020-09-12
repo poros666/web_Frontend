@@ -1,7 +1,19 @@
 .CompetitionPage{
-    
+    min-height: 100%;
+    background: linear-gradient(#FFFAD0,#ffffff);
 }
-
+.CompetionContentBox
+{
+    min-height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    width: 85%;
+    margin-left: 8.33%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 5px 5px 30px 10px gray;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 .DiscussListBox{
     border-bottom: 3px solid #ececec;
     border-top: 3px solid #ececec;
@@ -11,7 +23,10 @@
 border-bottom: 3px solid #ececec;
 border-top: 3px solid #ececec;
 }
-
+.CompetitionInformation h1
+{
+    text-align:center;
+}
 .CompetitionNameBox{
 margin-bottom: 5px;
 }
