@@ -5,7 +5,7 @@
 .CompetionContentBox
 {
     min-height: 100%;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255,0.8);
     width: 85%;
     margin-left: 8.33%;
     background-repeat: no-repeat;
@@ -20,7 +20,7 @@
 }
 
 .CompetitionInformation{
-border-bottom: 3px solid #ececec;
+border-bottom: 1.5px solid #ececec;
 border-top: 3px solid #ececec;
 }
 .CompetitionInformation h1
@@ -29,4 +29,12 @@ border-top: 3px solid #ececec;
 }
 .CompetitionNameBox{
 margin-bottom: 5px;
+}
+
+
+.detailDiscussBox{
+    border-bottom: 1.5px solid #ececec;
+    border-top: 1.5px solid #ececec;
+    margin-top: 1.5px;
+    margin-bottom: 1.5px;
 }

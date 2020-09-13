@@ -6,10 +6,7 @@ export default class CompetitionInformation extends Component {
             <div className={'CompetitionInformation'}>
                 <h1>比赛简介</h1>
                 <p>
-                    阿巴阿巴阿巴<br/>
-                    阿巴阿巴阿巴<br/>
-                    阿巴阿巴阿巴<br/>
-                    阿巴阿巴阿巴<br/>
+                    {this.props.compInformation}
                 </p>
             </div>
         )

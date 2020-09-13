@@ -53,11 +53,12 @@ export default class CompetitionList extends Component {
       pageSize: 3,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
-    
   }
+
   componentDidMount() {
     this.handleAnchor() //页面刷新时回到刷新前的page
   }
+
   handleAnchor() {
     this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
   }
@@ -82,6 +83,12 @@ export default class CompetitionList extends Component {
     }
    );
  }
+
+ /*getData()
+ {
+   fetch('https://localhost:44393/api/Project?Order=time&PageNumber=11')
+   .then
+ }*/
 
 
 
