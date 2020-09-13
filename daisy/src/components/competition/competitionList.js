@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {List,Col, Pagination} from 'antd'
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios'
 const data = [
     {
         ID:1,
@@ -86,8 +86,22 @@ export default class CompetitionList extends Component {
 
  /*getData()
  {
-   fetch('https://localhost:44393/api/Project?Order=time&PageNumber=11')
-   .then
+   axios.get('/api/Project',
+   {params:{
+     order:this.props.sortOrder,
+     pageNum:this.state.pageNumber
+   }})
+   .then(function (response) {
+    console.log(response);
+    this.setstate(
+        {
+          currentData:response.data
+        }
+    )
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
  }*/
 
 
