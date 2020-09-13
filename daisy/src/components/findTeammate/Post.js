@@ -68,7 +68,7 @@ function init(){
 
  function getPostContent(Pid){
      for(let i=0;i<SourceDataList.length;i++){
-         if(Pid==SourceDataList[i].Pid){
+         if(Pid===SourceDataList[i].Pid){
              return i;
          }
      }

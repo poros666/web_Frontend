@@ -100,7 +100,7 @@ export default class CommunityContent extends Component {
       window.location.hash = `#/findteam/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     this.setState((state)=>{
-    if(state.pageNumber%2==1){
+    if(state.pageNumber%2===1){
       for(let i=0;i<PostNum;i++){
         state.currentData.pop();
       }
