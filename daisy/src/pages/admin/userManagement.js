@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Descriptions, Badge, Card, Button, Input } from "antd"
 import { UserOutlined } from '@ant-design/icons';
 
-export default class CompManagement extends Component {
+export default class UserManagement extends Component {
   render() {
     return (
       <Card

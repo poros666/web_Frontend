@@ -1,6 +1,5 @@
 //import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
-import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
@@ -36,6 +35,7 @@ import SearchContentComp from "../components/search/searchContentComp";
 import SearchContentComm from "../components/search/searchContentComm";
 import SearchContentUsr from "../components/search/searchContentUsr";
 import DeliverSystemAnnouncement from "../pages/admin/deliverSystemAnnouncement";
+import ReportManagement from "../pages/admin/dealReport";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -45,7 +45,7 @@ export const adminRoutes = [{
 {
     path: "/admin/dealreport",
     title: "处理举报",
-    component: DealReport
+    component: ReportManagement
 },
 {
     path: "/admin/usermanagement",

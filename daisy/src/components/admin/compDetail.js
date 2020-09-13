@@ -20,7 +20,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,record }) => {
       callback()
     }
   }
-  console.log("hi", record)
+  // console.log("hi", record)
   return (
     <Modal
       visible={visible}

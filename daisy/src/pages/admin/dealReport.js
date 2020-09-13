@@ -5,7 +5,7 @@ import { SearchOutlined } from '@ant-design/icons'
 import ReportDetail from '../../components/admin/reportDetail'
 import axios from 'axios'
 
-export default class CompManagement extends Component {
+export default class ReportManagement extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,11 +13,31 @@ export default class CompManagement extends Component {
       loading: false, //载入
       searchText: '', //搜索文字
       searchedColumn: '', //搜出来的行
+      data: [],
+      show: 0,
     }
     axios
       .get('http://mock-api.com/ZgBbVmgB.mock/api/Report?base=&length=')
-      .then(function (res) {
-        console.log(res.data[0].Nickname)
+      .then((res) => {
+        console.log('res:', res.data)
+        var tempDate = []
+        for (var i = 0; i < res.data.length; i++) {
+          var tempTemp = {
+            id: res.data[i].ReportId,
+            type: [res.data[i].ReportType],
+            time: res.data[i].Time,
+            reporter: res.data[i].Nickname,
+            target: res.data[i].TargetNickname,
+          }
+          console.log('tt:', tempTemp)
+          tempDate.push(tempTemp)
+        }
+
+        this.setState({
+          data: tempDate,
+          show: res.data[0].ReportId,
+        })
+        console.log('data:', this.state.data)
       })
       .catch(function (error) {
         console.log(error)
@@ -87,18 +107,18 @@ export default class CompManagement extends Component {
           },
         ],
         onFilter: (value, record) => record.type.indexOf(value) === 0,
-        render: (type) => (
-          <>
-            {type.map((tag) => {
-              let color = 'volcano'
-              return (
-                <Tag color={color} key={tag}>
-                  {tag.toUpperCase()}
-                </Tag>
-              )
-            })}
-          </>
-        ),
+        // render: (type) => (
+        //   <>
+        //     {type.map((tag) => {
+        //       let color = 'volcano'
+        //       return (
+        //         <Tag color={color} key={tag}>
+        //           {tag.toUpperCase()}
+        //         </Tag>
+        //       )
+        //     })}
+        //   </>
+        // ),
       },
       {
         title: '状态',
@@ -115,21 +135,21 @@ export default class CompManagement extends Component {
           },
         ],
         onFilter: (value, record) => record.tags.indexOf(value) === 0,
-        render: (tags) => (
-          <>
-            {tags.map((tag) => {
-              let color = 'geekblue'
-              if (tag === '已处理') {
-                color = 'green'
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag.toUpperCase()}
-                </Tag>
-              )
-            })}
-          </>
-        ),
+        // render: (tags) => (
+        //   <>
+        //     {tags.map((tag) => {
+        //       let color = 'geekblue'
+        //       if (tag === '已处理') {
+        //         color = 'green'
+        //       }
+        //       return (
+        //         <Tag color={color} key={tag}>
+        //           {tag.toUpperCase()}
+        //         </Tag>
+        //       )
+        //     })}
+        //   </>
+        // ),
       },
       {
         title: '操作',
@@ -142,26 +162,9 @@ export default class CompManagement extends Component {
       },
     ]
 
-    const data = [
-      {
-        key: '1',
-        id: '37g7y128',
-        time: '2020/3/14',
-        reporter: '2020/4/14',
-        target: '同济大学',
-        type: ['色情', '涉政'],
-        tags: ['未处理'],
-      },
-      {
-        key: '2',
-        id: '7s8f0f4h',
-        time: '2020/3/14',
-        reporter: '2020/4/14',
-        target: '同济大学',
-        type: ['影响他人', '涉及交易'],
-        tags: ['已处理'],
-      },
-    ]
+    // var data = [
+
+    // ]
 
     return (
       <Card
@@ -180,10 +183,14 @@ export default class CompManagement extends Component {
             </Button>
           </div>
         }>
+        {/* {
+            this.state.data.length == 0?"none":JSON.stringify( this.state.data[0].ReportId)   
+          } */}
+          {console.log("sss:", this.state.data)}
         <Table
           columns={columns}
           bordered
-          dataSource={data}
+          dataSource={this.state.data}
           rowSelection={rowSelection}
         />
       </Card>
