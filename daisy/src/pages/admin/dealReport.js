@@ -1,8 +1,9 @@
-import React, { Component } from "react"
-import Highlighter from "react-highlight-words"
-import { Card, Table, Button, Tag, Space, Input, DatePicker } from "antd"
-import { SearchOutlined } from "@ant-design/icons"
-import ReportDetail from "../../components/admin/reportDetail"
+import React, { Component } from 'react'
+import Highlighter from 'react-highlight-words'
+import { Card, Table, Button, Tag, Space, Input, DatePicker } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
+import ReportDetail from '../../components/admin/reportDetail'
+import axios from 'axios'
 
 export default class CompManagement extends Component {
   constructor(props) {
@@ -10,9 +11,17 @@ export default class CompManagement extends Component {
     this.state = {
       selectedRowKeys: [], //多选
       loading: false, //载入
-      searchText: "", //搜索文字
-      searchedColumn: "", //搜出来的行
+      searchText: '', //搜索文字
+      searchedColumn: '', //搜出来的行
     }
+    axios
+      .get('http://mock-api.com/ZgBbVmgB.mock/api/Report?base=&length=')
+      .then(function (res) {
+        console.log(res.data[0].Nickname)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   render() {
@@ -25,63 +34,63 @@ export default class CompManagement extends Component {
 
     const columns = [
       {
-        title: "编号",
-        dataIndex: "id",
-        key: "id",
+        title: '编号',
+        dataIndex: 'id',
+        key: 'id',
         render: (text) => <a>{text}</a>,
-        ...this.getColumnSearchProps("id"),
+        ...this.getColumnSearchProps('id'),
       },
       {
-        title: "提交时间",
-        dataIndex: "time",
-        key: "time",
+        title: '提交时间',
+        dataIndex: 'time',
+        key: 'time',
         sorter: (a, b) => a.time - b.time,
-        sortDirections: ["descend", "ascend"],
+        sortDirections: ['descend', 'ascend'],
       },
       {
-        title: "举报者",
-        dataIndex: "reporter",
-        key: "reporter",
-        render: (text) => <a href="">{text}</a>,
+        title: '举报者',
+        dataIndex: 'reporter',
+        key: 'reporter',
+        render: (text) => <a href=''>{text}</a>,
       },
       {
-        title: "被举报者",
-        dataIndex: "target",
-        key: "target",
-        render: (text) => <a href="">{text}</a>,
+        title: '被举报者',
+        dataIndex: 'target',
+        key: 'target',
+        render: (text) => <a href=''>{text}</a>,
         //...this.getColumnSearchProps("target"),
       },
       {
-        title: "类别",
-        key: "type",
-        dataIndex: "type",
+        title: '类别',
+        key: 'type',
+        dataIndex: 'type',
         filters: [
           {
-            text: "色情",
-            value: "色情",
+            text: '色情',
+            value: '色情',
           },
           {
-            text: "涉政",
-            value: "涉政",
+            text: '涉政',
+            value: '涉政',
           },
           {
-            text: "影响他人",
-            value: "影响他人",
+            text: '影响他人',
+            value: '影响他人',
           },
           {
-            text: "涉及交易",
-            value: "涉及交易",
+            text: '涉及交易',
+            value: '涉及交易',
           },
           {
-            text: "恶意",
-            value: "恶意",
+            text: '恶意',
+            value: '恶意',
           },
         ],
         onFilter: (value, record) => record.type.indexOf(value) === 0,
         render: (type) => (
           <>
             {type.map((tag) => {
-              let color = "volcano"
+              let color = 'volcano'
               return (
                 <Tag color={color} key={tag}>
                   {tag.toUpperCase()}
@@ -92,26 +101,26 @@ export default class CompManagement extends Component {
         ),
       },
       {
-        title: "状态",
-        key: "tags",
-        dataIndex: "tags",
+        title: '状态',
+        key: 'tags',
+        dataIndex: 'tags',
         filters: [
           {
-            text: "未处理",
-            value: "未处理",
+            text: '未处理',
+            value: '未处理',
           },
           {
-            text: "已处理",
-            value: "已处理",
+            text: '已处理',
+            value: '已处理',
           },
         ],
         onFilter: (value, record) => record.tags.indexOf(value) === 0,
         render: (tags) => (
           <>
             {tags.map((tag) => {
-              let color = "geekblue"
-              if (tag === "已处理") {
-                color = "green"
+              let color = 'geekblue'
+              if (tag === '已处理') {
+                color = 'green'
               }
               return (
                 <Tag color={color} key={tag}>
@@ -121,13 +130,12 @@ export default class CompManagement extends Component {
             })}
           </>
         ),
-        
       },
       {
-        title: "操作",
-        key: "action",
+        title: '操作',
+        key: 'action',
         render: (text, record) => (
-          <Space size="middle">
+          <Space size='middle'>
             <ReportDetail />
           </Space>
         ),
@@ -136,44 +144,42 @@ export default class CompManagement extends Component {
 
     const data = [
       {
-        key: "1",
-        id: "37g7y128",
-        time: "2020/3/14",
-        reporter: "2020/4/14",
-        target: "同济大学",
-        type:["色情", "涉政"],
-        tags: ["未处理"],
+        key: '1',
+        id: '37g7y128',
+        time: '2020/3/14',
+        reporter: '2020/4/14',
+        target: '同济大学',
+        type: ['色情', '涉政'],
+        tags: ['未处理'],
       },
       {
-        key: "2",
-        id: "7s8f0f4h",
-        time: "2020/3/14",
-        reporter: "2020/4/14",
-        target: "同济大学",
-        type:["影响他人", "涉及交易"],
-        tags: ["已处理"],
+        key: '2',
+        id: '7s8f0f4h',
+        time: '2020/3/14',
+        reporter: '2020/4/14',
+        target: '同济大学',
+        type: ['影响他人', '涉及交易'],
+        tags: ['已处理'],
       },
     ]
 
     return (
       <Card
-        title="处理举报"
+        title='处理举报'
         extra={
           <div>
-            <Button type="primary" style={{ marginRight: 20 }}>
+            <Button type='primary' style={{ marginRight: 20 }}>
               完成处理
             </Button>
             <Button
-              type="primary"
+              type='primary'
               onClick={this.reload}
               disabled={loading}
-              loading={loading}
-            >
+              loading={loading}>
               Reload
             </Button>
           </div>
-        }
-      >
+        }>
         <Table
           columns={columns}
           bordered
@@ -197,7 +203,7 @@ export default class CompManagement extends Component {
   }
 
   onSelectChange = (selectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys)
+    console.log('selectedRowKeys changed: ', selectedRowKeys)
     this.setState({ selectedRowKeys })
   }
 
@@ -222,30 +228,28 @@ export default class CompManagement extends Component {
           onPressEnter={() =>
             this.handleSearch(selectedKeys, confirm, dataIndex)
           }
-          style={{ width: 188, marginBottom: 8, display: "block" }}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
         />
         <Space>
           <Button
-            type="primary"
+            type='primary'
             onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
+            size='small'
+            style={{ width: 90 }}>
             Search
           </Button>
           <Button
             onClick={() => this.handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
+            size='small'
+            style={{ width: 90 }}>
             Reset
           </Button>
         </Space>
       </div>
     ),
     filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -253,7 +257,7 @@ export default class CompManagement extends Component {
             .toString()
             .toLowerCase()
             .includes(value.toLowerCase())
-        : "",
+        : '',
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => this.searchInput.select())
@@ -262,10 +266,10 @@ export default class CompManagement extends Component {
     render: (text) =>
       this.state.searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
           searchWords={[this.state.searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ""}
+          textToHighlight={text ? text.toString() : ''}
         />
       ) : (
         text
@@ -282,6 +286,6 @@ export default class CompManagement extends Component {
 
   handleReset = (clearFilters) => {
     clearFilters()
-    this.setState({ searchText: "" })
+    this.setState({ searchText: '' })
   }
 }
