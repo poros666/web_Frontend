@@ -80,7 +80,7 @@ export const mainRoutes = [{
     component: Community
 },
 {
-    path: "/Moment/:id",
+    path: "/Moment",
     title: "动态",
     component: Moment
 },

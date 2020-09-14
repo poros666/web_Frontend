@@ -8,12 +8,6 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.5.1",
-<<<<<<< HEAD
-    "axios": "^0.20.0",
-    "mockjs": "^1.1.0",
-    "prop-types": "^15.7.2",
-=======
->>>>>>> parent of 94a7537... 安装axios 修正li没有key的问题
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-highlight-words": "^0.16.0",

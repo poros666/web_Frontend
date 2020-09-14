@@ -33,41 +33,28 @@ export default class Community extends Component {
  
     //组件功能实现
 
-    createMoment(tit,cont){
+    createMoment(title,content){
 
-      var myDate=new Date();
-      console.log(myDate.toLocaleTimeString())
-      
-
-
-      
-      //  传递json到服务端
-      var json=
-      [
-        {
-          "Account":"account",
-          "Title":tit,
-          "Time":myDate.toLocaleTimeString(),
-          "Content":cont
-        }
-      ]
-
-      // var json=
-      // [
-      //   {
-      //     "Account":"account",
-      //     "Title":"tit",
-      //     "Time":1,
-      //     "Content":"cont"
-      //   }
-      // ]
-      var url=CONSTURL.hosturl+CONSTURL.createMomentUrl
-      Axios.post(url,json).then((res)=>{
-        window.location.reload()
-      })
-
+      //传递json到服务端
+      console.log(title)
+      console.log(content)
     }
 
+    sortByTime(){
+      console.log('sortByTime')
+    }
+
+    sortByLike(){
+      console.log('sortByLike')
+    }
+
+    sortByComments(){
+      console.log('sortByComments')
+    }
+
+    sortByFavorites(){
+      console.log('sortByFavorites')
+    }
 
 
 
@@ -82,7 +69,7 @@ export default class Community extends Component {
         
             <div >
                 <HeaderNav/>
-                <div style={{height:'50px'}}/>
+                <div style={{height:'80px'}}/>
                 <FloatHelper/>
 
 
@@ -92,18 +79,18 @@ export default class Community extends Component {
 
 
 
-                    <div style={{padding:'0% 15% 5% 15%'}}>
+                    <div style={{padding:'0 50px'}}>
 
                         {
                           //这里比较简单就直接写死在html里面，不做额外的子组件了
                         }
-                        {/* <Space>
+                        <Space>
                             <p>sort by:</p>       
                           <Button type="primary" onClick={sortByTime}>time</Button>
                           <Button type="primary" onClick={sortByLike}>like</Button>
                           <Button type="primary" onClick={sortByComments}>comments</Button>
                           <Button type="primary" onClick={sortByFavorites}>Favorites</Button>     
-                        </Space> */}
+                        </Space>
 
 
                         <br/>

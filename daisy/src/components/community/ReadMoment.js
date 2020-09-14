@@ -21,7 +21,7 @@ const IconText = ({ icon, text }) => (
 
  function getMomentContent(Pid){
     //do something
-    
+  
   }
 
 
@@ -38,16 +38,12 @@ export default class ReadMoment extends Component {
                 
         const sourceData=[
             {
-                authorAvatar: "boss",
-                authorName: "i is kk i think cry",
-                authorUid: 132,
-                title:"Card title" ,
-                content:"this is the card content for testing",
-                bordered:false ,
-                time:123,
-                likes:133,
-                stars:114,
-                comments:514,
+            title:"Card title" ,
+            content:"this is the card content for testing",
+            bordered:false ,
+            authorName: "i is kk i think cry",
+            authorUid: 132,
+            authorAvatar: "boss",
             }
         ]
 
@@ -78,11 +74,11 @@ export default class ReadMoment extends Component {
                         }
                     actions={[
                         <Button type='text'>
-                            <IconText icon={StarOutlined} text={this.state.data[0].stars} key="list-vertical-star-o" />
+                            <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />
                         </Button>,
 
                         <Button type='text'>
-                            <IconText icon={LikeOutlined} text={this.state.data[0].likes} key="list-vertical-like-o" />
+                            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />
                         </Button>,
 
                         <Button type='text'>
