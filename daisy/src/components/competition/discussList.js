@@ -141,7 +141,7 @@ export default class DiscussList extends Component {
     }
    );
  }
-
+//存在疑问
 /*
   getData(){
     axios.get('/api/Discussion',{
@@ -155,6 +155,7 @@ export default class DiscussList extends Component {
             this.setstate(
                 {
                   currentData:response.data
+                  total:response.data.ProjectCount
                 }
             )
           })

@@ -79,7 +79,7 @@ export default class CompetitionPage extends Component
                         <CompetitionName compName={this.state.compName}/>
                     </Col>
                     <Col span={6}>
-                        <FindTeamBotton compID={this.state.compID}/>
+                        <FindTeamBotton compID={this.state.compID} compName={this.state.compName} compInformation={this.state.compInformation}/>
                         <br/>
                         <SubscriptionButton compID={this.state.compID}/>
                     </Col>

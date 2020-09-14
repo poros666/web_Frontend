@@ -8,7 +8,14 @@ export default class SubscriptionButton extends Component {
 
 /*
     postData(){
-        axios.post('/api/subscribe')
+        axios.post('/api/subscribe',{account:,projectId:this.propos.compID})
+        .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        
     }
 */
 

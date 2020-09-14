@@ -49,7 +49,7 @@ export default class CompetitionList extends Component {
     super(props)
     this.state={
       currentData:[],
-      total: data.length,
+      total: 0,
       pageSize: 3,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
@@ -83,7 +83,7 @@ export default class CompetitionList extends Component {
     }
    );
  }
-
+ //存在疑问
  /*getData()
  {
    axios.get('/api/Project',
@@ -96,6 +96,7 @@ export default class CompetitionList extends Component {
     this.setstate(
         {
           currentData:response.data
+          total:response.data.ProjectCount
         }
     )
   })

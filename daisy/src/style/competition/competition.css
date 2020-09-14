@@ -27,6 +27,10 @@ border-top: 3px solid #ececec;
 {
     text-align:center;
 }
+.CompetitionInformation h3
+{
+    color: black;
+}
 .CompetitionNameBox{
 margin-bottom: 5px;
 }
