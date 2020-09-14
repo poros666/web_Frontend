@@ -83,7 +83,6 @@ export default class CompetitionList extends Component {
     }
    );
  }
- //存在疑问
  /*getData()
  {
    axios.get('/api/Project',
@@ -96,7 +95,7 @@ export default class CompetitionList extends Component {
     this.setstate(
         {
           currentData:response.data
-          total:response.data.ProjectCount
+          total:response.data.length
         }
     )
   })

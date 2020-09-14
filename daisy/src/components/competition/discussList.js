@@ -141,13 +141,11 @@ export default class DiscussList extends Component {
     }
    );
  }
-//存在疑问
 /*
   getData(){
     axios.get('/api/Discussion',{
       params: {
         projectId: this.state.compID,
-        pageNum:this.state.pageNumber
       }
     })
           .then(function (response) {
@@ -155,7 +153,7 @@ export default class DiscussList extends Component {
             this.setstate(
                 {
                   currentData:response.data
-                  total:response.data.ProjectCount
+                  total:response.data.length
                 }
             )
           })
