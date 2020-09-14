@@ -1,5 +1,5 @@
 #WebPage{
-    margin:50px 150px 50px 150px
+    margin:50px 100px 50px 100px
 }
 
 #PostList{
@@ -28,6 +28,11 @@
     padding: 24px;
     background-color: #f5f5f5;
   }
+
+#date{
+    text-align: right;
+    size: 8px;
+}
 
 img{
     text-align: center;

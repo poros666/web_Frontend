@@ -20,10 +20,8 @@ const CommentList = ({ comments }) => (
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
-      <TextArea rows={1} onChange={onChange} value={value}  style={{width: '100%', resize: 'none'}} placeholder="标题"/>
       <br/>
-      <br/>
-      <TextArea rows={8} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} placeholder="正文"/>
+      <TextArea rows={5} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} placeholder="帖子内容"/>
     </Form.Item>
   </>
 );
@@ -47,7 +45,7 @@ const AdvancedSearchForm = () => {
     const children = [];//用于记录比赛信息
 
     children.push(
-      <Col span={6} key={0}>
+      <Col span={8} key={0}>
         <Form.Item
           name={`小队名称`}
           label={`小队名称`}

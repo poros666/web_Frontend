@@ -63,7 +63,7 @@ export const mainRoutes = [{
 },
 
 {
-    path: "/postpage/:id",
+    path: "/postpage/:ProjctId/:id",
     title: "寻找队伍帖",
     component: PostPage
 },

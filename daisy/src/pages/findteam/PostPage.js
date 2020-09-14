@@ -14,26 +14,19 @@ export default class PostPage extends Component {
 
     constructor(props){
         super(props)
-  
+
         this.state={
+          ProjctId:this.props.match.params.ProjctId,
           Pid:this.props.match.params.id
          }
       }
-  
-      componentWillMount(){
-  
-  
-  
-        //至此为止我们接收到了动态传过来了id，接着就是根据id取到值
-  
-  
-      }
+
     render() {
         return (
             <div>
                 <HeaderNav/>
                 <br/><br/>
-                <TeamNav/>
+                <TeamNav matchId={this.state.ProjctId}/>
                 <div id='WebPage'>
                 <Divider/>
                 <div>

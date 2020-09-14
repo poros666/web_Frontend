@@ -21,7 +21,7 @@ export default class FindTeam extends Component {
             <>
                 <HeaderNav/>
                 <br/><br/>
-                <TeamNav matchName='睡觉摸鱼大赛'/>
+                <TeamNav matchId='1'/>
                 <Divider/>
                 <div id='WebPage'>
                     <div id='PostList'>

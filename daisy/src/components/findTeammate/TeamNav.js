@@ -1,5 +1,4 @@
 import { PageHeader,Descriptions } from 'antd';
-import { Input } from 'antd';
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../../style/findTeam/findTeam.css'
@@ -9,28 +8,23 @@ export default class teamNav extends Component {
   /*接收比赛名称*/
   constructor(props){
     super(props);
-    let matchId=this.props.id;
+    let matchId=this.props.matchId;
     this.state={
-      matchInfo:[],
-      matchname:"",
-      matchdescription:""
+      matchName:'',
+      matchIntroduction:''
     }
-}
-
-componentDidMount=()=>{
-  axios.get('http://mock-api.com/5g7AeqKe.mock/matchInfo')
-  .then(response=>{
-    console.log(response.data[0].Nickname)
+    axios.get('http://mock-api.com/5g7AeqKe.mock/matchInfo/'+matchId)
+    .then(response=>{
     this.setState({
-      matchInfo:response.data
+      matchName:response.data[0].Name,
+      matchIntroduction:response.data[0].Introduction
     })
-    this.setState({
-      matchname:this.state.matchInfo[0].name,
-      matchdescription:this.state.matchInfo[0].description
-    })
-    console.log(this.state.matchdescription)
   })
   .catch(error=>{
+    this.setState({
+      matchName:'未找到该比赛',
+      matchIntroduction:'未找到该比赛'
+    })
     console.log(error);
   })
 }
@@ -41,10 +35,10 @@ render() {
       <div id="site-page-header-ghost-wrapper">
         <PageHeader
           ghost={false}
-          title={this.state.matchname}
+          title={this.state.matchName}
         >
           <Descriptions size="small">
-            <Descriptions.Item label="比赛简介">{this.state.matchdescription}</Descriptions.Item>
+            <Descriptions.Item label="比赛简介">{this.state.matchIntroduction}</Descriptions.Item>
           </Descriptions>
         </PageHeader>
       </div>
