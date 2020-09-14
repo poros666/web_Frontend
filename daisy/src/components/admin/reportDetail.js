@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, Modal, Form, Descriptions } from "antd"
+import axios from 'axios'
 
 const layout = {
   labelCol: {
@@ -11,8 +12,11 @@ const layout = {
 }
 
 //添加比赛的弹出框
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel,time,detail }) => {
   const [form] = Form.useForm()
+  // var time = props.time
+  // var detail = props.detail
+  console.log("time:",time,"detail:",detail)
   return (
     <Modal
       visible={visible}
@@ -34,29 +38,32 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
       }}
     >
       <Descriptions title="举报详情" bordered>         
-        <Descriptions.Item label="举报者"><a href="#/admin/userManagement">a留待传数据id</a></Descriptions.Item>
-        <Descriptions.Item label="被举报者"><a href="#/admin/userManagement">留待传数据id</a></Descriptions.Item>
-        <Descriptions.Item label="时间">$60.00</Descriptions.Item>
-        <Descriptions.Item label="详细描述">
-          Data disk type: MongoDB
-          <br />
-          Database version: 3.4
-          <br />
-          Package: dds.mongo.mid
-          <br />
-          Storage space: 10 GB
-          <br />
-          Replication factor: 3
-          <br />
-          Region: East China 1<br />
-        </Descriptions.Item>
+        <Descriptions.Item label="时间">{time}</Descriptions.Item>
+        <Descriptions.Item label="详细描述">{detail}</Descriptions.Item>
       </Descriptions>
     </Modal>
   )
 }
 
 //调用按钮
-const ReportDetail = () => {
+const ReportDetail = (props) => {
+
+  // console.log("chuli:",props.id)
+
+  
+  const [time, setTime] = useState()
+  const [detail, setDetail] = useState()
+  axios
+  .get(`http://mock-api.com/ZgBbVmgB.mock/api/Report/[${props.id}]`)
+  .then((res) => {
+    console.log('res1:', res.data)
+    setTime(res.data.Time) 
+    setDetail(res.data.Content) 
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
@@ -76,6 +83,8 @@ const ReportDetail = () => {
         处理
       </Button>
       <CollectionCreateForm
+        time={time}
+        detail={detail}
         visible={visible}
         onCreate={onCreate}
         onCancel={() => {

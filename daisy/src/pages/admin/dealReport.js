@@ -9,12 +9,10 @@ export default class ReportManagement extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedRowKeys: [], //多选
       loading: false, //载入
       searchText: '', //搜索文字
       searchedColumn: '', //搜出来的行
       data: [],
-      show: 0,
     }
     axios
       .get('http://mock-api.com/ZgBbVmgB.mock/api/Report?base=&length=')
@@ -24,12 +22,13 @@ export default class ReportManagement extends Component {
         for (var i = 0; i < res.data.length; i++) {
           var tempTemp = {
             id: res.data[i].ReportId,
-            type: [res.data[i].ReportType],
+            type: res.data[i].ReportType,
             time: res.data[i].Time,
             reporter: res.data[i].Nickname,
             target: res.data[i].TargetNickname,
+            tags: res.data[i].DealStatus,
           }
-          console.log('tt:', tempTemp)
+          console.log('tt:', res.data.length, tempTemp)
           tempDate.push(tempTemp)
         }
 
@@ -45,12 +44,7 @@ export default class ReportManagement extends Component {
   }
 
   render() {
-    const { loading, selectedRowKeys } = this.state
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    }
-    const hasSelected = selectedRowKeys.length > 0
+  
 
     const columns = [
       {
@@ -107,18 +101,14 @@ export default class ReportManagement extends Component {
           },
         ],
         onFilter: (value, record) => record.type.indexOf(value) === 0,
-        // render: (type) => (
-        //   <>
-        //     {type.map((tag) => {
-        //       let color = 'volcano'
-        //       return (
-        //         <Tag color={color} key={tag}>
-        //           {tag.toUpperCase()}
-        //         </Tag>
-        //       )
-        //     })}
-        //   </>
-        // ),
+        render: (type) => {
+          let color = 'volcano'
+          return (
+            <Tag color={color} key={type}>
+              {type}
+            </Tag>
+          )
+        },
       },
       {
         title: '状态',
@@ -127,36 +117,40 @@ export default class ReportManagement extends Component {
         filters: [
           {
             text: '未处理',
-            value: '未处理',
+            value: 'unprocessed',
           },
           {
             text: '已处理',
-            value: '已处理',
+            value: 'successful',
+          },
+          {
+            text: '失败',
+            value: 'failed',
           },
         ],
         onFilter: (value, record) => record.tags.indexOf(value) === 0,
-        // render: (tags) => (
-        //   <>
-        //     {tags.map((tag) => {
-        //       let color = 'geekblue'
-        //       if (tag === '已处理') {
-        //         color = 'green'
-        //       }
-        //       return (
-        //         <Tag color={color} key={tag}>
-        //           {tag.toUpperCase()}
-        //         </Tag>
-        //       )
-        //     })}
-        //   </>
-        // ),
+        render: (tags) => {
+          console.log('render-tags')
+          let color = 'geekblue'
+          if (tags === 'successful') {
+            color = 'green'
+          }
+          if (tags === 'failed') {
+            color = 'volcano'
+          }
+          return (
+            <Tag color={color} key={tags}>
+              {tags}
+            </Tag>
+          )
+        },
       },
       {
         title: '操作',
         key: 'action',
         render: (text, record) => (
           <Space size='middle'>
-            <ReportDetail />
+            <ReportDetail id={record.id}/>
           </Space>
         ),
       },
@@ -171,48 +165,24 @@ export default class ReportManagement extends Component {
         title='处理举报'
         extra={
           <div>
-            <Button type='primary' style={{ marginRight: 20 }}>
-              完成处理
-            </Button>
-            <Button
-              type='primary'
-              onClick={this.reload}
-              disabled={loading}
-              loading={loading}>
-              Reload
-            </Button>
+            
           </div>
         }>
         {/* {
             this.state.data.length == 0?"none":JSON.stringify( this.state.data[0].ReportId)   
           } */}
-          {console.log("sss:", this.state.data)}
+        {console.log('sss:', this.state.data)}
         <Table
           columns={columns}
           bordered
           dataSource={this.state.data}
-          rowSelection={rowSelection}
         />
       </Card>
     )
   }
 
-  //刷新
-  reload = () => {
-    this.setState({ loading: true })
-    // ajax request after empty completing
-    setTimeout(() => {
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
-      })
-    }, 1000)
-  }
-
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys)
-    this.setState({ selectedRowKeys })
-  }
+ 
+  
 
   //搜索
   getColumnSearchProps = (dataIndex) => ({

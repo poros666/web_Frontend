@@ -13,7 +13,36 @@ export default class CompManagement extends Component {
       loading: false, //载入
       searchText: "", //搜索文字
       searchedColumn: "", //搜出来的行
+      data: [],
     }
+    // 写到这里
+    axios
+      .get('http://mock-api.com/ZgBbVmgB.mock/api/Project?Order=[]&PageNumber=[]')
+      .then((res) => {
+        console.log('res:', res.data)
+        var tempDate = []
+        for (var i = 0; i < res.data.length; i++) {
+          var tempTemp = {
+            id: res.data[i].ReportId,
+            name: res.data[i].ReportType,
+            start: res.data[i].Time,
+            end: res.data[i].Nickname,
+            target: res.data[i].TargetNickname,
+            tags: res.data[i].DealStatus,
+          }
+          console.log('tt:', res.data.length, tempTemp)
+          tempDate.push(tempTemp)
+        }
+
+        this.setState({
+          data: tempDate,
+          show: res.data[0].ReportId,
+        })
+        console.log('data:', this.state.data)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   render() {
