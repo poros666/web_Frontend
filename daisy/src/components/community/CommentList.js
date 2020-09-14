@@ -165,7 +165,7 @@ export default class CommentList extends Component {
                       >
                         {
                             objArr.map((item,index)=>(
-                              <li key={item+index}>
+                              <li>
                                 <Comment
                                 className='middle'
                                 actions={ 
