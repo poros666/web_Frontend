@@ -21,7 +21,7 @@ class Homepage extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{height:'100%'}}>
                 <HeaderNav/>
                 <FloatHelper/>
                 <TopBar/>

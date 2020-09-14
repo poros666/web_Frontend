@@ -72,7 +72,7 @@ class ActivityShow extends Component {
         };
 
         return ( 
-             <div style={{height: '100%', margin:'10px 10px'}}>
+             <div style={{ margin:'10px 10px'}}>
                 <Layout>
                     <Content>
                         <Carousel 
@@ -80,14 +80,15 @@ class ActivityShow extends Component {
                         >
                             {this.state.slides.map(function(slide){
                                 return(
-                                    <div key={slide}>
+                                    <div key={slide} style={{height:'400px'}}>
                                         {/* <a href={"#/ReadPost/"+slide.Uid} target="_blank" rel="noopener noreferrer"> */}
                                                <img 
-                                                width='auto'
+                                                width='100%'
                                                 height='100%'
                                                 src={require("../../img/activity/"+slide.imgSrc+".jpg")}
-                                                // src={"../../img/activity/"+slide.imgSrc+".jpg"}
                                                 /> 
+                                            {/* <div style={{backgroundImage:require("../../img/activity/"+slide.imgSrc+".jpg"),backgroundSize:'button'}}> */}
+                                            {/* </div> */}
                                             <div style={{
                                                     position: 'absolute', 
                                                     bottom:'50px',

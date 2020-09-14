@@ -59,9 +59,9 @@ export default class FloatHelper extends Component {
                 </div>
                 
                 <div 
-                // style={{position:'absolute',top:90,left:400}}
+                style={{position:'fixed',float:'right',right:'70px',bottom:'120px'}}
                 >
-                <Affix offsetBottom={120}>
+                {/* <Affix offsetBottom={120}> */}
                     <Popover
                         content={content}
                         placement="rightTop"
@@ -75,7 +75,7 @@ export default class FloatHelper extends Component {
                             Helper
                         </Button>
                     </Popover>
-                </Affix>
+                {/* </Affix> */}
                 </div>
             </div>
          );

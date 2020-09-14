@@ -9,16 +9,16 @@ class TopBar extends Component {
     // state = {  }
     render() { 
         return (
-            <div style={{margin:'60px 150px 40px 150px'
+            <div style={{margin:'60px 150px 40px 150px',
             // ,border:'2px gray solid'
             }}>
                 
                 {/* 24栅栏 2:3 → 9:15 */}
                 <Row>
-                    <Col span={9} offset={0}>
+                    <Col span={12} offset={0}>
                         <ActivityShow/>
                     </Col>
-                    <Col span={14} offset={1}>
+                    <Col span={11} offset={1}>
                         <CommunityShow/>
                     </Col>
                 </Row>

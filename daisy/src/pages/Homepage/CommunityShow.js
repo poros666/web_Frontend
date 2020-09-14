@@ -213,26 +213,26 @@ class CommunityShow extends Component {
                                 <List.Item.Meta
 
                                 //帖子的名字和指向的地址，传一个pid，post_id
-                                title={<a href ={"#/Moment/"+item.Pid} target="_blank" rel="noopener noreferrer">{item.title}</a>}
+                                title={<a href ={"#/Moment/"+item.Pid} target="_blank" rel="noopener noreferrer">{limitTxt(item.title,25)}</a>}
                                 // description={<p>{item.description}</p>}
                                 description={
                                     <div>
                                         <Row>
-                                            <Col span={3} offset={0}>
+                                            <Col span={4} offset={0}>
                                                 {item.name}
                                             </Col>
-                                            <Col span={1} offset={3}>
+                                            <Col span={2} offset={3}>
                                                 <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />
                                             </Col>
-                                            <Col span={1} offset={1}>
+                                            <Col span={2} offset={1}>
                                                 <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />
                                             </Col>
-                                            <Col span={1} offset={1}>
+                                            <Col span={2} offset={1}>
                                                 <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />
                                             </Col>
-                                            <Col span={3} offset={2}>
+                                            {/* <Col span={5} offset={2}>
                                                 {item.time}
-                                            </Col>
+                                            </Col> */}
                                         </Row>
                                     </div>
                                 }

@@ -96,7 +96,7 @@ class CompShow extends Component {
                                     // <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
                                     ]}
                                     extra={
-                                        <div>
+                                        <div style={{width:'50%',padding:'10%'}}>
                                             <Tag icon={<CalendarOutlined />} color="success">开始时间：{item.startTime}</Tag>
                                             <br></br>
                                             <Tag icon={<CalendarOutlined />} color="success">结束时间：{item.endTime}</Tag>
