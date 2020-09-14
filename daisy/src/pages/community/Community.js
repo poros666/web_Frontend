@@ -5,16 +5,18 @@ import React, { Component } from 'react'
 import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import FloatHelper from '../../components/comm/FloatHelper'
-import {Space,Button} from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.css'
 import TurnPage from '../../components/comm/TurnPage'
 import MomentList from '../../components/community/MomentList'
 import CreateMoment from '../../components/community/CreateMoment'
-import Test from '../../components/community/Test'
+import CONSTURL from '../../components/community/config'
+import Axios from 'axios'
+import moment from 'moment'
+import { CustomerServiceTwoTone } from '@ant-design/icons'
 
 export default class Community extends Component {
     constructor(props){
-        super(props)
+        super()
  //       console.log('载入data数据')
       //改为数据请求
       
@@ -34,18 +36,36 @@ export default class Community extends Component {
     createMoment(tit,cont){
 
       var myDate=new Date();
-      //传递json到服务端
-      var json=[
-        {
-          account:"account",
-          title:tit,
-          content:cont,
-          time:myDate.toLocaleTimeString(),
-        }
+      console.log(myDate.toLocaleTimeString())
+      
 
+
+      
+      //  传递json到服务端
+      var json=
+      [
+        {
+          "Account":"account",
+          "Title":tit,
+          "Time":myDate.toLocaleTimeString(),
+          "Content":cont
+        }
       ]
 
-      console.log(json);
+      // var json=
+      // [
+      //   {
+      //     "Account":"account",
+      //     "Title":"tit",
+      //     "Time":1,
+      //     "Content":"cont"
+      //   }
+      // ]
+      var url=CONSTURL.hosturl+CONSTURL.createMomentUrl
+      Axios.post(url,json).then((res)=>{
+        window.location.reload()
+      })
+
     }
 
 

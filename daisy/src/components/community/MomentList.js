@@ -2,10 +2,12 @@
 // made by ykn
 //
 import React, { Component } from 'react'
-import { List, Avatar,Col, Pagination,Space } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
-import Item from 'antd/lib/list/Item';
-
+import { List, Avatar,Col, Pagination,Space } from 'antd'
+import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons'
+import Axios from 'axios'
+import './config'
+import CONSTURL from './config'
+import loading from './loading'
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -20,197 +22,37 @@ const IconText = ({ icon, text }) => (
 
 export default class MomentList extends Component {
     constructor(props){
-        super(props)
-    
-
-      var sourceData = [
-        {
-          Uid:110,
-          Pid:1,
-          avatarSrc:'boss',
-          title: '我最讨厌汇编了',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-        {
-          Uid:110,
-          Pid:2,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 2',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:3,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 3',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:4,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-        {
-          Uid:110,
-          Pid:1,
-          avatarSrc:'boss',
-          title: '当然c也很讨厌',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-        {
-          Uid:110,
-          Pid:2,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 2',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:3,
-          avatarSrc:'boss',
-          title: '总而言之要写课设的就讨厌',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:4,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-        {
-          Uid:110,
-          Pid:1,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 1',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-        {
-          Uid:110,
-          Pid:2,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 2',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:3,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 3',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:4,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-        {
-          Uid:110,
-          Pid:1,
-          avatarSrc:'boss',
-          title: '啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-        {
-          Uid:110,
-          Pid:2,
-          avatarSrc:'boss',
-          title: '不是 就 你一定要喊吗？',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:3,
-          avatarSrc:'boss',
-          title: '。。。。',
-          description:'Ant Design, a design language for background applications, is refined by Ant UED Team',
-          stars:123,
-          likes:32,
-          comments:5,
-
-        },
-        {
-          Uid:110,
-          Pid:4,
-          avatarSrc:'boss',
-          title: 'Ant Design Title 4',
-          description:'zzzzzz我睡着了 但是我没有摸鱼',
-          stars:123,
-          likes:32,
-          comments:5,
-        },
-      ];
-        this.state={
-          data:sourceData,
-          currentData:[],
-          total:16,//这里的total也是要获取的数据
-          pageSize: 10,
-          pageNumber:parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
-        }
+      super()
+      this.state={
+        isloading:true,
+        istotalloading:true,
+        currentData:[],
+        total:10,//这里的total也是要获取的数据
+        pageSize: 10,
+        ordertype:'time',
+        pageNumber:parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
+      }
     }
 
     componentDidMount() {
       this.handleAnchor() //页面刷新时回到刷新前的page
+      this.getMomentCount()//获取动态总数
     }
+
+    getMomentCount(){
+      var url=CONSTURL.hosturl+CONSTURL.getMomentCountUrl
+      Axios.get(url).then((res)=>{
+        console.log(res.data.Count)
+        this.setState({total:res.data.Count})
+        this.setState({istotalloading:false})
+      })
+    }
+
     handleAnchor() {
       this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
     }
     
     onPageChange=(page,pageSize)=>{
-      console.log("page:",page);
       this.setState({
         pageNumber: page
       }, () => {
@@ -220,20 +62,19 @@ export default class MomentList extends Component {
         for(let i=0;i<state.pageSize;i++){
           state.currentData.pop()
         }
-        
-
-
-
         //这里要负责接受数据
-        for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
-          console.log(i)
-          state.currentData.push(this.state.data[i])
-        }
+        var momentUrl=CONSTURL.momentURl1+this.state.ordertype+CONSTURL.momentURL2+page
+        //var momentUrl='/api/Moment?OrderBy='+'&PageNum='
 
-
-
-
-
+        var url=CONSTURL.hosturl+momentUrl
+        Axios.get(url).then((res)=>{
+          //console.log(res)
+          for(var i=0;i<res.data.length;i++){
+            state.currentData.push(res.data[i])
+          }
+          //console.log(state.currentData)
+          this.setState({isloading:false})
+        })
         return{
           currentData:state.currentData,
         }
@@ -241,36 +82,37 @@ export default class MomentList extends Component {
      );
    }
 
-
-
     render() {
         return (
+            (this.state.isloading || this.state.istotalloading)?<loading/>:
             <div>
                   <List
                     itemLayout="horizontal"
                     dataSource={this.state.currentData}
                     renderItem={item => (
                       <List.Item
-                          key={item.title}
+                          key={item.Title}
                           actions={[
-                                    <IconText icon={StarOutlined} text={item.stars} key="list-vertical-star-o" />,
-                                    <IconText icon={LikeOutlined} text={item.likes} key="list-vertical-like-o" />,
-                                    <IconText icon={MessageOutlined} text={item.comments} key="list-vertical-message" />,
+                                    <IconText icon={StarOutlined} text={item.StarNum} key="list-vertical-star-o" />,
+                                    <IconText icon={LikeOutlined} text={item.LikeNum} key="list-vertical-like-o" />,
+                                    <IconText icon={MessageOutlined} text={item.CommentNum} key="list-vertical-message" />,
                                   ]}
                                   >
                           <List.Item.Meta
                             avatar={
 
                               //头像的来源和指向的地址
-                              <a href={"#/Moment/"+item.Uid}>
-                                <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
+                              <a href={"#/Moment/"+item.Account}>
+                                <Avatar src={require("../../img/avatar/"+item.icon+".jpg")}></Avatar>
                               </a>
                             }
 
                             //帖子的名字和指向的地址，传一个pid，moment_id
-                              title={<a href ={"#/Moment/"+item.Pid}>{item.title}</a>}
+                              title={<a href ={"#/Moment/"+item.MomentId}>{item.Title}</a>}
 
-                              description={<p>{item.description}</p>}
+
+                              //这里还需要处理
+                              description={<p>{item.Content}</p>}
                               
                           />
 
@@ -287,6 +129,7 @@ export default class MomentList extends Component {
                     />
                   </Col>
             </div>
+          
         )
     }
 }
