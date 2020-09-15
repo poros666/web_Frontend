@@ -95,7 +95,7 @@ export default class CompetitionList extends Component {
     console.log(response);
     this.setstate(
         {
-          data:response.data
+          data:response.data,
           total:response.data.length
         }
     )

@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import axios from 'axios'
 import moment from 'moment'
 import Report from './Report'
+import { isLogined } from '../../utils/auth';
 const data = [
     {
       username: 'zhangsan',
