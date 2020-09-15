@@ -6,6 +6,7 @@ import { List, Avatar,Col, Pagination,Space,Button } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import CONSTURL from './config'
 import Axios from 'axios';
+import Loading from './Loading'
 
 
 const IconText = ({ icon, text }) => (

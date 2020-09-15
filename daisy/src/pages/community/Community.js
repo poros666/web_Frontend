@@ -9,6 +9,8 @@ import 'antd/dist/antd.css';
 import MomentList from '../../components/community/MomentList'
 import CreateMoment from '../../components/community/CreateMoment'
 import moment from 'moment'
+import Axios from 'axios';
+import CONSTURL from '../../components/community/config';
 
 export default class Community extends Component {
     constructor(props){
@@ -32,14 +34,25 @@ export default class Community extends Component {
     createMoment(title,content){
 
       //传递json到服务端
+      var now=moment().utc().format()
+  //    console.log(title)
+   //   console.log(content)
 
-      var nowTime=moment().format('MMMM Do YYYY, h:mm:ss a')
-      console.log(nowTime)
-      console.log(title)
-      console.log(content)
+      var json=
+        {
+          'Account':'ddd',
+          'Title':title,
+          'Time':now,
+          'Content':content
+        }
+      
 
+      var url=CONSTURL.hosturl+CONSTURL.CreatMoment
+        
 
-
+      Axios.post(url,json).then((res)=>{
+        console.log(res)
+      })
 
     }
 
