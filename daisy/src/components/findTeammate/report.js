@@ -93,11 +93,16 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
       Time:values.time
     }
     console.log(dataSent)
+    if(dataSent.Account.length>0){
     axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
         .then(response=>{
           console.log(response)
           window.alert("举报成功")
         })
+      }
+      else{
+        window.alert("举报失败")
+      }
     //处理数据
     setVisible(false)
   }
