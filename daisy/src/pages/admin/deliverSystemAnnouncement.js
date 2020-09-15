@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Input, Button, Checkbox, Card } from 'antd'
+import axios from 'axios'
 
 const layout = {
   labelCol: {
@@ -29,6 +30,15 @@ export default class DeliverSystemAnnouncement extends Component {
   render() {
     const onFinish = (values) => {
       console.log('Success:', values)
+      var data = {
+        Title: values.announceTitle,
+        Content: values.content,
+        Time: moment().format("YYYY-MM-DD")
+      }
+      console.log("data:",data);
+      axios.post('/api/Notice', data).then(res => {
+        console.log(res);
+      });
     }
 
     const onFinishFailed = (errorInfo) => {

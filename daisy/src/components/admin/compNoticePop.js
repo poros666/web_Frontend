@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, Form, Input, Radio } from 'antd'
 import moment from 'moment'
+import axios from 'axios'
 
 const layout = {
   labelCol: {
@@ -48,19 +49,15 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,name, id }) => {
         initialValues={{
           tags: 'not_started',
         }}>
-        {/* name= "John Brown"
-        start= "2020/3/14"
-        end= "2020/4/14"
-        sponsor= "同济大学"
-        tags= ["未开始"] */}
-        <Form.Item name='name' label='所属比赛名字'>
-          <Input placeholder={name} disabled/>
+        
+        <Form.Item name='name' label='所属比赛名字' initialValue={name}>
+          <Input disabled/>
         </Form.Item>
-        <Form.Item name='id' label='所属比赛ID'>
-          <Input placeholder={id} disabled/>
+        <Form.Item name='id' label='所属比赛ID' initialValue={id}>
+          <Input disabled/>
         </Form.Item>
-        <Form.Item name='time' label='发布时间'>
-          <Input placeholder={moment().format("YYYY-MM-DD HH:mm:ss")} disabled/>
+        <Form.Item name='time' label='发布时间' initialValue={moment().format("YYYY-MM-DD")}>
+          <Input disabled/>
         </Form.Item>
         <Form.Item
           name='title'
@@ -98,10 +95,20 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,name, id }) => {
 //调用按钮
 const CompNotice = (e) => {
   const [visible, setVisible] = useState(false)
-
+  console.log(e)
   const onCreate = (values) => {
     console.log('Received values of form: ', values)
-    //处理数据
+    // 处理数据
+    var data = {
+      ProjectId: e.Record.id,
+      Title: values.title,
+      Content: values.description,
+      Time: values.time
+    }
+    console.log("data:",data);
+    axios.post('/api/Notification',data).then(res=>{
+      console.log(res);
+    })
     setVisible(false)
   }
   // console.log("here" ,e.Record)

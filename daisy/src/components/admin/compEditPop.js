@@ -136,7 +136,7 @@ const CollectionsPage = () => {
         }}
         style={{ marginBottom: 10 }}
       >
-        Add
+        新建比赛
       </Button>
       <CollectionCreateForm
         visible={visible}

@@ -5,6 +5,7 @@ import { SearchOutlined } from '@ant-design/icons'
 import ReportDetail from '../../components/admin/reportDetail'
 import axios from 'axios'
 
+
 export default class ReportManagement extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +19,7 @@ export default class ReportManagement extends Component {
       .get('http://mock-api.com/ZgBbVmgB.mock/api/Report?base=&length=')
       .then((res) => {
         console.log('res:', res.data)
-        var tempDate = []
+        var tempData = []
         for (var i = 0; i < res.data.length; i++) {
           var tempTemp = {
             id: res.data[i].ReportId,
@@ -29,12 +30,11 @@ export default class ReportManagement extends Component {
             tags: res.data[i].DealStatus,
           }
           console.log('tt:', res.data.length, tempTemp)
-          tempDate.push(tempTemp)
+          tempData.push(tempTemp)
         }
 
         this.setState({
-          data: tempDate,
-          show: res.data[0].ReportId,
+          data: tempData,
         })
         console.log('data:', this.state.data)
       })
@@ -44,8 +44,6 @@ export default class ReportManagement extends Component {
   }
 
   render() {
-  
-
     const columns = [
       {
         title: '编号',
@@ -58,7 +56,11 @@ export default class ReportManagement extends Component {
         title: '提交时间',
         dataIndex: 'time',
         key: 'time',
-        sorter: (a, b) => a.time - b.time,
+        sorter: (a, b) => {
+          var sdate = new Date(Date.parse(a.time.replace(/-/g, '/')))
+          var edate = new Date(Date.parse(b.time.replace(/-/g, '/')))
+          return edate - sdate
+        },
         sortDirections: ['descend', 'ascend'],
       },
       {
@@ -150,7 +152,7 @@ export default class ReportManagement extends Component {
         key: 'action',
         render: (text, record) => (
           <Space size='middle'>
-            <ReportDetail id={record.id}/>
+            <ReportDetail id={record.id} />
           </Space>
         ),
       },
@@ -161,28 +163,15 @@ export default class ReportManagement extends Component {
     // ]
 
     return (
-      <Card
-        title='处理举报'
-        extra={
-          <div>
-            
-          </div>
-        }>
+      <Card title='处理举报' extra={<div></div>}>
         {/* {
             this.state.data.length == 0?"none":JSON.stringify( this.state.data[0].ReportId)   
           } */}
         {console.log('sss:', this.state.data)}
-        <Table
-          columns={columns}
-          bordered
-          dataSource={this.state.data}
-        />
+        <Table columns={columns} bordered dataSource={this.state.data} />
       </Card>
     )
   }
-
- 
-  
 
   //搜索
   getColumnSearchProps = (dataIndex) => ({
