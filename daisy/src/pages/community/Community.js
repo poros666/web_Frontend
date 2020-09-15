@@ -11,6 +11,7 @@ import TurnPage from '../../components/comm/TurnPage'
 import MomentList from '../../components/community/MomentList'
 import CreateMoment from '../../components/community/CreateMoment'
 import Test from '../../components/community/Test'
+import Axios from 'axios';
 
 export default class Community extends Component {
     constructor(props){
@@ -32,7 +33,7 @@ export default class Community extends Component {
     //组件功能实现
 
     createMoment(title,content){
-
+      
       //传递json到服务端
       console.log(title)
       console.log(content)
