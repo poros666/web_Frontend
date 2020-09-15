@@ -69,6 +69,9 @@ const ReportDetail = (props) => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     //处理数据
+    axios.put('/api/Report?status=successful').then(res => {
+      console.log(res);
+    })
     setVisible(false)
   }
 

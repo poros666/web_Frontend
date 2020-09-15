@@ -70,9 +70,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
               required: true,
               message: '请输入比赛名称',
             },
-            {
-              validator: nameValidate,
-            },
+            
           ]}>
           <Input />
         </Form.Item>
@@ -85,9 +83,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
               required: true,
               message: '请输入参与人数',
             },
-            {
-              validator: nameValidate,
-            },
+            
           ]}>
           <Input />
         </Form.Item>
@@ -135,15 +131,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
           />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
-        <Form.Item
-          name='tags'
-          className='collection-create-form_last-form-item'>
-          <Radio.Group>
-            <Radio value='not_started'>未开始</Radio>
-            <Radio value='running'>进行中</Radio>
-            <Radio value='over'>已结束</Radio>
-          </Radio.Group>
-        </Form.Item>
+        
       </Form>
     </Modal>
   )
@@ -156,6 +144,18 @@ const CompDetail = (e) => {
   const onCreate = (values) => {
     console.log('Received values of form: ', values)
     //处理数据
+    var data = {
+      Name: values.name,
+      Introduction: values.description,
+      ParticipantsNumber: values.number,
+      StartTime: values.start,
+      EndTime: values.end,
+      Host: values.sponsor
+    }
+    console.log("data:",data);
+    axios.post('/api/Project', data).then(res => {
+      console.log(res);
+    })
     setVisible(false)
   }
 

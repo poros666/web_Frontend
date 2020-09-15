@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Input, Button, Checkbox, Card } from 'antd'
 import axios from 'axios'
+import moment from 'moment'
 
 const layout = {
   labelCol: {
@@ -76,7 +77,7 @@ export default class DeliverSystemAnnouncement extends Component {
             ]}>
             <Input.TextArea
               allowClear={true}
-              autoSize={{ minRows: 3, maxRows: 30 }}
+              autoSize={{ minRows: 20, maxRows: 100 }}
               placeholder='在此输入公告内容'
             />
           </Form.Item>

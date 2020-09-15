@@ -98,6 +98,23 @@ export default class CompManagement extends Component {
     return "暂无简介"
   }
 
+  deleteNode = (id) => {
+    var ndata = this.state.data
+    console.log("ndata",ndata)
+    delete ndata[0]
+    console.log("ndata",ndata)
+    // for(var i = 0; i<this.state.data.length; i++){
+    //   if(this.state.data[i].id == id){ 
+    //     ndata.slice(i,1)
+    //     this.setState({
+    //       data: ndata,
+    //     })
+        
+    //     break
+    //   }
+    // }
+  }
+
   render() {
     const columns = [
       {
@@ -197,6 +214,7 @@ export default class CompManagement extends Component {
               onConfirm={() => {
                 console.log('confirm')
                 axios.delete(`/api/Project/[${record.id}]`)
+                // this.deleteNode(record.id)
                 //此处调用删除api
               }}>
               <Button danger>删除</Button>
