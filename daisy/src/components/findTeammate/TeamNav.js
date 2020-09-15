@@ -11,13 +11,15 @@ export default class teamNav extends Component {
     let matchId=this.props.matchId;
     this.state={
       matchName:'',
-      matchIntroduction:''
+      matchIntroduction:'',
+      matchMaxMemberNum:''
     }
     axios.get('http://mock-api.com/5g7AeqKe.mock/matchInfo/'+matchId)
     .then(response=>{
     this.setState({
       matchName:response.data[0].Name,
-      matchIntroduction:response.data[0].Introduction
+      matchIntroduction:response.data[0].Introduction,
+      matchMaxMemberNum:response.data[0].MaxMemberNum
     })
   })
   .catch(error=>{
@@ -30,6 +32,7 @@ export default class teamNav extends Component {
 }
 
 render() {
+  let MaxNum=this.state.matchMaxMemberNum.toString()
     return (
     <>
       <div id="site-page-header-ghost-wrapper">
@@ -39,6 +42,9 @@ render() {
         >
           <Descriptions size="small">
             <Descriptions.Item label="比赛简介">{this.state.matchIntroduction}</Descriptions.Item>
+          </Descriptions>
+          <Descriptions size="small">
+            <Descriptions.Item label="队伍人数上限">{MaxNum}人</Descriptions.Item>
           </Descriptions>
         </PageHeader>
       </div>

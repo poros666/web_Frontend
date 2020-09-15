@@ -14,14 +14,22 @@ export default class PostPage extends Component {
 
     constructor(props){
         super(props)
-
+        let projctId=0;
+        let pId=0;
+        if(this.props.match.params.ProjctId!=null){
+            projctId=this.props.match.params.ProjctId;
+        }
+        if(this.props.match.params.id!=null){
+            pId=this.props.match.params.id
+        }
         this.state={
-          ProjctId:this.props.match.params.ProjctId,
-          Pid:this.props.match.params.id
-         }
+            ProjctId:projctId,
+            Pid:pId
+        }
       }
 
     render() {
+        console.log(this.state.ProjctId)
         return (
             <div>
                 <HeaderNav/>
@@ -30,7 +38,7 @@ export default class PostPage extends Component {
                 <div id='WebPage'>
                 <Divider/>
                 <div>
-                    <Post postId={this.state.Pid}/>
+                    <Post matchId={this.state.ProjctId} postId={this.state.Pid} />
                 </div>
                 <Divider/>
                 <FloatHelper/>

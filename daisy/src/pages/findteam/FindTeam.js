@@ -29,7 +29,7 @@ export default class FindTeam extends Component {
                     </div>
                     <br/>
                     <Divider/>
-                    <div id='PublishPost'><PublishPost matchName='睡觉摸鱼大赛'/></div>
+                    <div id='PublishPost'><PublishPost matchId='1'/></div>
                     <br/>
                     </div>
                 <FloatHelper/>

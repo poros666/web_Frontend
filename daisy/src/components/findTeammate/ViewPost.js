@@ -6,6 +6,7 @@ import { Divider } from 'antd';
 import axios from 'axios'
 
 let ProjctId;
+let PostPerPage=4;
 
 export default class CommunityContent extends Component {
 
@@ -21,8 +22,9 @@ export default class CommunityContent extends Component {
      this.onPageChange=this.onPageChange.bind(this);
     axios.get('http://mock-api.com/5g7AeqKe.mock/Match/Count?ProjctId='+ProjctId)
     .then(response=>{
+      let PageCount=Math.ceil(response.data/PostPerPage);
       this.setState({
-        total:response.data
+        total:PageCount
       })
   })
   .catch(error=>{
@@ -43,14 +45,21 @@ export default class CommunityContent extends Component {
     }, () => {
       window.location.hash = `#/findteam/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
-    axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId+'&PageNumber='+page)
+    axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
     .then(response=>{
       this.setState((state)=>{
-          for(let i=0;i<10;i++){
+          for(let i=0;i<PostPerPage;i++){
             state.currentData.pop();
           }
-          for(let i=0;i<response.data.length;i++){
-            state.currentData.push(response.data[i]);
+          if((page-1)*PostPerPage+PostPerPage<=response.data.length){
+            for(let i=(page-1)*PostPerPage;i<(page-1)*PostPerPage+PostPerPage;i++){
+              state.currentData.push(response.data[i]);
+            }
+          }
+          else{
+            for(let i=(page-1)*PostPerPage;i<response.data.length;i++){
+              state.currentData.push(response.data[i]);
+            }
           }
           return{
             currentData:state.currentData,
@@ -60,7 +69,7 @@ export default class CommunityContent extends Component {
   .catch(error=>{
     console.log(error);
     this.setState((state)=>{
-      for(let i=0;i<10;i++){
+      for(let i=0;i<PostPerPage;i++){
         state.currentData.pop();
       }
       return{
@@ -89,7 +98,7 @@ export default class CommunityContent extends Component {
                                   </a>
                                 }
                                 title={<p>{item.NickName}的组队帖</p>}
-                                description={<a href={"#/PostPage/"+ProjctId+"/"+item.PostId}>查看帖子详情</a>}
+                                description={<a href={"#/PostPage/MatchId="+ProjctId+"/Pid="+item.PostId}>查看帖子详情</a>}
                             />
                         </List.Item>
                         )}

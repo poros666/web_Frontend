@@ -1,32 +1,46 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
-import { Card,Avatar,Space,Button } from 'antd';
+import { Card,Avatar,Space,Button,Input} from 'antd';
 import '../../style/comm/comm.css'
 import PostPageReport from '../findTeammate/report'
+import { Divider} from 'antd';
 import moment from 'moment'
 import axios from 'axios'
+
+const { TextArea } = Input;
+
+const Editor = ({onChange}) => (
+    <>
+        <TextArea rows={5} onChange={onChange} style={{width: '100%', resize: 'none'}} placeholder="填写入队申请"/>
+    </>
+  );
 
 export default class Post extends Component {
     
     constructor(props){
         super(props)
 
-        var tempId=this.props.postId
+        var PostId=this.props.postId
+        var MatchId=this.props.matchId
         
         this.state={
+            ProjctId:0,
             NickName:"",
             Icon:"strange",
             Content:"",
             PostTime:"",
+            Apply:'',
+            Account:''
         }
         
-        axios.get('http://mock-api.com/5g7AeqKe.mock/PostPage?PostId='+tempId)
+        axios.get('http://mock-api.com/5g7AeqKe.mock/Post/1?projectId='+MatchId+'&groupId='+PostId)
         .then(response=>{
-            console.log(response.data.Content)
             this.setState({
+                ProjctId:MatchId,
                 NickName:response.data.NickName,
                 Content:response.data.Content,
-                PostTime:response.data.PostTime
+                PostTime:response.data.PostTime,
+                Account:response.data.Account
             })
             if(response.data.Icon!=null){
                 this.setState({
@@ -38,6 +52,13 @@ export default class Post extends Component {
             console.log(error)
         })
     }
+
+    ContentChange = e => {
+        this.setState({
+          Apply:e.target.value
+        })
+        console.log(this.state.Apply)
+      };
     
     render() {
         return (
@@ -52,7 +73,7 @@ export default class Post extends Component {
                         </a>
                         <br/>                
                         <a href={"#/personal"}>{this.state.NickName}</a>
-
+                        <PostPageReport ReportUID={this.state.NickName} ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
                         </div>
                         }
                 >
@@ -69,11 +90,24 @@ export default class Post extends Component {
                 </Card>
                 <br/>
                 <Space>
-                    <Button ghost><p style={{color:'black'}}>申请进入小队</p></Button>
-                    <Button ghost><p style={{color:'black'}}>收藏</p></Button>
-                    <Button ghost><p style={{color:'black'}}>分享</p></Button>
-                    <PostPageReport ReportUID={this.state.NickName} ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
+                    <Button ghost><p style={{color:'black',margin: '0 8px'}}>收藏该帖</p></Button>
+                    <Button ghost><p style={{color:'black',margin: '0 8px'}} onClick={()=>{
+                        if(this.state.Apply.length>0&&this.state.Account!=null){
+                            let dataSent={
+                              ProjctId:this.state.ProjctId,
+                              Account:this.state.Account,
+                              Content:this.state.Apply
+                            }
+                            console.log(dataSent)
+                            axios.post('http://mock-api.com/5g7AeqKe.mock/Application',dataSent)
+                            .then(response=>{
+                              console.log(response)
+                            })
+                    }
+                    }}>申请进入小队</p></Button>
                 </Space>
+                <Divider/>
+                <Editor onChange={this.ContentChange}/>
             </div>
         )
     }
