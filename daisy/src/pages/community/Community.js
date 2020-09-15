@@ -5,13 +5,10 @@ import React, { Component } from 'react'
 import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import FloatHelper from '../../components/comm/FloatHelper'
-import {Space,Button} from 'antd';
 import 'antd/dist/antd.css';
-import TurnPage from '../../components/comm/TurnPage'
 import MomentList from '../../components/community/MomentList'
 import CreateMoment from '../../components/community/CreateMoment'
-import Test from '../../components/community/Test'
-import Axios from 'axios';
+import moment from 'moment'
 
 export default class Community extends Component {
     constructor(props){
@@ -33,27 +30,20 @@ export default class Community extends Component {
     //组件功能实现
 
     createMoment(title,content){
-      
+
       //传递json到服务端
+
+      var nowTime=moment().format('MMMM Do YYYY, h:mm:ss a')
+      console.log(nowTime)
       console.log(title)
       console.log(content)
+
+
+
+
     }
 
-    sortByTime(){
-      console.log('sortByTime')
-    }
 
-    sortByLike(){
-      console.log('sortByLike')
-    }
-
-    sortByComments(){
-      console.log('sortByComments')
-    }
-
-    sortByFavorites(){
-      console.log('sortByFavorites')
-    }
 
 
 
@@ -83,13 +73,7 @@ export default class Community extends Component {
                         {
                           //这里比较简单就直接写死在html里面，不做额外的子组件了
                         }
-                        <Space>
-                            <p>sort by:</p>       
-                          <Button type="primary" onClick={sortByTime}>time</Button>
-                          <Button type="primary" onClick={sortByLike}>like</Button>
-                          <Button type="primary" onClick={sortByComments}>comments</Button>
-                          <Button type="primary" onClick={sortByFavorites}>Favorites</Button>     
-                        </Space>
+
 
 
                         <br/>
@@ -131,22 +115,6 @@ export default class Community extends Component {
 
 
 
-
-function sortByTime(){
-  console.log('sortByTime')
-}
-
-function sortByLike(){
-  console.log('sortByLike')
-}
-
-function sortByComments(){
-  console.log('sortByComments')
-}
-
-function sortByFavorites(){
-  console.log('sortByFavorites')
-}
 
 
 
