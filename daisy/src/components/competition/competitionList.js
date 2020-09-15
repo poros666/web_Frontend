@@ -48,14 +48,16 @@ export default class CompetitionList extends Component {
   {
     super(props)
     this.state={
+      data:[],
       currentData:[],
-      total: 0,
+      total: data.length,
       pageSize: 3,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
   }
 
   componentDidMount() {
+    //getData()
     this.handleAnchor() //页面刷新时回到刷新前的page
   }
 
@@ -87,14 +89,13 @@ export default class CompetitionList extends Component {
  {
    axios.get('/api/Project',
    {params:{
-     order:this.props.sortOrder,
      pageNum:this.state.pageNumber
    }})
    .then(function (response) {
     console.log(response);
     this.setstate(
         {
-          currentData:response.data
+          data:response.data
           total:response.data.length
         }
     )

@@ -5,7 +5,7 @@ import Helper from '../../components/comm/FloatHelper'
 import CompetitionList from '../../components/competition/competitionList'
 import { Col,Radio} from 'antd'
 import 'antd/dist/antd.css'
-import axios from 'axios'
+
 
 export default class AllCompetitionPage extends Component {
 
@@ -27,8 +27,8 @@ export default class AllCompetitionPage extends Component {
                 <div>
                 <Radio.Group defaultValue="time" buttonStyle="solid" onChange={(e)=>{this.setState({sortOrder:e.target.value})}}>
                     <Radio value="time">按发布时间排序</Radio>
-                    <Radio value="discusstion">按讨论热度排序</Radio>
-                    <Radio value="subscribe">按订阅数量排序</Radio>
+                    <Radio value="discusstion" disabled={true}>按讨论热度排序</Radio>
+                    <Radio value="subscribe" disabled={true}>按订阅数量排序</Radio>
                 </Radio.Group>
                 </div>
                 <CompetitionList sortOrder={this.state.sortOrder}/>
