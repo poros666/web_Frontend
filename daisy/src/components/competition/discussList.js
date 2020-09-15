@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { List, Avatar ,Space,Radio, Pagination, Col, Popover} from 'antd';
 import 'antd/dist/antd.css';
-import { StarOutlined, LikeOutlined } from '@ant-design/icons';
-import Report from './Report'
+import axios from 'axios'
 import moment from 'moment'
+import Report from './Report'
+import { isLogined } from '../../utils/auth';
 const data = [
     {
       username: 'zhangsan',
@@ -104,7 +105,7 @@ export default class DiscussList extends Component {
     super(props)
     this.state={
       compID:this.props.compID,
-      sortMethod:1,
+      sortMethod:'time',
       currentData:[],
       total: data.length,
       pageSize: 5,
@@ -114,6 +115,7 @@ export default class DiscussList extends Component {
   }
 
   componentDidMount() {
+    //this.getData()
     this.handleAnchor() //页面刷新时回到刷新前的page
   }
   handleAnchor() {
@@ -127,7 +129,6 @@ export default class DiscussList extends Component {
     }, () => {
       window.location.hash = `#/compPage/${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
-    this.requestForData(this.state.pageNumber,this.state.compID,this.state.sortMethod)
     this.setState((state)=>{
     for(let i=0;i<state.pageSize;i++){
       state.currentData.pop();
@@ -141,42 +142,49 @@ export default class DiscussList extends Component {
     }
    );
  }
-
-  onLikeClick(UID){}
-
-  onStarClick(UID){}
-
-  requestForData(pageNumber,compID,sortMethod){}
-
+/*
+  getData(){
+    axios.get('/api/Discussion',{
+      params: {
+        projectId: this.state.compID,
+      }
+    })
+          .then(function (response) {
+            console.log(response);
+            this.setstate(
+                {
+                  currentData:response.data
+                  total:response.data.length
+                }
+            )
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+  }
+*/
   render() {
         return (
-            <div>
+            <div className='DiscussListBox'>
                 <Space>
                 <h3>sort by:</h3>
-                <Radio.Group defaultValue="a" buttonStyle="solid">
-                    <Radio.Button value="a">Time</Radio.Button>
-                    <Radio.Button value="b">Likes</Radio.Button>
-                    <Radio.Button value="c">Stars</Radio.Button>
+                <Radio.Group defaultValue="time" buttonStyle="solid">
+                    <Radio.Button value="time">Time</Radio.Button>
+                    <Radio.Button value="discussionNum" disabled={true}>Likes</Radio.Button>
+                    <Radio.Button value="subscribeNum" disabled={true}>Stars</Radio.Button>
                 </Radio.Group>
                 </Space>
                 <br/>
                 <br/>
                     <List
                         style={{width: '100%', resize: 'none'}}
+                        split={true}
                         itemLayout="horizontal"
                         dataSource={this.state.currentData}
                         renderItem={item => 
-                        <div>
+                        <div className={'detailDiscussBox'}>
                         <List.Item
                         actions={[
-                          <Popover content={<p>Star</p>}>
-                            <StarOutlined onClick={this.onStarClick}/>
-                            {123}
-                          </Popover>,
-                          <Popover content={<p>Like</p>}>
-                            <LikeOutlined onClick={this.onLikeClick}/>
-                            {123}
-                          </Popover>,
                           <Report ReportUID='test1' ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
                           ]}>
                             <List.Item.Meta

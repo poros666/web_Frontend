@@ -2,6 +2,10 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import moment from 'moment';
+import axios from 'axios'
+import '../../utils/auth'
+import { getUserInfor, isLogined } from '../../utils/auth';
+
 
 const { TextArea } = Input;
 
@@ -50,7 +54,13 @@ export default class RaiseDiscuss extends React.Component {
     if (!this.state.value) {
       return;
     }
-
+/*
+    if(isLogined()){
+      //this.postData()
+    }
+    else{
+      //跳转至登录页面或弹窗报错
+    }*/
     this.setState({
       submitting: true,
     });
@@ -62,8 +72,31 @@ export default class RaiseDiscuss extends React.Component {
     });
   };
 
+  /*
+  postData(){
+    var token=localStorage.getItem('token')
+    var account=token.account
+    var userData=getUserInfor(account)
+    var data={account:account,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),content:this.state.value,picture:userData.icon}
+
+    axios.post('/api/Discussion',data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }*/
+
   render() {
     const { comments, submitting, value } = this.state;
+    var userData=null
+    if(isLogined())
+    {
+      var token=localStorage.getItem('token')
+      var account=token.account
+      userData=getUserInfor(account)
+    }
 
     return (
       <>
@@ -71,8 +104,8 @@ export default class RaiseDiscuss extends React.Component {
         <Comment
           avatar={
             <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
+              src={userData ? 'data:image/png;base64,'+userData.icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}
+              alt={userData ? userData.nickName:''}
             />
           }
           content={

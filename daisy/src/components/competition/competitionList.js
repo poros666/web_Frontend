@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {List,Col, Pagination} from 'antd'
 import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios'
 const data = [
     {
         ID:1,
@@ -48,16 +48,19 @@ export default class CompetitionList extends Component {
   {
     super(props)
     this.state={
+      data:[],
       currentData:[],
       total: data.length,
       pageSize: 3,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
-    
   }
+
   componentDidMount() {
+    //getData()
     this.handleAnchor() //页面刷新时回到刷新前的page
   }
+
   handleAnchor() {
     this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
   }
@@ -82,6 +85,25 @@ export default class CompetitionList extends Component {
     }
    );
  }
+ /*getData()
+ {
+   axios.get('/api/Project',
+   {params:{
+     pageNum:this.state.pageNumber
+   }})
+   .then(function (response) {
+    console.log(response);
+    this.setstate(
+        {
+          data:response.data,
+          total:response.data.length
+        }
+    )
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ }*/
 
 
 
