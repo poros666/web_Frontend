@@ -19,15 +19,66 @@ import ReadMoment from '../../components/community/ReadMoment'
 
 export default class Moment extends Component {
     constructor(props){
-      super()
+      super(props)
 
       this.createComment=this.createComment.bind(this)
+
       let tempId=this.props.match.params.id
 
       //这里根据tempid请求数据
-      
+      const sourceData = [
+        {
+          author: 'Han Solo',
+          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          content: (
+            <p>
+              We supply a series of design principles, practical patterns and high quality design
+              resources (Sketch and Axure), to help people create their product prototypes beautifully and
+              efficiently.
+            </p>
+          ),
+          datetime: (
+            <Tooltip
+              title={moment()
+                .subtract(1, 'days')
+                .format('YYYY-MM-DD HH:mm:ss')}
+            >
+              <span>
+                {moment()
+                  .subtract(1, 'days')
+                  .fromNow()}
+              </span>
+            </Tooltip>
+          ),
+        },
+        {
+          author: 'kk',
+          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          content: (
+            <p>
+              We supply a series of design principles, practical patterns and high quality design
+              resources (Sketch and Axure), to help people create their product prototypes beautifully and
+              efficiently.
+            </p>
+          ),
+          datetime: (
+            <Tooltip
+              title={moment()
+                .subtract(2, 'days')
+                .format('YYYY-MM-DD HH:mm:ss')}
+            >
+              <span>
+                {moment()
+                  .subtract(2, 'days')
+                  .fromNow()}
+              </span>
+            </Tooltip>
+          ),
+        },
+      ];
 
       this.state={
+        data:sourceData,
         Pid:tempId
        }
     }
@@ -46,14 +97,14 @@ export default class Moment extends Component {
 
     render() {
         return (
-            <div className='momentbackcolor'>
+            <div className='backcolor'>
                 <HeaderNav/>
                 <FloatHelper/>
                 {
                     //本体
                 }
-                <div className='momentBody'>  
-                    <div className='momentMiddle'>
+                <div className='Body'>  
+                    <div className='middle'>
 
 
                         <ReadMoment momentId={this.state.Pid}/>

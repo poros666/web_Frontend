@@ -1,10 +1,16 @@
-.momentBody{
-    margin: 80px 15% 5% 15%;
+.Body{
+    margin: 50px 50px 50px 50px;
     background: #ececec;
 }
-.momentMiddle{
+
+.site-card-border-less-wrapper {
+    padding: 30px;
+    background: #ececec;
+  }
+
+  .middle{
     margin: 10px 50px 10px 50px;
 }
-.momentbackcolor{
+.backcolor{
     background-color: #ececec;
 }

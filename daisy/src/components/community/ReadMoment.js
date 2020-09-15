@@ -55,7 +55,7 @@ export default class ReadMoment extends Component {
     
     render() {
         return (
-            <div>
+            <div className='site-card-border-less-wrapper'>
                 <Card
                     
                     title={this.state.data[0].title}

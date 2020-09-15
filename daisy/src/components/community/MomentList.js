@@ -152,23 +152,13 @@ export default class MomentList extends Component {
 
     componentDidMount() {
       this.handleAnchor() //页面刷新时回到刷新前的page
-      this.getMomentCount()//获取动态总数
     }
-
-    getMomentCount(){
-      var url=CONSTURL.hosturl+CONSTURL.getMomentCountUrl
-      Axios.get(url).then((res)=>{
-        console.log(res.data.Count)
-        this.setState({total:res.data.Count})
-        this.setState({istotalloading:false})
-      })
-    }
-
     handleAnchor() {
       this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
     }
     
     onPageChange=(page,pageSize)=>{
+      console.log("page:",page);
       this.setState({
         pageNumber: page
       }, () => {
@@ -190,16 +180,17 @@ export default class MomentList extends Component {
      );
    }
 
+
+
     render() {
         return (
-            (this.state.isloading || this.state.istotalloading)?<loading/>:
             <div>
                   <List
                     itemLayout="horizontal"
                     dataSource={this.state.currentData}
                     renderItem={item => (
                       <List.Item
-                          key={item.Title}
+                          key={item.title}
                           actions={[
                                     <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
                                     <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
@@ -210,17 +201,15 @@ export default class MomentList extends Component {
                             avatar={
 
                               //头像的来源和指向的地址
-                              <a href={"#/Moment/"+item.Account}>
-                                <Avatar src={require("../../img/avatar/"+item.icon+".jpg")}></Avatar>
+                              <a href={"#/Moment/"+item.Uid}>
+                                <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
                               </a>
                             }
 
                             //帖子的名字和指向的地址，传一个pid，moment_id
-                              title={<a href ={"#/Moment/"+item.MomentId}>{item.Title}</a>}
+                              title={<a href ={"#/Moment/"+item.Pid}>{item.title}</a>}
 
-
-                              //这里还需要处理
-                              description={<p>{item.Content}</p>}
+                              description={<p>{item.description}</p>}
                               
                           />
 
@@ -237,7 +226,6 @@ export default class MomentList extends Component {
                     />
                   </Col>
             </div>
-          
         )
     }
 }

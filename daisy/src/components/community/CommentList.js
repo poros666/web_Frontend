@@ -15,7 +15,6 @@ import ReportButton from './ReportButton'
 import { Collapse } from 'antd';
 import 'antd/dist/antd.css';
 import '../../style/community/Comment.css'
-import loading from './loading'
 
 
 
@@ -32,7 +31,7 @@ const text = `
 export default class CommentList extends Component {
 
     constructor(props){
-        super()
+        super(props)
         var tempId=this.props.momentId
         this.submitComment=this.submitComment.bind(this)
         this.childCreateComment=this.childCreateComment.bind(this)
@@ -96,7 +95,7 @@ export default class CommentList extends Component {
       }
 
       componentDidMount(){
-        
+        //
       }
 
       updateADComp(){

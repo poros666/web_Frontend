@@ -5,18 +5,16 @@ import React, { Component } from 'react'
 import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import FloatHelper from '../../components/comm/FloatHelper'
-import 'antd/dist/antd.css'
+import {Space,Button} from 'antd';
+import 'antd/dist/antd.css';
 import TurnPage from '../../components/comm/TurnPage'
 import MomentList from '../../components/community/MomentList'
 import CreateMoment from '../../components/community/CreateMoment'
-import CONSTURL from '../../components/community/config'
-import Axios from 'axios'
-import moment from 'moment'
-import { CustomerServiceTwoTone } from '@ant-design/icons'
+import Test from '../../components/community/Test'
 
 export default class Community extends Component {
     constructor(props){
-        super()
+        super(props)
  //       console.log('载入data数据')
       //改为数据请求
       
