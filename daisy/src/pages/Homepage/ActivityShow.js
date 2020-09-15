@@ -3,12 +3,7 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Layout, Carousel} from 'antd';
 import './activityShow.css'
-
 const { Header,Footer, Content } = Layout;
-const contentStyle = {
-    color: '#fff',
-    height:'40px',
-};
   
 function limitTxt(txt,count) {
     var str = txt;
@@ -72,23 +67,23 @@ class ActivityShow extends Component {
         };
 
         return ( 
-             <div style={{ margin:'10px 10px'}}>
-                <Layout>
+             <div style={{ margin:'10px 10px',height:'100%',width:'100%'}}>
+                <Layout style={{height:'100%',width:'100%'}}>
                     <Content>
                         <Carousel 
                             // effect="fade" 
                         >
                             {this.state.slides.map(function(slide){
                                 return(
-                                    <div key={slide} style={{height:'400px'}}>
+                                    <div key={slide} style={{height:'100%',width:'100%'}}>
                                         {/* <a href={"#/ReadPost/"+slide.Uid} target="_blank" rel="noopener noreferrer"> */}
+                                            <div style={{margin:'0 auto',position:'relative'}}>
                                                <img 
                                                 width='100%'
-                                                height='100%'
+                                                height= 'auto'
                                                 src={require("../../img/activity/"+slide.imgSrc+".jpg")}
                                                 /> 
-                                            {/* <div style={{backgroundImage:require("../../img/activity/"+slide.imgSrc+".jpg"),backgroundSize:'button'}}> */}
-                                            {/* </div> */}
+                                            </div>
                                             <div style={{
                                                     position: 'absolute', 
                                                     bottom:'50px',
@@ -100,7 +95,7 @@ class ActivityShow extends Component {
                                                 {limitTxt(slide.title,20)}
                                             </div>
                                         {/* </a> */}
-                                        <div style={contentStyle}></div> 
+                                        {/* <div style={{color: '#fff',height:'40px',}}></div>  */}
                                     </div>
                                 )
                             })

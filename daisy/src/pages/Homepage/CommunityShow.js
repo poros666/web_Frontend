@@ -58,7 +58,7 @@ const sourceData = [
     {
         Uid:116,
         Pid:16,
-        avatarSrc:'boss',
+        avatarSrc:'roo',
         name:'程序员小王',
         time:'2020-09-09',
         title: '快速学懂Lingo软件及其编程方法',
@@ -86,86 +86,15 @@ class CommunityShow extends Component {
         super(props)
 
         this.state={
-            initSwitching: true,
-            switching: false,
             data:sourceData
         }
     }
 
-    // componentDidMount() {
-    //     this.getData(res => {
-    //         this.setState({
-    //             initSwitching: false,
-    //             data: res.results,
-    //             list: res.results,
-    //         });
-    //     });
-    // }
-
-    // getData = callback => {
-    //     reqwest({
-    //         url: fakeDataUrl,
-    //         type: 'json',
-    //         method: 'get',
-    //         contentType: 'application/json',
-    //         success: res => {
-    //             callback(res);
-    //         },
-    //     });
-    // };
-
-    getRandom(n){
-        var newList=[],id;
-        var len=sourceData.length;
-        for(var i=0;i<n;i++){
-            // id=Math.floor(Math.random()*len);
-            id = Math.ceil(Math.random()*len);
-            if(newList.indexOf(sourceData[id]) === -1){
-                newList.push(sourceData[id]);
-            }
-            else{
-                i= i - 1;
-                continue;
-            }
-        }
-        return newList;
-    }
-
     onSwitch() {
-        let data1=this.getRandom(count)
-        console.log(this.state.data);
-        this.setState({
-            switching: true,
-            data:data1,
-            // list: this.state.data.concat([...new Array(count)].map(() => ({ switching: true, name: {} }))),
-            // list: this.state.list.splice(0,3,data1),
-        });
-        // console.log( this.state.data[2]);
-        // this.getData(res => {
-        //     const data = this.state.data.concat(res.results);
-        //     this.setState(
-        //     {
-        //         data,
-        //         list: data,
-        //         switching: false,
-        //         },
-        //         () => {        
-        //         //重置窗口的offsetTop以便显示地板下的虚拟化演示。
-        //         //在实际场景中，您可以使用react-virtualized的公共方法：
-        //         // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-        //         window.dispatchEvent(new Event('resize'));
-        //         },
-        //     );
-        // });
+
     }
 
     render() {
-        const { initSwitching, switching, list } = this.state
-        const switchMore =!initSwitching && !switching
-            // !initSwitching && !switching ? (
-            //     <div>
-            //     </div>
-            // ) : null;
 
         return ( 
             // <div style={{height: '400px',width:'600px',margin:'10px 10px',float:'right'}}>
@@ -197,23 +126,14 @@ class CommunityShow extends Component {
                     <Content style={{paddingLeft:'30px',paddingRight:'30px'}}>
                         <List
                             // bordered={true}
-                            switching={initSwitching}
-                            switchMore={switchMore}
                             itemLayout="horizontal"
                             dataSource={this.state.data}
                             renderItem={item => (
-                            <List.Item
-                                // actions={[
-                                //     <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                                //     <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                                //     <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-                                //     ]}
-                            >
+                            <List.Item>
 
                                 <List.Item.Meta
-
                                 //帖子的名字和指向的地址，传一个pid，post_id
-                                title={<a href ={"#/Moment/"+item.Pid} target="_blank" rel="noopener noreferrer">{limitTxt(item.title,25)}</a>}
+                                title={<a href ={"#/Moment/"+item.Pid} target="_blank" rel="noopener noreferrer">{limitTxt(item.title,30)}</a>}
                                 // description={<p>{item.description}</p>}
                                 description={
                                     <div>
@@ -221,7 +141,7 @@ class CommunityShow extends Component {
                                             <Col span={4} offset={0}>
                                                 {item.name}
                                             </Col>
-                                            <Col span={2} offset={3}>
+                                            <Col span={2} offset={10}>
                                                 <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />
                                             </Col>
                                             <Col span={2} offset={1}>

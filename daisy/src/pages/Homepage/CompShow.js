@@ -74,70 +74,50 @@ class CompShow extends Component {
                             <List
                                 itemLayout="vertical"
                                 size="large"
-
-                                // pagination 将展示区分页
-                                // pagination={{
-                                // onChange: page => {
-                                //     console.log(page);
-                                // },
-                                // pageSize: 6,
-                                // }}
-                                
                                 dataSource={listData}
-
                                 renderItem={item => (
-                                <List.Item
-                                    key={item.title}
-                                    actions={[
-                                    // <IconText icon={StarOutlined}
-                                    //     text="156"
-                                    //     key="list-vertical-star-o" />,
-                                    // <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                                    // <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-                                    ]}
-                                    extra={
-                                        <div style={{width:'50%',padding:'10%'}}>
-                                            <Tag icon={<CalendarOutlined />} color="success">开始时间：{item.startTime}</Tag>
-                                            <br></br>
-                                            <Tag icon={<CalendarOutlined />} color="success">结束时间：{item.endTime}</Tag>
-                                            <br></br>
-                                            <Button key="subscriptComp" icon={<StarTwoTone/>}>订阅</Button>
-                                        </div>
-                                    }
-                                >
-
-                                <List.Item.Meta
-                                    // avatar={<Avatar src={item.avatar} />}
-                                    title={
-                                        <div style={{
-                                            fontSize:20,
-                                            textAlign: 'center',
+                                <div style={{background:'#f1f2f6',margin:'20px',
+                                                // *border:'0.5px #c8d6e5 solid'
                                         }}>
-                                            <a href={"/compPage/"+item.ID+"=id"} 
-                                            // id="compTitle" 
-                                            target="_blank" rel="noopener noreferrer">{item.title}</a>
-                                        </div>
-                                    }
-                                    description={
-                                        <div>
-                                            <div style={{textAlign:"center"}}>
-                                                <p>{item.host}</p>
+                                    <List.Item
+                                        key={item.title}
+                                        // actions={[]}
+                                        extra={
+                                            <div style={{width:'100%',padding:'10%'}}>
+                                                <Tag icon={<CalendarOutlined />} color="success">开始时间：{item.startTime}</Tag>
+                                                <br></br>
+                                                <Tag icon={<CalendarOutlined />} color="success">结束时间：{item.endTime}</Tag>
+                                                <br></br>
+                                                <Button key="subscriptComp" icon={<StarTwoTone/>}>订阅</Button>
                                             </div>
-                                            {limitTxt(item.content,200)}
-                                            {/* <Row>
-                                                <Col span={3} offset={9}>
-                                                    <Tag icon={<CalendarOutlined />} color="success">{item.startTime}  ———  {item.endTime}</Tag>
-                                                </Col>
-                                                <Col span={2} offset={9}>
-                                                    <Button key="subscriptComp" icon={<StarTwoTone/>}>订阅</Button>
-                                                </Col>
-                                            </Row> */}
-                                        </div>
-                                    }
-                                />
-                                
-                                </List.Item>
-                                
+                                        }
+                                    >
+
+                                    <List.Item.Meta
+                                        title={
+                                            <div style={{
+                                                fontSize:20,
+                                                textAlign: 'center',
+                                            }}>
+                                                <a href={"/compPage/"+item.ID+"=id"} 
+                                                // id="compTitle" 
+                                                target="_blank" rel="noopener noreferrer">{item.title}</a>
+                                            </div>
+                                        }
+                                        description={
+                                            <div>
+                                                <div style={{textAlign:"center"}}>
+                                                    <p>{item.host}</p>
+                                                </div>
+                                                <div style={{color:'#57606f'}}>
+                                                    {limitTxt(item.content,200)}
+                                                </div>
+                                            </div>
+                                        }
+                                    />
+                                    
+                                    </List.Item>
+                                    </div>
                                 )}
                             />
                         </Content>
