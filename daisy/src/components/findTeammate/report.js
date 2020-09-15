@@ -1,15 +1,10 @@
 import React, { useState,Component } from "react"
-import { Modal, Form, Input, Checkbox, Row, Col, Popover } from "antd"
+import { Modal, Form, Input, Select,Popover } from "antd"
 import { WarningOutlined} from "@ant-design/icons"
+import axios from 'axios'
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-}
+
+const { Option } = Select;
 
 //添加举报的弹出框
 const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time }) => {
@@ -41,122 +36,41 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
           tags: "not_started",
         }}
       >
-        {/* key: "1",
-        id: "37g7y128",
-        time: "2020/3/14",
-        reporter: "2020/4/14",
-        target: "同济大学",
-        type:["色情", "涉政"],
-        tags: ["未处理"], */}
         <Form.Item
           name="time"
           label="举报时间"
-          rules={[
-            {
-              required: true,
-              message: "#",
-            },
-          ]}
         >
           <Input placeholder={Time} disabled/>
         </Form.Item>
         <Form.Item
           name="reporter_id"
           label="您的用户id"
-          rules={[
-            {
-              required: true,
-              message: "#",
-            },
-          ]}
         >
           <Input placeholder={ReporterUID} disabled/>
         </Form.Item>
         <Form.Item
           name="target_id"
           label="被举报用户id"
-          rules={[
-            {
-              required: true,
-              message: "#",
-            },
-          ]}
         >
           <Input placeholder={ReportUID} disabled/>
         </Form.Item>
-        <Form.Item name="description" label="举报内容">
+        <Form.Item name="types" label="举报类型" 
+        rules={[{ required: true, message: '请选择举报类型' }]}>
+        <Select initialValues="色情" style={{ width: 120 }}>
+          <Option value="sex">色情</Option>
+          <Option value="policy">涉政</Option>
+          <Option value="effect">影响他人</Option>
+          <Option value="trade">涉及交易</Option>
+          <Option value="spite">恶意</Option>
+    </Select>
+        </Form.Item>
+        <Form.Item name="description" label="举报内容" 
+        rules={[{ required: true, message: '请填写举报内容' }]}>
           <Input.TextArea
             allowClear={true}
             autoSize={{ minRows: 1, maxRows: 30 }}
             placeholder="在此输入举报原因等详情"
           />
-        </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
-        <Form.Item name="types">
-          <Checkbox.Group>
-            <Row>
-              <Col span={8}>
-                <Checkbox
-                  value="sex"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  色情
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="political"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  涉政
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="influence"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  影响他人
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="trade"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  涉及交易
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="attack"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  恶意
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="else"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  其他
-                </Checkbox>
-              </Col>
-            </Row>
-          </Checkbox.Group>
         </Form.Item>
       </Form>
     </Modal>
@@ -168,7 +82,22 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
+    values.time=Time;
+    values.reporter_id=ReporterUID;
+    values.target_id=ReportUID;
     console.log("Received values of form: ", values)
+    let dataSent={
+      Account:values.target_id,
+      ReportType:values.types,
+      Content:values.description,
+      Time:values.time
+    }
+    console.log(dataSent)
+    axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
+        .then(response=>{
+          console.log(response)
+          window.alert("举报成功")
+        })
     //处理数据
     setVisible(false)
   }

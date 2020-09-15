@@ -15,33 +15,34 @@ export default class PostPage extends Component {
     constructor(props){
         super(props)
         let projctId=0;
-        let pId=0;
+        let groupId=0;
         if(this.props.match.params.ProjctId!=null){
             projctId=this.props.match.params.ProjctId;
         }
-        if(this.props.match.params.id!=null){
-            pId=this.props.match.params.id
+        if(this.props.match.params.groupId!=null){
+            groupId=this.props.match.params.groupId
         }
         this.state={
             ProjctId:projctId,
-            Pid:pId
+            GroupId:groupId
         }
       }
 
     render() {
-        console.log(this.state.ProjctId)
         return (
             <div>
                 <HeaderNav/>
                 <br/><br/>
                 <TeamNav matchId={this.state.ProjctId}/>
-                <div id='WebPage'>
+                <div id='page'>
                 <Divider/>
+                <div id='WebPage'>
                 <div>
-                    <Post matchId={this.state.ProjctId} postId={this.state.Pid} />
+                    <Post matchId={this.state.ProjctId} groupId={this.state.GroupId} />
                 </div>
                 <Divider/>
                 <FloatHelper/>
+                </div>
                 <Footer/>
                 </div>
             </div>

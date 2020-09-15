@@ -20,11 +20,10 @@ export default class Post extends Component {
     constructor(props){
         super(props)
 
-        var PostId=this.props.postId
+        var GroupId=this.props.groupId
         var MatchId=this.props.matchId
         
         this.state={
-            ProjctId:0,
             NickName:"",
             Icon:"strange",
             Content:"",
@@ -33,14 +32,14 @@ export default class Post extends Component {
             Account:''
         }
         
-        axios.get('http://mock-api.com/5g7AeqKe.mock/Post/1?projectId='+MatchId+'&groupId='+PostId)
+        axios.get('http://mock-api.com/5g7AeqKe.mock/Post/1?projectId='+MatchId+'&groupId='+GroupId)
         .then(response=>{
             this.setState({
                 ProjctId:MatchId,
                 NickName:response.data.NickName,
                 Content:response.data.Content,
                 PostTime:response.data.PostTime,
-                Account:response.data.Account
+                Account:response.data.LeaderAccount
             })
             if(response.data.Icon!=null){
                 this.setState({
@@ -57,7 +56,6 @@ export default class Post extends Component {
         this.setState({
           Apply:e.target.value
         })
-        console.log(this.state.Apply)
       };
     
     render() {
@@ -73,7 +71,7 @@ export default class Post extends Component {
                         </a>
                         <br/>                
                         <a href={"#/personal"}>{this.state.NickName}</a>
-                        <PostPageReport ReportUID={this.state.NickName} ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
+                        <PostPageReport ReportUID={this.state.Account} ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
                         </div>
                         }
                 >
@@ -98,11 +96,14 @@ export default class Post extends Component {
                               Account:this.state.Account,
                               Content:this.state.Apply
                             }
-                            console.log(dataSent)
                             axios.post('http://mock-api.com/5g7AeqKe.mock/Application',dataSent)
                             .then(response=>{
                               console.log(response)
-                            })
+                              window.alert("申请成功")
+                            })      
+                    }
+                    else{
+                        window.alert("您还未登录")
                     }
                     }}>申请进入小队</p></Button>
                 </Space>

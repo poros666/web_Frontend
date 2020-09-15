@@ -13,7 +13,7 @@ export default class FindTeam extends Component {
         super(props)
   
         this.state={
-          match:this.props.match.params.matchname
+          matchId:1
          }
       }
     render() {
@@ -21,7 +21,8 @@ export default class FindTeam extends Component {
             <>
                 <HeaderNav/>
                 <br/><br/>
-                <TeamNav matchId='1'/>
+                <TeamNav matchId={this.state.matchId}/>
+                <div id='page'>
                 <Divider/>
                 <div id='WebPage'>
                     <div id='PostList'>
@@ -29,10 +30,11 @@ export default class FindTeam extends Component {
                     </div>
                     <br/>
                     <Divider/>
-                    <div id='PublishPost'><PublishPost matchId='1'/></div>
+                    <div id='PublishPost'><PublishPost matchId={this.state.matchId}/></div>
                     <br/>
                     </div>
                 <FloatHelper/>
+                </div>
                 <Footer/>
             </>
         )

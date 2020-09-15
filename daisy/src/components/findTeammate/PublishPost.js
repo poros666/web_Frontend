@@ -121,7 +121,16 @@ export default class CreatePost extends React.Component {
     );
     children.push(
       <Col span={21} key={3}>
-      <Form.Item>
+      <Form.Item
+      name={`帖子内容`}
+      label={`帖子内容`}
+      rules={[
+        {
+          required: true,
+          message: '该项为必填项',
+        },
+      ]}
+      >
       <Editor onChange={this.ContentChange}/>
     </Form.Item>
     </Col>
@@ -141,6 +150,7 @@ export default class CreatePost extends React.Component {
         axios.post('http://mock-api.com/5g7AeqKe.mock/Post',dataSent)
         .then(response=>{
           console.log(response)
+          window.alert("发布成功")
         })
       }
       }}>建立小队</Button>

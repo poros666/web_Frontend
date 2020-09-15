@@ -19,7 +19,7 @@ export default class teamNav extends Component {
     this.setState({
       matchName:response.data[0].Name,
       matchIntroduction:response.data[0].Introduction,
-      matchMaxMemberNum:response.data[0].MaxMemberNum
+      matchMaxMemberNum:response.data[0].ParticipantsNumber
     })
   })
   .catch(error=>{

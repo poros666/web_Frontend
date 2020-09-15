@@ -98,7 +98,7 @@ export default class CommunityContent extends Component {
                                   </a>
                                 }
                                 title={<p>{item.NickName}的组队帖</p>}
-                                description={<a href={"#/PostPage/MatchId="+ProjctId+"/Pid="+item.PostId}>查看帖子详情</a>}
+                                description={<a href={"#/PostPage/MatchId="+ProjctId+"/groupId="+item.GroupId+"/Pid="+item.PostId}>查看帖子详情</a>}
                             />
                         </List.Item>
                         )}
