@@ -20,16 +20,15 @@ export default class CommunityContent extends Component {
       pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
-    axios.get('http://mock-api.com/5g7AeqKe.mock/Match/Count?ProjctId='+ProjctId)
-    .then(response=>{
-      let PageCount=Math.ceil(response.data/PostPerPage);
-      this.setState({
-        total:PageCount
-      })
-  })
-  .catch(error=>{
-    console.log(error);
-  })
+     axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
+     .then(response=>{
+       this.setState({
+         total:Math.ceil(response.data.length/PostPerPage)
+        });
+   })
+   .catch(error=>{
+     console.log(error);
+   })
   }
 
   componentDidMount() {
