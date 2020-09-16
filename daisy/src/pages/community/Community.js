@@ -11,6 +11,7 @@ import CreateMoment from '../../components/community/CreateMoment'
 import moment from 'moment'
 import Axios from 'axios';
 import CONSTURL from '../../components/community/config';
+import '../../style/community/community.css'
 
 export default class Community extends Component {
     constructor(props){
@@ -82,7 +83,7 @@ export default class Community extends Component {
 
 
 
-                    <div style={{padding:'0 50px'}}>
+                    <div className='MomentList'>
 
                         {
                           //这里比较简单就直接写死在html里面，不做额外的子组件了
@@ -94,8 +95,6 @@ export default class Community extends Component {
                         <br/>
 
                         <MomentList/>
-                            
-
 
                         <CreateMoment
                           createMoment={this.createMoment}

@@ -8,8 +8,6 @@ import FloatHelper from '../../components/comm/FloatHelper'
 import '../../style/comm/comm.css'
 import ToComment from '../../components/community/ToComment'
 import 'antd/dist/antd.css';
-import 'antd/dist/antd.css';
-import '../../style/comm/comm.css'
 import  CommentList from '../../components/community/CommentList'
 import ReadMoment from '../../components/community/ReadMoment'
 import Axios from 'axios'
@@ -78,7 +76,7 @@ export default class Moment extends Component {
                     //本体
                 }
                 <div className='Body'>  
-                    <div className='middle'>
+                    <div className='momentMiddle'>
 
 
                         <ReadMoment momentId={Pid}/>
