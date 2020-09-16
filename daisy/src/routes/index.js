@@ -85,7 +85,7 @@ export const mainRoutes = [{
     component: Community
 },
 {
-    path: "/Moment",
+    path: "/Moment/:id",
     title: "动态",
     component: Moment
 },

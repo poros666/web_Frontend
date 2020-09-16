@@ -8,12 +8,11 @@ import FloatHelper from '../../components/comm/FloatHelper'
 import '../../style/comm/comm.css'
 import ToComment from '../../components/community/ToComment'
 import 'antd/dist/antd.css';
-import { Tooltip } from 'antd';
-import 'antd/dist/antd.css';
-import moment from 'moment';
-import '../../style/comm/comm.css'
 import  CommentList from '../../components/community/CommentList'
 import ReadMoment from '../../components/community/ReadMoment'
+import Axios from 'axios'
+import CONSTURL from '../../components/community/config'
+import moment from 'moment-timezone'
 
 
 
@@ -26,61 +25,13 @@ export default class Moment extends Component {
       let tempId=this.props.match.params.id
 
       //这里根据tempid请求数据
-      const sourceData = [
-        {
-          author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: (
-            <p>
-              We supply a series of design principles, practical patterns and high quality design
-              resources (Sketch and Axure), to help people create their product prototypes beautifully and
-              efficiently.
-            </p>
-          ),
-          datetime: (
-            <Tooltip
-              title={moment()
-                .subtract(1, 'days')
-                .format('YYYY-MM-DD HH:mm:ss')}
-            >
-              <span>
-                {moment()
-                  .subtract(1, 'days')
-                  .fromNow()}
-              </span>
-            </Tooltip>
-          ),
-        },
-        {
-          author: 'kk',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: (
-            <p>
-              We supply a series of design principles, practical patterns and high quality design
-              resources (Sketch and Axure), to help people create their product prototypes beautifully and
-              efficiently.
-            </p>
-          ),
-          datetime: (
-            <Tooltip
-              title={moment()
-                .subtract(2, 'days')
-                .format('YYYY-MM-DD HH:mm:ss')}
-            >
-              <span>
-                {moment()
-                  .subtract(2, 'days')
-                  .fromNow()}
-              </span>
-            </Tooltip>
-          ),
-        },
-      ];
-
+    
       this.state={
-        data:sourceData,
         Pid:tempId
        }
+
+
+    //   console.log(this.state.Pid)
     }
 
 
@@ -92,10 +43,31 @@ export default class Moment extends Component {
     // }
 
     createComment(content){
-      console.log(content)
+
+      var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
+
+      var json=
+      {
+        "MomentId":this.state.Pid,
+        "Account":123,
+        "Content":content,
+        "Time":t
+      }
+      console.log(json)
+      var url=CONSTURL.hosturl+CONSTURL.CreateComment
+      Axios.post(url,json).then((res)=>{
+    //    console.log(res.data)
+        window.location.reload()
+
+      })
+
     }
 
+
+
     render() {
+        var Pid=this.state.Pid
+
         return (
             <div className='backcolor'>
                 <HeaderNav/>
@@ -104,16 +76,16 @@ export default class Moment extends Component {
                     //本体
                 }
                 <div className='Body'>  
-                    <div className='middle'>
+                    <div className='momentMiddle'>
 
 
-                        <ReadMoment momentId={this.state.Pid}/>
+                        <ReadMoment momentId={Pid}/>
 
                         <ToComment createComment={this.createComment}/>
 
                         <CommentList 
-                        momentId={this.state.Pid} 
-                        createComment={this.createComment}
+                          momentId={Pid} 
+                          createComment={this.createComment}
                         />
 
                        

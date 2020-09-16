@@ -4,12 +4,11 @@
 }
 
 .site-card-border-less-wrapper {
-    padding: 30px;
     background: #ececec;
   }
 
-  .middle{
-    margin: 10px 50px 10px 50px;
+  .momentMiddle{
+    margin: 100px 15% 5% 15%;
 }
 .backcolor{
     background-color: #ececec;

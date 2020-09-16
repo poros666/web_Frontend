@@ -1,7 +1,7 @@
 //
 // made by ykn
 //
-import { Comment, List } from 'antd';
+import { Comment, List,Avatar } from 'antd';
 
 import React, { Component } from 'react'
 import '../../style/comm/comm.css'
@@ -15,6 +15,9 @@ import ReportButton from './ReportButton'
 import { Collapse } from 'antd';
 import 'antd/dist/antd.css';
 import '../../style/community/Comment.css'
+import Reply from './Reply'
+import CONSTURL from './config';
+import Axios from 'axios';
 
 
 
@@ -35,72 +38,67 @@ export default class CommentList extends Component {
         var tempId=this.props.momentId
         this.submitComment=this.submitComment.bind(this)
         this.childCreateComment=this.childCreateComment.bind(this)
+        this.createReply=this.createReply.bind(this)
         //这里根据tempid请求数据
-        const sourceData = [
-          {
-            author: 'Han Solo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: (
-              <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
-              </p>
-            ),
-            datetime: (
-              <Tooltip
-                title={moment()
-                  .subtract(1, 'days')
-                  .format('YYYY-MM-DD HH:mm:ss')}
-              >
-                <span>
-                  {moment()
-                    .subtract(1, 'days')
-                    .fromNow()}
-                </span>
-              </Tooltip>
-            ),
-          },
-          {
-            author: 'kk',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: (
-              <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
-              </p>
-            ),
-            datetime: (
-              <Tooltip
-                title={moment()
-                  .subtract(2, 'days')
-                  .format('YYYY-MM-DD HH:mm:ss')}
-              >
-                <span>
-                  {moment()
-                    .subtract(2, 'days')
-                    .fromNow()}
-                </span>
-              </Tooltip>
-            ),
-          },
-        ];
+
         this.state={
           renderAdComponent:[],
-          data:sourceData,
+          data:[],
           Pid:tempId,
          }
          this.updateADComp()
       }
 
       componentDidMount(){
-        //
+        var url=CONSTURL.hosturl+CONSTURL.GetCommentList+this.state.Pid
+        Axios.get(url).then((res)=>{
+          var result=res.data
+          for(var i=0;i<result.length;i++){
+            result[i].Time=this.deleteLetter(result[i].Time)
+          }
+          this.setState({data:result})
+          console.log(this.state.data)
+        })
+      }
+
+      deleteLetter(str) {
+
+        var result;
+      
+        var reg = /[a-zA-Z]+/;  //[a-zA-Z]表示匹配字母，g表示全局匹配
+      
+        while (result = str.match(reg)) { //判断str.match(reg)是否没有字母了
+      
+          str = str.replace(result[0], ' '); //替换掉字母  result[0] 是 str.match(reg)匹配到的字母
+      
+        }
+        return str;
+      }
+
+
+
+      createReply(content){
+
+        var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
+
+        var json=
+        {
+          "CommentId":this.state.Pid,
+          "Account":"account",
+          "Content":content,
+          "Time":t,
+        }
+        console.log(json)
+
+        var url=CONSTURL.hosturl+CONSTURL.CreateReply
+        Axios.post(url,json).then((res)=>{
+          window.location.reload()
+        })
       }
 
       updateADComp(){
         let temp=this.state.data.length
-        console.log(temp)
+       // console.log(temp)
         for(let i=0;i<temp;i++){
           let tmp=this.state.renderAdComponent
           tmp.push(false)
@@ -108,7 +106,7 @@ export default class CommentList extends Component {
             renderAdComponent:tmp
           })
         }
-        console.log(this.state.renderAdComponent)
+    //    console.log(this.state.renderAdComponent)
       }
 
       childCreateComment(content){
@@ -116,8 +114,8 @@ export default class CommentList extends Component {
       }
 
       submitComment(index){
-        console.log(index)
-        console.log("i am clicked")
+     //   console.log(index)
+      //  console.log("i am clicked")
         this.changeRenderADComp(index)
       }
 
@@ -132,12 +130,12 @@ export default class CommentList extends Component {
     render() {      
       //初始化render数组状态
       let objArr=this.state.data
+   //   console.log(objArr)
         return (
             <div id="firstLayer">
-              {/* <p className="childComment">我是kkkkkkkkkkkk</p> */}
                 {
                   objArr.map((item,index)=>(
-                    <li style={{listStyle:"none"}}>
+                    <li style={{listStyle:"none"}} key={item+index}>
                       <Comment
                       className='middle'
                       actions={ 
@@ -153,35 +151,19 @@ export default class CommentList extends Component {
                               <ReportButton/>
                             </>,
                             <span>
-                              {this.state.renderAdComponent[index] ? <ToComment  className="childComment" createComment={this.childCreateComment}/> : null}
+                              {this.state.renderAdComponent[index] ? <ToComment  className="childComment" createComment={this.createReply}/> : null}
                             </span>,
                             
                           ]}
-                      author={item.author}
-                      avatar={item.avatar}
-                      content={item.content}
-                      datetime={item.datetime}
+                      author={item.Nickname}
+                      avatar={<Avatar
+                        src={item.Icon}
+                      />}
+                      content={item.Content}
+                      datetime={item.Time}
                       >
-                        {
-                            objArr.map((item,index)=>(
-                              <li>
-                                <Comment
-                                className='middle'
-                                actions={ 
-                                    [
-                                      <>
-                                        <ReportButton/>
-                                      </>,
-                                    ]}
-                                author={item.author}
-                                avatar={item.avatar}
-                                content={item.content}
-                                datetime={item.datetime}
-                                >
-                                </Comment>
-                              </li>))
-                        }
-                           
+                      <Reply replyId={item.CommentId}/>
+                   
                       </Comment>
                     </li>
                   ))

@@ -5,6 +5,7 @@ import Helper from '../../components/comm/FloatHelper'
 import CompetitionList from '../../components/competition/competitionList'
 import { Col,Radio} from 'antd'
 import 'antd/dist/antd.css'
+import axios from 'axios'
 
 
 export default class AllCompetitionPage extends Component {

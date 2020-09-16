@@ -50,7 +50,7 @@ export default class CompetitionList extends Component {
     this.state={
       data:[],
       currentData:[],
-      total: data.length,
+      total: 0,
       pageSize: 3,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
@@ -85,6 +85,26 @@ export default class CompetitionList extends Component {
     }
    );
  }
+ /*getData()
+ {
+   axios.get('/api/Project',
+   {params:{
+     order:this.props.sortOrder,
+     pageNum:this.state.pageNumber
+   }})
+   .then(function (response) {
+    console.log(response);
+    this.setstate(
+        {
+          currentData:response.data
+          total:response.data.length
+        }
+    )
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+ }*/
 
  /*getData()
  {

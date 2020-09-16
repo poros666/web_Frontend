@@ -2,8 +2,11 @@
 // made by ykn
 //
 import React, { Component } from 'react'
-import { List, Avatar,Col, Pagination,Space } from 'antd';
+import { List, Avatar,Col, Pagination,Space,Button } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import CONSTURL from './config'
+import Axios from 'axios';
+import Loading from './Loading'
 
 
 const IconText = ({ icon, text }) => (
@@ -143,22 +146,95 @@ export default class MomentList extends Component {
       ];
         this.state={
           data:sourceData,
+          sortType:'time',
           currentData:[],
-          total:sourceData.length,//这里的total也是要获取的数据
-          pageSize: sourceData.length/4,
+          total:10,//这里的total也是要获取的数据
+          pageSize: 10,
           pageNumber:parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
+
         }
     }
 
     componentDidMount() {
-      this.handleAnchor() //页面刷新时回到刷新前的page
+      this.getMomentList()
     }
+
+    getMomentList(){
+      var url=CONSTURL.hosturl+CONSTURL.GetMomentList+this.state.sortType
+      Axios.get(url).then((res)=>{
+        this.setState({data:res.data})
+        this.setState({total:res.data.length})
+    //    console.log(this.state)
+        //数据读取完成之后更新页面
+        this.handleAnchor()
+      })
+    }
+
+    sortByTime(){
+      var temp=this.state.data
+    //  console.log("temp:", temp)
+      temp.sort(this.sortTime)
+//console.log(temp)
+      this.setState({data:temp})
+   //   console.log(this.state.data)
+      this.handleAnchor()
+    }
+
+    sortByLike(){
+      var temp=this.state.data
+      //console.log("temp:", temp)
+      temp.sort(this.sortLike)
+      //console.log(temp)
+      this.setState({data:temp})
+      //console.log(this.state.data)
+      this.handleAnchor()
+
+    }
+
+    sortByComments(){
+      var temp=this.state.data
+      //console.log("temp:", temp)
+      temp.sort(this.sortComment)
+      //console.log(temp)
+      this.setState({data:temp})
+      //console.log(this.state.data)
+      this.handleAnchor()
+
+    }
+
+    sortByFavorites(){
+      var temp=this.state.data
+      //console.log("temp:", temp)
+      temp.sort(this.sortStar)
+      //console.log(temp)
+      this.setState({data:temp})
+      //console.log(this.state.data)
+      this.handleAnchor()
+
+    }
+    
+    sortTime(a,b){
+      return b.Time-a.Time
+    }
+
+    sortLike(a,b){
+      return b.LikeNum-a.LikeNum
+    }
+      
+    sortComment(a,b){
+      return b.CommentNum-a.CommentNum
+    }
+
+    sortStar(a,b){
+      return b.StarNum-a.StarNum
+    }
+
     handleAnchor() {
       this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
     }
     
     onPageChange=(page,pageSize)=>{
-      console.log("page:",page);
+//      console.log("page:",page);
       this.setState({
         pageNumber: page
       }, () => {
@@ -168,9 +244,8 @@ export default class MomentList extends Component {
       for(let i=0;i<state.pageSize;i++){
         state.currentData.pop()
       }
-      
       for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
-        console.log(i)
+  //      console.log(i)
         state.currentData.push(this.state.data[i])
       }
         return{
@@ -185,31 +260,38 @@ export default class MomentList extends Component {
     render() {
         return (
             <div>
+                  <Space>
+                    <p>sort by:</p>       
+                    <Button type="primary" onClick={this.sortByTime.bind(this)}>time</Button>
+                    <Button type="primary" onClick={this.sortByLike.bind(this)}>like</Button>
+                    <Button type="primary" onClick={this.sortByComments.bind(this)}>comments</Button>
+                    <Button type="primary" onClick={this.sortByFavorites.bind(this)}>Favorites</Button>     
+                  </Space>
                   <List
                     itemLayout="horizontal"
                     dataSource={this.state.currentData}
                     renderItem={item => (
                       <List.Item
-                          key={item.title}
+                          key={item.MomentId}
                           actions={[
-                                    <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                                    <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                                    <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+                                    <IconText icon={StarOutlined} text={item.StarNum} key="list-vertical-star-o" />,
+                                    <IconText icon={LikeOutlined} text={item.LikeNum} key="list-vertical-like-o" />,
+                                    <IconText icon={MessageOutlined} text={item.CommentNum} key="list-vertical-message" />,
                                   ]}
                                   >
                           <List.Item.Meta
                             avatar={
 
                               //头像的来源和指向的地址
-                              <a href={"#/Moment/"+item.Uid}>
-                                <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
+                              <a href={"#/Moment/"+item.Account}>
+                                <Avatar src={require("../../img/avatar/"+item.icon+".jpg")}></Avatar>
                               </a>
                             }
 
                             //帖子的名字和指向的地址，传一个pid，moment_id
-                              title={<a href ={"#/Moment/"+item.Pid}>{item.title}</a>}
+                              title={<a href ={"#/Moment/"+item.MomentId}>{item.Title}</a>}
 
-                              description={<p>{item.description}</p>}
+                              description={<p>{item.Content}</p>}
                               
                           />
 
@@ -229,3 +311,4 @@ export default class MomentList extends Component {
         )
     }
 }
+

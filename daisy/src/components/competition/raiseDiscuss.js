@@ -54,6 +54,7 @@ export default class RaiseDiscuss extends React.Component {
     if (!this.state.value) {
       return;
     }
+    //this.postData()
 
     if(!isLogined()){
       window.alert("未登录，确定后跳转至登陆界面")
@@ -74,6 +75,18 @@ export default class RaiseDiscuss extends React.Component {
       value: e.target.value,
     });
   };
+/*
+  postData(){
+    var data={account:,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),content:this.state.value,picture:}
+
+    axios.post('/api/Discussion',data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }*/
 
   /*
   postData(){

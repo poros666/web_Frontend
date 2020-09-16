@@ -107,7 +107,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
 }
 
 //调用按钮
-const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
+const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {

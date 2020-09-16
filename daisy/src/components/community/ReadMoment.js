@@ -1,12 +1,22 @@
 //
 // made by ykn
 //
+
+
+//记录明天的部分 
+//排序
+//登陆状态的用户体验提升
+
+
 import React, { Component } from 'react'
 import 'antd/dist/antd.css'
 import { Card,Avatar,Space,Button } from 'antd'
 import '../../style/comm/comm.css'
-import { MessageOutlined, LikeOutlined, StarOutlined,ShareAltOutlined,AlertOutlined } from '@ant-design/icons'
+import { LikeOutlined, StarOutlined,CommentOutlined } from '@ant-design/icons'
 import ReportButton from './ReportButton'
+import CONSTURL from './config'
+import Axios from 'axios'
+import Loading from './Loading'
 
 
 
@@ -19,95 +29,126 @@ const IconText = ({ icon, text }) => (
   );
   
 
- function getMomentContent(Pid){
-    //do something
-  
-  }
-
 
 export default class ReadMoment extends Component {
     
 
     constructor(props){
-        super(props)
-
-
-        var tempId=this.props.momentId
+        super()
         
-        getMomentContent(tempId)
-                
-        const sourceData=[
-            {
-            title:"Card title" ,
-            content:"this is the card content for testing",
-            bordered:false ,
-            authorName: "i is kk i think cry",
-            authorUid: 132,
-            authorAvatar: "boss",
-            }
-        ]
-
-
         this.state={
-            data:sourceData
+            data:{
+                "Icon":"",
+                "Account":"",
+                "Nickname":"",
+                "Title":"",
+                "Content":"",
+                "Time":"",
+                "LikeCount":0,
+                "CommentCount":0,
+                "StarCount":0
+            },
+            isLoading:true,
+            Mid:props.momentId,
         }
+
+        this.getMomentContent(this.state.Mid)
+    }
+
+    componentDidMount(){
+       // console.log("123123131312")
+        this.getMomentContent(this.state.Mid)
     }
     
+
+    getMomentContent(Mid){
+        //do something
+        var url=CONSTURL.hosturl+CONSTURL.GetMoment+Mid
+        Axios.get(url).then((res)=>{
+         //   console.log(res.data)
+            this.setState({data:res.data})
+            this.setState({isLoading:false})
+        })
+      }
+
+    likeMoment(){
+      var json=
+        {
+            "MomentId":this.state.Mid,
+            "Account":'ddd'
+        }
+      var url=CONSTURL.hosturl+CONSTURL.LikeMoment
+
+      Axios.post(url,json).then((res)=>{
+        console.log(res)
+        window.location.reload()
+      })
+    }
+
+    starMoment(){
+        var json=
+        {
+            "MomentId":this.state.Mid,
+            "Account":"ddd",
+            "Name":"Moment"
+        }
+        var url=CONSTURL.hosturl+CONSTURL.StarMoment
+        Axios.post(url,json).then((res)=>{
+            console.log(res)
+            window.location.reload()
+        })
+    }
+
+
+      
     render() {
         return (
-            <div className='site-card-border-less-wrapper'>
+                this.state.isLoading ? <Loading /> :
+                <div className='site-card-border-less-wrapper'>
                 <Card
-                    
-                    title={this.state.data[0].title}
-                    bordered={this.state.data[0].bordered} 
+                    title={this.state.data.Title}
+                    bordered={false} 
                     extra={//之后可以用button之类的包装一下做成超链接
                         //这里的头像要动态生成
                         <div align="right">
 
-                        <a href={"#/Moment/"+this.state.data[0].authorUid}>
-                            <Avatar src={require("../../img/avatar/"+this.state.data[0].authorAvatar+".jpg")}></Avatar>
+                        <a href={"#/Moment/"+this.state.data.Account}>
+                            <Avatar src={this.state.data.Icon}></Avatar>
                         </a>
-                                        
-                        <p>{this.state.data[0].authorName}</p>
+
+                        <p>{this.state.data.Nickname}</p>
 
                         </div>
                         }
                     actions={[
-                        <Button type='text'>
-                            <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />
+                        <Button type='text' onClick={this.starMoment.bind(this)}>
+                            <IconText icon={StarOutlined} text={this.state.data.StarCount} key="list-vertical-star-o" />
+                        </Button>,
+
+                        <Button type='text' onClick={this.likeMoment.bind(this)}>
+                            <IconText icon={LikeOutlined} text={this.state.data.LikeCount} key="list-vertical-like-o" />
                         </Button>,
 
                         <Button type='text'>
-                            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />
-                        </Button>,
-
-                        <Button type='text'>
-                            <IconText icon={ShareAltOutlined} text="分享" key="list-vertical-share-o" />
+                            <IconText icon={CommentOutlined} text={this.state.data.CommentCount} key="list-vertical-share-o" />
                         </Button>,
 
                         <ReportButton/>,
 
                         ]}
                     >
-                
-
                 {
                     //下面是帖子的内容部分
                 }
                 <p>
-                   { this.state.data[0].content}
+                   { this.state.data.Content}
                 </p>
-
                 </Card>
-                
                 <br/>
-
             </div>
-        //     <div className="site-card-border-less-wrapper">
+            
 
-        //         <p>注释里面就别检查了8</p>
-        //    
-        //   </div>
+            
         )
     }
 }
