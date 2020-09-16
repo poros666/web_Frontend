@@ -5,6 +5,7 @@ export default class Loading extends Component {
         return (
             <div>
                 
+                
             </div>
         )
     }

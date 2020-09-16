@@ -35,10 +35,28 @@ export default class Reply extends Component {
         var url=CONSTURL.hosturl+CONSTURL.GetReplyList+this.state.Rid
       //  console.log(url)
         Axios.get(url).then((res)=>{
-            this.setState({data:res.data})
+            var temp=res.data
+            for(var i=0;i<temp.length;i++){
+                temp[i].Time=this.deleteLetter(temp[i].Time)
+            }
+            this.setState({data:temp})
             this.setState({isLoading:false})
         })
     }
+
+    deleteLetter(str) {
+
+        var result;
+      
+        var reg = /[a-zA-Z]+/;  //[a-zA-Z]表示匹配字母，g表示全局匹配
+      
+        while (result = str.match(reg)) { //判断str.match(reg)是否没有字母了
+      
+          str = str.replace(result[0], ' '); //替换掉字母  result[0] 是 str.match(reg)匹配到的字母
+      
+        }
+        return str;
+      }
 
     render() {
      //   console.log(this.state)

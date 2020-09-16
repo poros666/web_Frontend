@@ -52,19 +52,43 @@ export default class CommentList extends Component {
       componentDidMount(){
         var url=CONSTURL.hosturl+CONSTURL.GetCommentList+this.state.Pid
         Axios.get(url).then((res)=>{
-      //    console.log(res.data)
-          this.setState({data:res.data})
+          var result=res.data
+          for(var i=0;i<result.length;i++){
+            result[i].Time=this.deleteLetter(result[i].Time)
+          }
+          this.setState({data:result})
+          console.log(this.state.data)
         })
       }
 
+      deleteLetter(str) {
+
+        var result;
+      
+        var reg = /[a-zA-Z]+/;  //[a-zA-Z]表示匹配字母，g表示全局匹配
+      
+        while (result = str.match(reg)) { //判断str.match(reg)是否没有字母了
+      
+          str = str.replace(result[0], ' '); //替换掉字母  result[0] 是 str.match(reg)匹配到的字母
+      
+        }
+        return str;
+      }
+
+
+
       createReply(content){
+
+        var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
+
         var json=
         {
           "CommentId":this.state.Pid,
           "Account":"account",
           "Content":content,
-          "Time":"Time",
+          "Time":t,
         }
+        console.log(json)
 
         var url=CONSTURL.hosturl+CONSTURL.CreateReply
         Axios.post(url,json).then((res)=>{

@@ -164,33 +164,70 @@ export default class MomentList extends Component {
       Axios.get(url).then((res)=>{
         this.setState({data:res.data})
         this.setState({total:res.data.length})
-        console.log(this.state)
+    //    console.log(this.state)
         //数据读取完成之后更新页面
         this.handleAnchor()
       })
     }
 
     sortByTime(){
-      this.setState({sortType:'time'})
-      this.getMomentList()
+      var temp=this.state.data
+    //  console.log("temp:", temp)
+      temp.sort(this.sortTime)
+//console.log(temp)
+      this.setState({data:temp})
+   //   console.log(this.state.data)
+      this.handleAnchor()
     }
 
     sortByLike(){
-      this.setState({sortType:'like'})
-      this.getMomentList()
+      var temp=this.state.data
+      //console.log("temp:", temp)
+      temp.sort(this.sortLike)
+      //console.log(temp)
+      this.setState({data:temp})
+      //console.log(this.state.data)
+      this.handleAnchor()
+
     }
 
     sortByComments(){
-      this.setState({sortType:'comment'})
-      this.getMomentList()
+      var temp=this.state.data
+      //console.log("temp:", temp)
+      temp.sort(this.sortComment)
+      //console.log(temp)
+      this.setState({data:temp})
+      //console.log(this.state.data)
+      this.handleAnchor()
+
     }
 
     sortByFavorites(){
-      this.setState({sortType:'star'})
-      this.getMomentList()  
+      var temp=this.state.data
+      //console.log("temp:", temp)
+      temp.sort(this.sortStar)
+      //console.log(temp)
+      this.setState({data:temp})
+      //console.log(this.state.data)
+      this.handleAnchor()
+
     }
-        
+    
+    sortTime(a,b){
+      return a.Time-b.Time
+    }
+
+    sortLike(a,b){
+      return a.LikeNum-b.LikeNum
+    }
       
+    sortComment(a,b){
+      return a.CommentNum-b.CommentNum
+    }
+
+    sortStar(a,b){
+      return a.StarNum-b.StarNum
+    }
 
     handleAnchor() {
       this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
@@ -235,7 +272,7 @@ export default class MomentList extends Component {
                     dataSource={this.state.currentData}
                     renderItem={item => (
                       <List.Item
-                          key={item.Title}
+                          key={item.MomentId}
                           actions={[
                                     <IconText icon={StarOutlined} text={item.StarNum} key="list-vertical-star-o" />,
                                     <IconText icon={LikeOutlined} text={item.LikeNum} key="list-vertical-like-o" />,

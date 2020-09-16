@@ -34,19 +34,18 @@ export default class Community extends Component {
     createMoment(title,content){
 
       //传递json到服务端
-      var now=moment().utc().format()
-  //    console.log(title)
+      var t=moment().format('YYYY-MM-DDTHH:mm:ssC')  //    console.log(title)
    //   console.log(content)
 
       var json=
         {
           'Account':'ddd',
           'Title':title,
-          'Time':now,
+          'Time':t,
           'Content':content
         }
       
-
+        console.log(json)
       var url=CONSTURL.hosturl+CONSTURL.CreatMoment
         
 

@@ -14,6 +14,7 @@ import  CommentList from '../../components/community/CommentList'
 import ReadMoment from '../../components/community/ReadMoment'
 import Axios from 'axios'
 import CONSTURL from '../../components/community/config'
+import moment from 'moment-timezone'
 
 
 
@@ -44,12 +45,15 @@ export default class Moment extends Component {
     // }
 
     createComment(content){
+
+      var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
+
       var json=
       {
         "MomentId":this.state.Pid,
         "Account":123,
         "Content":content,
-        "Time":'time'
+        "Time":t
       }
       console.log(json)
       var url=CONSTURL.hosturl+CONSTURL.CreateComment
