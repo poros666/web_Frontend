@@ -214,19 +214,19 @@ export default class MomentList extends Component {
     }
     
     sortTime(a,b){
-      return a.Time-b.Time
+      return b.Time-a.Time
     }
 
     sortLike(a,b){
-      return a.LikeNum-b.LikeNum
+      return b.LikeNum-a.LikeNum
     }
       
     sortComment(a,b){
-      return a.CommentNum-b.CommentNum
+      return b.CommentNum-a.CommentNum
     }
 
     sortStar(a,b){
-      return a.StarNum-b.StarNum
+      return b.StarNum-a.StarNum
     }
 
     handleAnchor() {

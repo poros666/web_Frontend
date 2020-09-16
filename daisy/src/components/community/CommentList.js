@@ -92,7 +92,7 @@ export default class CommentList extends Component {
 
         var url=CONSTURL.hosturl+CONSTURL.CreateReply
         Axios.post(url,json).then((res)=>{
-
+          window.location.reload()
         })
       }
 

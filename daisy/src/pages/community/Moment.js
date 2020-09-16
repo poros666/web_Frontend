@@ -59,6 +59,8 @@ export default class Moment extends Component {
       var url=CONSTURL.hosturl+CONSTURL.CreateComment
       Axios.post(url,json).then((res)=>{
     //    console.log(res.data)
+        window.location.reload()
+
       })
 
     }

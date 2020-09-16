@@ -68,7 +68,6 @@ export default class ReadMoment extends Component {
          //   console.log(res.data)
             this.setState({data:res.data})
             this.setState({isLoading:false})
-          //  console.log(this.state.data)
         })
       }
 
@@ -82,7 +81,22 @@ export default class ReadMoment extends Component {
 
       Axios.post(url,json).then((res)=>{
         console.log(res)
+        window.location.reload()
       })
+    }
+
+    starMoment(){
+        var json=
+        {
+            "MomentId":this.state.Mid,
+            "Account":"ddd",
+            "Name":"Moment"
+        }
+        var url=CONSTURL.hosturl+CONSTURL.StarMoment
+        Axios.post(url,json).then((res)=>{
+            console.log(res)
+            window.location.reload()
+        })
     }
 
 
@@ -107,7 +121,7 @@ export default class ReadMoment extends Component {
                         </div>
                         }
                     actions={[
-                        <Button type='text'>
+                        <Button type='text' onClick={this.starMoment.bind(this)}>
                             <IconText icon={StarOutlined} text={this.state.data.StarCount} key="list-vertical-star-o" />
                         </Button>,
 

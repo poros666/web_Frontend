@@ -51,6 +51,8 @@ export default class Community extends Component {
 
       Axios.post(url,json).then((res)=>{
         console.log(res)
+        window.location.reload()
+
       })
 
     }

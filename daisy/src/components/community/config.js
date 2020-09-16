@@ -9,6 +9,7 @@ const CONSTURL={
     GetCommentList:'/api/Comment?MomentId=',
     GetReplyList:'/api/Reply?CommentId=',
     LikeMoment:'/api/LikeMoment',
+    StarMoment:'/api/MomentStar'
 
 }
 
