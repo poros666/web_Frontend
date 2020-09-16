@@ -93,9 +93,7 @@ export default class RaiseDiscuss extends React.Component {
     var userData=null
     if(isLogined())
     {
-      var token=localStorage.getItem('token')
-      var account=token.account
-      userData=getUserInfor(account)
+      userData=localStorage.getItem('userData')
     }
 
     return (

@@ -13,7 +13,7 @@ export default class FindTeam extends Component {
         super(props)
   
         this.state={
-          matchId:1
+          matchId:this.props.location.query.compID
          }
       }
     render() {
