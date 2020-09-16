@@ -77,7 +77,7 @@ export default class Post extends Component {
                         <PostPageReport 
                         ReportUID={this.state.PostId} 
                         ReporterUID='test2' 
-                        Time={moment().format("YYYY-MM-DD HH:mm:ss")}
+                        Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
                         />
                         </div>
                         }

@@ -8,10 +8,11 @@
 #PostList{
     background-color: snow;
     height:65%;
+    box-shadow: 5px 5px 5px 5px lightskyblue;
 }
 
-#Search{
-    margin: 50px 50px;
+#TeamNav{
+    box-shadow: 5px 5px 5px 5px gray;
 }
 
 #TurnPage{
@@ -20,7 +21,8 @@
 
 
 #Post{
-    height: 1000px;
+    height: 100%;
+    box-shadow: 5px 5px 5px 5px lightskyblue;
 }
 
 #Apply{

@@ -38,11 +38,13 @@ export default class PostPage extends Component {
             <div>
                 <HeaderNav/>
                 <br/><br/>
+                <div id='TeamNav'>
                 <TeamNav matchId={this.state.ProjctId}/>
+                </div>
                 <div id='page'>
                 <Divider/>
                 <div id='WebPage'>
-                <div>
+                <div id='Post'>
                     <Post matchId={this.state.ProjctId} groupId={this.state.GroupId} postId={this.state.PostId}/>
                 </div>
                 <Divider/>
