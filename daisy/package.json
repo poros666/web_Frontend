@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.6.3",
     "axios": "^0.20.0",
+    "moment-timezone": "^0.5.31",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-highlight-words": "^0.16.0",

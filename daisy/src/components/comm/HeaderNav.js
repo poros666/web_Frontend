@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-// import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
+import { withRouter } from 'react-router-dom'
 // import logo from './logo2.png'
 // import logo from './logo3.png'
 
@@ -21,6 +22,7 @@ class HeaderNav extends Component {
         //   isSignInMenu:'block',
           isSignInMenu:' ',
           isSignOutMenu:'none',
+          searchWord:'',
         };
 
         // 这个绑定是必要的，使`this`在回调中起作用
@@ -43,15 +45,29 @@ class HeaderNav extends Component {
     //     console.log('click ', e);
     //     this.setState({ current: e.key });
     // };
+    setSearchWord(e){
+        // console.log(e.target.value)
+        this.setState({
+            searchWord: e.target.value
+        })
+    }
     searchJump(value){
         console.log(value)
         console.log(value.length)
         var w=window.open('about:blank')
+        var keyWord=''
         if(value.length == 0){
             w.location.href="#/search"
         }
         else{
-            w.location.href="#/searchResult"
+            // w.location.href="#/searchResult"
+            //这里可以onClick，实现点击跳转传参
+            this.props.history.push({
+                pathname: `/searchResult`, 
+                state: {keyWord:this.state.searchWord}
+            });
+            console.log( this.props)
+            // this.props.history.push("#/searchResult/all?keyword=${page}", 
         }
     }
     
@@ -104,8 +120,10 @@ class HeaderNav extends Component {
                                 </Menu.Item>
                                                         
                                 <Search 
+                                    history={this.props.history}
                                     placeholder="请输入想要搜索的内容"
-                                    // onChange={this.inputChange.bind(this)}
+                                    value={this.state.searchWord}
+                                    onChange={e => this.setSearchWord(e)}
                                     onSearch={value => this.searchJump(value)}
                                     onKeyDown={e=>this.keyDown(e)}
                                     style={{ width: 400 }}
@@ -198,4 +216,5 @@ class HeaderNav extends Component {
     }
 }
 
-export default HeaderNav;
+// export default HeaderNav;
+export default withRouter(HeaderNav);
