@@ -7,7 +7,7 @@ export default class FindTeamButton extends Component {
     render() {
         return (
             <div>
-                <a href={"#/findteam/id="+this.props.compID+'/'}>
+                <a href={"#/findteam/id="+this.props.compID}>
                 <Button type="primary" icon={<SmileTwoTone />}>组队</Button>
                 </a>
             </div>
