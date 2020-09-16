@@ -21,7 +21,9 @@ export default class FindTeam extends Component {
             <>
                 <HeaderNav/>
                 <br/><br/>
-                <TeamNav matchId={this.state.matchId}/>
+                <div id='TeamNav'>
+                <TeamNav matchId={this.state.ProjctId}/>
+                </div>
                 <div id='page'>
                 <Divider/>
                 <div id='WebPage'>
