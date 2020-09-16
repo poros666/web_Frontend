@@ -16,15 +16,20 @@ export default class PostPage extends Component {
         super(props)
         let projctId=0;
         let groupId=0;
+        let postId=0;
         if(this.props.match.params.ProjctId!=null){
             projctId=this.props.match.params.ProjctId;
         }
         if(this.props.match.params.groupId!=null){
             groupId=this.props.match.params.groupId
         }
+        if(this.props.match.params.id!=null){
+            postId=this.props.match.params.id
+        }
         this.state={
             ProjctId:projctId,
-            GroupId:groupId
+            GroupId:groupId,
+            PostId:postId
         }
       }
 
@@ -38,7 +43,7 @@ export default class PostPage extends Component {
                 <Divider/>
                 <div id='WebPage'>
                 <div>
-                    <Post matchId={this.state.ProjctId} groupId={this.state.GroupId} />
+                    <Post matchId={this.state.ProjctId} groupId={this.state.GroupId} postId={this.state.PostId}/>
                 </div>
                 <Divider/>
                 <FloatHelper/>

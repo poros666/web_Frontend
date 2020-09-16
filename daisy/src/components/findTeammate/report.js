@@ -7,7 +7,7 @@ import axios from 'axios'
 const { Option } = Select;
 
 //添加举报的弹出框
-const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time}) => {
   const [form] = Form.useForm()
   return (
     <Modal
@@ -50,7 +50,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         </Form.Item>
         <Form.Item
           name="target_id"
-          label="被举报用户id"
+          label="被举报帖子id"
         >
           <Input placeholder={ReportUID} disabled/>
         </Form.Item>
@@ -87,10 +87,12 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     values.target_id=ReportUID;
     console.log("Received values of form: ", values)
     let dataSent={
-      Account:values.target_id,
+      Account:values.reporter_id,
       ReportType:values.types,
       Content:values.description,
-      Time:values.time
+      Time:values.time,
+      TargetType:'post',
+      TargetId:values.target_id
     }
     console.log(dataSent)
     if(dataSent.Account.length>0){

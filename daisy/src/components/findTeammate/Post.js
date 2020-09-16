@@ -20,8 +20,9 @@ export default class Post extends Component {
     constructor(props){
         super(props)
 
-        var GroupId=this.props.groupId
+        var groupId=this.props.groupId
         var MatchId=this.props.matchId
+        var postId=this.props.postId
         
         this.state={
             NickName:"",
@@ -29,10 +30,12 @@ export default class Post extends Component {
             Content:"",
             PostTime:"",
             Apply:'',
-            Account:''
+            Account:'',
+            GroupId:groupId,
+            PostId:postId,
         }
         
-        axios.get('http://mock-api.com/5g7AeqKe.mock/Post/1?projectId='+MatchId+'&groupId='+GroupId)
+        axios.get('http://mock-api.com/5g7AeqKe.mock/Post/1?projectId='+MatchId+'&groupId='+groupId)
         .then(response=>{
             this.setState({
                 ProjctId:MatchId,
@@ -71,7 +74,11 @@ export default class Post extends Component {
                         </a>
                         <br/>                
                         <a href={"#/personal"}>{this.state.NickName}</a>
-                        <PostPageReport ReportUID={this.state.Account} ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
+                        <PostPageReport 
+                        ReportUID={this.state.PostId} 
+                        ReporterUID='test2' 
+                        Time={moment().format("YYYY-MM-DD HH:mm:ss")}
+                        />
                         </div>
                         }
                 >
@@ -94,7 +101,8 @@ export default class Post extends Component {
                             let dataSent={
                               ProjctId:this.state.ProjctId,
                               Account:this.state.Account,
-                              Content:this.state.Apply
+                              Content:this.state.Apply,
+                              GroupId:this.state.GroupId
                             }
                             axios.post('http://mock-api.com/5g7AeqKe.mock/Application',dataSent)
                             .then(response=>{
@@ -103,7 +111,7 @@ export default class Post extends Component {
                             })      
                     }
                     else{
-                        window.alert("您还未登录")
+                        window.alert("申请失败")
                     }
                     }}>申请进入小队</p></Button>
                 </Space>
