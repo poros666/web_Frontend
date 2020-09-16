@@ -13,7 +13,7 @@ export default class FindTeam extends Component {
         super(props)
   
         this.state={
-          matchId:this.props.location.query.compID
+          matchId:this.props.match.params.compID
          }
       }
     render() {
@@ -26,7 +26,7 @@ export default class FindTeam extends Component {
                 <Divider/>
                 <div id='WebPage'>
                     <div id='PostList'>
-                        <PostList/>
+                        <PostList matchId={this.state.matchId}/>
                     </div>
                     <br/>
                     <Divider/>

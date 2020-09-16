@@ -127,7 +127,7 @@ export default class DiscussList extends Component {
     this.setState({
       pageNumber: page
     }, () => {
-      window.location.hash = `#/compPage/${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
+      window.location.hash = `#/compPage/id=${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     this.setState((state)=>{
     for(let i=0;i<state.pageSize;i++){

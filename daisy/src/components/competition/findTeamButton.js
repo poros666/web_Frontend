@@ -7,18 +7,9 @@ export default class FindTeamButton extends Component {
     render() {
         return (
             <div>
-                <Link to={
-                    {
-                        pathname:"/findTeam",
-                        query:{
-                            compID:this.props.compID,
-                            compName:this.props.compName,
-                            compInformation:this.props.compInformation
-                            }
-                    }
-                    }>
+                <a href={"#/findteam/id="+this.props.compID+'/'}>
                 <Button type="primary" icon={<SmileTwoTone />}>组队</Button>
-                </Link>
+                </a>
             </div>
         )
     }

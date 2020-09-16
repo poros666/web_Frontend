@@ -122,11 +122,7 @@ export default class CompetitionList extends Component {
                       src={item.logosrc}
                     />
                     <List.Item.Meta
-                    title={<Link to={{pathname:"/compPage/"+item.ID+"=id",
-                                      query:{
-                                        id:item.ID,
-                                        name:item.competitionname
-                                      }}}>{item.competitionname}</Link>
+                    title={<a href={"#/compPage/id="+item.ID+'/'}>{item.competitionname}</a>
                     }
                     description={item.description}
                     />

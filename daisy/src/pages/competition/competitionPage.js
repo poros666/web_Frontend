@@ -22,7 +22,7 @@ export default class CompetitionPage extends Component
     constructor(props){
         super(props)
         this.state={
-            compID:this.props.location.query.id,
+            compID:this.props.match.params.compID,
             compName:'',
             compImgUrl:'',
             compInformation:'',
@@ -79,7 +79,7 @@ export default class CompetitionPage extends Component
                         <CompetitionName compName={this.state.compName}/>
                     </Col>
                     <Col span={6}>
-                        <FindTeamBotton compID={this.state.compID} compName={this.state.compName} compInformation={this.state.compInformation}/>
+                        <FindTeamBotton compID={this.state.compID}/>
                         <br/>
                         <SubscriptionButton compID={this.state.compID}/>
                     </Col>

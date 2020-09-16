@@ -75,7 +75,7 @@ export const mainRoutes = [{
 },
 
 {
-    path: "/findTeam",
+    path: "/findTeam/id=:compID",
     title: "寻找队伍",
     component: FindTeam
 },
@@ -90,7 +90,7 @@ export const mainRoutes = [{
     component: Moment
 },
 {
-    path: "/compPage/:compID",
+    path: "/compPage/id=:compID",
     title: "比赛页面",
     component: CompetitionPage
 },
