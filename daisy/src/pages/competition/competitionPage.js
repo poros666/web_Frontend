@@ -22,7 +22,7 @@ export default class CompetitionPage extends Component
     constructor(props){
         super(props)
         this.state={
-            compID:this.props.match.params.compID,
+            compID:this.props.location.query.id,
             compName:'',
             compImgUrl:'',
             compInformation:'',
