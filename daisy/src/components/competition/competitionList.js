@@ -85,6 +85,7 @@ export default class CompetitionList extends Component {
     }
    );
  }
+
  /*getData()
  {
    axios.get('/api/Project',
@@ -102,6 +103,7 @@ export default class CompetitionList extends Component {
   })
   .catch(function (error) {
     console.log(error);
+    window.alter("连接似乎出现问题")
   });
  }*/
 
@@ -141,15 +143,5 @@ export default class CompetitionList extends Component {
                     </Col>
             </div>
         )
-    }
-
-    handleChangePage(CompID)
-    {
-      this.context.router.push(
-        {
-          path:'#/compPage/'+CompID,
-          ID:CompID
-        }
-      )
     }
 }

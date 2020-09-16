@@ -4,7 +4,7 @@ import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import moment from 'moment';
 import axios from 'axios'
 import '../../utils/auth'
-import { getUserInfor, isLogined } from '../../utils/auth';
+import { isLogined } from '../../utils/auth';
 
 
 const { TextArea } = Input;
@@ -54,13 +54,16 @@ export default class RaiseDiscuss extends React.Component {
     if (!this.state.value) {
       return;
     }
-/*
-    if(isLogined()){
-      //this.postData()
+
+    if(!isLogined()){
+      window.alert("未登录，确定后跳转至登陆界面")
+      window.location.hash ='#/login'
+      return 
     }
     else{
-      //跳转至登录页面或弹窗报错
-    }*/
+      //postData()
+    }
+    
     this.setState({
       submitting: true,
     });
@@ -75,9 +78,8 @@ export default class RaiseDiscuss extends React.Component {
   /*
   postData(){
     var token=localStorage.getItem('token')
-    var account=token.account
-    var userData=getUserInfor(account)
-    var data={account:account,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),content:this.state.value,picture:userData.icon}
+    var userData=localStorage.getItem('userData')
+    var data={account:userData.account,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),content:this.state.value,picture:userData.icon}
 
     axios.post('/api/Discussion',data)
     .then(function (response) {

@@ -1,15 +1,12 @@
 import React, { useState,Component } from "react"
-import { Modal, Form, Input, Checkbox, Row, Col, Popover } from "antd"
-import { WarningOutlined, ThunderboltFilled } from "@ant-design/icons"
+import { Modal, Form, Input,Select, Popover } from "antd"
+import { WarningOutlined} from "@ant-design/icons"
+import axios from "axios"
+import { isLogined } from "../../utils/auth";
+const { Option } = Select;
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-}
+
+
 
 //添加举报的弹出框
 const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time }) => {
@@ -87,6 +84,16 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         >
           <Input/>
         </Form.Item>
+        <Form.Item name="types" label="举报类型" 
+        rules={[{ required: true, message: '请选择举报类型' }]}>
+        <Select initialValues="色情" style={{ width: 120 }}>
+          <Option value="sex">色情</Option>
+          <Option value="policy">涉政</Option>
+          <Option value="effect">影响他人</Option>
+          <Option value="trade">涉及交易</Option>
+          <Option value="spite">恶意</Option>
+    </Select>
+        </Form.Item>
         <Form.Item name="description" label="举报内容">
           <Input.TextArea
             allowClear={true}
@@ -94,85 +101,41 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
             placeholder="在此输入举报原因等详情"
           />
         </Form.Item>
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
-        <Form.Item name="types">
-          <Checkbox.Group>
-            <Row>
-              <Col span={8}>
-                <Checkbox
-                  value="sex"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  色情
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="political"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  涉政
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="influence"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  影响他人
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="trade"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  涉及交易
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="attack"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  恶意
-                </Checkbox>
-              </Col>
-              <Col span={8}>
-                <Checkbox
-                  value="else"
-                  style={{
-                    lineHeight: "32px",
-                  }}
-                >
-                  其他
-                </Checkbox>
-              </Col>
-            </Row>
-          </Checkbox.Group>
-        </Form.Item>
-      </Form>
+</Form>
     </Modal>
   )
 }
 
 //调用按钮
-const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
+const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     //处理数据
+    /*values.time=moment(Time).format('YYYY-MM-DDTHH:mm:ssC');
+    values.reporter_id=ReporterUID;
+    values.target_id=ReportUID;
+    console.log("Received values of form: ", values)
+    let dataSent={
+      Account:values.reporter_id,
+      ReportType:values.types,
+      Content:values.description,
+      Time:values.time,
+      TargetType:'discussion',
+      TargetId:values.target_id
+    }
+    console.log(dataSent)
+    if(dataSent.Account.length>0){
+    axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
+        .then(response=>{
+          console.log(response)
+          window.alert("举报成功")
+        })
+      }
+      else{
+        window.alert("举报失败")
+      }*/
     setVisible(false)
   }
 
@@ -180,6 +143,12 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
     <Popover content={<p>report</p>}>
       <WarningOutlined
         onClick={() => {
+          if(!isLogined())
+          {
+            window.alert("未登录，确定后跳转至登陆界面")
+            window.location.hash ='#/login'
+            return 
+         }
           setVisible(true)
         }}
       />

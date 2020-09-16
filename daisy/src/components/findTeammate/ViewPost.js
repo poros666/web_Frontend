@@ -42,7 +42,7 @@ export default class CommunityContent extends Component {
     this.setState({
       pageNumber: page
     }, () => {
-      window.location.hash = `#/findteam/id=${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
+      window.location.hash = `#/findteam/id=${this.props.matchId}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
     .then(response=>{

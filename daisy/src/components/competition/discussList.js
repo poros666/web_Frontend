@@ -107,6 +107,7 @@ export default class DiscussList extends Component {
       compID:this.props.compID,
       sortMethod:'time',
       currentData:[],
+      data:[],
       total: data.length,
       pageSize: 5,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
@@ -153,13 +154,14 @@ export default class DiscussList extends Component {
             console.log(response);
             this.setstate(
                 {
-                  currentData:response.data
+                  data:response.data
                   total:response.data.length
                 }
             )
           })
           .catch(function (error) {
             console.log(error);
+            window.alter("连接似乎出现问题")
           });
   }
 */
