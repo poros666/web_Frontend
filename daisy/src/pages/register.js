@@ -6,10 +6,8 @@ import "../style/registercard.css"
 export default class Register extends Component {
   render() {
     return (
-      <Card className="register-card" title="注册">
-        <br />
+      
         <RegistrationForm />
-      </Card>
     )
   }
 }

@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import axios from 'axios'
+import {setToken} from "../../utils/auth"
 
 const NormalLoginForm = () => {
   const onFinish = values => {
     console.log('Received values of form: ', values);
+    let dataSent={
+      Account:values.username,
+      Password:values.password,
+    }
+    axios.post('/api/User/Login',dataSent)
+    .then(response=>{
+      console.log(response)
+      setToken(response.jwt, values.username)
+      window.alert("登陆成功")
+    })
   };
 
   return (
