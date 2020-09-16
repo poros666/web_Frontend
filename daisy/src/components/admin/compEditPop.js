@@ -13,6 +13,16 @@ const layout = {
 //添加比赛的弹出框
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
+  const nameValidate = (rule, value, callback) => {
+    if (value < 1) {
+      callback('组队人数不能小于1人')
+    }
+    if (value > 100) {
+      callback('组队人数不能大于100人')
+    } else {
+      callback()
+    }
+  }
   return (
     <Modal
       visible={visible}
@@ -58,6 +68,21 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           <Input />
         </Form.Item>
         <Form.Item
+          name="number"
+          label="参赛人数"
+          rules={[
+            {
+              required: true,
+              message: "请输入参赛人数",
+            },
+            {
+              validator: nameValidate,
+            },
+          ]}
+        >
+          <Input placeholder="1~100"/>
+        </Form.Item>
+        <Form.Item
           name="start"
           label="开始时间"
           rules={[
@@ -67,7 +92,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="类似2020-01-01"/>
         </Form.Item>
         <Form.Item
           name="end"
@@ -79,7 +104,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder={"类似2020-01-01"}/>
         </Form.Item>
         <Form.Item
           name="sponsor"
@@ -94,7 +119,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name="description" label="比赛简介">
+        <Form.Item name="description" label="比赛简介" initialValue="暂无简介">
           <Input.TextArea
             allowClear={true}
             autoSize={{ minRows: 3, maxRows: 30 }}
@@ -102,16 +127,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
-        <Form.Item
-          name="tags"
-          className="collection-create-form_last-form-item"
-        >
-          <Radio.Group>
-            <Radio value="not_started">未开始</Radio>
-            <Radio value="running">进行中</Radio>
-            <Radio value="over">已结束</Radio>
-          </Radio.Group>
-        </Form.Item>
+        
       </Form>
     </Modal>
   )
@@ -136,7 +152,7 @@ const CollectionsPage = () => {
         }}
         style={{ marginBottom: 10 }}
       >
-        Add
+        新建比赛
       </Button>
       <CollectionCreateForm
         visible={visible}

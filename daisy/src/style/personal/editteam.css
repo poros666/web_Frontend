@@ -1,0 +1,23 @@
+#editteam_page{
+    background-color:#f0f2f5;
+    height: 100%;
+}
+#edteam_content{
+    margin-top: 60px;
+    height: 100%;
+}
+#editteam_card{
+    margin: 0 auto;
+    width: 1000px;
+}
+.avatar-item {
+    margin-right: 24px;
+  }
+  .saveButtons{
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 200px;
+  }
+  .saveButtons Button{
+    margin-left: 20px;
+  }

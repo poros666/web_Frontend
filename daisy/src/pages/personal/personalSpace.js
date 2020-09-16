@@ -2,38 +2,44 @@ import React, { Component } from 'react'
 import {Route, Link} from "react-router-dom";
 import MastHead from '../../components/personal/mastHead'
 import HeaderNav from '../../components/comm/HeaderNav'
-import {Layout,Menu} from 'antd'
+import {Layout,Divider} from 'antd'
 import '../../style/personal/personalSpace.css'
 import { personalRoutes } from '../../routes/index'
+import OtherMenuItem from '../../components/personal/otherMenuItem'
+import MyMenuItem from '../../components/personal/myMenuItem'
+import Footer from '../../components/comm/Footer'
 
-const { Header, Content,} = Layout;
 
 export default class PersonalSpace extends Component {  
+  constructor(props){
+    super(props)
+      this.state={
+        role:1,       //role=1表示本人视角，role=0表示其他人视角
+        
+      }
+  }
+  
   render() {
     return (
-      <Layout>
-        {/* <Header><HeaderNav/></Header> */}
+      <div className='whole_page'>
         <HeaderNav/>
-        <div style={{height:'50px'}}/>
-
-        <Content className="perspace_content">
-          <div><MastHead/></div>
-          <Menu mode="horizontal">
-          {
-            personalRoutes.map((item,index)=>{
-            return (<Menu.Item key={index}><Link to={item.path}>{item.title}</Link></Menu.Item>)
-            })
-          }
-          </Menu>
-          <Content>
-          {
-            personalRoutes.map((item,index)=>{
-              return (<Route key={index} path={item.path} component={item.component}/>)
-            })
-          }
-          </Content>
-        </Content>
-      </Layout>
+        <div id="perspace_content">
+          <div id='mastHead'>
+            <MastHead role={this.state.role}/>
+          </div>
+          <div id='menuItem'>
+            {this.state.role?<MyMenuItem/>:<OtherMenuItem/>}
+            <div>
+            {
+              personalRoutes.map((item,index)=>{
+                return (<Route key={index} path={item.path} component={item.component}/>)
+              })
+            }
+            </div>
+          </div>
+        </div>
+        <Footer/>
+      </div>
     )
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
-import { Layout, Menu, Input, Space,Divider, Button,Row,Col} from 'antd'
+import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
 // import logo from './logo2.png'
@@ -65,40 +65,134 @@ class HeaderNav extends Component {
         return (
             <div >
                 <Layout>
-                    <div style={{ position: 'fixed', zIndex: 1, width: '100%' ,color:'white',height:'60px'}}>
-                        <Row>
-                            <Col span={2} offset={0}>
-                             <div className="logo" style={{width:'10%',margin:'0',padding:'0',position:'relative'}}>
-                                <a href="#/home" target="_blank" rel="noopener noreferrer">
-                                    <img 
-                                        height={'40px'}
-                                        src={logo} 
-                                        alt="logo"
-                                    />
-                                </a>
-                            </div>
-                            </Col>
-                            <Col span={2} offset={18}>
-                                <Button type="primary" style={{float:'right',top:'15px'}}>换一换</Button>
-                            </Col>
-                            <Col span={2} offset={0}>
-                                <Button type="primary" style={{float:'right',top:'15px'}}>
+                    <Space size={20}  style={{ position: 'fixed', zIndex: 1, width: '100%', background:'white'}}>
+                        <div className="logo" style={{margin:'0,100px',position:'relative',left:'50%'}}>
+                            <a href="#/home" target="_blank" rel="noopener noreferrer">
+                                <img 
+                                    height={'40px'}
+                                    src={logo} 
+                                    alt="logo"
+                                />
+                            </a>
+                        </div>
+                        <div style={{position:'relative',}}>
+                            <Button onClick={this.handleClick} style={{width:'60px'}}>
+                                {this.state.isLogin ? 'OFF':'IN' }
+                            </Button>
+                        </div>
+                        <div style={{position:'relative',width:'100%',left:'20%'}}>
+                            <Menu 
+                            // style={{width:'100%'}}
+                            // onClick={this.handleClick} 
+                            // selectedKeys={[current]}
+                             mode="horizontal" 
+                            >
+                                <Menu.Item key="home" icon={<HomeOutlined />}>
+                                    <a href="#/home" target="_blank" rel="noopener noreferrer">
+                                        首页
+                                    </a>
+                                </Menu.Item>
+                                <Menu.Item key="compPage" icon={<RadarChartOutlined />}>
                                     <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
-                                        更多</a>
-                                </Button>
-                            </Col>
-                        </Row>
-                        
-                        <Menu theme="dark" mode="horizontal"
-                            style={{width:'50%',position:'relative',float:'right'}}
-                        >
-                            <Menu.Item key="1">nav 1</Menu.Item>
-                            <Menu.Item key="2">nav 2</Menu.Item>
-                            <Menu.Item key="3">nav 3</Menu.Item>
-                        </Menu>
-                    </div>
-                
+                                        比赛
+                                    </a>
+                                </Menu.Item>
+                                <Menu.Item key="community" icon={<LayoutOutlined />}>
+                                    <a href="#/community" target="_blank" rel="noopener noreferrer">
+                                        社区
+                                    </a>
+                                </Menu.Item>
+                                                        
+                                <Search 
+                                    placeholder="请输入想要搜索的内容"
+                                    // onChange={this.inputChange.bind(this)}
+                                    onSearch={value => this.searchJump(value)}
+                                    onKeyDown={e=>this.keyDown(e)}
+                                    style={{ width: 400 }}
+                                />
+                                
+                                <SubMenu icon={<UserOutlined />} 
+                                key='personalMenu'
+                                style={{ visibility: this.state.isVisibility}}
+                                title={"我的"}>
+                                    
+                                    <Menu.Item key="userHome">
+                                        <a href="#/personal" target="_blank" rel="noopener noreferrer">
+                                            个人主页
+                                        </a>
+                                    </Menu.Item>
+                                    <Menu.Item key="userTeam">
+                                        <a href="#/personal/team" target="_blank" rel="noopener noreferrer">
+                                            我的队伍
+                                        </a>
+                                        </Menu.Item>
+                                    <Menu.Item key="userComp">
+                                        <a href="#/personal/comp" target="_blank" rel="noopener noreferrer">
+                                            我的比赛
+                                        </a>
+                                    </Menu.Item>
+                                    <Menu.Item key="userCollege">
+                                        <a href="#/personal/colle" target="_blank" rel="noopener noreferrer">
+                                            我的收藏
+                                        </a>
+                                    </Menu.Item>
+                                </SubMenu>
+
+                                <SubMenu icon={<CommentOutlined />} 
+                                key='messageMenu'
+                                style={{ visibility: this.state.isVisibility,}}
+                                title={"消息"
+                                // <a href ={"#/message"}>{"消息"}</a>
+                                    }>
+                                    <Menu.Item key="systemNotice">
+                                        <a href="#/message/system" target="_blank" rel="noopener noreferrer">
+                                            系统公告
+                                        </a></Menu.Item>
+
+                                    <Menu.Item key="compNotice">
+                                        <a href="#/message/comp" target="_blank" rel="noopener noreferrer">
+                                            比赛通知
+                                        </a></Menu.Item>
+
+                                    <Menu.Item key="replyNotice">
+                                        <a href="#/message/reply" target="_blank" rel="noopener noreferrer">
+                                            回复我的
+                                        </a></Menu.Item>
+
+                                    <Menu.Item key="letterNotice">
+                                        <a href="#/message/letter" target="_blank" rel="noopener noreferrer">
+                                            私信
+                                        </a></Menu.Item>
+
+                                    <Menu.Item key="teamNotice">
+                                        <a href="#/message/team" target="_blank" rel="noopener noreferrer">
+                                            队伍消息
+                                        </a></Menu.Item>
+
+                                    <Menu.Item key="applyNotice">
+                                        <a href="#/message/apply" target="_blank" rel="noopener noreferrer">
+                                            组队申请
+                                        </a>
+                                    </Menu.Item>
+                                </SubMenu>
+                                <Menu.Item key="signOut" icon={<LogoutOutlined />}
+                                    style={{ display: this.state.isSignOutMenu,}} >
+                                        登出
+                                </Menu.Item>
+                                <Menu.Item key="signIn" icon={<LoginOutlined />}
+                                    style={{ display: this.state.isSignInMenu,float:'right'}}>
+                                    <a href="#/login" target="_blank" rel="noopener noreferrer">
+                                        登录
+                                    </a>
+                                </Menu.Item>
+                            </Menu>
+                        </div>
+                    </Space>
                 </Layout>
+                
+                <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:23 }}/>
+                <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:23 }}/>
+                <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:24 }}/>
             </div>
         )
     }

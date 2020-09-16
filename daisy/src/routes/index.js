@@ -1,6 +1,5 @@
-import AdminIndex from "../pages/admin/adminIndex";
+//import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
-import DealReport from "../pages/admin/dealReport";
 import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
 import Homepage from "../pages/homepage";
@@ -12,17 +11,21 @@ import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import AllCompetitionPage from "../pages/competition/allCompetitionPage";
 
-import MessageIndex from "../pages/message/messageIndex";
 import Reply from "../pages/message/reply";
 import CompNotice from "../pages/message/compNotice";
 import Apply from "../pages/message/apply";
 import SystemNotice from "../pages/message/systemNotice";
 import TeamMessage from "../pages/message/teamMessage";
 import PrivateLetter from "../pages/message/privateLetter";
-import PersonalCenter from "../pages/personal/personalSpace";
-import MyTeam from "../pages/personal/myTeam"
-import MyComp from "../pages/personal/myComp"
-import MyColle from "../pages/personal/myColle"
+import UserTeam from "../pages/personal/userTeam"
+import UserComp from "../pages/personal/userComp"
+import UserColle from "../pages/personal/userColle"
+import UserInform from "../pages/personal/userInform"
+import UserPost from "../pages/personal/userPost"
+import Editinform from "../pages/personal/editInform"
+import EditTeam from "../pages/personal/editTeam"
+import Collection from "../pages/personal/collection"
+
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
 import Login from "../pages/login";
@@ -31,6 +34,8 @@ import SearchContent from "../components/search/searchContent";
 import SearchContentComp from "../components/search/searchContentComp";
 import SearchContentComm from "../components/search/searchContentComm";
 import SearchContentUsr from "../components/search/searchContentUsr";
+import DeliverSystemAnnouncement from "../pages/admin/deliverSystemAnnouncement";
+import ReportManagement from "../pages/admin/dealReport";
 
 export const adminRoutes = [{
     path: "/admin/comp",
@@ -40,18 +45,24 @@ export const adminRoutes = [{
 {
     path: "/admin/dealreport",
     title: "处理举报",
-    component: DealReport
+    component: ReportManagement
 },
 {
     path: "/admin/usermanagement",
     title: "用户管理",
     component: UserManagement
 },
+{
+    path: "/admin/sysannounce",
+    title: "发布系统公告",
+    component: DeliverSystemAnnouncement
+},
 ]
 
 export const mainRoutes = [{
     path: '/404',
-    component: PageNotFound},
+    component: PageNotFound
+},
 {
     path: "/home",
     title: "主页",
@@ -70,7 +81,7 @@ export const mainRoutes = [{
     component: FindTeam
 },
 {
-    path: "/community",
+    path: "/Community",
     title: "社区",
     component: Community
 },
@@ -95,6 +106,21 @@ export const mainRoutes = [{
     component: SearchResult
 },
 {
+    path: "/editinform",
+    title: "编辑个人资料",
+    component: Editinform
+},
+{
+    path: "/editTeam/:teamID",
+    title: "编辑小队",
+    component: EditTeam
+},
+{
+    path: "/collection/:fileID",
+    title: "收藏夹",
+    component: Collection
+},
+{
     path: "/login",
     title: "登录",
     component: Login
@@ -110,6 +136,7 @@ export const mainRoutes = [{
     component: AllCompetitionPage
 }]
 
+    
 export const searchRoutes = [
 {
     path: "/searchResult/type=mixed",
@@ -167,16 +194,26 @@ export const messageRoutes = [
 
 export const personalRoutes = [{
     path: "/personal/team",
-    title: "我的队伍",
-    component: MyTeam
+    title: "队伍",
+    component: UserTeam
 },
 {
     path: "/personal/comp",
-    title: "我的比赛",
-    component: MyComp
+    title: "比赛",
+    component: UserComp
 },
 {
     path: "/personal/colle",
-    title: "我的收藏",
-    component: MyColle
+    title: "收藏",
+    component: UserColle
+},
+{
+    path: "/personal/inform",
+    title: "资料",
+    component: UserInform
+},
+{
+    path: "/personal/post",
+    title: "发布",
+    component: UserPost
 }]

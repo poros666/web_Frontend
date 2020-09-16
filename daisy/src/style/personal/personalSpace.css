@@ -1,6 +1,16 @@
-.perspace_content {
+.whole_page{
+    background-color:#f0f2f5;
+}
+#perspace_content {
     width: 1000px;
     margin: 0 auto;
-    height: 500px;
+    margin-top: 60px;
+    height: 100%;
+}
+#mastHead{
+    margin-top: 30px;
+}
+#menuItem{
+    margin-top: 20px;
     background-color: white;
 }
