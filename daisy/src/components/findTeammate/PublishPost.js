@@ -1,44 +1,77 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Comment, Avatar, Form, Button, List, Input } from 'antd';
+import { Comment, Avatar, Form, Button, Input } from 'antd';
 import { InputNumber } from 'antd';
 import moment from 'moment';
-import { useState } from 'react';
 import { Row, Col} from 'antd';
+import axios from 'axios'
 
 const { TextArea } = Input;
 
-const CommentList = ({ comments }) => (
-  <List
-    dataSource={comments}
-    header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
-    itemLayout="horizontal"
-    renderItem={props => <Comment {...props} />}
-  />
-);
+/*模拟已登录用户数据*/
+const data={
+    Account:'111111',
+    UserName:'帅哥学霸ykn',
+    Icon:'strange'
+  }
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
-  <>
-    <Form.Item>
-      <TextArea rows={1} onChange={onChange} value={value}  style={{width: '100%', resize: 'none'}} placeholder="标题"/>
-      <br/>
-      <br/>
-      <TextArea rows={8} onChange={onChange} value={value} style={{width: '100%', resize: 'none'}} placeholder="正文"/>
-    </Form.Item>
-  </>
-);
+  const Editor = ({onChange}) => (
+    <>
+      <Form.Item>
+        <TextArea rows={10} onChange={onChange} style={{width: '100%', resize: 'none'}} placeholder="帖子内容"/>
+      </Form.Item>
+    </>
+  );
 
+export default class CreatePost extends React.Component {
 
-/*填写小队信息*/
-const AdvancedSearchForm = () => {
-  const [expand, setExpand] = useState(false);
-  const [form] = Form.useForm();
+    constructor(props){
+      super(props)
   
-  const getFields = () => {
-    const children = [];
+      let tempId=this.props.matchId
+
+      this.state={
+        ProjctId:tempId,
+        Content:'',
+        matchName:'',
+        matchMaxMemberNum:0,
+        Name:''
+      }
+
+      axios.get('http://mock-api.com/5g7AeqKe.mock/matchInfo/'+tempId)
+      .then(response=>{
+      this.setState({
+        matchName:response.data[0].Name,
+        matchMaxMemberNum:response.data[0].MaxMemberNum
+      })
+    })
+    .catch(error=>{
+      this.setState({
+        matchName:'未找到该比赛',
+        matchIntroduction:'未找到该比赛'
+      })
+      console.log(error);
+    })
+  }
+
+  TeamNameChange=e=>{
+    this.setState({
+      Name:e.target.value
+    })
+  }
+
+  
+  ContentChange = e => {
+    this.setState({
+      Content:e.target.value
+    })
+  };
+  
+  getFields=()=>{
+    const children = [];//用于记录比赛信息
 
     children.push(
-      <Col span={6} key={0}>
+      <Col span={10} key={0}>
         <Form.Item
           name={`小队名称`}
           label={`小队名称`}
@@ -49,29 +82,14 @@ const AdvancedSearchForm = () => {
             },
           ]}
         >
-          <Input placeholder="输入小队名称" />
+          <Input placeholder="输入小队名称" onChange={this.TeamNameChange}/>
         </Form.Item>
       </Col>,
     );
 
+    
     children.push(
-      <Col span={6} key={1}>
-        <Form.Item
-          name={`从属比赛`}
-          label={`从属比赛`}
-          rules={[
-            {
-              required: false,
-            },
-          ]}
-        >
-          <Input placeholder="比赛名称" disabled/>
-        </Form.Item>
-      </Col>,
-    );
-
-    children.push(
-      <Col span={6} key={2}>
+      <Col span={7} key={1}>
         <Form.Item
           name={`队长名称`}
           label={`队长名称`}
@@ -81,133 +99,91 @@ const AdvancedSearchForm = () => {
             },
           ]}
         >
-          <Input placeholder="队长名称" disabled/>
+          <Input placeholder={data.UserName} disabled/>
         </Form.Item>
       </Col>,
     );
 
     children.push(
-      <Col span={4} key={3}>
+      <Col span={6} key={2}>
         <Form.Item
-          name={`人数上限`}
-          label={`人数上限`}
+          name={`从属比赛`}
+          label={`从属比赛`}
           rules={[
             {
-              required: true,
-              message: '该项为必填项',
+              required: false,
             },
           ]}
         >
-          <InputNumber min={1}/>
+          <InputNumber placeholder={this.state.matchName} disabled/>
         </Form.Item>
       </Col>,
     );
-
+    children.push(
+      <Col span={21} key={3}>
+      <Form.Item
+      name={`帖子内容`}
+      label={`帖子内容`}
+      rules={[
+        {
+          required: true,
+          message: '该项为必填项',
+        },
+      ]}
+      >
+      <Editor onChange={this.ContentChange}/>
+    </Form.Item>
+    </Col>
+    )
+    children.push(
+      <Col span={24} key={4}>
+      <Button type="primary" htmlType="submit" onClick={()=>{
+        if(this.state.Name.length>0&&this.state.Content.length>0){
+        let dataSent={
+          ProjctId:this.state.ProjctId,
+          LeaderAccount:data.Account,
+          PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
+          Content:this.state.Content,
+          MaxMemberNum:this.state.matchMaxMemberNum,
+          Name:this.state.Name
+        }
+        axios.post('http://mock-api.com/5g7AeqKe.mock/Post',dataSent)
+        .then(response=>{
+          console.log(response)
+          window.alert("发布成功")
+        })
+      }
+      }}>建立小队</Button>
+      </Col>
+    )
     return children;
-  };
-
-  const onFinish = values => {
-    console.log('Received values of form: ', values);
-  };
-
-  return (
-    <Form
-      form={form}
-      name="advanced_search"
-      className="ant-advanced-search-form"
-      onFinish={onFinish}
-    >
-      <Row gutter={24}>{getFields()}</Row>
-      <Row>
-        <Col
-          span={24}
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            建立小队
-          </Button>
-          <Button
-            style={{
-              margin: '0 8px',
-            }}
-            onClick={() => {
-              form.resetFields();
-            }}
-          >
-            Clear
-          </Button>
-        </Col>
-      </Row>
-    </Form>
-  );
-};
-
-export default class CreatePost extends React.Component {
-  state = {
-    comments: [],
-    submitting: false,
-    value: '',
-  };
-
-  handleSubmit = () => {
-    if (!this.state.value) {
-      return;
-    }
-
-    this.setState({
-      submitting: true,
-    });
-
-    setTimeout(() => {
-      this.setState({
-        submitting: false,
-        value: '',
-        comments: [
-          {
-            author: 'Han Solo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: <p>{this.state.value}</p>,
-            datetime: moment().fromNow(),
-          },
-          ...this.state.comments,
-        ],
-      });
-    }, 1000);
-  };
-
-  handleChange = e => {
-    this.setState({
-      value: e.target.value,
-    });
-  };
+  }
 
   render() {
-    const { comments, submitting, value } = this.state;
-
     return (
       <>
-        {comments.length > 0 && <CommentList comments={comments} />}
-        <Comment
+        <Comment 
           avatar={
-            <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
+            <Avatar style={{
+              margin: '0 10px 0 50px',
+              }}
+              src={require("../../img/avatar/"+data.Icon+".jpg")}
             />
           }
           content={
-            <Editor
-              onChange={this.handleChange}
-              onSubmit={this.handleSubmit}
-              submitting={submitting}
-              value={value}
-            />
+            <Form
+            name="advanced_search"
+            className="ant-advanced-search-form"
+            id='PublishPost'
+            >
+            <Row gutter={24}>{this.getFields()}</Row>
+        </Form>
           }
         />
-        <AdvancedSearchForm/>
       </>
     );
   }
 }
+
+
 

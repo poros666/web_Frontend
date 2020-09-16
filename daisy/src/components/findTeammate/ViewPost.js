@@ -1,91 +1,34 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import { List, Avatar } from 'antd';
 import{  Pagination  } from 'antd';
 import 'antd/dist/antd.css';
 import { Divider } from 'antd';
-import PostPage from '../../pages/findteam/PostPage'
+import axios from 'axios'
 
-const PostNum=4;
-
-//再这里绑定元数据
-const data_1= [
-    {
-      Uid:110,
-      Pid:1,
-      avatarSrc:'boss',
-      title: 'Ant Design Title 1',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      Uid:110,
-      Pid:2,
-      avatarSrc:'boss',
-      title: 'Ant Design Title 2',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      Uid:110,
-      Pid:3,
-      avatarSrc:'boss',
-      title: 'Ant Design Title 3',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      Uid:111,
-      Pid:4,
-      avatarSrc:'strange',
-      title: 'Ant Design Title 4',
-      description:'zzzzzz我睡着了而且我想摸鱼'
-    },
-  ];
-
-  const data_2= [
-    {
-      Uid:110,
-      Pid:1,
-      avatarSrc:'boss',
-      title: 'Ant Design Title 1',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      Uid:110,
-      Pid:2,
-      avatarSrc:'boss',
-      title: 'Ant Design Title 2',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      Uid:110,
-      Pid:3,
-      avatarSrc:'boss',
-      title: 'Ant Design Title 3',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      Uid:111,
-      Pid:5,
-      avatarSrc:'strange',
-      title: 'Ant Design Title 5',
-      description:'我没睡觉也没摸鱼但我就是写不出'
-    },
-  ];
+let ProjctId;
+let PostPerPage=4;
 
 export default class CommunityContent extends Component {
 
   constructor(props){
     super(props)
+    ProjctId=1;
     this.state={
       currentData:[],
-      total: 50,
+      total:0,
       pageSize: 1,
-      pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
+      pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
+     axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
+     .then(response=>{
+       this.setState({
+         total:Math.ceil(response.data.length/PostPerPage)
+        });
+   })
+   .catch(error=>{
+     console.log(error);
+   })
   }
 
   componentDidMount() {
@@ -95,36 +38,44 @@ export default class CommunityContent extends Component {
     this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
   }
 
-  onPageChange=(page,pageSize)=>{
+  onPageChange=(page)=>{
     this.setState({
       pageNumber: page
     }, () => {
       window.location.hash = `#/findteam/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
+    axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
+    .then(response=>{
+      this.setState((state)=>{
+          for(let i=0;i<PostPerPage;i++){
+            state.currentData.pop();
+          }
+          if((page-1)*PostPerPage+PostPerPage<=response.data.length){
+            for(let i=(page-1)*PostPerPage;i<(page-1)*PostPerPage+PostPerPage;i++){
+              state.currentData.push(response.data[i]);
+            }
+          }
+          else{
+            for(let i=(page-1)*PostPerPage;i<response.data.length;i++){
+              state.currentData.push(response.data[i]);
+            }
+          }
+          return{
+            currentData:state.currentData,
+          }
+       });
+  })
+  .catch(error=>{
+    console.log(error);
     this.setState((state)=>{
-    if(state.pageNumber%2==1){
-      for(let i=0;i<PostNum;i++){
+      for(let i=0;i<PostPerPage;i++){
         state.currentData.pop();
-      }
-      for(let i=0;i<PostNum;i++){
-        state.currentData.push(data_1[i]);
       }
       return{
         currentData:state.currentData,
       }
-    }
-    else{
-      for(let i=0;i<PostNum;i++){
-        state.currentData.pop();
-      }
-      for(let i=0;i<PostNum;i++){
-        state.currentData.push(data_2[i]);
-      }
-      return{
-        currentData:state.currentData,
-      }
-    }
    });
+  })
  }
   
     render() {
@@ -141,20 +92,12 @@ export default class CommunityContent extends Component {
                             <List.Item.Meta
                                  avatar={
                                   //头像的来源和指向的地址
-                                  <animateTransform href={"#/PostPage/"+item.Uid}>
-                                    <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
-                                  </animateTransform>
+                                  <a href={"#/personal"}>
+                                    <Avatar src={require("../../img/avatar/"+item.Icon+".jpg")}></Avatar>
+                                  </a>
                                 }
-                                title={<Link to={
-                                  {
-                                    pathname:`/PostPage`,
-                                    query:{
-                                      Pid:item.Pid,
-                                    },
-                                    state:{dataSource:agriculturalListData}
-                                  }
-                                }>{item.title}</Link>}
-                                description={<p>{item.description}</p>}
+                                title={<p>{item.NickName}的组队帖</p>}
+                                description={<a href={"#/PostPage/MatchId="+ProjctId+"/groupId="+item.GroupId+"/Pid="+item.PostId}>查看帖子详情</a>}
                             />
                         </List.Item>
                         )}

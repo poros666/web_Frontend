@@ -1,5 +1,8 @@
+#page{
+    background-color: lightcyan;
+}
 #WebPage{
-    margin:50px 50px 50px 50px
+    margin:50px 100px 50px 100px;
 }
 
 #PostList{
@@ -15,30 +18,6 @@
     text-align: center;
 }
 
-#Title{
-    text-align: left;
-    color: darkturquoise;
-    font-size: 25px;
-}
-
-#Content{
-    text-align: left;
-    font-size: 12px;
-}
-
-#UserInfo{
-    text-align: center;
-}
-
-#UserName{
-    font-size:15px;
-    color:blue;
-    text-align: centet;
-}
-
-#UserName:hover{
-    color:rgb(73, 73, 214);
-}
 
 #Post{
     height: 1000px;
@@ -48,9 +27,19 @@
     text-align: center;
 }
 
-.site-page-header-ghost-wrapper {
+#site-page-header-ghost-wrapper {
     padding: 24px;
+    background-color: #f5f5f5;
   }
+
+#date{
+    text-align: right;
+    size: 8px;
+}
+
+#PublishPost{
+    background-color: #f5f5f5;
+}
 
 img{
     text-align: center;
