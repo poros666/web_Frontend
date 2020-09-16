@@ -5,14 +5,17 @@ export function getToken() {
   return localStorage.getItem("token")
 }
 
-//设置token，登陆时调用,rdc：暂时想法是我把jwt和account存下来，然后需要用户的其他信息的时候再用account去查询
+//设置token，登陆时调用
+//rdc：暂时想法是我把jwt和account存下来，然后需要用户的其他信息的时候再用account去查询
+//rdc: 修改，将userdata全部存下来了
 export function setToken(token,account) {
-  const obj = {
+  const usertoken = {
     token:token,
-    account:account,
     expire: new Date().getTime() + 1000 * 60 * 30//30分钟有效期
   };
-  localStorage.setItem("token", obj)
+  localStorage.setItem("token", usertoken)
+  const userData=getUserInfor(account)
+  localStorage.setItem("userData",userData)
 }
 
 //判断是否是登陆状态
@@ -25,6 +28,7 @@ export function isLogined() {
           result = true;
       } else {
           localStorage.removeItem("token");
+          localStorage.removeItem("userData");
       }
   }
   return result;
@@ -42,6 +46,7 @@ export function getUserInfor(account){
   .then(function (response) {
     console.log(response);
     var data=response.data
+    data['account']=account
     return data
   })
   .catch(function (error) {
