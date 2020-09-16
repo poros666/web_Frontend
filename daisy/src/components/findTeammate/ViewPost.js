@@ -12,7 +12,8 @@ export default class CommunityContent extends Component {
 
   constructor(props){
     super(props)
-    ProjctId=1;
+    ProjctId=this.props.matchId;
+    console.log(ProjctId)
     this.state={
       currentData:[],
       total:0,
@@ -42,7 +43,7 @@ export default class CommunityContent extends Component {
     this.setState({
       pageNumber: page
     }, () => {
-      window.location.hash = `#/findteam/id=${this.props.compID}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
+      window.location.hash = `#/findteam/id=${ProjctId}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
     .then(response=>{
