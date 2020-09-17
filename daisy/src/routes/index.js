@@ -133,22 +133,22 @@ export const mainRoutes = [{
     
 export const searchRoutes = [
 {
-    path: "/searchResult/type=mixed",
+    path: "/searchResult/type=mixed/:kw",
     title: "综合",
     component: SearchContent
 },
 {
-    path: "/searchResult/type=comp",
+    path: "/searchResult/type=comp/:kw",
     title: "比赛",
     component: SearchContentComp
 },
 {
-    path: "/searchResult/type=comm",
+    path: "/searchResult/type=comm/:kw",
     title: "社区",
     component: SearchContentComm
 },
 {
-    path: "/searchResult/type=usr",
+    path: "/searchResult/type=usr/:kw",
     title: "用户",
     component: SearchContentUsr
 }

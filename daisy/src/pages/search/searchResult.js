@@ -24,8 +24,6 @@ export default class SearchResult extends Component {
 
                 <LogoBar/>
 
-                <EasySearchFrame/>
-
                 <SearchAssort/>
 
                 <Footer/>
