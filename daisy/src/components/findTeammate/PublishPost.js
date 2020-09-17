@@ -9,6 +9,7 @@ import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
 
+
 /*模拟已登录用户数据*/
 const data={
     Account:'111111',
@@ -39,8 +40,9 @@ export default class CreatePost extends React.Component {
         Name:''
       }
 
-      axios.get('http://mock-api.com/5g7AeqKe.mock/matchInfo/'+tempId)
+      axios.get('http://fwdarling2020.cn:8080/api/Project/'+tempId)
       .then(response=>{
+        console.log(response)
       this.setState({
         matchName:response.data[0].Name,
         matchMaxMemberNum:response.data[0].MaxMemberNum
@@ -143,14 +145,14 @@ export default class CreatePost extends React.Component {
           if(this.state.Name.length>0&&this.state.Content.length>0){
           let dataSent={
             ProjctId:this.state.ProjctId,
-            //LeaderAccount:localStorage.userData.account,
+            //LeaderAccount:localStorage.getItem('userData'),
             LeaderAccount:data.Account,
             PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
             Content:this.state.Content,
             MaxMemberNum:this.state.matchMaxMemberNum,
             Name:this.state.Name
           }
-          axios.post('http://mock-api.com/5g7AeqKe.mock/Post',dataSent)
+          axios.post('http://fwdarling2020.cn:8080/api/Post',dataSent)
           .then(response=>{
             console.log(response)
             window.alert("发布成功")
@@ -176,7 +178,7 @@ export default class CreatePost extends React.Component {
               margin: '0 10px 0 50px',
               }}
               //src={require(localStorage.userData.Icon)}
-              src={require("../../img/avatar/"+data.Icon+".jpg")}
+              src={data.Icon}
             />
           }
           content={

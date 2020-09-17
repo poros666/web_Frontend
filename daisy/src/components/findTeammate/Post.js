@@ -33,12 +33,13 @@ export default class Post extends Component {
             Account:'',
             GroupId:groupId,
             PostId:postId,
+            ProjctId:MatchId,
         }
         
-        axios.get('http://mock-api.com/5g7AeqKe.mock/Post/1?projectId='+MatchId+'&groupId='+groupId)
+        axios.get('http://fwdarling2020.cn:8080/api/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         .then(response=>{
+            console.log(response)
             this.setState({
-                ProjctId:MatchId,
                 NickName:response.data.NickName,
                 Content:response.data.Content,
                 PostTime:response.data.PostTime,
@@ -70,7 +71,7 @@ export default class Post extends Component {
                         <div align="right">
 
                         <a href={"#/personal"}>
-                            <Avatar src={require("../../img/avatar/"+this.state.Icon+".jpg")}></Avatar>
+                            <Avatar src={this.state.Icon}></Avatar>
                         </a>
                         <br/>                
                         <a href={"#/personal"}>{this.state.NickName}</a>
@@ -84,12 +85,12 @@ export default class Post extends Component {
                             if(this.state.Apply.length>0&&this.state.Account!=null){
                                 let dataSent={
                                   ProjctId:this.state.ProjctId,
-                                  //Account:localStorage.userData.account
+                                  //Account:localStorage.getItem('userData')
                                   Account:this.state.Account,
                                   Content:this.state.Apply,
                                   GroupId:this.state.GroupId
                                 }
-                                axios.post('http://mock-api.com/5g7AeqKe.mock/Application',dataSent)
+                                axios.post('/api/Application',dataSent)
                                 .then(response=>{
                                   console.log(response)
                                   window.alert("申请成功")
@@ -111,20 +112,20 @@ export default class Post extends Component {
                                 if(this.state.Apply.length>0&&this.state.Account!=null){
                                     let dataSent={
                                       ProjctId:this.state.ProjctId,
-                                      //Account:localStorage.userData.account
+                                      //Account:localStorage.getItem('userData')
                                       Account:this.state.Account,
                                       Name:'Post',
                                       GroupId:this.state.GroupId,
                                       PostId:this.state.PostId
                                     }
-                                    axios.post('http://mock-api.com/5g7AeqKe.mock/PostStar',dataSent)
+                                    axios.post('/api/PostStar',dataSent)
                                     .then(response=>{
                                       console.log(response)
-                                      window.alert("申请成功")
+                                      window.alert("收藏成功")
                                     })      
                             }
                             else{
-                                window.alert("申请失败")
+                                window.alert("收藏失败")
                             }
                             }
                             else{

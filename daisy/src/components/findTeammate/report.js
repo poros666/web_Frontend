@@ -97,7 +97,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
       }
       console.log(dataSent)
       if(dataSent.Account.length>0){
-      axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
+      axios.post('http://fwdarling2020.cn:8080/api/Report',dataSent)
           .then(response=>{
             console.log(response)
             window.alert("举报成功")

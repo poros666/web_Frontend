@@ -7,7 +7,6 @@ import logo from './logo-re.png'
 // import logo from './logo2.png'
 // import logo from './logo3.png'
 
-const { Header} = Layout;
 const { SubMenu } = Menu;
 const { Search } = Input;
 
@@ -47,7 +46,7 @@ class HeaderNav extends Component {
         console.log(value)
         console.log(value.length)
         var w=window.open('about:blank')
-        if(value.length == 0){
+        if(value.length === 0){
             w.location.href="#/search"
         }
         else{
