@@ -8,6 +8,7 @@ import axios from 'axios'
 import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
+axios.defaults.baseURL='/api';
 
 
 /*模拟已登录用户数据*/
@@ -40,12 +41,12 @@ export default class CreatePost extends React.Component {
         Name:''
       }
 
-      axios.get('http://fwdarling2020.cn:8080/api/Project/'+tempId)
+      axios.get('=/Project/'+tempId)
       .then(response=>{
         console.log(response)
       this.setState({
-        matchName:response.data[0].Name,
-        matchMaxMemberNum:response.data[0].MaxMemberNum
+        matchName:response.data.name,
+        matchMaxMemberNum:response.data.maxMemberNum
       })
     })
     .catch(error=>{
@@ -144,15 +145,15 @@ export default class CreatePost extends React.Component {
         if(isLogined()){
           if(this.state.Name.length>0&&this.state.Content.length>0){
           let dataSent={
-            ProjctId:this.state.ProjctId,
+            projctId:this.state.ProjctId,
             //LeaderAccount:localStorage.getItem('userData'),
-            LeaderAccount:data.Account,
-            PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
-            Content:this.state.Content,
-            MaxMemberNum:this.state.matchMaxMemberNum,
-            Name:this.state.Name
+            leaderAccount:data.Account,
+            postTime:moment().format("YYYY-MM-DD HH:mm:ss"),
+            content:this.state.Content,
+            maxMemberNum:this.state.matchMaxMemberNum,
+            name:this.state.Name
           }
-          axios.post('http://fwdarling2020.cn:8080/api/Post',dataSent)
+          axios.post('/Post',dataSent)
           .then(response=>{
             console.log(response)
             window.alert("发布成功")
