@@ -20,9 +20,9 @@ export default class teamNav extends Component {
     .then(response=>{
       console.log(response.data)
       this.state={
-        matchName:response.data[0].Name,
-        matchIntroduction:response.data[0].Introduction,
-        matchMaxMemberNum:response.data[0].ParticipantsNumber
+        matchName:response.data.name,
+        matchIntroduction:response.data.introduction,
+        matchMaxMemberNum:response.data.participantsNumber
       }
   })
   .catch(error=>{

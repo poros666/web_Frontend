@@ -7,6 +7,7 @@ import axios from 'axios'
 
 let ProjctId;
 let PostPerPage=4;
+axios.defaults.baseURL='/api';
 
 export default class CommunityContent extends Component {
 
@@ -21,7 +22,7 @@ export default class CommunityContent extends Component {
       pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
-     axios.get('http://fwdarling2020.cn:8080/api/Post?ProjctId='+ProjctId)
+     axios.get('/Post?ProjctId='+ProjctId)
      .then(response=>{
        console.log(response)
        this.setState({
@@ -46,7 +47,7 @@ export default class CommunityContent extends Component {
     }, () => {
       window.location.hash = `#/findteam/id=${ProjctId}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
-    axios.get('http://fwdarling2020.cn:8080/api/Post?ProjctId='+ProjctId)
+    axios.get('/Post?ProjctId='+ProjctId)
     .then(response=>{
       console.log(response)
       this.setState((state)=>{
@@ -96,11 +97,11 @@ export default class CommunityContent extends Component {
                                  avatar={
                                   //头像的来源和指向的地址
                                   <a href={"#/personal"}>
-                                    <Avatar src={item.Icon}></Avatar>
+                                    <Avatar src={item.icon}></Avatar>
                                   </a>
                                 }
-                                title={<p>{item.NickName}的组队帖</p>}
-                                description={<a href={"#/PostPage/MatchId="+ProjctId+"/groupId="+item.GroupId+"/Pid="+item.PostId}>查看帖子详情</a>}
+                                title={<p>{item.nickname}的组队帖</p>}
+                                description={<a href={"#/PostPage/MatchId="+ProjctId+"/groupId="+item.groupId+"/Pid="+item.postId}>查看帖子详情</a>}
                             />
                         </List.Item>
                         )}

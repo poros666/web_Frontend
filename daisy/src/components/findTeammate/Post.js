@@ -8,6 +8,7 @@ import axios from 'axios'
 import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
+axios.defaults.baseURL='/api';
 
 const Editor = ({onChange}) => (
     <>
@@ -36,14 +37,14 @@ export default class Post extends Component {
             ProjctId:MatchId,
         }
         
-        axios.get('http://fwdarling2020.cn:8080/api/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
+        axios.get('/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         .then(response=>{
             console.log(response)
             this.setState({
-                NickName:response.data.NickName,
-                Content:response.data.Content,
-                PostTime:response.data.PostTime,
-                Account:response.data.LeaderAccount
+                NickName:response.data.nickname,
+                Content:response.data.content,
+                PostTime:response.data.postTime,
+                Account:response.data.leaderAccount
             })
             if(response.data.Icon!=null){
                 this.setState({
@@ -84,13 +85,13 @@ export default class Post extends Component {
                         if(isLogined()){
                             if(this.state.Apply.length>0&&this.state.Account!=null){
                                 let dataSent={
-                                  ProjctId:this.state.ProjctId,
+                                  projctId:this.state.ProjctId,
                                   //Account:localStorage.getItem('userData')
-                                  Account:this.state.Account,
-                                  Content:this.state.Apply,
-                                  GroupId:this.state.GroupId
+                                  account:this.state.Account,
+                                  content:this.state.Apply,
+                                  groupId:this.state.GroupId
                                 }
-                                axios.post('/api/Application',dataSent)
+                                axios.post('/Application',dataSent)
                                 .then(response=>{
                                   console.log(response)
                                   window.alert("申请成功")
@@ -111,14 +112,14 @@ export default class Post extends Component {
                             if(isLogined()){
                                 if(this.state.Apply.length>0&&this.state.Account!=null){
                                     let dataSent={
-                                      ProjctId:this.state.ProjctId,
+                                      projctId:this.state.ProjctId,
                                       //Account:localStorage.getItem('userData')
-                                      Account:this.state.Account,
-                                      Name:'Post',
-                                      GroupId:this.state.GroupId,
-                                      PostId:this.state.PostId
+                                      account:this.state.Account,
+                                      name:'Post',
+                                      groupId:this.state.GroupId,
+                                      postId:this.state.PostId
                                     }
-                                    axios.post('/api/PostStar',dataSent)
+                                    axios.post('/PostStar',dataSent)
                                     .then(response=>{
                                       console.log(response)
                                       window.alert("收藏成功")

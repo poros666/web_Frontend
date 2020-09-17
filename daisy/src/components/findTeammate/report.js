@@ -5,6 +5,7 @@ import { isLogined } from "../../utils/auth";
 
 
 const { Option } = Select;
+axios.defaults.baseURL='/api';
 
 //添加举报的弹出框
 const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time}) => {
@@ -88,16 +89,16 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     console.log("Received values of form: ", values)
     if(isLogined()){
       let dataSent={
-        Account:values.reporter_id,
-        ReportType:values.types,
-        Content:values.description,
-        Time:values.time,
-        TargetType:'post',
-        TargetId:values.target_id
+        account:values.reporter_id,
+        reportType:values.types,
+        content:values.description,
+        time:values.time,
+        targetType:'post',
+        targetId:values.target_id
       }
       console.log(dataSent)
       if(dataSent.Account.length>0){
-      axios.post('http://fwdarling2020.cn:8080/api/Report',dataSent)
+      axios.post('/Report',dataSent)
           .then(response=>{
             console.log(response)
             window.alert("举报成功")
