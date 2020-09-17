@@ -5,6 +5,10 @@
     margin:50px 100px 50px 100px;
 }
 
+#PostPage{
+    background-color:whitesmoke;
+}
+
 #Publish{
     box-shadow: 5px 5px 5px 5px lightgrey;
     width:100%;
@@ -28,7 +32,6 @@
 
 #Post{
     height: 100%;
-    box-shadow: 5px 5px 5px 5px lightgray;
     background-color: whitesmoke;
 }
 

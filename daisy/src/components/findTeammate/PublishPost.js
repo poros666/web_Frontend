@@ -138,11 +138,12 @@ export default class CreatePost extends React.Component {
     )
     children.push(
       <Col span={14} key={4}>
-      <Button type="primary" htmlType="submit" onClick={()=>{
+      <Button shape="round" type="primary" htmlType="submit" onClick={()=>{
         if(isLogined()){
           if(this.state.Name.length>0&&this.state.Content.length>0){
           let dataSent={
             ProjctId:this.state.ProjctId,
+            //LeaderAccount:localStorage.userData.account,
             LeaderAccount:data.Account,
             PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
             Content:this.state.Content,
@@ -174,6 +175,7 @@ export default class CreatePost extends React.Component {
             <Avatar style={{
               margin: '0 10px 0 50px',
               }}
+              //src={require(localStorage.userData.Icon)}
               src={require("../../img/avatar/"+data.Icon+".jpg")}
             />
           }

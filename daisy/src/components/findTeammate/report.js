@@ -1,6 +1,5 @@
 import React, { useState,Component } from "react"
-import { Modal, Form, Input, Select,Popover } from "antd"
-import { WarningOutlined} from "@ant-design/icons"
+import { Modal, Form, Input, Select,Popover,Button} from "antd"
 import axios from 'axios'
 import { isLogined } from "../../utils/auth";
 
@@ -118,11 +117,13 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
 
   return (
     <Popover content={<p>report</p>}>
-      <WarningOutlined
+      <Button
+      shape="round" 
+      type="primary"
         onClick={() => {
           setVisible(true)
         }}
-      />
+      ><p>举报该帖</p></Button>
       <CollectionCreateForm
         visible={visible}
         onCreate={onCreate}

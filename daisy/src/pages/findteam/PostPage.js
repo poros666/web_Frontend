@@ -41,7 +41,7 @@ export default class PostPage extends Component {
                 <div id='TeamNav'>
                 <TeamNav matchId={this.state.ProjctId}/>
                 </div>
-                <div id='page'>
+                <div id='PostPage'>
                 <Divider/>
                 <div id='WebPage'>
                 <div id='Post'>
