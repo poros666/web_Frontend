@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {Card,Divider, Descriptions} from 'antd'
-import {WeiboOutlined} from '@ant-design/icons'
-import { Link} from "react-router-dom";
 
 export default class UserInform extends Component {
     constructor(props){
@@ -17,10 +15,6 @@ export default class UserInform extends Component {
             major:'软件学院',
             grade:'2018级',
             intro:'请在这里这里阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴一大串', 
-            slogan:'是个疯子',
-            qq: 1235678454,
-            wechat:'12345677654',
-            weibo:'https://weibo.com/wflanker',
             icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
         }
     }
@@ -63,26 +57,11 @@ export default class UserInform extends Component {
                     </Descriptions>
                     <Divider orientation="left">了解更多</Divider>
                     <Descriptions>
-                        <Descriptions.Item label='qq'>
-                            {this.state.qq}
-                        </Descriptions.Item>
-                        <Descriptions.Item label='微信'>
-                            {this.state.wechat}
-                        </Descriptions.Item>
-                        <Descriptions.Item label='微博'>
-                            <Link to={this.state.weibo}>
-                                <WeiboOutlined/>
-                            </Link>
-                        </Descriptions.Item>
-                        <Descriptions.Item label='签名'>
-                            {this.state.slogan}
-                        </Descriptions.Item>
                         <Descriptions.Item label='简介'>
                             {this.state.intro}
                         </Descriptions.Item>
                     </Descriptions>
                 </Card>
-                
             </div>
         )
     }

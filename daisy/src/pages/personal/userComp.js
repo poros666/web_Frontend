@@ -1,30 +1,23 @@
 import React, { Component } from 'react'
-import {Card,List,Col} from 'antd'
+import {Card,List} from 'antd'
+import axios from 'axios'
 
 const compData = [
   {
       ID:1,
-      competitionname: 'comp 1',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+      compName: 'comp 1'
   },
   {
       ID:2,
-      competitionname: 'comp 2',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+      compName: 'comp 2'
   },
   {
       ID:3,
-      competitionname: 'comp 3',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+      compName: 'comp 3'
   },
   {
       ID:4,
-      competitionname: 'comp 4',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+      compName: 'comp 4'
   }]
 
 export default class UserComp extends Component {
@@ -33,7 +26,28 @@ export default class UserComp extends Component {
     this.state={
       data:compData
     }
+    axios
+      .get()
+      .then((res)=>{
+        let tmpData=[]
+        for(let i=0;i<res.data.length;i++){
+          let tmpComp={
+            ID:res.data[i].ProjectId,
+            compName:res.data[i].Name
+          }
+          tmpData.push(tmpComp)
+        }
+        this.setState({
+          data:tmpData
+        })
+      })
+      .catch(function(error){
+        console.log(error)
+      })
   }
+
+  
+
     render() {
         return (
             <div>
@@ -42,16 +56,13 @@ export default class UserComp extends Component {
                 grid={{ gutter: 20, column: 3 }}
                 dataSource={this.state.data}
                 renderItem={item => (
-                    <List.Item>
-                        <Card
-                        title={
-                            <a href={"#/compPage/"+item.ID+"=id"+item.ID}>
-                                {item.competitionname}
-                            </a>
-                        }>
-                            {item.description}
-                        </Card>
-                    </List.Item>
+                  <List.Item>
+                      <Card>
+                          <a href={"#/compPage/"+item.ID+"=id"+item.ID}>
+                            {item.compName}
+                          </a>
+                      </Card>
+                  </List.Item>
                 )}
                 />
             </div>

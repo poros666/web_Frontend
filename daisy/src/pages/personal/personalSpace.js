@@ -8,15 +8,16 @@ import { personalRoutes } from '../../routes/index'
 import OtherMenuItem from '../../components/personal/otherMenuItem'
 import MyMenuItem from '../../components/personal/myMenuItem'
 import Footer from '../../components/comm/Footer'
+import { isLogined } from '../../utils/auth'
+
 
 
 export default class PersonalSpace extends Component {  
   constructor(props){
     super(props)
-      this.state={
-        role:1,       //role=1表示本人视角，role=0表示其他人视角
-        
-      }
+    this.state={
+      role:1,       //role=1表示本人视角，role=0表示其他人视角
+    }
   }
   
   render() {

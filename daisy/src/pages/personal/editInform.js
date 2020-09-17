@@ -4,6 +4,8 @@ import {UploadOutlined} from '@ant-design/icons'
 import '../../style/personal/editInform.css'
 import HeaderNav from '../../components/comm/HeaderNav'
 import Footer from '../../components/comm/Footer'
+import { getUserInfor, isLogined } from '../../utils/auth'
+import Axios from 'axios'
 
 
 const { TextArea } = Input;
@@ -13,6 +15,7 @@ export default class EditInform extends Component {
     constructor(props){
         super(props)
         this.inputChange=this.inputChange.bind(this)
+        this.saveEdit=this.saveEdit.bind(this)
         this.state={
             nameVl:'名字',
             nickname:'同济大学今天放暑假了吗',
@@ -23,13 +26,11 @@ export default class EditInform extends Component {
             school:'同济大学',
             major:'软件学院',
             grade:'2018级',
-            intro:'请在这里这里阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴一大串', 
-            slogan:'是个疯子',
-            qq: 1235678454,
-            wechat:'12345677654',
-            weibo:'https://weibo.com/wflanker',
+            intro:'请在这里这里阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴一大串',
             icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
         }
+        let informData=getUserInfor()
+        //给this.state赋值
     }
 
     render() {
@@ -153,53 +154,8 @@ export default class EditInform extends Component {
                                 />
                             </Descriptions.Item>
                         </Descriptions>
-
                         <Divider orientation="left">了解更多</Divider>
                         <Descriptions bordered>
-                            <Descriptions.Item 
-                            label="qq"
-                            >
-                                <TextArea
-                                autoSize
-                                bordered={false} 
-                                name="qq" 
-                                value={this.state.qq} 
-                                onChange={this.inputChange}
-                                />
-                            </Descriptions.Item>
-                            <Descriptions.Item 
-                            label="微信"
-                            >
-                                <TextArea
-                                autoSize 
-                                bordered={false} 
-                                name="wechat" 
-                                value={this.state.wechat} 
-                                onChange={this.inputChange}
-                                />
-                            </Descriptions.Item>
-                            <Descriptions.Item 
-                            label="微博"
-                            >
-                                <TextArea
-                                autoSize
-                                bordered={false}  
-                                name="weibo" 
-                                value={this.state.weibo} 
-                                onChange={this.inputChange}
-                                />
-                            </Descriptions.Item>
-                            <Descriptions.Item 
-                            label="用一句话描述自己"
-                            >
-                                <TextArea
-                                autoSize  
-                                bordered={false}
-                                name="slogan" 
-                                value={this.state.slogan} 
-                                onChange={this.inputChange}
-                                />
-                            </Descriptions.Item>
                             <Descriptions.Item 
                             label="简介"
                             >
@@ -219,7 +175,7 @@ export default class EditInform extends Component {
                             >
                                 保存
                             </Button>
-                            <a href='#/personal'>
+                            <a href='#/personal/team'>
                                 <Button>取消</Button>
                             </a>
                         </div>
@@ -230,7 +186,9 @@ export default class EditInform extends Component {
         )
     }
     saveEdit(){
-        //保存数据
+        
+
+        console.log(this.state)
     }
     inputChange(e){
         let o={}

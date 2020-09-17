@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import {Card,List,Avatar,Modal,Button,Form,Input,Radio} from 'antd'
+import {Card,List,Avatar} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
-import { Link } from 'react-router-dom';
-
-
 
 const teamData = [
     {
@@ -110,7 +107,7 @@ export default class UserTeam extends Component {
                             <Avatar.Group maxCount={6}>
                                 {
                                     item.member.map((item,index)=>{
-                                        return <Avatar src={item}/>
+                                        return <Avatar src={item} key={index}/>
 
                                     })
                                 }
