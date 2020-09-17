@@ -1,5 +1,6 @@
 const CONSTURL={
-    hosturl:'http://fwdarling2020.cn:8080',
+  //  hosturl:'http://fwdarling2020.cn:8080',
+    hosturl:'',
     GetMomentList:'/api/Moment?OrderBy=',
     GetMomentCount:'/api/Moment/count',
     CreatMoment:'/api/Moment',
