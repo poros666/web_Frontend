@@ -36,6 +36,7 @@ render() {
     return (
     <>
       <div id="site-page-header-ghost-wrapper">
+        <div id='title'>
         <PageHeader
           ghost={false}
           title={this.state.matchName}
@@ -47,6 +48,7 @@ render() {
             <Descriptions.Item label="队伍人数上限">{MaxNum}人</Descriptions.Item>
           </Descriptions>
         </PageHeader>
+        </div>
       </div>
       </>
     )

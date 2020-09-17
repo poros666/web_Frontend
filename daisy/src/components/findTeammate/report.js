@@ -2,6 +2,7 @@ import React, { useState,Component } from "react"
 import { Modal, Form, Input, Select,Popover } from "antd"
 import { WarningOutlined} from "@ant-design/icons"
 import axios from 'axios'
+import { isLogined } from "../../utils/auth";
 
 
 const { Option } = Select;
@@ -86,25 +87,31 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     values.reporter_id=ReporterUID;
     values.target_id=ReportUID;
     console.log("Received values of form: ", values)
-    let dataSent={
-      Account:values.reporter_id,
-      ReportType:values.types,
-      Content:values.description,
-      Time:values.time,
-      TargetType:'post',
-      TargetId:values.target_id
+    if(isLogined()){
+      let dataSent={
+        Account:values.reporter_id,
+        ReportType:values.types,
+        Content:values.description,
+        Time:values.time,
+        TargetType:'post',
+        TargetId:values.target_id
+      }
+      console.log(dataSent)
+      if(dataSent.Account.length>0){
+      axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
+          .then(response=>{
+            console.log(response)
+            window.alert("举报成功")
+          })
+        }
+        else{
+          window.alert("缺少需要填写项,举报失败")
+        }
     }
-    console.log(dataSent)
-    if(dataSent.Account.length>0){
-    axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
-        .then(response=>{
-          console.log(response)
-          window.alert("举报成功")
-        })
-      }
-      else{
-        window.alert("举报失败")
-      }
+    else{
+      window.alert("未登录，确定后跳转至登陆界面")
+      window.location.hash ='#/login'
+    }
     //处理数据
     setVisible(false)
   }

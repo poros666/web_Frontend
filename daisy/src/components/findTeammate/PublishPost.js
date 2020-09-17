@@ -5,6 +5,7 @@ import { InputNumber } from 'antd';
 import moment from 'moment';
 import { Row, Col} from 'antd';
 import axios from 'axios'
+import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
 
@@ -18,7 +19,7 @@ const data={
   const Editor = ({onChange}) => (
     <>
       <Form.Item>
-        <TextArea rows={10} onChange={onChange} style={{width: '100%', resize: 'none'}} placeholder="帖子内容"/>
+        <TextArea rows={10} onChange={onChange} style={{width: '90%', resize: 'none'}} placeholder="帖子内容"/>
       </Form.Item>
     </>
   );
@@ -66,7 +67,7 @@ export default class CreatePost extends React.Component {
       Content:e.target.value
     })
   };
-  
+
   getFields=()=>{
     const children = [];//用于记录比赛信息
 
@@ -136,22 +137,28 @@ export default class CreatePost extends React.Component {
     </Col>
     )
     children.push(
-      <Col span={24} key={4}>
+      <Col span={14} key={4}>
       <Button type="primary" htmlType="submit" onClick={()=>{
-        if(this.state.Name.length>0&&this.state.Content.length>0){
-        let dataSent={
-          ProjctId:this.state.ProjctId,
-          LeaderAccount:data.Account,
-          PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
-          Content:this.state.Content,
-          MaxMemberNum:this.state.matchMaxMemberNum,
-          Name:this.state.Name
+        if(isLogined()){
+          if(this.state.Name.length>0&&this.state.Content.length>0){
+          let dataSent={
+            ProjctId:this.state.ProjctId,
+            LeaderAccount:data.Account,
+            PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
+            Content:this.state.Content,
+            MaxMemberNum:this.state.matchMaxMemberNum,
+            Name:this.state.Name
+          }
+          axios.post('http://mock-api.com/5g7AeqKe.mock/Post',dataSent)
+          .then(response=>{
+            console.log(response)
+            window.alert("发布成功")
+          })
         }
-        axios.post('http://mock-api.com/5g7AeqKe.mock/Post',dataSent)
-        .then(response=>{
-          console.log(response)
-          window.alert("发布成功")
-        })
+      }
+      else{
+        window.alert("未登录，确定后跳转至登陆界面")
+        window.location.hash ='#/login'
       }
       }}>建立小队</Button>
       </Col>

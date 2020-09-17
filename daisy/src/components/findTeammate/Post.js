@@ -6,12 +6,14 @@ import PostPageReport from '../findTeammate/report'
 import { Divider} from 'antd';
 import moment from 'moment'
 import axios from 'axios'
+import {isLogined} from "../../utils/auth"
+import SizeContext from 'antd/lib/config-provider/SizeContext';
 
 const { TextArea } = Input;
 
 const Editor = ({onChange}) => (
     <>
-        <TextArea rows={5} onChange={onChange} style={{width: '100%', resize: 'none'}} placeholder="填写入队申请"/>
+        <TextArea rows={5} onChange={onChange} style={{width: '80%', resize: 'none',left:'10%'}} placeholder="填写入队申请"/>
     </>
   );
 
@@ -63,7 +65,7 @@ export default class Post extends Component {
     
     render() {
         return (
-            <div className='site-card-border-less-wrapper'>
+            <div style={{backgroundColor:'white'}}>
                 <Card    
                     extra={//之后可以用button之类的包装一下做成超链接
                         //这里的头像要动态生成
@@ -80,43 +82,45 @@ export default class Post extends Component {
                         Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
                         />
                         </div>
-                        }
+                        }        
                 >
-
-                {
-                    //下面是帖子的内容部分
-                }
-                <p>
-                   { this.state.Content}
-                </p>
-                <p id="date">
-                    {this.state.PostTime}
-                </p>
+                    <div>
+                    <p style={{textAlign:'left'}}>{ this.state.Content}</p>
+                    <p id="date" >{this.state.PostTime}</p>
+                    </div>
                 </Card>
-                <br/>
-                <Space>
-                    <Button ghost><p style={{color:'black',margin: '0 8px'}}>收藏该帖</p></Button>
-                    <Button ghost><p style={{color:'black',margin: '0 8px'}} onClick={()=>{
-                        if(this.state.Apply.length>0&&this.state.Account!=null){
-                            let dataSent={
-                              ProjctId:this.state.ProjctId,
-                              Account:this.state.Account,
-                              Content:this.state.Apply,
-                              GroupId:this.state.GroupId
-                            }
-                            axios.post('http://mock-api.com/5g7AeqKe.mock/Application',dataSent)
-                            .then(response=>{
-                              console.log(response)
-                              window.alert("申请成功")
-                            })      
-                    }
-                    else{
-                        window.alert("申请失败")
-                    }
-                    }}>申请进入小队</p></Button>
-                </Space>
-                <Divider/>
+                <br/><br/>
                 <Editor onChange={this.ContentChange}/>
+                <br/><br/>
+                <Space/>
+                    <div id='actions'>
+                    <Button shape='round' style={{color:'white',backgroundColor:'blue'}}><p>收藏该帖</p></Button>
+                    <Button shape='round'style={{color:'white',margin:'0 15px',backgroundColor:'blue'}}><p  onClick={()=>{
+                        if(isLogined()){
+                            if(this.state.Apply.length>0&&this.state.Account!=null){
+                                let dataSent={
+                                  ProjctId:this.state.ProjctId,
+                                  Account:this.state.Account,
+                                  Content:this.state.Apply,
+                                  GroupId:this.state.GroupId
+                                }
+                                axios.post('http://mock-api.com/5g7AeqKe.mock/Application',dataSent)
+                                .then(response=>{
+                                  console.log(response)
+                                  window.alert("申请成功")
+                                })      
+                        }
+                        else{
+                            window.alert("申请失败")
+                        }
+                        }
+                        else{
+                            window.alert("未登录，确定后跳转至登陆界面")
+                            window.location.hash ='#/login'
+                        }
+                    }}>申请进入小队</p></Button>
+                <br/><br/>
+                </div>
             </div>
         )
     }
