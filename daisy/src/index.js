@@ -8,11 +8,12 @@ import { mainRoutes } from './routes/index'
 import AdminIndex from './pages/admin/adminIndex'
 import MessageIndex from './pages/message/messageIndex'
 import PersonalSpace from './pages/personal/personalSpace'
+import { isLogined } from "./utils/auth"
 
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route path="/admin" render={routeProps=><AdminIndex {...routeProps} />}/>
+      <Route path="/admin" render={(routeProps)=>(isLogined()?(<AdminIndex {...routeProps} />):(<Redirect to="/login"/>))}/>
       <Route path="/message" render={routeProps=><MessageIndex {...routeProps} />}/>
       <Route path="/personal" render={routeProps=><PersonalSpace {...routeProps} />}/>
       {mainRoutes.map(route=>{
