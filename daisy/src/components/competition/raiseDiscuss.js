@@ -61,7 +61,7 @@ export default class RaiseDiscuss extends React.Component {
       return 
     }
     else{
-      //this.postData()
+      this.postData()
     }
     
     this.setState({
@@ -82,7 +82,7 @@ export default class RaiseDiscuss extends React.Component {
     var data={account:userData.account,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),
     content:this.state.value,picture:userData.icon}
 
-    axios.post('http://fwdarling2020.cn:8080/api/Discussion',data)
+    axios.post('/api/Discussion',data)
     .then(function (response) {
       console.log(response);
     })

@@ -40,7 +40,7 @@ export default class CompetitionPage extends Component
 
    getData()
     {
-        var requesturl='http://fwdarling2020.cn:8080/api/Project/'+this.state.compID
+        var requesturl='/api/Project/'+this.state.compID
         var returnData
         axios.get(requesturl)
           .then(function (response) {

@@ -128,7 +128,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
     }
     console.log(dataSent)
     if(dataSent.Account.length>0){
-    axios.post('http://fwdarling2020.cn:8080/api/Report',dataSent)
+    axios.post('/api/Report',dataSent)
         .then(response=>{
           console.log(response)
           window.alert("举报成功")

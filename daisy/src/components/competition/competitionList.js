@@ -57,7 +57,7 @@ export default class CompetitionList extends Component {
   }
 
   componentDidMount() {
-    //getData()
+    this.getData()
     this.handleAnchor() //页面刷新时回到刷新前的page
   }
 
@@ -88,7 +88,7 @@ export default class CompetitionList extends Component {
  
  getData()
  {
-   axios.get('http://fwdarling2020.cn:8080/api/Project')
+   axios.get('/api/Project')
    .then(function (response) {
     console.log(response);
     this.setstate(
@@ -100,7 +100,7 @@ export default class CompetitionList extends Component {
   })
   .catch(function (error) {
     console.log(error);
-    window.alter("连接出现问题，点击确定跳转回主页")
+    window.alert("连接出现问题，点击确定跳转回主页")
     window.location.hash ='#/home'
   });
  }

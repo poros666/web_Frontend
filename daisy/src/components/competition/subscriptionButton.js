@@ -7,20 +7,20 @@ import { isLogined } from '../../utils/auth'
 
 export default class SubscriptionButton extends Component {
 
-/*
+
     postData(){
-        axios.post('/api/subscribe',{account:,projectId:this.propos.compID})
+        axios.post('/api/subscribe',{account:localStorage.getItem('userData').account,projectId:this.propos.compID})
         .then(function (response) {
             console.log(response);
             window.alter("订阅成功")
           })
           .catch(function (error) {
             console.log(error);
-            window.alter("连接似乎出现问题")
+            window.alert("连接似乎出现问题")
           });
         
     }
-*/
+
 
 handleClick(){
     if(!isLogined())
@@ -30,7 +30,7 @@ handleClick(){
             return 
          }
         else{
-            //postData()
+            this.postData()
         }
 }
 
