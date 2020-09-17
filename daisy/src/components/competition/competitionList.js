@@ -1,46 +1,7 @@
 import React, { Component } from 'react'
 import {List,Col, Pagination} from 'antd'
 import 'antd/dist/antd.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios'
-const data = [
-    {
-        ID:1,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    },
-    {
-        ID:2,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    },
-    {
-        ID:3,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    },
-    {
-        ID:4,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    }
-];
 
 
 export default class CompetitionList extends Component {
@@ -57,8 +18,7 @@ export default class CompetitionList extends Component {
   }
 
   componentDidMount() {
-    this.getData()
-    this.handleAnchor() //页面刷新时回到刷新前的page
+    this.getData() //页面刷新时回到刷新前的page
   }
 
   handleAnchor() {
@@ -77,7 +37,7 @@ export default class CompetitionList extends Component {
       state.currentData.pop();
     }
     for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
-      state.currentData.push(data[i]);
+      state.currentData.push(this.state.data[i]);
     }
       return{
         currentData:state.currentData,
@@ -88,17 +48,17 @@ export default class CompetitionList extends Component {
  
  getData()
  {
-   axios.get('/api/Project')
-   .then(function (response) {
+   axios.get('/Project')
+   .then(response=>{
     console.log(response);
-    this.setstate(
+    this.setState(
         {
           data:response.data,
           total:response.data.length
-        }
+        },this.handleAnchor()
     )
   })
-  .catch(function (error) {
+  .catch(error=>{
     console.log(error);
     window.alert("连接出现问题，点击确定跳转回主页")
     window.location.hash ='#/home'

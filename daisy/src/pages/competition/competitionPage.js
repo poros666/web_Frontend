@@ -40,27 +40,25 @@ export default class CompetitionPage extends Component
 
    getData()
     {
-        var requesturl='/api/Project/'+this.state.compID
-        var returnData
+        var requesturl='/Project/'+this.state.compID
         axios.get(requesturl)
-          .then(function (response) {
+        .then(response=>{
             console.log(response);
-            returnData=response.data
+            this.setState(
+                {
+                    compName:response.data.name,
+                    compInformation:response.data.introduction,
+                    compHost:response.data.host,
+                    compParticipantsNumber:response.data.participantsNumber,
+                    compStartTime:response.data.startTime,
+                    compEndTime:response.data.endTime
+                })
           })
-          .catch(function (error) {
+          .catch(error=>{
             console.log(error);
             window.alert("连接出现问题，点击确定跳转回主页")
             window.location.hash ='#/home'
           });
-          this.setstate(
-            {
-                compName:returnData.Name,
-                compInformation:returnData.Introduction,
-                compHost:returnData.Host,
-                compParticipantsNumber:returnData.ParticipantsNumber,
-                compStartTime:returnData.StartTime,
-                compEndTime:returnData.EndTime
-            })
     }
      
 

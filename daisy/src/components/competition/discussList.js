@@ -4,99 +4,7 @@ import 'antd/dist/antd.css';
 import axios from 'axios'
 import moment from 'moment'
 import Report from './Report'
-import { isLogined } from '../../utils/auth';
-const data = [
-    {
-      username: 'zhangsan',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      username: 'lisi',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
 
-    },
-    {
-      username: 'kuanye',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'maoge',
-      description:'zzzzzz我睡着了 但是我没有摸鱼'
-    },
-    {
-      username: 'zhangsan',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      username: 'lisi',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'kuanye',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'maoge',
-      description:'zzzzzz我睡着了 但是我没有摸鱼'
-    },
-    {
-      username: 'zhangsan',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      username: 'lisi',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'kuanye',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'maoge',
-      description:'zzzzzz我睡着了 但是我没有摸鱼'
-    },
-    {
-      username: 'zhangsan',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      username: 'lisi',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'kuanye',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'maoge',
-      description:'zzzzzz我睡着了 但是我没有摸鱼'
-    },
-    {
-      username: 'zhangsan',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      username: 'lisi',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'kuanye',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      username: 'maoge',
-      description:'zzzzzz我睡着了 但是我没有摸鱼'
-    },
-  ];
 
 
 export default class DiscussList extends Component { 
@@ -108,15 +16,29 @@ export default class DiscussList extends Component {
       sortMethod:'time',
       currentData:[],
       data:[],
-      total: data.length,
+      total: 0,
       pageSize: 5,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
+
+     axios.get('/Discussion?ProjectId=1'/*+this.state.compID*/)
+     .then(response=>{
+        console.log(response);
+        this.setState(
+            {
+              data:response.data,
+              total:response.data.length
+            }
+        )
+      })
+      .catch(error=>{
+        console.log(error);
+        window.alert("连接似乎出现问题")
+      });
     
   }
 
   componentDidMount() {
-    this.getData()
     this.handleAnchor() //页面刷新时回到刷新前的page
   }
   handleAnchor() {
@@ -135,7 +57,7 @@ export default class DiscussList extends Component {
       state.currentData.pop();
     }
     for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
-      state.currentData.push(data[i]);
+      state.currentData.push(this.state.data[i]);
     }
       return{
         currentData:state.currentData,
@@ -145,20 +67,7 @@ export default class DiscussList extends Component {
  }
 
   getData(){
-    axios.get('/api/Discussion?ProjectId='+this.state.compID)
-      .then(function (response) {
-        console.log(response);
-        this.setstate(
-            {
-              data:response.data,
-              total:response.data.length
-            }
-        )
-      })
-      .catch(function (error) {
-        console.log(error);
-        window.alert("连接似乎出现问题")
-      });
+    
   }
 
   render() {

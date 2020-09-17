@@ -9,12 +9,12 @@ export default class SubscriptionButton extends Component {
 
 
     postData(){
-        axios.post('/api/subscribe',{account:localStorage.getItem('userData').account,projectId:this.propos.compID})
-        .then(function (response) {
+        axios.post('/subscribe',{account:localStorage.getItem('userData').account,projectId:this.propos.compID})
+        .then(response=>{
             console.log(response);
             window.alter("订阅成功")
           })
-          .catch(function (error) {
+          .catch(error=>{
             console.log(error);
             window.alert("连接似乎出现问题")
           });
