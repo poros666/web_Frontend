@@ -102,7 +102,8 @@ class HeaderNav extends Component {
                                         社区
                                     </a>
                                 </Menu.Item>
-                                                        
+
+                                <Menu.Item>
                                 <Search 
                                     placeholder="请输入想要搜索的内容"
                                     // onChange={this.inputChange.bind(this)}
@@ -110,6 +111,7 @@ class HeaderNav extends Component {
                                     onKeyDown={e=>this.keyDown(e)}
                                     style={{ width: 400 }}
                                 />
+                                </Menu.Item>              
                                 
                                 <SubMenu icon={<UserOutlined />} 
                                 key='personalMenu'
