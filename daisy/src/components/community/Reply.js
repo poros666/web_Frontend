@@ -33,7 +33,7 @@ export default class Reply extends Component {
 
     componentDidMount(){
 
-        var url=CONSTURL.hosturl+CONSTURL.GetReplyList+this.state.Rid
+        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.GetReplyList+this.state.Rid
       //  console.log(url)
         Axios.get(url).then((res)=>{
             var temp=res.data
@@ -82,9 +82,13 @@ export default class Reply extends Component {
                                     </>,
                                     ]}
                                 author={item.Nickname}
-                                avatar={<Avatar
-                                    src={item.Icon}
-                                />}
+                                avatar={
+                                    <a href='#/personal'>
+                                        <Avatar
+                                            src={item.Icon}
+                                        />
+                                    </a>
+                                }
                                 content={item.Content}
                                 datetime={item.Time}
                             >

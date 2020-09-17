@@ -2,6 +2,7 @@ import React, { useState,Component } from "react"
 import { Modal, Form, Input, Select,Popover } from "antd"
 import { WarningOutlined} from "@ant-design/icons"
 import axios from 'axios'
+import { isLogined } from "../../utils/auth";
 
 
 const { Option } = Select;
@@ -54,15 +55,16 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         >
           <Input placeholder={ReportUID} disabled/>
         </Form.Item>
-        <Form.Item name="types" label="举报类型" 
-        rules={[{ required: true, message: '请选择举报类型' }]}>
-        <Select initialValues="色情" style={{ width: 120 }}>
-          <Option value="sex">色情</Option>
-          <Option value="policy">涉政</Option>
-          <Option value="effect">影响他人</Option>
-          <Option value="trade">涉及交易</Option>
-          <Option value="spite">恶意</Option>
-    </Select>
+        <Form.Item 
+          name="types" label="举报类型" 
+          rules={[{ required: true, message: '请选择举报类型' }]}>
+          <Select initialValues="色情" style={{ width: 120 }}>
+            <Option value="sex">色情</Option>
+            <Option value="policy">涉政</Option>
+            <Option value="effect">影响他人</Option>
+            <Option value="trade">涉及交易</Option>
+            <Option value="spite">恶意</Option>
+          </Select>
         </Form.Item>
         <Form.Item name="description" label="举报内容" 
         rules={[{ required: true, message: '请填写举报内容' }]}>
@@ -87,6 +89,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,ContentType}) => {
     values.target_id=ReportUID;
     values.t_type=ContentType;
     console.log("Received values of form: ", values)
+    if(isLogined()){
     let dataSent={
       Account:values.reporter_id,
       ReportType:values.types,
@@ -95,7 +98,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,ContentType}) => {
       TargetType:values.t_type,
       TargetId:values.target_id
     }
-    console.log(dataSent)
+ //   console.log(dataSent)
     if(dataSent.Account.length>0){
     axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
         .then(response=>{
@@ -106,6 +109,11 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,ContentType}) => {
       else{
         window.alert("举报失败")
       }
+    }
+    else{
+      window.alert("未登录，跳转至登陆界面")
+      window.location.hash='#/login'
+    }
     //处理数据
     setVisible(false)
   }
