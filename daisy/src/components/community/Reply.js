@@ -5,6 +5,7 @@ import Loading from './Loading';
 import CONSTURL from './config';
 import Axios from 'axios';
 import Avatar from 'antd/lib/avatar/avatar';
+import moment from 'moment'
 
 export default class Reply extends Component {
 
@@ -72,7 +73,12 @@ export default class Reply extends Component {
                                 actions={ 
                                     [
                                     <>
-                                        <ReportButton/>
+                                        <ReportButton
+                                          ReportUID={this.state.Rid} 
+                                          ReporterUID='test2' 
+                                          Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
+                                          ContentType="reply"
+                                      />
                                     </>,
                                     ]}
                                 author={item.Nickname}

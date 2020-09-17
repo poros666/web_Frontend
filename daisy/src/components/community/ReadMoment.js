@@ -17,7 +17,8 @@ import ReportButton from './ReportButton'
 import CONSTURL from './config'
 import Axios from 'axios'
 import Loading from './Loading'
-
+//import Report from '../findTeammate/report'
+import moment from 'moment'
 
 
 
@@ -133,7 +134,12 @@ export default class ReadMoment extends Component {
                             <IconText icon={CommentOutlined} text={this.state.data.CommentCount} key="list-vertical-share-o" />
                         </Button>,
 
-                        <ReportButton/>,
+                        <ReportButton
+                            ReportUID={this.state.Mid} 
+                            ReporterUID='test2' 
+                            Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
+                            ContentType="moment"
+                        />,
 
                         ]}
                     >

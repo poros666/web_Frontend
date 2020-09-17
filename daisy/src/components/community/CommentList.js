@@ -148,7 +148,12 @@ export default class CommentList extends Component {
                                 Reply to
                             </span>,
                             <>
-                              <ReportButton/>
+                              <ReportButton   
+                                ReportUID={this.state.Pid} 
+                                ReporterUID='test2' 
+                                Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
+                                ContentType="comment"
+                              />
                             </>,
                             <span>
                               {this.state.renderAdComponent[index] ? <ToComment  className="childComment" createComment={this.createReply}/> : null}
