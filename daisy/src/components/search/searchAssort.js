@@ -10,7 +10,12 @@ import { Route, Link } from 'react-router-dom';
 import { searchRoutes } from '../../routes/index'
 
 export default class SearchAssort extends Component {
-
+    constructor(props){
+      super(props);
+      this.State={
+          searchWord:'',
+      }
+    }
     state = {
       current: 'mail',
     };
@@ -32,7 +37,9 @@ export default class SearchAssort extends Component {
             >
           {
               searchRoutes.map((item,index)=>{
-                return (<Menu.Item key={index}><Link to={item.path}>{item.title}</Link></Menu.Item>)
+                // console.log('path:'+item.path)
+                // console.log('title:'+item.title)
+                return (<Menu.Item key={index}><Link to={item.path+'?keyword='+this.State.searchWord}>{item.title}</Link></Menu.Item>)
               })
           }
           {/* 头部导航栏菜单内容 */}
@@ -48,6 +55,7 @@ export default class SearchAssort extends Component {
           >
           {
             searchRoutes.map((item,index)=>{
+              console.log(item.path)
               return (<Route key={index} path={item.path} component={item.component}/>)
             })
           }

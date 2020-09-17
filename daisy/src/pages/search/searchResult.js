@@ -17,11 +17,18 @@ import SearchAssort from '../../components/search/searchAssort'
 import LogoBar from '../../components/search/logoBar'
 
 export default class SearchResult extends Component {
+    constructor() {
+        super();
+        this.state = {
+            resultWord:"",
+        };
+      };
+    
     render() {
         return (
             <div >
                 <HeaderNav/>
-
+                
                 <LogoBar/>
 
                 <EasySearchFrame/>
