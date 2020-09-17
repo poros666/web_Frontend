@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Input } from 'antd';
+<<<<<<< HEAD
 import { withRouter,location } from 'react-router-dom'
 
 class EasySearchFrame extends Component {
@@ -53,16 +54,47 @@ class EasySearchFrame extends Component {
         // var searchWord=this.props.location.state.keyWord;
         // console.log(searchWord)
         console.log(this.props.history.location.Search)
+=======
+import { Link } from 'react-router-dom'
+
+const { Search } = Input;
+
+const onChange = e => {
+    console.log(e);
+    };
+    
+export default class EasySearchFrame extends Component {
+
+    keyDown(e){
+        if(e.keyCode === 13){
+        }
+    }
+
+    searchJump(value){
+        console.log(value)
+        var w=window.open('about:blank')
+        w.location.href="#/searchResult/type=mixed"+this.props.keyword
+    }
+    
+    render() {
+
+>>>>>>> zhw
         return (
             <div style={{marginLeft: '22%'}}>
                 <Search
                     placeholder="搜搜看你感兴趣的内容吧～"
+<<<<<<< HEAD
                     // value={searchWord}
                     onChange={e => this.onKeywordChange(e)}
                     onSearch={value => this.onSearchKeyword(value)}
+=======
+
+                    onSearch={value => this.searchJump(value)}
+                    onKeyDown={e=>this.keyDown(e)}
+                    onChange={onChange}
+
+>>>>>>> zhw
                     style={{ width: '68%'}}
-                    allowClear 
-                    //accesskey="s"
                 />
             </div>
         )

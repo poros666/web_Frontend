@@ -1,4 +1,5 @@
 //日后补充：data来源和链接跳转的目标（该关键词的搜索结果）
+//功能修改：热门搜索，运用随机获取15个比赛的那个接口
 
 import React, { Component } from 'react'
 import { List, Divider, Layout } from 'antd';

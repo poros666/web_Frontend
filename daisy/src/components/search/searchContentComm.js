@@ -26,9 +26,13 @@ const IconText = ({ icon, text }) => (
 
 export default class SearchContentComm extends Component {
 
-    state = {
-      value: 1,
-    };
+    constructor(props) {
+      super(props);
+      this.state = {
+        kw: this.props.match.params.kw,
+        order: 1
+      };
+    }
 
     onChange = e => {
         console.log('radio checked', e.target.value);
@@ -36,6 +40,14 @@ export default class SearchContentComm extends Component {
           value: e.target.value,
         });
     };
+
+    orderChange(e){
+      console.log('radio checked', e.target.value);
+      this.setState({
+        order: e.target.value
+      })
+      console.log('radio checked', this.state.order);
+    }
 
     render() {
 
@@ -49,7 +61,8 @@ export default class SearchContentComm extends Component {
             >
                 <Form.Item label="">
                     <Radio.Group
-                        onChange={this.onChange} value={this.state.value}
+                    onChange={this.orderChange.bind(this)} 
+                    value={this.state.order}
                     >
                     <Radio value={1}><FieldTimeOutlined/>最新发布</Radio>
                     <Radio value={2}><LikeOutlined/>最多点赞</Radio>

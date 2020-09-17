@@ -138,22 +138,38 @@ export const mainRoutes = [{
     
 export const searchRoutes = [
 {
+<<<<<<< HEAD
     path: "/searchResult/all",
+=======
+    path: "/searchResult/type=mixed/:kw",
+>>>>>>> zhw
     title: "综合",
     component: SearchContent
 },
 {
+<<<<<<< HEAD
     path: "/searchResult/comp",
+=======
+    path: "/searchResult/type=comp/:kw",
+>>>>>>> zhw
     title: "比赛",
     component: SearchContentComp
 },
 {
+<<<<<<< HEAD
     path: "/searchResult/comm",
+=======
+    path: "/searchResult/type=comm/:kw",
+>>>>>>> zhw
     title: "社区",
     component: SearchContentComm
 },
 {
+<<<<<<< HEAD
     path: "/searchResult/usr",
+=======
+    path: "/searchResult/type=usr/:kw",
+>>>>>>> zhw
     title: "用户",
     component: SearchContentUsr
 }
