@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../../style/findTeam/findTeam.css'
 
+axios.defaults.baseURL='/api';
+
 export default class teamNav extends Component {
 
   /*接收比赛名称*/
@@ -14,19 +16,20 @@ export default class teamNav extends Component {
       matchIntroduction:'',
       matchMaxMemberNum:''
     }
-    axios.get('http://mock-api.com/5g7AeqKe.mock/matchInfo/'+matchId)
+    axios.get('/Project/'+matchId)
     .then(response=>{
-    this.setState({
-      matchName:response.data[0].Name,
-      matchIntroduction:response.data[0].Introduction,
-      matchMaxMemberNum:response.data[0].ParticipantsNumber
-    })
+      console.log(response.data)
+      this.state={
+        matchName:response.data[0].Name,
+        matchIntroduction:response.data[0].Introduction,
+        matchMaxMemberNum:response.data[0].ParticipantsNumber
+      }
   })
   .catch(error=>{
-    this.setState({
+    this.state={
       matchName:'未找到该比赛',
       matchIntroduction:'未找到该比赛'
-    })
+    }
     console.log(error);
   })
 }
@@ -36,6 +39,7 @@ render() {
     return (
     <>
       <div id="site-page-header-ghost-wrapper">
+        <div id='title'>
         <PageHeader
           ghost={false}
           title={this.state.matchName}
@@ -47,6 +51,7 @@ render() {
             <Descriptions.Item label="队伍人数上限">{MaxNum}人</Descriptions.Item>
           </Descriptions>
         </PageHeader>
+        </div>
       </div>
       </>
     )

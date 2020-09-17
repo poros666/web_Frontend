@@ -21,8 +21,9 @@ export default class CommunityContent extends Component {
       pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
-     axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
+     axios.get('http://fwdarling2020.cn:8080/api/Post?ProjctId='+ProjctId)
      .then(response=>{
+       console.log(response)
        this.setState({
          total:Math.ceil(response.data.length/PostPerPage)
         });
@@ -45,8 +46,9 @@ export default class CommunityContent extends Component {
     }, () => {
       window.location.hash = `#/findteam/id=${ProjctId}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
-    axios.get('http://mock-api.com/5g7AeqKe.mock/Post?ProjctId='+ProjctId)
+    axios.get('http://fwdarling2020.cn:8080/api/Post?ProjctId='+ProjctId)
     .then(response=>{
+      console.log(response)
       this.setState((state)=>{
           for(let i=0;i<PostPerPage;i++){
             state.currentData.pop();
@@ -94,7 +96,7 @@ export default class CommunityContent extends Component {
                                  avatar={
                                   //头像的来源和指向的地址
                                   <a href={"#/personal"}>
-                                    <Avatar src={require("../../img/avatar/"+item.Icon+".jpg")}></Avatar>
+                                    <Avatar src={item.Icon}></Avatar>
                                   </a>
                                 }
                                 title={<p>{item.NickName}的组队帖</p>}
