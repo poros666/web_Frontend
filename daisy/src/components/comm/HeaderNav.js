@@ -4,7 +4,7 @@ import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
-import { withRouter } from 'react-router-dom'
+import { withRouter,Link } from 'react-router-dom'
 // import logo from './logo2.png'
 // import logo from './logo3.png'
 
@@ -54,20 +54,35 @@ class HeaderNav extends Component {
     searchJump(value){
         console.log(value)
         console.log(value.length)
-        var w=window.open('about:blank')
-        var keyWord=''
+        var searchWord=""
+        // String word=JSON.toJSONString(this.state.searchWord)
         if(value.length == 0){
-            w.location.href="#/search"
+            window.open('#/search')
         }
         else{
-            // w.location.href="#/searchResult"
-            //这里可以onClick，实现点击跳转传参
-            this.props.history.push({
-                pathname: `/searchResult`, 
-                state: {keyWord:this.state.searchWord}
-            });
-            console.log( this.props)
-            // this.props.history.push("#/searchResult/all?keyword=${page}", 
+            // <Link
+            //     // 弹出新的选项卡只能用search来传递数据，单页面的话可以使用state
+            //     // 注意，此处search传递是以URL拼接的方式传递传递长度根据浏览器限制来的，只能传递字符串，
+            //     // 还有search传递过去的参数会默认追加一个? e.g search?id=1
+            //     // state则没有限制，可直接传递obj
+            //     to={{ pathname: "/maker/bill/detail/supplement", search: JSON.stringify(billDetailObj) }}
+            //     target="_blank"
+            //     // 当target="_blank"打开新页面的时候，state内容无法传递
+            //     state：{id:1}
+            //     className="fontBlue fontWeight">
+            //     打开新页面
+            // </Link>
+            // w.location.href="#/searchResult/all?"+'keyword='+String(value)
+            window.open("#/searchResult/all?"+'keyword='+String(value))
+            // 这里可以onClick，实现点击跳转传参
+            // this.props.history.push({
+            //     pathname: `/searchResult/all`, 
+            //     // search: JSON.stringify(value),
+            //     search: String(value),
+            //     target:"_blank"
+                // state: {keyWord:this.state.searchWord},
+            // });
+            // console.log( this.props)
         }
     }
     
