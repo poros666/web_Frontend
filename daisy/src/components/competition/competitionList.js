@@ -86,14 +86,14 @@ export default class CompetitionList extends Component {
    );
  }
  
- /*getData()
+ getData()
  {
-   axios.get('/api/Project')
+   axios.get('http://fwdarling2020.cn:8080/api/Project')
    .then(function (response) {
     console.log(response);
     this.setstate(
         {
-          data:response.data
+          data:response.data,
           total:response.data.length
         }
     )
@@ -103,7 +103,7 @@ export default class CompetitionList extends Component {
     window.alter("连接出现问题，点击确定跳转回主页")
     window.location.hash ='#/home'
   });
- }*/
+ }
 
 
     render() {
@@ -115,11 +115,6 @@ export default class CompetitionList extends Component {
               dataSource={this.state.currentData}
               renderItem={item => (
                 <List.Item>
-                    <img
-                      width={272}
-                      alt="logo"
-                      src={item.logosrc}
-                    />
                     <List.Item.Meta
                     title={<a href={"#/compPage/id="+item.ID+'/'}>{item.competitionname}</a>
                     }

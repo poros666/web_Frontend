@@ -75,21 +75,21 @@ export default class RaiseDiscuss extends React.Component {
     });
   };
 
-  /*
+  
   postData(){
     var token=localStorage.getItem('token')
     var userData=localStorage.getItem('userData')
     var data={account:userData.account,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),
     content:this.state.value,picture:userData.icon}
 
-    axios.post('/api/Discussion',data)
+    axios.post('http://fwdarling2020.cn:8080/api/Discussion',data)
     .then(function (response) {
       console.log(response);
     })
     .catch(function (error) {
       console.log(error);
     });
-  }*/
+  }
 
   render() {
     const { comments, submitting, value } = this.state;

@@ -2,6 +2,7 @@ import React, { useState,Component } from "react"
 import { Modal, Form, Input,Select, Popover } from "antd"
 import { WarningOutlined} from "@ant-design/icons"
 import axios from "axios"
+import moment from 'moment'
 import { isLogined } from "../../utils/auth";
 const { Option } = Select;
 
@@ -113,7 +114,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     //处理数据
-    /*values.time=moment(Time).format('YYYY-MM-DDTHH:mm:ssC');
+    values.time=moment(Time).format('YYYY-MM-DDTHH:mm:ssC');
     values.reporter_id=ReporterUID;
     values.target_id=ReportUID;
     console.log("Received values of form: ", values)
@@ -127,7 +128,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
     }
     console.log(dataSent)
     if(dataSent.Account.length>0){
-    axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
+    axios.post('http://fwdarling2020.cn:8080/api/Report',dataSent)
         .then(response=>{
           console.log(response)
           window.alert("举报成功")
@@ -135,7 +136,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
       }
       else{
         window.alert("举报失败")
-      }*/
+      }
     setVisible(false)
   }
 

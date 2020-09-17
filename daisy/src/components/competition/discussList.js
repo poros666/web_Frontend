@@ -143,14 +143,14 @@ export default class DiscussList extends Component {
     }
    );
  }
-/*
+
   getData(){
-    axios.get('/api/Discussion?ProjectId='+this.state.compID)
+    axios.get('http://fwdarling2020.cn:8080/api/Discussion?ProjectId='+this.state.compID)
       .then(function (response) {
         console.log(response);
         this.setstate(
             {
-              data:response.data
+              data:response.data,
               total:response.data.length
             }
         )
@@ -160,7 +160,7 @@ export default class DiscussList extends Component {
         window.alter("连接似乎出现问题")
       });
   }
-*/
+
   render() {
         return (
             <div className='DiscussListBox'>
