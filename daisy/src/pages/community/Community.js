@@ -59,7 +59,7 @@ export default class Community extends Component {
       }
       else{
         window.alert("未登陆，将跳转到登陆界面")
-        window.alert.hash='#/home'
+        window.location.hash='#/home'
       }
   
 

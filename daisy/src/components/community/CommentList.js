@@ -19,6 +19,7 @@ import Reply from './Reply'
 import CONSTURL from './config';
 import Axios from 'axios';
 import {isLogined} from '../../utils/auth'
+import unLogined from './Unlogined'
 
 
 
