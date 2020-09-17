@@ -1,5 +1,5 @@
 const CONSTURL={
-    hosturl:'http://mock-api.com/vzMrDQgG.mock',
+    hosturl:'http://fwdarling2020.cn:8080',
     GetMomentList:'/api/Moment?OrderBy=',
     GetMomentCount:'/api/Moment/count',
     CreatMoment:'/api/Moment',
@@ -9,7 +9,9 @@ const CONSTURL={
     GetCommentList:'/api/Comment?MomentId=',
     GetReplyList:'/api/Reply?CommentId=',
     LikeMoment:'/api/LikeMoment',
-    StarMoment:'/api/MomentStar'
+    StarMoment:'/api/MomentStar',
+   // local:'http://localhost:3000/#/'
+    local:''
 
 }
 

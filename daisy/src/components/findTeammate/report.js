@@ -62,7 +62,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
           <Option value="effect">影响他人</Option>
           <Option value="trade">涉及交易</Option>
           <Option value="spite">恶意</Option>
-    </Select>
+      </Select>
         </Form.Item>
         <Form.Item name="description" label="举报内容" 
         rules={[{ required: true, message: '请填写举报内容' }]}>

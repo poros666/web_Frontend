@@ -12,6 +12,7 @@ import moment from 'moment'
 import Axios from 'axios';
 import CONSTURL from '../../components/community/config';
 import '../../style/community/community.css'
+import { isLogined } from '../../utils/auth';
 
 export default class Community extends Component {
     constructor(props){
@@ -33,28 +34,34 @@ export default class Community extends Component {
     //组件功能实现
 
     createMoment(title,content){
-
-      //传递json到服务端
+      if(isLogined()){
+            //传递json到服务端
       var t=moment().format('YYYY-MM-DDTHH:mm:ssC')  //    console.log(title)
-   //   console.log(content)
-
-      var json=
-        {
-          'Account':'ddd',
-          'Title':title,
-          'Time':t,
-          'Content':content
-        }
-      
-        console.log(json)
-      var url=CONSTURL.hosturl+CONSTURL.CreatMoment
-        
-
-      Axios.post(url,json).then((res)=>{
-        console.log(res)
-        window.location.reload()
-
-      })
+      //   console.log(content)
+   
+         var json=
+           {
+             'Account':'ddd',
+             'Title':title,
+             'Time':t,
+             'Content':content
+           }
+         
+           console.log(json)
+         var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.CreatMoment
+           
+   
+         Axios.post(url,json).then((res)=>{
+           console.log(res)
+           window.location.reload()
+   
+         })
+      }
+      else{
+        window.alert("未登陆，将跳转到登陆界面")
+        window.location.hash='#/home'
+      }
+  
 
     }
 

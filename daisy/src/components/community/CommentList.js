@@ -18,6 +18,8 @@ import '../../style/community/Comment.css'
 import Reply from './Reply'
 import CONSTURL from './config';
 import Axios from 'axios';
+import {isLogined} from '../../utils/auth'
+import unLogined from './Unlogined'
 
 
 
@@ -50,19 +52,18 @@ export default class CommentList extends Component {
       }
 
       componentDidMount(){
-        var url=CONSTURL.hosturl+CONSTURL.GetCommentList+this.state.Pid
+        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.GetCommentList+this.state.Pid
         Axios.get(url).then((res)=>{
           var result=res.data
           for(var i=0;i<result.length;i++){
             result[i].Time=this.deleteLetter(result[i].Time)
           }
           this.setState({data:result})
-          console.log(this.state.data)
+        //  console.log(this.state.data)
         })
       }
 
       deleteLetter(str) {
-
         var result;
       
         var reg = /[a-zA-Z]+/;  //[a-zA-Z]表示匹配字母，g表示全局匹配
@@ -78,22 +79,26 @@ export default class CommentList extends Component {
 
 
       createReply(content){
+        if(isLogined()){
+          var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
+          var json=
+          {
+            "CommentId":this.state.Pid,
+            "Account":"account",
+            "Content":content,
+            "Time":t,
+          }
+          console.log(json)
 
-        var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
-
-        var json=
-        {
-          "CommentId":this.state.Pid,
-          "Account":"account",
-          "Content":content,
-          "Time":t,
+          var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.CreateReply
+          Axios.post(url,json).then((res)=>{
+            window.location.reload()
+          })
         }
-        console.log(json)
-
-        var url=CONSTURL.hosturl+CONSTURL.CreateReply
-        Axios.post(url,json).then((res)=>{
-          window.location.reload()
-        })
+        else{
+          window.alert("未登录，跳转至登陆界面")
+          window.location.hash='#/login'
+        }
       }
 
       updateADComp(){
@@ -148,7 +153,12 @@ export default class CommentList extends Component {
                                 Reply to
                             </span>,
                             <>
-                              <ReportButton/>
+                              <ReportButton   
+                                ReportUID={this.state.Pid} 
+                                ReporterUID='test2' 
+                                Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
+                                ContentType="comment"
+                              />
                             </>,
                             <span>
                               {this.state.renderAdComponent[index] ? <ToComment  className="childComment" createComment={this.createReply}/> : null}
@@ -156,9 +166,13 @@ export default class CommentList extends Component {
                             
                           ]}
                       author={item.Nickname}
-                      avatar={<Avatar
-                        src={item.Icon}
-                      />}
+                      avatar={
+                        <a href='#/personal'>
+                        <Avatar
+                          src={item.Icon}
+                        />
+                        </a>
+                      }
                       content={item.Content}
                       datetime={item.Time}
                       >

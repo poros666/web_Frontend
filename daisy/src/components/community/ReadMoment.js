@@ -17,6 +17,9 @@ import ReportButton from './ReportButton'
 import CONSTURL from './config'
 import Axios from 'axios'
 import Loading from './Loading'
+//import Report from '../findTeammate/report'
+import moment from 'moment'
+import {isLogined} from '../../utils/auth'
 
 
 
@@ -63,40 +66,53 @@ export default class ReadMoment extends Component {
 
     getMomentContent(Mid){
         //do something
-        var url=CONSTURL.hosturl+CONSTURL.GetMoment+Mid
+        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.GetMoment+Mid
         Axios.get(url).then((res)=>{
-         //   console.log(res.data)
+            console.log(res)
             this.setState({data:res.data})
             this.setState({isLoading:false})
         })
       }
 
     likeMoment(){
-      var json=
-        {
-            "MomentId":this.state.Mid,
-            "Account":'ddd'
-        }
-      var url=CONSTURL.hosturl+CONSTURL.LikeMoment
-
-      Axios.post(url,json).then((res)=>{
-        console.log(res)
-        window.location.reload()
-      })
-    }
-
-    starMoment(){
+    if(isLogined()){
         var json=
-        {
-            "MomentId":this.state.Mid,
-            "Account":"ddd",
-            "Name":"Moment"
-        }
-        var url=CONSTURL.hosturl+CONSTURL.StarMoment
+            {
+                "MomentId":this.state.Mid,
+                "Account":'ddd'
+            }
+        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.LikeMoment
+
         Axios.post(url,json).then((res)=>{
             console.log(res)
             window.location.reload()
         })
+    }
+    else{
+        window.alert("未登录，跳转至登陆界面")
+        window.location.hash='#/login'
+      }
+    }
+
+    starMoment(){
+        if(isLogined()){
+            var json=
+            {
+                "MomentId":this.state.Mid,
+                "Account":"ddd",
+                "Name":"Moment"
+            }
+            var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.StarMoment
+            Axios.post(url,json).then((res)=>{
+                console.log(res)
+                window.location.reload()
+            })
+        }
+        else{
+            window.alert("未登录，跳转至登陆界面")
+            window.location.hash='#/login'
+        }
+
     }
 
 
@@ -112,7 +128,7 @@ export default class ReadMoment extends Component {
                         //这里的头像要动态生成
                         <div align="right">
 
-                        <a href={"#/Moment/"+this.state.data.Account}>
+                        <a href={"#/personal"}>
                             <Avatar src={this.state.data.Icon}></Avatar>
                         </a>
 
@@ -133,7 +149,12 @@ export default class ReadMoment extends Component {
                             <IconText icon={CommentOutlined} text={this.state.data.CommentCount} key="list-vertical-share-o" />
                         </Button>,
 
-                        <ReportButton/>,
+                        <ReportButton
+                            ReportUID={this.state.Mid} 
+                            ReporterUID='test2' 
+                            Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
+                            ContentType="moment"
+                        />,
 
                         ]}
                     >
