@@ -5,8 +5,10 @@ import { InputNumber } from 'antd';
 import moment from 'moment';
 import { Row, Col} from 'antd';
 import axios from 'axios'
+import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
+
 
 /*模拟已登录用户数据*/
 const data={
@@ -18,7 +20,7 @@ const data={
   const Editor = ({onChange}) => (
     <>
       <Form.Item>
-        <TextArea rows={10} onChange={onChange} style={{width: '100%', resize: 'none'}} placeholder="帖子内容"/>
+        <TextArea rows={10} onChange={onChange} style={{width: '90%', resize: 'none'}} placeholder="帖子内容"/>
       </Form.Item>
     </>
   );
@@ -38,8 +40,9 @@ export default class CreatePost extends React.Component {
         Name:''
       }
 
-      axios.get('http://mock-api.com/5g7AeqKe.mock/matchInfo/'+tempId)
+      axios.get('http://fwdarling2020.cn:8080/api/Project/'+tempId)
       .then(response=>{
+        console.log(response)
       this.setState({
         matchName:response.data[0].Name,
         matchMaxMemberNum:response.data[0].MaxMemberNum
@@ -66,7 +69,7 @@ export default class CreatePost extends React.Component {
       Content:e.target.value
     })
   };
-  
+
   getFields=()=>{
     const children = [];//用于记录比赛信息
 
@@ -136,22 +139,29 @@ export default class CreatePost extends React.Component {
     </Col>
     )
     children.push(
-      <Col span={24} key={4}>
-      <Button type="primary" htmlType="submit" onClick={()=>{
-        if(this.state.Name.length>0&&this.state.Content.length>0){
-        let dataSent={
-          ProjctId:this.state.ProjctId,
-          LeaderAccount:data.Account,
-          PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
-          Content:this.state.Content,
-          MaxMemberNum:this.state.matchMaxMemberNum,
-          Name:this.state.Name
+      <Col span={14} key={4}>
+      <Button shape="round" type="primary" htmlType="submit" onClick={()=>{
+        if(isLogined()){
+          if(this.state.Name.length>0&&this.state.Content.length>0){
+          let dataSent={
+            ProjctId:this.state.ProjctId,
+            //LeaderAccount:localStorage.getItem('userData'),
+            LeaderAccount:data.Account,
+            PostTime:moment().format("YYYY-MM-DD HH:mm:ss"),
+            Content:this.state.Content,
+            MaxMemberNum:this.state.matchMaxMemberNum,
+            Name:this.state.Name
+          }
+          axios.post('http://fwdarling2020.cn:8080/api/Post',dataSent)
+          .then(response=>{
+            console.log(response)
+            window.alert("发布成功")
+          })
         }
-        axios.post('http://mock-api.com/5g7AeqKe.mock/Post',dataSent)
-        .then(response=>{
-          console.log(response)
-          window.alert("发布成功")
-        })
+      }
+      else{
+        window.alert("未登录，确定后跳转至登陆界面")
+        window.location.hash ='#/login'
       }
       }}>建立小队</Button>
       </Col>
@@ -167,7 +177,8 @@ export default class CreatePost extends React.Component {
             <Avatar style={{
               margin: '0 10px 0 50px',
               }}
-              src={require("../../img/avatar/"+data.Icon+".jpg")}
+              //src={require(localStorage.userData.Icon)}
+              src={data.Icon}
             />
           }
           content={

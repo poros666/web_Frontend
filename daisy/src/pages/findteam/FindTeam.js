@@ -19,22 +19,14 @@ export default class FindTeam extends Component {
     render() {
         return (
             <>
+                <div id='page'>
                 <HeaderNav/>
                 <br/><br/>
                 <div id='TeamNav'>
                 <TeamNav matchId={this.state.matchId}/>
                 </div>
-                <div id='page'>
                 <Divider/>
-                <div id='WebPage'>
-                    <div id='PostList'>
-                        <PostList matchId={this.state.matchId}/>
-                    </div>
-                    <br/>
-                    <Divider/>
-                    <div id='PublishPost'><PublishPost matchId={this.state.matchId}/></div>
-                    <br/>
-                    </div>
+
                 <FloatHelper/>
                 </div>
                 <Footer/>

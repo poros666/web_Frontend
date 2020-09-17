@@ -1,7 +1,7 @@
 import React, { useState,Component } from "react"
-import { Modal, Form, Input, Select,Popover } from "antd"
-import { WarningOutlined} from "@ant-design/icons"
+import { Modal, Form, Input, Select,Popover,Button} from "antd"
 import axios from 'axios'
+import { isLogined } from "../../utils/auth";
 
 
 const { Option } = Select;
@@ -86,36 +86,44 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     values.reporter_id=ReporterUID;
     values.target_id=ReportUID;
     console.log("Received values of form: ", values)
-    let dataSent={
-      Account:values.reporter_id,
-      ReportType:values.types,
-      Content:values.description,
-      Time:values.time,
-      TargetType:'post',
-      TargetId:values.target_id
+    if(isLogined()){
+      let dataSent={
+        Account:values.reporter_id,
+        ReportType:values.types,
+        Content:values.description,
+        Time:values.time,
+        TargetType:'post',
+        TargetId:values.target_id
+      }
+      console.log(dataSent)
+      if(dataSent.Account.length>0){
+      axios.post('http://fwdarling2020.cn:8080/api/Report',dataSent)
+          .then(response=>{
+            console.log(response)
+            window.alert("举报成功")
+          })
+        }
+        else{
+          window.alert("缺少需要填写项,举报失败")
+        }
     }
-    console.log(dataSent)
-    if(dataSent.Account.length>0){
-    axios.post('http://mock-api.com/5g7AeqKe.mock/Report',dataSent)
-        .then(response=>{
-          console.log(response)
-          window.alert("举报成功")
-        })
-      }
-      else{
-        window.alert("举报失败")
-      }
+    else{
+      window.alert("未登录，确定后跳转至登陆界面")
+      window.location.hash ='#/login'
+    }
     //处理数据
     setVisible(false)
   }
 
   return (
     <Popover content={<p>report</p>}>
-      <WarningOutlined
+      <Button
+      shape="round" 
+      type="primary"
         onClick={() => {
           setVisible(true)
         }}
-      />
+      ><p>举报该帖</p></Button>
       <CollectionCreateForm
         visible={visible}
         onCreate={onCreate}

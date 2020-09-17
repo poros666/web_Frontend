@@ -1,18 +1,28 @@
 #page{
-    background-color: lightcyan;
+    background-color:white;
 }
 #WebPage{
     margin:50px 100px 50px 100px;
 }
 
+#PostPage{
+    background-color:whitesmoke;
+}
+
+#Publish{
+    box-shadow: 5px 5px 5px 5px lightgrey;
+    width:100%;
+    background-color:white;
+}
+
 #PostList{
-    background-color: snow;
+    background-color:white;
     height:65%;
-    box-shadow: 5px 5px 5px 5px lightskyblue;
+    box-shadow: 5px 5px 5px 5px lightgray;
 }
 
 #TeamNav{
-    box-shadow: 5px 5px 5px 5px gray;
+    box-shadow: 5px 5px 5px 5px lightskyblue;
 }
 
 #TurnPage{
@@ -22,7 +32,7 @@
 
 #Post{
     height: 100%;
-    box-shadow: 5px 5px 5px 5px lightskyblue;
+    background-color: whitesmoke;
 }
 
 #Apply{
@@ -31,29 +41,15 @@
 
 #site-page-header-ghost-wrapper {
     padding: 24px;
-    background-color: #f5f5f5;
+    background-color: lightskyblue;
   }
+
+#actions{
+    text-align: center;
+}
 
 #date{
     text-align: right;
     size: 8px;
 }
 
-#PublishPost{
-    background-color: #f5f5f5;
-}
-
-img{
-    text-align: center;
-}
-
-h2{
-    text-align: center;
-    color: darkturquoise;
-}
-
-h3{
-    text-align: left;
-    color: darkblue;
-    font-size:20px;
-}
