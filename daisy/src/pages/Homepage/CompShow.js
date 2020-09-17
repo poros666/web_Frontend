@@ -99,7 +99,7 @@ class CompShow extends Component {
                                                 fontSize:20,
                                                 textAlign: 'center',
                                             }}>
-                                                <a href={"/compPage/"+item.ID+"=id"} 
+                                                <a href={"#/compPage/id="+item.ID+"/"} 
                                                 // id="compTitle" 
                                                 target="_blank" rel="noopener noreferrer">{item.title}</a>
                                             </div>

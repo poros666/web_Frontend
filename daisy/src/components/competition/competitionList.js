@@ -85,48 +85,25 @@ export default class CompetitionList extends Component {
     }
    );
  }
+ 
  /*getData()
  {
-   axios.get('/api/Project',
-   {params:{
-     order:this.props.sortOrder,
-     pageNum:this.state.pageNumber
-   }})
+   axios.get('/api/Project')
    .then(function (response) {
     console.log(response);
     this.setstate(
         {
-          currentData:response.data
+          data:response.data
           total:response.data.length
         }
     )
   })
   .catch(function (error) {
     console.log(error);
+    window.alter("连接出现问题，点击确定跳转回主页")
+    window.location.hash ='#/home'
   });
  }*/
-
- /*getData()
- {
-   axios.get('/api/Project',
-   {params:{
-     pageNum:this.state.pageNumber
-   }})
-   .then(function (response) {
-    console.log(response);
-    this.setstate(
-        {
-          data:response.data,
-          total:response.data.length
-        }
-    )
-  })
-  .catch(function (error) {
-    console.log(error);
-    window.alter("连接似乎出现问题")
-  });
- }*/
-
 
 
     render() {

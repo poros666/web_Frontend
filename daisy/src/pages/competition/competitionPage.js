@@ -58,6 +58,9 @@ export default class CompetitionPage extends Component
           })
           .catch(function (error) {
             console.log(error);
+            window.alter("连接出现问题，点击确定跳转回主页")
+            window.location.hash ='#/home'
+
           });
     }
     */ 
