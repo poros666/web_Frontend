@@ -188,7 +188,7 @@ function compress(
     _canvas.getContext('2d').drawImage(this, 0, 0, w, h)
     var base64 = _canvas.toDataURL('image/jpeg')
     _canvas.toBlob(function (blob) {
-      if (blob.size > 300 * 300) {
+      if (blob.size > 450 * 450) {
         //如果还大，继续压缩
         compress(base64, rate, callback)
       } else {
@@ -203,10 +203,9 @@ const RegistrationForm = () => {
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values)
-    var base
-    compress(values.upload[0].thumbUrl,1.5, function (base64) {
-      console.log(base64)
-      base = base64
+    var base64 = values.upload[0].thumbUrl
+    compress(base64,1.5, function (base64) {
+      console.log("new base64:",base64)
     })
     let dataSent = {
       Account: values.account,
@@ -221,7 +220,7 @@ const RegistrationForm = () => {
       Grade: values.grade,
       StudentNumber: values.student_num,
       Intro: values.intro,
-      Icon: base,
+      Icon: base64,
     }
     console.log("dataSent:",dataSent)
     axios.post('/api/Users', dataSent).then((response) => {
