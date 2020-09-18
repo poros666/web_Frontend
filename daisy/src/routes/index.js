@@ -24,6 +24,7 @@ import UserPost from "../pages/personal/userPost"
 import Editinform from "../pages/personal/editInform"
 import EditTeam from "../pages/personal/editTeam"
 import Collection from "../pages/personal/collection"
+import NewColle from "../pages/personal/newCollection"
 
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
@@ -108,6 +109,11 @@ export const mainRoutes = [{
     path: "/editinform",
     title: "编辑个人资料",
     component: Editinform
+},
+{
+    path: "/newColle",
+    title: "新建收藏夹",
+    component: NewColle
 },
 {
     path: "/editTeam/:teamID",
