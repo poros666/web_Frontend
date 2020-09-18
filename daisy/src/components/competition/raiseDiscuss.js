@@ -61,7 +61,7 @@ export default class RaiseDiscuss extends React.Component {
       return 
     }
     else{
-      //this.postData()
+      this.postData()
     }
     
     this.setState({
@@ -75,21 +75,21 @@ export default class RaiseDiscuss extends React.Component {
     });
   };
 
-  /*
+  
   postData(){
     var token=localStorage.getItem('token')
     var userData=localStorage.getItem('userData')
     var data={account:userData.account,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),
     content:this.state.value,picture:userData.icon}
 
-    axios.post('/api/Discussion',data)
-    .then(function (response) {
+    axios.post('/Discussion',data)
+    .then(response=>{
       console.log(response);
     })
-    .catch(function (error) {
+    .catch(error=>{
       console.log(error);
     });
-  }*/
+  }
 
   render() {
     const { comments, submitting, value } = this.state;

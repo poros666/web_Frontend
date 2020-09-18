@@ -14,9 +14,7 @@ const IconText = ({ icon, text }) => (
       {text}
     </Space>
   );
-  
-const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
+
 const { Header, Footer, Sider, Content } = Layout;
  
 function limitTxt(txt,count) {
@@ -179,7 +177,7 @@ class CommunityShow extends Component {
                                 }
                                 avatar={
                                     <a href={"#/personal"}>
-                                      <Avatar src={this.state.data.Icon}></Avatar>
+                                      <Avatar src={item.Icon}></Avatar>
                                     </a>
                                   }
 

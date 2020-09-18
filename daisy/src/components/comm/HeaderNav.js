@@ -4,18 +4,20 @@ import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
+import { isLogined } from '../../utils/auth';
 // import logo from './logo2.png'
 // import logo from './logo3.png'
 
 const { SubMenu } = Menu;
 const { Search } = Input;
-
+var islog=isLogined()
 class HeaderNav extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          isLogin: false,
+        //   isLogin: false,
+          isLogin:islog,
           isVisibility:'hidden',
         //   isSignInMenu:'block',
           isSignInMenu:' ',
@@ -28,7 +30,7 @@ class HeaderNav extends Component {
     
     handleClick() {
         this.setState(prevState => ({
-            isLogin: !prevState.isLogin,
+            // isLogin: !prevState.isLogin,
             isVisibility: prevState.isLogin ? 'hidden': 'visible',
             // isSignInMenu: prevState.isLogin ? 'inline-table': 'none',
             isSignInMenu: prevState.isLogin ? ' ':'none',

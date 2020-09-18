@@ -11,10 +11,13 @@ const NormalLoginForm = () => {
       Account:values.username,
       Password:values.password,
     }
-    axios.post('/api/User/Login',dataSent)
+    axios.post('/Users/Login',{
+      Account:values.username,
+      Password:values.password,
+    })
     .then(response=>{
       console.log(response)
-      setToken(response.jwt, values.username)
+      setToken(response.data.jwt, values.username)
       window.alert("登陆成功")
     })
   };
