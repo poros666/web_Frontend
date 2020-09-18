@@ -4,6 +4,7 @@ import HeaderNav from '../../components/comm/HeaderNav'
 import '../../style/personal/editteam.css'
 import { CloseOutlined } from '@ant-design/icons'
 import Footer from '../../components/comm/Footer'
+import Axios from 'axios'
 
 const { TextArea } = Input;
 
@@ -13,38 +14,57 @@ export default class EditTeam extends Component{
         super(props)
         this.inputChange=this.inputChange.bind(this)
         this.state={
-            teamID:1,
-            compID:1,
-            teamname:'team 1',
-            limit:10,
-            compname: 'comp 1',
-            description:
-                'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-            member:[
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            ]
+           Name:[],
+           Introduction:[],
+           GroupId:this.props.location.query.GroupId,
+           ProjectId:this.props.location.query.ProjectId,
         }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/Usergroup?GroupId='+this.props.location.query.GroupId+'&ProjectId='+this.props.location.query.ProjectId,
+        {headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            this.setState({
+                Name:res.data.name,
+                Introduction:res.data.introduction
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+         })
+
     }
     inputChange(e){
         let o={}
         o[e.target.name]=e.target.value
         this.setState(o)
     }
-    deleteMember(index){
-        const member=[...this.state.member]
-        member.splice(index,1)
-        this.setState({
-            member:member
-        })
+    //删除队员
+    deleteMember(account){
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.delete('/Member',{ProjectId:parseInt(this.state.ProjectId),GroupId:parseInt(this.state.GroupId),Account:account},
+        {headers: { "Authorization": 'Bearer ' +token }})
+        .catch(function(error){
+            console.log(error)
+            window.alert("删除失败")
+         })
+    }
+
+    handleClick(){
+        var content={
+            GroupId:this.state.GroupId,
+            ProjectId:this.state.ProjectId,
+            Name:this.state.name,
+            Introduction:this.state.Introduction
+        }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.put('/Usergroups',content,{headers: { "Authorization": 'Bearer ' +token }})
+        .then(
+            window.alert("修改成功")
+        )
+        .catch(function(error){
+            console.log(error)
+            window.alert("修改失败")
+         })
     }
     render(){
         return(
@@ -63,17 +83,7 @@ export default class EditTeam extends Component{
                                 autoSize 
                                 bordered={false} 
                                 name="teamname" 
-                                value={this.state.teamname} 
-                                onChange={this.inputChange}
-                                />
-                            </Descriptions.Item>
-                            <Descriptions.Item
-                            label='人数上限'>
-                                <TextArea
-                                autoSize 
-                                bordered={false} 
-                                name="limit" 
-                                value={this.state.limit} 
+                                value={this.state.data.teamname} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -83,7 +93,7 @@ export default class EditTeam extends Component{
                                 autoSize
                                 bordered={false} 
                                 name="description" 
-                                value={this.state.description} 
+                                value={this.state.data.description} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -91,7 +101,7 @@ export default class EditTeam extends Component{
                             label='成员'>
                                 <div style={{width:700}}>
                                 {
-                                this.state.member.map((item,index)=>{
+                                this.state.data.member.map((item)=>{
                                     return(
                                         <span className="avatar-item">
                                             <Badge 
@@ -103,7 +113,7 @@ export default class EditTeam extends Component{
                                                 shape='circle' 
                                                 size='small'
                                                 icon={<CloseOutlined/>}
-                                                onClick={this.deleteMember.bind(this,index)}
+                                                onClick={this.deleteMember(item.account)}
                                                 />
                                             }>
                                                 <Avatar 
@@ -120,7 +130,7 @@ export default class EditTeam extends Component{
                             </Descriptions.Item>
                         </Descriptions>
                         <div className='saveButtons'>
-                            <Button type='primary'>保存</Button>
+                            <Button type='primary' onClick={this.handleClick}>保存</Button>
                             <Button>取消</Button>
                         </div>
                     </Card>

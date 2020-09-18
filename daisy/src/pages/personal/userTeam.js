@@ -1,85 +1,30 @@
 import React, { Component } from 'react'
-import {Card,List,Avatar,Modal,Button,Form,Input,Radio} from 'antd'
+import {Card,List} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
-import { Link } from 'react-router-dom';
-
-
-
-const teamData = [
-    {
-        teamID:1,
-        compID:1,
-        teamname:'team 1',
-        limit:10,
-        compname: 'comp 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    },
-    {
-        teamID:2,
-        compID:2,
-        teamname:'team 2',
-        limit:7,
-        compname: 'comp 2',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    },
-    {
-        teamID:3,
-        compID:3,
-        teamname:'team 3',
-        limit:5,
-        compname: 'comp 3',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-          member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    },
-    {
-        teamID:4,
-        compID:4,
-        teamname:'team 4',
-        limit:3,
-        compname: 'comp 4',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-          member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    }]
-
+import { Link } from 'react-router-dom'
+import Axios from 'axios'
 
 export default class UserTeam extends Component {
     constructor(props){
         super(props)
         this.state={
-          data:teamData
+          data:[],
+          account:this.props.match.params.account
         }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/Usergroups/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            this.setState({
+                data:res.data,
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+         })
     }
 
     render() {
+
         return (
             <div>
                 <List
@@ -90,45 +35,31 @@ export default class UserTeam extends Component {
                     <List.Item>
                         <Card
                         title={item.teamname}
-                        extra={<div>
-                                <a href={"#/editteam/"+item.teamID}>
-                                    <EditOutlined/>
-                                    </a>
-                                  </div>
-                        }>
-                            <p>
-                                <a href={"#/compPage/"+item.compID+"=id"+item.compID}>
-                                    {item.compname}
-                                </a>
-                            </p>
-                            <p>
-                                最多人数{item.limit}
-                            </p>
-                            <p>
-                                简介：{item.description}
-                            </p>
-                            <Avatar.Group maxCount={6}>
+                        extra={()=>{
+                                if(this.state.account===JSON.parse( localStorage.getItem('userData')).account)
                                 {
-                                    item.member.map((item,index)=>{
-                                        return <Avatar src={item}/>
-
-                                    })
+                                    return(<div>
+                                        <Link to={{pathname:"#/editteam/"+item.teamID,
+                                        query:{
+                                            GroupId:item.groupId,
+                                            ProjectId:item.projectId,
+                                        }}}>
+                                        <EditOutlined/>
+                                        </Link>
+                                        </div>)
                                 }
-                            </Avatar.Group>
+                                else{
+                                        return
+                                    }
+                                }}>
+                            <p>
+                                简介：{item.introduction}
+                            </p>
                         </Card>
                     </List.Item>
                 )}
                 />
             </div>
         )
-    }
-    handleChangePage(teamID)
-    {
-      this.context.router.push(
-        {
-          path:'#/team/'+teamID,
-          ID:teamID
-        }
-      )
     }
 }
