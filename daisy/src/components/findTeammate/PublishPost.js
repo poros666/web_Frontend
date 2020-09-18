@@ -107,7 +107,7 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <Input placeholder={userdata.name} disabled/>
+          <Input placeholder={isLogined()?userdata.name:'请先登录'} disabled/>
         </Form.Item>
       </Col>,
     );
@@ -150,7 +150,7 @@ export default class CreatePost extends React.Component {
           var token=JSON.parse( localStorage.getItem('token')).token
           if(this.state.Name.length>0&&this.state.Content.length>0){
           let dataSent={
-            projctId:this.state.ProjctId,
+            ProjectId:this.state.ProjctId,
             leaderAccount:userdata.account,
             postTime:moment().format("YYYY-MM-DDTHH:mm:ssC"),
             content:this.state.Content,
@@ -183,7 +183,7 @@ export default class CreatePost extends React.Component {
             <Avatar style={{
               margin: '0 10px 0 50px',
               }}
-              src={userdata.icon}
+              src={isLogined()?userdata.icon:''}
             />
           }
           content={

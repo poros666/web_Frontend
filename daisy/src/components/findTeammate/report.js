@@ -85,18 +85,18 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     values.target_id=ReportUID;
     console.log("Received values of form: ", values)
     if(isLogined()){
+      var token=JSON.parse( localStorage.getItem('token')).token
       let dataSent={
         account:values.reporter_id,
         reportType:values.types,
         content:values.description,
         time:values.time,
         targetType:'post',
-        targetId:values.target_id
+        targetId:parseInt(values.target_id)
       }
-      console.log(dataSent)
       if(dataSent.account.length>0){
         console.log(dataSent)
-      axios.post('/Report',dataSent)
+      axios.post('/Report',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
           .then(response=>{
             console.log(response)
             window.alert("举报成功")
@@ -122,6 +122,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
         onClick={() => {
           setVisible(true)
         }}
+        style={{ width: 200,margin:'60px'}}
       ><p>举报该帖</p></Button>
       <CollectionCreateForm
         visible={visible}

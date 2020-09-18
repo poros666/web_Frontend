@@ -8,11 +8,16 @@ import Post from '../../components/findTeammate/Post'
 import FloatHelper from '../../components/comm/FloatHelper'
 import '../../style/comm/comm.css'
 import 'antd/dist/antd.css';
+import { isLogined } from '../../utils/auth'
 
 
 export default class PostPage extends Component {
 
     constructor(props){
+        if(!isLogined()){
+            window.alert('连接出错，点击确定返回主页')
+            window.location.hash ='#/home'
+        }
         super(props)
         let projctId=0;
         let groupId=0;

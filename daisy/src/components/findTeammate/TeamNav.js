@@ -26,10 +26,8 @@ export default class teamNav extends Component {
       })
   })
   .catch(error=>{
-    this.setState({
-      matchName:'未找到该比赛',
-      matchIntroduction:'未找到该比赛'
-    })
+    window.alert('连接出错，点击确定返回主页')
+    window.location.hash ='#/home'
     console.log(error);
   })
 }
