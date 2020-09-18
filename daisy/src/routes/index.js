@@ -23,7 +23,8 @@ import UserInform from "../pages/personal/userInform"
 import UserPost from "../pages/personal/userPost"
 import Editinform from "../pages/personal/editInform"
 import EditTeam from "../pages/personal/editTeam"
-import Collection from "../pages/personal/collection"
+import PostCollection from "../pages/personal/Postcollection"
+import MomentCollection from "../pages/personal/MomentCollection"
 import NewColle from "../pages/personal/newCollection"
 
 import SearchPage from "../pages/search/searchPage";
@@ -111,7 +112,7 @@ export const mainRoutes = [{
     component: Editinform
 },
 {
-    path: "/newColle",
+    path: "/newColle/Account=:account",
     title: "新建收藏夹",
     component: NewColle
 },
@@ -121,10 +122,16 @@ export const mainRoutes = [{
     component: EditTeam
 },
 {
-    path: "/collection/:fileID",
-    title: "收藏夹",
-    component: Collection
+    path: "/postCollection/account=:account/fileName=:fileName",
+    title: "帖子收藏夹",
+    component: PostCollection
 },
+{
+    path: "/MomentCollection/account=:account/fileName=:fileName",
+    title: "评论收藏夹",
+    component: MomentCollection
+},
+
 {
     path: "/login",
     title: "登录",
