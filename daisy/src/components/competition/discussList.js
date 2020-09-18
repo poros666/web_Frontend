@@ -21,25 +21,12 @@ export default class DiscussList extends Component {
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
 
-     axios.get('/Discussion?ProjectId='+this.state.compID)
-     .then(response=>{
-        console.log(response);
-        this.setState(
-            {
-              data:response.data,
-              total:response.data.length
-            }
-        )
-      })
-      .catch(error=>{
-        console.log(error);
-        window.alert("连接似乎出现问题")
-      });
     
   }
 
   componentDidMount() {
-    this.handleAnchor() //页面刷新时回到刷新前的page
+    this.getData() //页面刷新时回到刷新前的page
+    this.handleAnchor()
   }
   handleAnchor() {
     this.onPageChange(this.state.pageNumber, this.state.pageSize); //手动调用onPageChange,传入当前页数和每页条数
@@ -68,6 +55,20 @@ export default class DiscussList extends Component {
 
   getData(){
     
+    axios.get('/Discussion?ProjectId='+this.state.compID)
+    .then(response=>{
+       console.log(response);
+       this.setState(
+           {
+             data:response.data,
+             total:response.data.length
+           }
+       )
+     })
+     .catch(error=>{
+       console.log(error);
+       window.alert("连接似乎出现问题")
+     });
   }
 
   render() {
@@ -87,22 +88,23 @@ export default class DiscussList extends Component {
                         style={{width: '100%', resize: 'none'}}
                         split={true}
                         itemLayout="horizontal"
-                        dataSource={this.state.currentData}
+                        dataSource={this.state.data}
                         renderItem={item => 
                         <div className={'detailDiscussBox'}>
                         <List.Item
                         actions={[
-                          <Report ReportUID='test1' ReporterUID='test2' Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
+                          <Report ReportUID={item.discussionId} ReporterUID={JSON.parse(localStorage.getItem('userData')).account} Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
                           ]}>
                             <List.Item.Meta
                                 avatar={
                                   <a href={"#/ReadPost"}>
-                                    <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'></Avatar>
+                                    <Avatar src={item.pictureUrl?item.pictureUrl:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}></Avatar>
                                   </a>
                                 }
-                                title={<a href="#/ReadPost">{item.username}</a>}
-                                description={<p>{item.description}</p>}
-                            />     
+                                title={<a href="#/ReadPost">{item.account}</a>}
+                                description={<p>{item.content}</p>}
+                            />  
+                            <p>{"发表时间:"+item.time}</p>   
                         </List.Item>
                         </div>
                         }
