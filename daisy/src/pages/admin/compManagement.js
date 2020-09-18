@@ -58,8 +58,9 @@ export default class CompManagement extends Component {
       searchedColumn: '', //搜出来的行
       data: [],
     }
+    var token=JSON.parse( localStorage.getItem('token')).token
     axios
-      .get('http://mock-api.com/ZgBbVmgB.mock/api/Project?Order=[]')
+      .get('/Project',{headers: { "Authorization": 'Bearer ' +token }})
       .then((res) => {
         console.log('res:', res.data)
         var tempData = []
