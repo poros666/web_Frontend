@@ -7,10 +7,11 @@ export default class UserTeam extends Component {
     constructor(props){
         super(props)
         this.state={
-          data:[]
+          data:[],
+          account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/Usergroups/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.get('/Usergroups/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState({
                 data:res.data,
@@ -22,6 +23,24 @@ export default class UserTeam extends Component {
     }
 
     render() {
+
+        var editicon= ()=>{
+            if(this.state.account===JSON.parse( localStorage.getItem('userData')).account)
+            {
+                return(<div>
+                    <Link to={{pathname:"#/editteam/"+item.teamID,
+                                query:{
+                                    GroupId:item.groupId,
+                                    ProjectId:item.projectId,
+                                }}}>
+                        <EditOutlined/>
+                        </Link>
+                      </div>)
+            }
+            else{
+                return
+            }
+        }
         return (
             <div>
                 <List
@@ -32,16 +51,7 @@ export default class UserTeam extends Component {
                     <List.Item>
                         <Card
                         title={item.teamname}
-                        extra={<div>
-                                <Link to={{pathname:"#/editteam/"+item.teamID,
-                                            query:{
-                                                GroupId:item.groupId,
-                                                ProjectId:item.projectId,
-                                            }}}>
-                                    <EditOutlined/>
-                                    </Link>
-                                  </div>
-                        }>
+                        extra={editicon}>
                             <p>
                                 简介：{item.introduction}
                             </p>
