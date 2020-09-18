@@ -40,13 +40,13 @@ export default class Community extends Component {
       //   console.log(content)
 
       var json = {
-        Account: 'ddd',
+        Account: JSON.parse(localStorage.userData).account.toString(),
         Title: title,
         Time: t,
         Content: content,
       }
 
-      console.log(json)
+      console.log(" 创建动态的信息",json)
       var url = CONSTURL.CreatMoment
       var token = JSON.parse(localStorage.getItem('token')).token
       Axios.post(url, json, {

@@ -167,7 +167,7 @@ export default class MomentList extends Component {
       var url=CONSTURL.GetMomentList+this.state.sortType
       console.log(url)
       Axios.get(url).then((res)=>{
-        console.log(res)
+        console.log(res.data)
         this.setState({data:res.data})
         this.setState({total:res.data.length})
      //   console.log(res.data.length)
@@ -279,7 +279,7 @@ export default class MomentList extends Component {
                     dataSource={this.state.currentData}
                     renderItem={item => (
                       <List.Item
-                          key={item.MomentId}
+                          key={item.momentId}
                           actions={[
                                     <IconText icon={StarOutlined} text={item.StarNum} key="list-vertical-star-o" />,
                                     <IconText icon={LikeOutlined} text={item.LikeNum} key="list-vertical-like-o" />,
@@ -291,14 +291,14 @@ export default class MomentList extends Component {
 
                               //头像的来源和指向的地址
                               <a href={"#/personal"}>
-                                {isLogined()?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
+                                {item.icon}
                               </a>
                             }
 
                             //帖子的名字和指向的地址，传一个pid，moment_id
-                              title={<a href ={"#/Moment/"+item.MomentId}>{item.Title}</a>}
+                              title={<a href ={"#/Moment/"+item.momentId}>{item.title}</a>}
 
-                              description={<p>{item.Content}</p>}
+                              description={<p>{item.content}</p>}
                               
                           />
 

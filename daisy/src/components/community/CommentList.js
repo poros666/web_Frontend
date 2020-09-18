@@ -91,7 +91,7 @@ export default class CommentList extends Component {
           var json=
           {
             CommentId:Number( this.state.Pid),
-            Account:"account",
+            Account:JSON.parse(localStorage.userData).account.toString(),
             Content:content,
             Time:t
           }
