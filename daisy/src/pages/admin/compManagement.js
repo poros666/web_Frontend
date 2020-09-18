@@ -38,11 +38,9 @@ function checkTime(stime, etime) {
 }
 
 function getTags(start, end, now) {
-
   if (checkTime(now, start)) {
     console.log(start, end, now)
     return '未开始'
-
   } else if (checkTime(end, now)) {
     return '已结束'
   }
@@ -58,23 +56,24 @@ export default class CompManagement extends Component {
       searchedColumn: '', //搜出来的行
       data: [],
     }
-    var token=JSON.parse( localStorage.getItem('token')).token
+    var token = JSON.parse(localStorage.getItem('token')).token
     axios
-      .get('/Project',{headers: { "Authorization": 'Bearer ' +token }})
+      .get('/Project', { headers: { Authorization: 'Bearer ' + token } })
       .then((res) => {
         console.log('res:', res.data)
         var tempData = []
         var now = moment().format('YYYY-MM-DD')
-        for (var i = 0; i < res.data.length; i++) {
+        for (var i = 1; i < res.data.length; i++) {
+          console.log('i', res.data[i])
           var tempTemp = {
-            id: res.data[i].ProjectId,
-            name: res.data[i].Name,
-            number: res.data[i].ParticipantsNumber,
-            start: res.data[i].StartTime,
-            end: res.data[i].EndTime,
-            sponsor: res.data[i].Host,
-            intro: res.data[i].Introduction,
-            tags: getTags(res.data[i].StartTime, res.data[i].EndTime, now),
+            id: res.data[i].projectId,
+            name: res.data[i].name,
+            number: res.data[i].participantsNumber,
+            start: res.data[i].startTime,
+            end: res.data[i].endTime,
+            sponsor: res.data[i].host,
+            intro: res.data[i].introduction,
+            tags: getTags(res.data[i].startTime, res.data[i].endTime, now),
           }
           console.log('tt:', res.data.length, tempTemp)
           tempData.push(tempTemp)
@@ -91,26 +90,26 @@ export default class CompManagement extends Component {
   }
 
   getDetail = (id) => {
-    for(var i = 0; i<this.state.data.length; i++){
-      if(this.state.data[i].id == id){
+    for (var i = 0; i < this.state.data.length; i++) {
+      if (this.state.data[i].id == id) {
         return this.state.data[i].intro
       }
     }
-    return "暂无简介"
+    return '暂无简介'
   }
 
   deleteNode = (id) => {
     var ndata = this.state.data
-    console.log("ndata",ndata)
+    console.log('ndata', ndata)
     delete ndata[0]
-    console.log("ndata",ndata)
+    console.log('ndata', ndata)
     // for(var i = 0; i<this.state.data.length; i++){
-    //   if(this.state.data[i].id == id){ 
+    //   if(this.state.data[i].id == id){
     //     ndata.slice(i,1)
     //     this.setState({
     //       data: ndata,
     //     })
-        
+
     //     break
     //   }
     // }
@@ -203,9 +202,9 @@ export default class CompManagement extends Component {
       {
         title: '操作',
         key: 'action',
-        render: (text, record, detail=this.getDetail(record.id)) => (
+        render: (text, record, detail = this.getDetail(record.id)) => (
           <Space size='middle'>
-            <CompDetail Record={record} detail={detail}/>
+            <CompDetail Record={record} detail={detail} />
             <CompNotice Record={record} />
             <Popconfirm
               title='确认删除此项？'
@@ -214,7 +213,10 @@ export default class CompManagement extends Component {
               }}
               onConfirm={() => {
                 console.log('confirm')
-                axios.delete(`/api/Project/[${record.id}]`)
+                var token = JSON.parse(localStorage.getItem('token')).token
+                axios.delete(`/Project/[${record.id}]`, {
+                  headers: { Authorization: 'Bearer ' + token },
+                })
                 // this.deleteNode(record.id)
                 //此处调用删除api
               }}>
@@ -384,5 +386,4 @@ export default class CompManagement extends Component {
     clearFilters()
     this.setState({ searchText: '' })
   }
-  
 }

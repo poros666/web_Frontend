@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, Modal, Form, Input, Radio } from "antd"
+import axios from 'axios'
 
 const layout = {
   labelCol: {
@@ -140,6 +141,19 @@ const CollectionsPage = () => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     //处理数据
+    var data = {
+      Name: values.name,
+      Introduction: values.description,
+      ParticipantsNumber: Number(values.number) ,
+      StartTime: values.start,
+      EndTime: values.end,
+      Host: values.sponsor
+    }
+    console.log("data:",data);
+    var token=JSON.parse( localStorage.getItem('token')).token
+    axios.post('/Project',data,{headers: { "Authorization": 'Bearer ' +token }}).then(res=>{
+      console.log(res);
+    })
     setVisible(false)
   }
 
