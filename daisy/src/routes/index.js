@@ -46,11 +46,11 @@ export const adminRoutes = [{
     title: "处理举报",
     component: ReportManagement
 },
-{
-    path: "/admin/usermanagement",
-    title: "用户管理",
-    component: UserManagement
-},
+// {
+//     path: "/admin/usermanagement",
+//     title: "用户管理",
+//     component: UserManagement
+// },
 {
     path: "/admin/sysannounce",
     title: "发布系统公告",

@@ -15,8 +15,11 @@ export default class ReportManagement extends Component {
       searchedColumn: '', //搜出来的行
       data: [],
     }
+    var token = JSON.parse(localStorage.getItem('token')).token
     axios
-      .get('http://mock-api.com/ZgBbVmgB.mock/api/Report?base=&length=')
+      .get('/Report', {
+        headers: { Authorization: 'Bearer ' + token },
+      })
       .then((res) => {
         console.log('res:', res.data)
         var tempData = []
