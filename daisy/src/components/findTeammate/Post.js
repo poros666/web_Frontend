@@ -9,6 +9,7 @@ import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
 axios.defaults.baseURL='/api';
+var userdata=JSON.parse(localStorage.getItem('userData'));
 
 const Editor = ({onChange}) => (
     <>
@@ -36,6 +37,8 @@ export default class Post extends Component {
             PostId:postId,
             ProjctId:MatchId,
         }
+
+        console.log(userdata);
         
         axios.get('/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         .then(response=>{
@@ -83,19 +86,19 @@ export default class Post extends Component {
                         type="primary"
                       onClick={()=>{
                         if(isLogined()){
-                            if(this.state.Apply.length>0&&this.state.Account!=null){
+                            if(this.state.Apply.length>0&&userdata.account!=null){
                                 let dataSent={
                                   projctId:this.state.ProjctId,
-                                  //Account:localStorage.getItem('userData')
-                                  account:this.state.Account,
+                                  account:userdata.account,
                                   content:this.state.Apply,
                                   groupId:this.state.GroupId
                                 }
-                                axios.post('/Application',dataSent)
+                                console.log(dataSent)
+                                /*axios.post('/Application',dataSent)
                                 .then(response=>{
                                   console.log(response)
                                   window.alert("申请成功")
-                                })      
+                                })*/      
                         }
                         else{
                             window.alert("申请失败")
@@ -110,20 +113,20 @@ export default class Post extends Component {
                         type="primary"
                         onClick={()=>{
                             if(isLogined()){
-                                if(this.state.Apply.length>0&&this.state.Account!=null){
+                                if(userdata.account!=null){
                                     let dataSent={
                                       projctId:this.state.ProjctId,
-                                      //Account:localStorage.getItem('userData')
-                                      account:this.state.Account,
+                                      account:userdata.account,
                                       name:'Post',
                                       groupId:this.state.GroupId,
                                       postId:this.state.PostId
                                     }
-                                    axios.post('/PostStar',dataSent)
+                                    console.log(dataSent)
+                                    /*axios.post('/PostStar',dataSent)
                                     .then(response=>{
                                       console.log(response)
                                       window.alert("收藏成功")
-                                    })      
+                                    })*/      
                             }
                             else{
                                 window.alert("收藏失败")
@@ -136,8 +139,7 @@ export default class Post extends Component {
                         }}><p>收藏该帖</p></Button>,
                     <PostPageReport 
                     ReportUID={this.state.PostId}
-                    //ReporterUID=localStorage.userData.account
-                    ReporterUID='test2' 
+                    ReporterUID={userdata.account}
                     Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
                     />
                     ]}      

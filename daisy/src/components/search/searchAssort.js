@@ -18,9 +18,10 @@ export default class SearchAssort extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        kw: this.props.match.params.kw,
-        //kw: this.props.kw,
-        type: this.props.match.params.type
+        //kw: this.props.match.params.kw,
+        kw: this.props.kw,
+        type: this.props.type
+        //type: this.props.match.params.type
       }
     }
 

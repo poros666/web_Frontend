@@ -13,14 +13,13 @@ export function setToken(token,account) {
     token:token,
     expire: new Date().getTime() + 1000 * 60 * 30//30分钟有效期
   };
-  localStorage.setItem("token", usertoken)
-  const userData=getUserInfor(account)
-  localStorage.setItem("userData",userData)
+  localStorage.setItem("token", JSON.stringify(usertoken))
+  getUserInfor(account)
 }
 
 //判断是否是登陆状态
 export function isLogined() {
-  const storage = localStorage.getItem("token");
+  const storage =JSON.parse( localStorage.getItem("token"));
   const time = new Date().getTime();
   let result = false;
   if (storage) {
@@ -42,12 +41,13 @@ export function clearToken() {
 
 //获取用户的各种信息
 export function getUserInfor(account){
-  axios.get('/api/User/'+account)
+  var token=JSON.parse( localStorage.getItem('token')).token
+  axios.get('/Users/'+account,{headers: { "Authorization": 'Bearer ' +token }})
   .then(function (response) {
     console.log(response);
     var data=response.data
     data['account']=account
-    return data
+    localStorage.setItem("userData", JSON.stringify(data))
   })
   .catch(function (error) {
     console.log(error);
