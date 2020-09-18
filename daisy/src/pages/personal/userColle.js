@@ -11,24 +11,16 @@ export default class UserColle extends Component {
         this.deleteFile.bind(this)
         this.changePrivacy.bind(this)
         this.state={
-            data:[
-                {
-                    fileID:1,
-                    filename:'file1',
-                    private:0,
-                    type:'post'
-                },
-                {
-                    fileID:2,
-                    filename:'file2',
-                    private:1,
-                    type:'moment'
-                }
-            ]
+            data:[],
+            account:this.props.match.params.account
         }
-        Axios.get('/FavouritePakcage/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.get('/FavouritePakcage/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
-            res.data//这里是collec数据
+            this.setState(
+                {
+                    data:res.data
+                }
+            )
         })
         .catch(function(error){
             console.log(error)
