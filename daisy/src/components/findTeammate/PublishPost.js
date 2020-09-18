@@ -41,7 +41,7 @@ export default class CreatePost extends React.Component {
         Name:''
       }
 
-      axios.get('=/Project/'+tempId)
+      axios.get('/Project/'+tempId)
       .then(response=>{
         console.log(response)
       this.setState({
