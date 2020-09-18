@@ -6,23 +6,16 @@ export default class UserComp extends Component {
   constructor(props){
     super(props)
     this.state={
-      data:[]
+      data:[],
+      account:this.props.match.params.account
     }
     var token=JSON.parse( localStorage.getItem('token')).token
 
     axios
-      .get('/Subscribe?Account='+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+      .get('/Subscribe?Account='+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
       .then((res)=>{
-        let tmpData=[]
-        for(let i=0;i<res.data.length;i++){
-          let tmpComp={
-            ID:res.data[i].ProjectId,
-            compName:res.data[i].Name
-          }
-          tmpData.push(tmpComp)
-        }
         this.setState({
-          data:tmpData
+          data:res.data
         })
       })
       .catch(function(error){
@@ -39,8 +32,8 @@ export default class UserComp extends Component {
                 renderItem={item => (
                   <List.Item>
                       <Card>
-                          <a href={"#/compPage/"+item.ID+"=id"+item.ID}>
-                            {item.compName}
+                          <a href={"#/compPage/id="+item.projectId+'/'}>
+                            {item.name}
                           </a>
                       </Card>
                   </List.Item>

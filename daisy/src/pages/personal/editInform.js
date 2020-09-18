@@ -35,7 +35,7 @@ export default class EditInform extends Component {
                             <Descriptions.Item label="头像">
                                 <Avatar 
                                 size={128}
-                                src={this.state.icon} />
+                                src={this.state.data.icon} />
                                 <Upload name="logo" action="/upload.do" listType="picture">
                                     <Button>
                                         <UploadOutlined /> 点击上传
@@ -52,7 +52,7 @@ export default class EditInform extends Component {
                                 autoSize 
                                 bordered={false} 
                                 name="Name" 
-                                value={this.state.Name} 
+                                value={this.state.data.name} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -63,7 +63,7 @@ export default class EditInform extends Component {
                                 autoSize 
                                 bordered={false}
                                 name="Sex" 
-                                value={this.state.Sex} 
+                                value={this.state.data.sex} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -74,7 +74,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="Nickname" 
-                                value={this.state.Nickname} 
+                                value={this.state.data.nickname} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -85,7 +85,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="PhoneNum" 
-                                value={this.state.PhoneNum} 
+                                value={this.state.data.phoneNum} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -96,7 +96,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="EmailAddress" 
-                                value={this.state.EmailAddress} 
+                                value={this.state.data.emailAddress} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -107,7 +107,7 @@ export default class EditInform extends Component {
                                 autoSize
                                 bordered={false}  
                                 name="school" 
-                                value={this.state.school} 
+                                value={this.state.data.school} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -118,7 +118,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 name="StudentNumber" 
                                 bordered={false}
-                                value={this.state.StudentNumber} 
+                                value={this.state.data.studentNumber} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -129,7 +129,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="College" 
-                                value={this.state.College} 
+                                value={this.state.data.college} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -140,7 +140,7 @@ export default class EditInform extends Component {
                                 autoSize 
                                 bordered={false}
                                 name="Grade" 
-                                value={this.state.Grade} 
+                                value={this.state.data.grade} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -154,7 +154,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="Intro" 
-                                value={this.state.Intro} 
+                                value={this.state.data.intro} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -162,7 +162,7 @@ export default class EditInform extends Component {
                         <div className='saveButtons'>
                             <Button 
                             type='primary'
-                            onClick={()=>this.saveEdit}
+                            onClick={()=>this.saveEdit()}
                             >
                                 保存
                             </Button>
@@ -179,7 +179,12 @@ export default class EditInform extends Component {
     saveEdit(){
         var token=JSON.parse( localStorage.getItem('token')).token
 
-        Axios.put("/Users/"+this.data.account,this.state.data,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.put("/Users/"+this.state.data.account,this.state.data,{headers: { "Authorization": 'Bearer ' +token }})
+        .then(response=>{
+            console.log(response);})
+        .catch(error=>{
+            console.log(error);
+          });
         console.log(this.state)
     }
     inputChange(e){

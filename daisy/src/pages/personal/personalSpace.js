@@ -30,11 +30,11 @@ export default class PersonalSpace extends Component {
             <MastHead role={this.state.role}/>
           </div>
           <div id='menuItem'>
-            {this.state.role?<MyMenuItem/>:<OtherMenuItem/>}
+            {this.state.role?<MyMenuItem account={this.state.account}/>:<OtherMenuItem account={this.state.account}/>}
             <div>
             {
               personalRoutes.map((item,index)=>{
-                return (<Route key={index} path={item.path} component={item.component} account={this.state.account}/>)
+                return (<Route key={index} path={item.path} component={item.component}/>)
               })
             }
             </div>

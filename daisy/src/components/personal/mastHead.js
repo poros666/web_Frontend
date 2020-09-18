@@ -4,14 +4,14 @@ import {EditOutlined} from '@ant-design/icons'
 import { Link} from "react-router-dom";
 import axios from 'axios'
 
-var data=JSON.parse(localStorage.getItem("userData"))
+const data=JSON.parse(localStorage.getItem("userData"))
 
 export default class MastHead extends Component {
     constructor(props){
         super(props)
         this.state={
-            Icon:data.Icon,
-            nickname:data.Nickname
+            Icon:data.icon?'':data.icon,
+            nickname:data.nickname
         }
     }
     

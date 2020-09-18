@@ -10,8 +10,6 @@ const {Meta}=Card
 export default class UserColle extends Component {
     constructor(props){
         super(props)
-        this.deleteFile.bind(this)
-        this.changePrivacy.bind(this)
         this.state={
             data:[],
             account:this.props.match.params.account
@@ -44,7 +42,7 @@ export default class UserColle extends Component {
     render() {
         return (
             <div>
-                <Link to={{pathname:'/newColle',state:this.props.account}}>
+                <Link to={'/newColle/account='+this.state.account}>
                     <Button
                     type="text" 
                     size='large'
@@ -84,14 +82,5 @@ export default class UserColle extends Component {
                 />
             </div>
         )
-    }
-    handleChangePage(fileID)
-    {
-      this.context.router.push(
-        {
-          path:'#/collection/'+fileID,
-          ID:fileID
-        }
-      )
     }
 }

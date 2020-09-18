@@ -10,10 +10,11 @@ export default class UserPost extends Component {
         this.state={
             momentData:[],
             discussionData:[],
-            postData:[]
+            postData:[],
+            account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        axios.get('/Users/Post/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.get('/Users/Post/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState({
                 postData:res.data
@@ -22,7 +23,7 @@ export default class UserPost extends Component {
         .catch(function(error){
             console.log(error)
          })
-         axios.get('/Users/Moment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+         axios.get('/Users/Moment/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
          .then((res)=>{
             this.setState({
                 momentData:res.data
@@ -31,7 +32,7 @@ export default class UserPost extends Component {
          .catch(function(error){
              console.log(error)
           })
-          axios.get('/Users/Comment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+          axios.get('/Users/Comment/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
          .then((res)=>{
             this.setState({
                 discussionData:res.data
@@ -54,8 +55,8 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card>
-                                    <a href={"#/Moment/"+item.MomentId}>
-                                        {item.Title}
+                                    <a href={"#/Moment/"+item.momentId}>
+                                        {item.title}
                                     </a>
                                 </Card>
                             </List.Item>
@@ -70,10 +71,7 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card>
-                                    
-                                     
-                                        {item.Title}
-                                    
+                                        {item.discussionId}
                                 </Card>
                             </List.Item>
                         )}
@@ -88,7 +86,7 @@ export default class UserPost extends Component {
                             <List.Item>
                                 <Card>
                                     
-                                        {item.Name}
+                                        {item.name}
                                     
                                 </Card>
                             </List.Item>

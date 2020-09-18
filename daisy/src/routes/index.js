@@ -112,7 +112,7 @@ export const mainRoutes = [{
     component: Editinform
 },
 {
-    path: "/newColle/Account=:account",
+    path: "/newColle/account=:account",
     title: "新建收藏夹",
     component: NewColle
 },

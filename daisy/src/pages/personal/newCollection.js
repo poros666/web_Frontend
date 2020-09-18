@@ -85,6 +85,6 @@ export default class NewCollection extends Component {
         var token=JSON.parse( localStorage.getItem('token')).token
         var content={Account:this.state.account,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:this.state.fileName,Privacy:this.state.private,Type:this.state.type}
         Axios.post('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
-        console.log(this.state)
+        window.location.hash="#/personal/account="+this.state.account
     }
 }
