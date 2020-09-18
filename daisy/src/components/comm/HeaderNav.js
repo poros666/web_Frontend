@@ -9,18 +9,13 @@ import LogoutHeaderNav from './LogoutHeaderNav';
 
 const { SubMenu } = Menu;
 const { Search } = Input;
-var islog=isLogined()
 class HeaderNav extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
         //   isLogin: false,
-          isLogin:islog,
-          isVisibility:'hidden',
-        //   isSignInMenu:'block',
-          isSignInMenu:' ',
-          isSignOutMenu:'none',
+        //   isLogin:islog,
         };
 
         // 这个绑定是必要的，使`this`在回调中起作用
@@ -49,6 +44,8 @@ class HeaderNav extends Component {
     }
     
     render() {
+        var islog=isLogined()
+        console.log(islog)
         return (
             islog?
             <div >
@@ -161,7 +158,9 @@ class HeaderNav extends Component {
                                         </a>
                                     </Menu.Item>
                                 </SubMenu>
-                                <Menu.Item key="signOut" icon={<LogoutOutlined />}>
+                                <Menu.Item key="signOut" icon={<LogoutOutlined />}
+                                // onClick={this.logoutClick}
+                                >
                                         登出
                                 </Menu.Item>
                             </Menu>
