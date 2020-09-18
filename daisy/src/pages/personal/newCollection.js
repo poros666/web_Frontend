@@ -19,6 +19,7 @@ export default class NewCollection extends Component {
         this.state={
             fileName:'',
             private:'private',
+            account:this.props.match.params.account,
             type:'post'
         }
     }
@@ -81,7 +82,7 @@ export default class NewCollection extends Component {
         this.setState(o)
     }
     createFile(){
-        var content={Account:this.props.location.state,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:,Privacy:,Type:,}
+        var content={Account:this.state.account,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:this.state.fileName,Privacy:this.state.private,Type:this.state.type}
         Axios.post('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
         console.log(this.state)
     }
