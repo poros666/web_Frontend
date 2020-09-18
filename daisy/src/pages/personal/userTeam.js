@@ -1,86 +1,21 @@
 import React, { Component } from 'react'
-import {Card,List,Avatar} from 'antd'
+import {Card,List} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-
-const teamData = [
-    {
-        teamID:1,
-        compID:1,
-        teamname:'team 1',
-        limit:10,
-        compname: 'comp 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    },
-    {
-        teamID:2,
-        compID:2,
-        teamname:'team 2',
-        limit:7,
-        compname: 'comp 2',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    },
-    {
-        teamID:3,
-        compID:3,
-        teamname:'team 3',
-        limit:5,
-        compname: 'comp 3',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-          member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    },
-    {
-        teamID:4,
-        compID:4,
-        teamname:'team 4',
-        limit:3,
-        compname: 'comp 4',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-          member:[
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        ]
-    }]
-
+import Axios from 'axios'
 
 export default class UserTeam extends Component {
     constructor(props){
         super(props)
         this.state={
-          data:teamData
+          data:[],
+          account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        axios.get('/Usergroups/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.get('/Usergroups/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState({
-                data:res.data
+                data:res.data,
             })
         })
         .catch(function(error){
@@ -89,6 +24,24 @@ export default class UserTeam extends Component {
     }
 
     render() {
+
+        var editicon= ()=>{
+            if(this.state.account===JSON.parse( localStorage.getItem('userData')).account)
+            {
+                return(<div>
+                    <Link to={{pathname:"#/editteam/"+item.teamID,
+                                query:{
+                                    GroupId:item.groupId,
+                                    ProjectId:item.projectId,
+                                }}}>
+                        <EditOutlined/>
+                        </Link>
+                      </div>)
+            }
+            else{
+                return
+            }
+        }
         return (
             <div>
                 <List
@@ -99,46 +52,15 @@ export default class UserTeam extends Component {
                     <List.Item>
                         <Card
                         title={item.teamname}
-                        extra={<div>
-                                <Link to={{pathname:"#/editteam/"+item.teamID,
-                                            query:{/*这里放比赛id队伍id名字和简介*/}}}>
-                                    <EditOutlined/>
-                                    </Link>
-                                  </div>
-                        }>
+                        extra={editicon}>
                             <p>
-                                <a href={"#/compPage/"+item.compID+"=id"+item.compID}>
-                                    {item.compname}
-                                </a>
+                                简介：{item.introduction}
                             </p>
-                            <p>
-                                最多人数{item.limit}
-                            </p>
-                            <p>
-                                简介：{item.description}
-                            </p>
-                            <Avatar.Group maxCount={6}>
-                                {
-                                    item.member.map((item,index)=>{
-                                        return <Avatar src={item} key={index}/>
-
-                                    })
-                                }
-                            </Avatar.Group>
                         </Card>
                     </List.Item>
                 )}
                 />
             </div>
         )
-    }
-    handleChangePage(teamID)
-    {
-      this.context.router.push(
-        {
-          path:'#/team/'+teamID,
-          ID:teamID
-        }
-      )
     }
 }
