@@ -9,6 +9,7 @@ import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
 axios.defaults.baseURL='/api';
+var userdata=JSON.parse(localStorage.getItem('userData'));
 
 
 /*模拟已登录用户数据*/
@@ -28,6 +29,7 @@ const data={
 
 export default class CreatePost extends React.Component {
 
+
     constructor(props){
       super(props)
   
@@ -40,6 +42,8 @@ export default class CreatePost extends React.Component {
         matchMaxMemberNum:0,
         Name:''
       }
+
+      console.log(userdata);
 
       axios.get('/Project/'+tempId)
       .then(response=>{
@@ -103,7 +107,7 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <Input placeholder={data.UserName} disabled/>
+          <Input placeholder={userdata.name} disabled/>
         </Form.Item>
       </Col>,
     );
@@ -146,18 +150,18 @@ export default class CreatePost extends React.Component {
           if(this.state.Name.length>0&&this.state.Content.length>0){
           let dataSent={
             projctId:this.state.ProjctId,
-            //LeaderAccount:localStorage.getItem('userData'),
-            leaderAccount:data.Account,
+            leaderAccount:userdata.account,
             postTime:moment().format("YYYY-MM-DD HH:mm:ss"),
             content:this.state.Content,
             maxMemberNum:this.state.matchMaxMemberNum,
             name:this.state.Name
           }
-          axios.post('/Post',dataSent)
+          console.log(dataSent);
+          /*axios.post('/Post',dataSent)
           .then(response=>{
             console.log(response)
             window.alert("发布成功")
-          })
+          })*/
         }
       }
       else{
@@ -178,8 +182,7 @@ export default class CreatePost extends React.Component {
             <Avatar style={{
               margin: '0 10px 0 50px',
               }}
-              //src={require(localStorage.userData.Icon)}
-              src={data.Icon}
+              src={userdata.icon}
             />
           }
           content={
