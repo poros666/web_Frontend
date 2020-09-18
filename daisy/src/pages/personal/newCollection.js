@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {Form,Select,Descriptions,Divider,Avatar,Input,Upload, Card, Button} from 'antd'
 import {UploadOutlined} from '@ant-design/icons'
 import '../../style/personal/editInform.css'
-import { getUserInfor, isLogined } from '../../utils/auth'
-import Axios from 'axios'
+import axios from 'axios'
+import moment from 'moment'
 
 
 const {Option}=Select
@@ -81,8 +81,9 @@ export default class NewCollection extends Component {
         this.setState(o)
     }
     createFile(){
-        var content={Account:this.props.location.state,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:,Privacy:,Type:,}
-        Axios.post('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
+        var token=JSON.parse( localStorage.getItem('token')).token
+        var content={Account:this.props.location.state,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:this.state.fileName,Privacy:this.state.private,Type:this.state.type,}
+        axios.post('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
         console.log(this.state)
     }
 }

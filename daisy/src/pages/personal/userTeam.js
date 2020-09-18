@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Card,List,Avatar} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const teamData = [
     {
@@ -76,9 +77,11 @@ export default class UserTeam extends Component {
           data:teamData
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/Usergroups/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.get('/Usergroups/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
-            res.data//这里是team数据
+            this.setState({
+                data:res.data
+            })
         })
         .catch(function(error){
             console.log(error)

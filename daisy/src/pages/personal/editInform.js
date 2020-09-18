@@ -4,7 +4,6 @@ import {UploadOutlined} from '@ant-design/icons'
 import '../../style/personal/editInform.css'
 import HeaderNav from '../../components/comm/HeaderNav'
 import Footer from '../../components/comm/Footer'
-import { getUserInfor, isLogined } from '../../utils/auth'
 import Axios from 'axios'
 
 
@@ -16,11 +15,12 @@ export default class EditInform extends Component {
     constructor(props){
         super(props)
         this.inputChange=this.inputChange.bind(this)
-        this.saveEdit=this.saveEdit.bind(this)
+        //this.saveEdit=this.saveEdit.bind(this)
         this.state={
             data:JSON.parse(localStorage.getItem("userData"))
             //当前登录的用户数据
         }
+        console.log(this.state.data)
         //给this.state赋值
     }
 
@@ -51,8 +51,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize 
                                 bordered={false} 
-                                name="nameVl" 
-                                value={this.state.nameVl} 
+                                name="Name" 
+                                value={this.state.Name} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -62,8 +62,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize 
                                 bordered={false}
-                                name="sex" 
-                                value={this.state.sex} 
+                                name="Sex" 
+                                value={this.state.Sex} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -73,8 +73,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize  
                                 bordered={false}
-                                name="nickname" 
-                                value={this.state.nickname} 
+                                name="Nickname" 
+                                value={this.state.Nickname} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -84,8 +84,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize  
                                 bordered={false}
-                                name="phone_num" 
-                                value={this.state.phone_num} 
+                                name="PhoneNum" 
+                                value={this.state.PhoneNum} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -95,8 +95,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize  
                                 bordered={false}
-                                name="email_address" 
-                                value={this.state.email_address} 
+                                name="EmailAddress" 
+                                value={this.state.EmailAddress} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -116,9 +116,9 @@ export default class EditInform extends Component {
                             >
                                 <TextArea
                                 autoSize  
-                                name="stuNum" 
+                                name="StudentNumber" 
                                 bordered={false}
-                                value={this.state.stuNum} 
+                                value={this.state.StudentNumber} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -128,8 +128,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize  
                                 bordered={false}
-                                name="major" 
-                                value={this.state.major} 
+                                name="College" 
+                                value={this.state.College} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -139,8 +139,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize 
                                 bordered={false}
-                                name="grade" 
-                                value={this.state.grade} 
+                                name="Grade" 
+                                value={this.state.Grade} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -153,8 +153,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize  
                                 bordered={false}
-                                name="intro" 
-                                value={this.state.intro} 
+                                name="Intro" 
+                                value={this.state.Intro} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -162,7 +162,7 @@ export default class EditInform extends Component {
                         <div className='saveButtons'>
                             <Button 
                             type='primary'
-                            onClick={()=>{this.saveEdit}}
+                            onClick={()=>this.saveEdit}
                             >
                                 保存
                             </Button>

@@ -4,31 +4,15 @@ import {EditOutlined} from '@ant-design/icons'
 import { Link} from "react-router-dom";
 import axios from 'axios'
 
+var data=JSON.parse(localStorage.getItem("userData"))
+
 export default class MastHead extends Component {
     constructor(props){
         super(props)
         this.state={
-            Icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            nickname:'同济大学今天放暑假了吗'
+            Icon:data.Icon,
+            nickname:data.Nickname
         }
-        axios
-            .get('')
-            .then((res)=>{
-                let tmpData=[]
-                for(let i=0;i<res.data.length;i++){
-                let tmp={
-                    Icon:res.data[i].Icon,
-                    nickname:res.data[i].Nickname
-                }
-                tmpData.push(tmp)
-                }
-                this.setState({
-                //data:tmpData
-                })
-            })
-            .catch(function(error){
-                console.log(error)
-            })
     }
     
     render() {

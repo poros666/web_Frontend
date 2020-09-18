@@ -2,29 +2,11 @@ import React, { Component } from 'react'
 import {Card,List} from 'antd'
 import axios from 'axios'
 
-const compData = [
-  {
-      ID:1,
-      compName: 'comp 1'
-  },
-  {
-      ID:2,
-      compName: 'comp 2'
-  },
-  {
-      ID:3,
-      compName: 'comp 3'
-  },
-  {
-      ID:4,
-      compName: 'comp 4'
-  }]
-
 export default class UserComp extends Component {
   constructor(props){
     super(props)
     this.state={
-      data:compData
+      data:[]
     }
     var token=JSON.parse( localStorage.getItem('token')).token
 
@@ -47,9 +29,6 @@ export default class UserComp extends Component {
         console.log(error)
       })
   }
-
-  
-
     render() {
         return (
             <div>

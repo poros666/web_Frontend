@@ -1,58 +1,41 @@
 import React, { Component } from 'react'
 import {Card,List,Tabs} from 'antd'
+import axios from 'axios'
 
 const {TabPane}=Tabs
-
-const Data = [
-    {
-      id:1,
-      title: 'Ant Design Title 1',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-    },
-    {
-      id:2,
-      title: 'Ant Design Title 2',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      id:3,
-      title: 'Ant Design Title 3',
-      description:'Ant Design, a design language for background applications, is refined by Ant UED Team'
-
-    },
-    {
-      id:4,
-      title: 'Ant Design Title 4',
-      description:'zzzzzz我睡着了 但是我没有摸鱼'
-    }]
 
 export default class UserPost extends Component {
     constructor(props){
         super(props)
         this.state={
-            momentData:Data,
-            discussionData:Data,
-            postData:Data
+            momentData:[],
+            discussionData:[],
+            postData:[]
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/Users/Post/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.get('/Users/Post/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
-            res.data//这里是post数据
+            this.setState({
+                postData:res.data
+            })
         })
         .catch(function(error){
             console.log(error)
          })
-         Axios.get('/Users/Moment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+         axios.get('/Users/Moment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
          .then((res)=>{
-             res.data//这里是moment数据
+            this.setState({
+                momentData:res.data
+            })
          })
          .catch(function(error){
              console.log(error)
           })
-          Axios.get('/Users/Comment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+          axios.get('/Users/Comment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
          .then((res)=>{
-             res.data//这里是Discuss数据
+            this.setState({
+                discussionData:res.data
+            })
          })
          .catch(function(error){
              console.log(error)
@@ -71,8 +54,8 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card>
-                                    <a href={"#/Moment/"+item.id}>
-                                        {item.title}
+                                    <a href={"#/Moment/"+item.MomentId}>
+                                        {item.Title}
                                     </a>
                                 </Card>
                             </List.Item>
@@ -87,9 +70,10 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card>
-                                    <a href={"#/Moment/"+item.id}>  
-                                        {item.title}
-                                    </a>
+                                    
+                                     
+                                        {item.Title}
+                                    
                                 </Card>
                             </List.Item>
                         )}
@@ -103,9 +87,9 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card>
-                                    <a href={"#/Moment/"+item.id}>
-                                        {item.title}
-                                    </a>
+                                    
+                                        {item.Name}
+                                    
                                 </Card>
                             </List.Item>
                         )}

@@ -3,6 +3,8 @@ import {Card,Button,Modal,Form,Input,Select,Popconfirm,Popover,List} from 'antd'
 import {LockOutlined,LockFilled,DeleteOutlined,PlusCircleOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 
+import axios from 'axios'
+
 const {Meta}=Card
 
 export default class UserColle extends Component {
@@ -26,9 +28,12 @@ export default class UserColle extends Component {
                 }
             ]
         }
-        Axios.get('/FavouritePakcage/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        var token=JSON.parse( localStorage.getItem('token')).token
+        axios.get('/FavouritePakcage/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
-            res.data//这里是collec数据
+            this.setState({
+                data:res.data
+            })
         })
         .catch(function(error){
             console.log(error)
