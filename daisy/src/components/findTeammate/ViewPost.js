@@ -14,11 +14,10 @@ export default class CommunityContent extends Component {
   constructor(props){
     super(props)
     ProjctId=this.props.matchId;
-    console.log(ProjctId)
     this.state={
       currentData:[],
       total:0,
-      pageSize: 1,
+      pageSize: PostPerPage,
       pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
@@ -26,7 +25,7 @@ export default class CommunityContent extends Component {
      .then(response=>{
        console.log(response)
        this.setState({
-         total:Math.ceil(response.data.length/PostPerPage)
+         total:Math.ceil(response.data.length)
         });
    })
    .catch(error=>{

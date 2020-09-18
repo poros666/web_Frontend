@@ -10,8 +10,11 @@ import '../../style/findTeam/findTeam.css'
 
 export default class FindTeam extends Component {
     constructor(props){//接收比赛页面传递的比赛数据
-        super(props)
-  
+        super(props)        
+        if(!this.props.match.params.compID){
+            window.alert('连接出错，点击确定返回主页')
+            window.location.hash ='#/home'
+        }
         this.state={
           matchId:this.props.match.params.compID
          }

@@ -33,9 +33,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         form={form}
         layout="vertical"
         name="report_form_in_modal"
-        initialValues={{
-          tags: "not_started",
-        }}
       >
         <Form.Item
           name="time"
@@ -57,7 +54,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         </Form.Item>
         <Form.Item name="types" label="举报类型" 
         rules={[{ required: true, message: '请选择举报类型' }]}>
-        <Select initialValues="色情" style={{ width: 120 }}>
+        <Select style={{ width: 120 }}>
           <Option value="sex">色情</Option>
           <Option value="policy">涉政</Option>
           <Option value="effect">影响他人</Option>
@@ -88,17 +85,18 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     values.target_id=ReportUID;
     console.log("Received values of form: ", values)
     if(isLogined()){
+      var token=JSON.parse( localStorage.getItem('token')).token
       let dataSent={
         account:values.reporter_id,
         reportType:values.types,
         content:values.description,
         time:values.time,
         targetType:'post',
-        targetId:values.target_id
+        targetId:parseInt(values.target_id)
       }
-      console.log(dataSent)
-      if(dataSent.Account.length>0){
-      axios.post('/Report',dataSent)
+      if(dataSent.account.length>0){
+        console.log(dataSent)
+      axios.post('/Report',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
           .then(response=>{
             console.log(response)
             window.alert("举报成功")
@@ -124,6 +122,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
         onClick={() => {
           setVisible(true)
         }}
+        style={{ width: 200,margin:'60px'}}
       ><p>举报该帖</p></Button>
       <CollectionCreateForm
         visible={visible}

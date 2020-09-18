@@ -36,7 +36,7 @@ export default class CreatePost extends React.Component {
       let tempId=this.props.matchId
 
       this.state={
-        ProjctId:tempId,
+        ProjctId:parseInt(tempId),
         Content:'',
         matchName:'',
         matchMaxMemberNum:0,
@@ -50,7 +50,7 @@ export default class CreatePost extends React.Component {
         console.log(response)
       this.setState({
         matchName:response.data.name,
-        matchMaxMemberNum:response.data.maxMemberNum
+        matchMaxMemberNum:response.data.participantsNumber
       })
     })
     .catch(error=>{
@@ -107,7 +107,7 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <Input placeholder={userdata.name} disabled/>
+          <Input placeholder={isLogined()?userdata.name:'请先登录'} disabled/>
         </Form.Item>
       </Col>,
     );
@@ -147,21 +147,22 @@ export default class CreatePost extends React.Component {
       <Col span={14} key={4}>
       <Button shape="round" type="primary" htmlType="submit" onClick={()=>{
         if(isLogined()){
+          var token=JSON.parse( localStorage.getItem('token')).token
           if(this.state.Name.length>0&&this.state.Content.length>0){
           let dataSent={
-            projctId:this.state.ProjctId,
+            ProjectId:this.state.ProjctId,
             leaderAccount:userdata.account,
-            postTime:moment().format("YYYY-MM-DD HH:mm:ss"),
+            postTime:moment().format("YYYY-MM-DDTHH:mm:ssC"),
             content:this.state.Content,
             maxMemberNum:this.state.matchMaxMemberNum,
             name:this.state.Name
           }
           console.log(dataSent);
-          /*axios.post('/Post',dataSent)
+          axios.post('/Post',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
           .then(response=>{
             console.log(response)
             window.alert("发布成功")
-          })*/
+          })
         }
       }
       else{
@@ -182,7 +183,7 @@ export default class CreatePost extends React.Component {
             <Avatar style={{
               margin: '0 10px 0 50px',
               }}
-              src={userdata.icon}
+              src={isLogined()?userdata.icon:''}
             />
           }
           content={

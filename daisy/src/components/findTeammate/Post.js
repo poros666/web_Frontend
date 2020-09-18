@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
-import { Card,Avatar,Space,Button,Input} from 'antd';
+import { Card,Avatar,Select,Button,Input,Form} from 'antd';
 import '../../style/comm/comm.css'
 import PostPageReport from '../findTeammate/report'
+import StarPost from '../findTeammate/StarPost'
 import moment from 'moment'
 import axios from 'axios'
 import {isLogined} from "../../utils/auth"
@@ -33,10 +34,12 @@ export default class Post extends Component {
             PostTime:"",
             Apply:'',
             Account:'',
-            GroupId:groupId,
-            PostId:postId,
-            ProjctId:MatchId,
+            GroupId:parseInt(groupId),
+            PostId:parseInt(postId),
+            ProjctId:parseInt(MatchId),
         }
+
+        console.log(this.state)
 
         console.log(userdata);
         
@@ -84,21 +87,26 @@ export default class Post extends Component {
                     actions={[
                         <Button shape="round" 
                         type="primary"
+                        style={{ width: 200,margin:'60px'}}
                       onClick={()=>{
                         if(isLogined()){
+                            var token=JSON.parse( localStorage.getItem('token')).token
                             if(this.state.Apply.length>0&&userdata.account!=null){
                                 let dataSent={
-                                  projctId:this.state.ProjctId,
+                                  projectId:parseInt(this.state.ProjctId),
                                   account:userdata.account,
                                   content:this.state.Apply,
-                                  groupId:this.state.GroupId
+                                  groupId:parseInt(this.state.GroupId)
                                 }
                                 console.log(dataSent)
-                                /*axios.post('/Application',dataSent)
+                                axios.post('/Application',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
                                 .then(response=>{
                                   console.log(response)
                                   window.alert("申请成功")
-                                })*/      
+                                })
+                                .catch(error=>{
+                                    window.alert("您已经发送过申请")
+                                  })         
                         }
                         else{
                             window.alert("申请失败")
@@ -109,34 +117,11 @@ export default class Post extends Component {
                             window.location.hash ='#/login'
                         }
                     }}><p>申请进入小队</p></Button>,
-                        <Button shape="round" 
-                        type="primary"
-                        onClick={()=>{
-                            if(isLogined()){
-                                if(userdata.account!=null){
-                                    let dataSent={
-                                      projctId:this.state.ProjctId,
-                                      account:userdata.account,
-                                      name:'Post',
-                                      groupId:this.state.GroupId,
-                                      postId:this.state.PostId
-                                    }
-                                    console.log(dataSent)
-                                    /*axios.post('/PostStar',dataSent)
-                                    .then(response=>{
-                                      console.log(response)
-                                      window.alert("收藏成功")
-                                    })*/      
-                            }
-                            else{
-                                window.alert("收藏失败")
-                            }
-                            }
-                            else{
-                                window.alert("未登录，确定后跳转至登陆界面")
-                                window.location.hash ='#/login'
-                            }
-                        }}><p>收藏该帖</p></Button>,
+                    <StarPost 
+                    userdata={userdata} 
+                    ProjctId={this.state.ProjctId} 
+                    GroupId={this.state.GroupId} 
+                    PostId={this.state.PostId}/>,
                     <PostPageReport 
                     ReportUID={this.state.PostId}
                     ReporterUID={userdata.account}
