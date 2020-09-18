@@ -13,11 +13,13 @@ function handleChange(value) {
 export default class SearchFrame extends Component {
 
     constructor(props) {
+        
         super(props)
         this.state = {
           kw: this.props.kw,
-          type: this.props.type
+          type: "comp"
         }
+
     }
 
     inputChange(e){
@@ -33,21 +35,18 @@ export default class SearchFrame extends Component {
     }
 
     searchJump(value){
+        console.log(1)
+        console.log(this.state.kw)
         //console.log(value)
         //var w=window.open('about:blank')
-        window.location.href="#/searchResult/type="+this.state.type+"/"+this.state.kw
+        window.location.hash=`#/searchResult/type=${this.state.type}/${this.state.kw}`
         //console.log(this.state.type)
     }
 
     orderChange(e){
         //console.log(e)
         //console.log('radio checked', e.target.value);
-        if(e=="综合"){
-            this.setState({
-            type: "mixed"
-            },()=>console.log(this.state.type))           
-        }
-        else if(e=="比赛"){
+        if(e=="比赛"){
             this.setState({
             type: "comp"
             },()=>console.log(this.state.type))          
@@ -59,7 +58,7 @@ export default class SearchFrame extends Component {
         }
         else if(e=="用户"){
             this.setState({
-            type: "usr"
+            type: "user"
             },()=>console.log(this.state.type))            
         }
         //console.log('radio checked', this.state.type);
@@ -70,8 +69,7 @@ export default class SearchFrame extends Component {
 
         return (
             <div style={{ marginLeft: '22%' }}>
-                <Select defaultValue="综合" style={{ width: '80px' }} onChange={this.orderChange.bind(this)}>
-                <Option value="综合">综合</Option>
+                <Select defaultValue="比赛" initialValues="比赛" style={{ width: '80px' }} onChange={this.orderChange.bind(this)}>
                 <Option value="比赛">比赛</Option>
                 <Option value="社区">社区</Option>
                 <Option value="用户">用户</Option>

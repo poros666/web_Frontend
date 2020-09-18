@@ -4,6 +4,10 @@ import { Form, Radio, Layout } from 'antd';
 import { FireOutlined, FieldTimeOutlined, CommentOutlined, BellOutlined } from '@ant-design/icons';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
+import CONSTURL from '../../components/community/config';
+import Axios from 'axios';
+
+/*
 const listData = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
@@ -16,6 +20,7 @@ for (let i = 0; i < 23; i++) {
       'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
   });
 }
+*/
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -24,35 +29,52 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
+
 export default class SearchContentComm extends Component {
 
     constructor(props) {
       super(props);
       this.state = {
-        kw: this.props.match.params.kw,
-        order: 1
+        kw: window.location.hash.slice(25),
+        order: 1,
+        data:[]
       };
     }
 
+    componentDidMount(){
+      var url=CONSTURL.local+CONSTURL.searchComm+this.state.kw+'&OrderBy='+this.state.order
+      Axios.get(url).then((res)=>{
+        var result=res.data
+        /*
+        for(var i=0;i<result.length;i++){
+          result[i].Time=this.deleteLetter(result[i].Time)
+        }
+        */
+        this.setState({data:result})
+        console.log(res)
+      })
+    }
+
     onChange = e => {
-        console.log('radio checked', e.target.value);
+        //console.log('radio checked', e.target.value);
         this.setState({
           value: e.target.value,
         });
     };
 
     orderChange(e){
-      console.log('radio checked', e.target.value);
+      //console.log('radio checked', e.target.value);
       this.setState({
         order: e.target.value
       })
-      console.log('radio checked', this.state.order);
+      //console.log('radio checked', this.state.order);
     }
 
     render() {
-
+        //初始化render数组状态
+        let objArr=this.state.data
+        
         return (
-
             <Layout>
             <Form
                 layout="inline"
@@ -74,7 +96,7 @@ export default class SearchContentComm extends Component {
                         
             <List
                 itemLayout="vertical"
-                size="large"
+                /*
                 split="true"
                 pagination={{
                 onChange: page => {
@@ -82,30 +104,30 @@ export default class SearchContentComm extends Component {
                 },
                 pageSize: 3,
                 }}
-                dataSource={listData}
+                */
+               style={{ marginLeft: '20px' }}
+                dataSource={objArr}
 
                 renderItem={item => (
                 <List.Item
-                    key={item.title}
+                    key={item.momentId}
                     actions={[
-                    <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                    <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                    <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+                    <IconText icon={StarOutlined} text={item.starCount} key="list-vertical-star-o" />,
+                    <IconText icon={LikeOutlined} text={item.likeCount} key="list-vertical-like-o" />,
+                    <IconText icon={MessageOutlined} text={item.commentCount} key="list-vertical-message" />,
                     ]}
-                    extra={
-                    <img
-                        width={272}
-                        alt="logo"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                    />
-                    }
                 >
                     <List.Item.Meta
-                    avatar={<Avatar src={item.avatar} />}
-                    title={<a href={item.href}>{item.title}</a>}
-                    description={item.description}
+                    title={
+                      <a href={'#/Moment/'+item.momentId}>
+                        {item.name}
+                      </a>
+                    }
+                    description={
+                      "发布时间："+item.startTime+"      "+"结束时间："+item.endTime
+                    }
                     />
-                    {item.content}
+                    {/*item.content*/}
                 </List.Item>
                 )}
             />              
