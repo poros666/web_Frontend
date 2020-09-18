@@ -93,6 +93,7 @@ export default class ReadMoment extends Component {
         Account: JSON.parse(localStorage.userData).account.toString(),
         Name: 'Moment',
       }
+      console.log()
       var url = CONSTURL.StarMoment
       var token = JSON.parse(localStorage.getItem('token')).token
       Axios.post(url, json, {

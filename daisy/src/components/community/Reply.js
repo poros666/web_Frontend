@@ -7,7 +7,6 @@ import Axios from 'axios'
 import Avatar from 'antd/lib/avatar/avatar'
 import moment from 'moment'
 
-Axios.defaults.baseURL = '/api'
 
 export default class Reply extends Component {
   constructor(props) {
@@ -83,7 +82,9 @@ export default class Reply extends Component {
               author={item.Nickname}
               avatar={
                 <a href='#/personal'>
+
                   <Avatar src={item.Icon} />
+                  
                 </a>
               }
               content={item.Content}

@@ -25,12 +25,12 @@ export default class ReportManagement extends Component {
         var tempData = []
         for (var i = 0; i < res.data.length; i++) {
           var tempTemp = {
-            id: res.data[i].ReportId,
-            type: res.data[i].ReportType,
-            time: res.data[i].Time,
-            reporter: res.data[i].Nickname,
-            target: res.data[i].TargetNickname,
-            tags: res.data[i].DealStatus,
+            id: res.data[i].reportId,
+            type: res.data[i].reportType,
+            time: res.data[i].time,
+            reporter: res.data[i].account,
+            target: res.data[i].targetNickname,
+            tags: res.data[i].dealStatus,
           }
           console.log('tt:', res.data.length, tempTemp)
           tempData.push(tempTemp)
