@@ -57,7 +57,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         </Form.Item>
         <Form.Item name="types" label="举报类型" 
         rules={[{ required: true, message: '请选择举报类型' }]}>
-        <Select initialValues="色情" style={{ width: 120 }}>
+        <Select style={{ width: 120 }}>
           <Option value="sex">色情</Option>
           <Option value="policy">涉政</Option>
           <Option value="effect">影响他人</Option>
