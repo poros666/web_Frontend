@@ -4,32 +4,33 @@ import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
-import { isLogined } from '../../utils/auth';
+import { isLogined,clearToken } from '../../utils/auth';
 import LogoutHeaderNav from './LogoutHeaderNav';
 
 const { SubMenu } = Menu;
 const { Search } = Input;
+var islog;
 class HeaderNav extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
         //   isLogin: false,
-        //   isLogin:islog,
+        //   islog:false,
         };
 
         // 这个绑定是必要的，使`this`在回调中起作用
-        this.handleClick = this.handleClick.bind(this);
+        // this.handleClick = this.handleClick.bind(this);
     }
     
-    handleClick() {
-        this.setState(prevState => ({
-            // isLogin: !prevState.isLogin,
-            isVisibility: prevState.isLogin ? 'hidden': 'visible',
-            // isSignInMenu: prevState.isLogin ? 'inline-table': 'none',
-            isSignInMenu: prevState.isLogin ? ' ':'none',
-            isSignOutMenu: prevState.isLogin ? 'none': '',
-        }));
+    // handleClick() {
+    //     this.setState(prevState => ({
+    //         // isLogin: !prevState.isLogin,
+    //     }));
+    // }
+    logoutClick(){
+        clearToken()
+        // this.setState{}
     }
     searchJump(value){
         console.log(value)
@@ -44,7 +45,7 @@ class HeaderNav extends Component {
     }
     
     render() {
-        var islog=isLogined()
+        islog=isLogined()
         console.log(islog)
         return (
             islog?
@@ -60,11 +61,11 @@ class HeaderNav extends Component {
                                 />
                             </a>
                         </div>
-                        <div style={{position:'relative',}}>
+                        {/* <div style={{position:'relative',}}>
                             <Button onClick={this.handleClick} style={{width:'60px'}}>
                                 {this.state.isLogin ? 'OFF':'IN' }
                             </Button>
-                        </div>
+                        </div> */}
                         <div style={{position:'relative',width:'100%',left:'20%'}}>
                             <Menu 
                             // style={{width:'100%'}}
@@ -159,7 +160,7 @@ class HeaderNav extends Component {
                                     </Menu.Item>
                                 </SubMenu>
                                 <Menu.Item key="signOut" icon={<LogoutOutlined />}
-                                // onClick={this.logoutClick}
+                                onClick={this.logoutClick}
                                 >
                                         登出
                                 </Menu.Item>
