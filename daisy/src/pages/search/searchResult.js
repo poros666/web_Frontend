@@ -10,7 +10,6 @@
 //      单击_放大镜_图标时跳转至本页面
 
 import React, { Component } from 'react'
-import EasySearchFrame from '../../components/search/easySearchFrame'
 import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 import SearchAssort from '../../components/search/searchAssort'

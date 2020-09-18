@@ -11,6 +11,8 @@ import { Menu } from 'antd';
 import { Route, Link } from 'react-router-dom';
 import { searchRoutes } from '../../routes/index'
 
+import 　axios　from 'axios'
+
 const { Search } = Input;
 
 export default class SearchAssort extends Component {
@@ -48,6 +50,13 @@ export default class SearchAssort extends Component {
       }
     }
 */    
+
+    componentDidMount(){
+      axios.post('https://web-api.juejin.im/v3/web/wbbr/bgeda')
+        .then((res)=>{console.log('axios succeeded'+JSON.stringify(res))})
+        .catch((error)=>{console.log('axios failed'+error)})
+    }
+
     render(){
 
         return(
