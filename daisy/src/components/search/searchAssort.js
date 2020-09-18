@@ -18,20 +18,23 @@ export default class SearchAssort extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        kw: this.props.match.params.kw,
-        //kw: this.props.kw,
-        type: this.props.match.params.type
+        //kw: this.props.match.params.kw,
+        kw: window.location.hash.slice(25),
+        //type: this.props.match.params.type
+        type: this.props.type
       }
+      console.log(this.state.kw)
     }
 
     inputChange(e){
       this.setState({
         kw: e.target.value
       })
+      console.log(this.state.kw)
     }
 
     handleClick(e){
-      //console.log('click ', e);
+      console.log('click ', e.key);
       this.setState({ 
         type: e.key
       });
@@ -40,7 +43,7 @@ export default class SearchAssort extends Component {
 
     searchJump(value){
         //console.log(value)
-        window.location.href="#/searchResult/type=mixed/"+this.state.kw
+        window.location.hash=`#/searchResult/type=${this.state.type}/${this.state.kw}`
     }
 /*
     keyDown(e){
@@ -49,6 +52,7 @@ export default class SearchAssort extends Component {
     }
 */    
     render(){
+      console.log(this.state.kw)
 
         return(
       
@@ -72,32 +76,23 @@ export default class SearchAssort extends Component {
 
           <Menu 
             onClick={this.handleClick.bind(this)}
-            selectedKeys={[this.state.type]} 
+            defaultSelectedKeys={[this.state.type]} 
             mode="horizontal"
             style={{ textAlign:"center", fontSize:18 }}
             >
           {/*
               searchRoutes.map((item,index)=>{
-<<<<<<< HEAD
-                // console.log('path:'+item.path)
-                // console.log('title:'+item.title)
-                return (<Menu.Item key={index}><Link to={item.path+'?keyword='+this.State.searchWord}>{item.title}</Link></Menu.Item>)
-=======
                 return (<Menu.Item key={index}><Link to={item.path+this.state.kw}>{item.title}</Link></Menu.Item>)
->>>>>>> zhw
               })
           */}
-            <Menu.Item key="mixed">
-            <Link to={'/searchResult/type=mixed/'+this.state.kw } >综合</Link>
-            </Menu.Item>
             <Menu.Item key="comp">
             <Link to={'/searchResult/type=comp/'+this.state.kw } >比赛</Link>
             </Menu.Item>
             <Menu.Item key="comm">
             <Link to={ '/searchResult/type=comm/'+this.state.kw } >社区</Link>
             </Menu.Item>
-            <Menu.Item key="usr">
-            <Link to={ '/searchResult/type=usr/'+this.state.kw } >用户</Link>
+            <Menu.Item key="user">
+            <Link to={ '/searchResult/type=user/'+this.state.kw } >用户</Link>
             </Menu.Item>
           {/* 头部导航栏菜单内容 */}
           </Menu>
