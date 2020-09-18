@@ -18,6 +18,8 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
+Axios.defaults.baseURL='/api'
+
 
 export default class MomentList extends Component {
     constructor(props){
@@ -162,8 +164,10 @@ export default class MomentList extends Component {
     }
 
     getMomentList(){
-      var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.GetMomentList+this.state.sortType
+      var url=CONSTURL.GetMomentList+this.state.sortType
+      console.log(url)
       Axios.get(url).then((res)=>{
+        console.log(res)
         this.setState({data:res.data})
         this.setState({total:res.data.length})
      //   console.log(res.data.length)

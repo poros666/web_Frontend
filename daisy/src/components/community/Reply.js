@@ -7,6 +7,9 @@ import Axios from 'axios';
 import Avatar from 'antd/lib/avatar/avatar';
 import moment from 'moment'
 
+Axios.defaults.baseURL='/api'
+
+
 export default class Reply extends Component {
 
     constructor(props){
@@ -33,7 +36,7 @@ export default class Reply extends Component {
 
     componentDidMount(){
 
-        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.GetReplyList+this.state.Rid
+        var url=CONSTURL.GetReplyList+this.state.Rid
       //  console.log(url)
         Axios.get(url).then((res)=>{
             var temp=res.data
