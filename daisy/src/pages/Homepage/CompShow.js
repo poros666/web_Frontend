@@ -4,9 +4,13 @@ import 'antd/dist/antd.css';
 import { Layout, List, Space, Row, Col, Button,Tag, Divider} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined,StarTwoTone,CalendarOutlined} from '@ant-design/icons';
 import './compShow.css'
+import CONSTURL from './config'
+import Axios from 'axios';
+import '../../style/homepage.css'
+Axios.defaults.baseURL='/api'
 
 const { Header, Footer, Sider, Content } = Layout;
-const listData = [];
+const sourceData = [];
 const IconText = ({ icon, text }) => (
     <Space>
       {React.createElement(icon)}
@@ -23,24 +27,48 @@ function limitTxt(txt,count) {
 };
 
 for (let i = 0; i < 15; i++) {
-    listData.push({
+    sourceData.push({
         
-    ID: i+1,
-    // title: `community part ${i+1}`,
-    title:'第二届中国工业互联网大赛',
+    projectId: i+1,
+    name:'第二届中国工业互联网大赛',
     startTime:
         '2020-08-16',
     endTime:
         '2020-09-24',
     host:
         '同济大学软件学院',
-    content:
+    participantsNumber:2,
+    introduction:
         '为深入实施工业互联网创新发展战略，持续提升工业互联网创新能力，支撑服务实体经济数字化转型，定于2020年7月-12月举办第二届中国工业互联网大赛（以下简称“大赛”）。大赛由工业和信息化部和浙江省人民政府联合主办。为深入实施工业互联网创新发展战略，持续提升工业互联网创新能力，支撑服务实体经济数字化转型，定于2020年7月-12月举办第二届中国工业互联网大赛（以下简称“大赛”）。大赛由工业和信息化部和浙江省人民政府联合主办。为深入实施工业互联网创新发展战略，持续提升工业互联网创新能力，支撑服务实体经济数字化转型，定于2020年7月-12月举办第二届中国工业互联网大赛（以下简称“大赛”）。大赛由工业和信息化部和浙江省人民政府联合主办。',
     });
   };
 
 class CompShow extends Component {
-    state = {  }
+    constructor(props){
+        super(props)
+        this.state={
+            // currentData:sourceData,
+            currentData:[],
+            isLoaded:false,
+        }
+    }
+    componentDidMount(){
+        const _this=this;    //先存一下this，以防使用箭头函数this会指向我们不希望它所指向的对象。
+        Axios.get('/Project/Random')
+        .then(function (response) {
+          _this.setState({
+            currentData:response.data,
+            isLoaded:true
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+          _this.setState({
+            isLoaded:false,
+            error:error
+          })
+        })
+    }
     render() { 
         return ( 
             <div style={{ margin:'50px 150px' }}>
@@ -74,21 +102,22 @@ class CompShow extends Component {
                             <List
                                 itemLayout="vertical"
                                 size="large"
-                                dataSource={listData}
+                                dataSource={this.state.currentData}
                                 renderItem={item => (
-                                <div style={{background:'#f1f2f6',margin:'20px',
+                                <div style={{background:'#f1f2f6',margin:'50px 20px',
                                                 // *border:'0.5px #c8d6e5 solid'
                                         }}>
                                     <List.Item
                                         key={item.title}
                                         // actions={[]}
                                         extra={
-                                            <div style={{width:'100%',padding:'10%'}}>
+                                            <div style={{width:'200px',margin:'0 auto',}}>
                                                 <Tag icon={<CalendarOutlined />} color="success">开始时间：{item.startTime}</Tag>
                                                 <br></br>
                                                 <Tag icon={<CalendarOutlined />} color="success">结束时间：{item.endTime}</Tag>
                                                 <br></br>
-                                                <Button key="subscriptComp" icon={<StarTwoTone/>}>订阅</Button>
+                                                <Tag icon={<CalendarOutlined />} color="success">参与人数：{item.participantsNumber}</Tag>
+                                                <br></br>
                                             </div>
                                         }
                                     >
@@ -101,7 +130,7 @@ class CompShow extends Component {
                                             }}>
                                                 <a href={"#/compPage/id="+item.ID+"/"} 
                                                 // id="compTitle" 
-                                                target="_blank" rel="noopener noreferrer">{item.title}</a>
+                                                target="_blank" rel="noopener noreferrer">{item.name}</a>
                                             </div>
                                         }
                                         description={
@@ -110,7 +139,8 @@ class CompShow extends Component {
                                                     <p>{item.host}</p>
                                                 </div>
                                                 <div style={{color:'#57606f'}}>
-                                                    {limitTxt(item.content,200)}
+                                                    {item.introduction}
+                                                    {/* {limitTxt(item.Introduction,200)} */}
                                                 </div>
                                             </div>
                                         }

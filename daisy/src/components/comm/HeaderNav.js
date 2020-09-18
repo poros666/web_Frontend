@@ -4,44 +4,38 @@ import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
-// import logo from './logo2.png'
-// import logo from './logo3.png'
+import { isLogined,clearToken } from '../../utils/auth';
+import LogoutHeaderNav from './LogoutHeaderNav';
 
 const { SubMenu } = Menu;
 const { Search } = Input;
-
+// var islog;
 class HeaderNav extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          isLogin: false,
-          isVisibility:'hidden',
-        //   isSignInMenu:'block',
-          isSignInMenu:' ',
-          isSignOutMenu:'none',
+        //   isLogin: false,
+          islog:false,
         };
 
         // 这个绑定是必要的，使`this`在回调中起作用
-        this.handleClick = this.handleClick.bind(this);
+        this.logoutClick = this.logoutClick.bind(this);
     }
     
-    handleClick() {
-        this.setState(prevState => ({
-            isLogin: !prevState.isLogin,
-            isVisibility: prevState.isLogin ? 'hidden': 'visible',
-            // isSignInMenu: prevState.isLogin ? 'inline-table': 'none',
-            isSignInMenu: prevState.isLogin ? ' ':'none',
-            isSignOutMenu: prevState.isLogin ? 'none': '',
-        }));
+    // handleClick() {
+    //     this.setState(prevState => ({
+    //         // isLogin: !prevState.isLogin,
+    //     }));
+    // }
+    logoutClick(){
+        clearToken()
+        setTimeout(()=>{ 
+            this.setState({
+                islog:false,
+            })
+        })
     }
-    // state = {
-    //     current: 'mail',
-    //   };
-    // handleClick = e => {
-    //     console.log('click ', e);
-    //     this.setState({ current: e.key });
-    // };
     searchJump(value){
         console.log(value)
         console.log(value.length)
@@ -54,14 +48,11 @@ class HeaderNav extends Component {
         }
     }
     
-    keyDown(e){
-        if(e.keyCode === 13){
-        }
-    }
-
     render() {
-        // const { current } = this.state;
+        this.state.islog=isLogined()
+        // console.log(islog)
         return (
+            this.state.islog?
             <div >
                 <Layout>
                     <Space size={20}  style={{ position: 'fixed', zIndex: 1, width: '100%', background:'white'}}>
@@ -74,11 +65,11 @@ class HeaderNav extends Component {
                                 />
                             </a>
                         </div>
-                        <div style={{position:'relative',}}>
+                        {/* <div style={{position:'relative',}}>
                             <Button onClick={this.handleClick} style={{width:'60px'}}>
                                 {this.state.isLogin ? 'OFF':'IN' }
                             </Button>
-                        </div>
+                        </div> */}
                         <div style={{position:'relative',width:'100%',left:'20%'}}>
                             <Menu 
                             // style={{width:'100%'}}
@@ -107,14 +98,12 @@ class HeaderNav extends Component {
                                     placeholder="请输入想要搜索的内容"
                                     // onChange={this.inputChange.bind(this)}
                                     onSearch={value => this.searchJump(value)}
-                                    onKeyDown={e=>this.keyDown(e)}
                                     style={{ width: 400 }}
                                 />
                                 </Menu.Item>              
                                 
                                 <SubMenu icon={<UserOutlined />} 
                                 key='personalMenu'
-                                style={{ visibility: this.state.isVisibility}}
                                 title={"我的"}>
                                     
                                     <Menu.Item key="userHome">
@@ -141,10 +130,8 @@ class HeaderNav extends Component {
 
                                 <SubMenu icon={<CommentOutlined />} 
                                 key='messageMenu'
-                                style={{ visibility: this.state.isVisibility,}}
-                                title={"消息"
-                                // <a href ={"#/message"}>{"消息"}</a>
-                                    }>
+                                // style={{ visibility: this.state.isVisibility,}}
+                                title={"消息"}>
                                     <Menu.Item key="systemNotice">
                                         <a href="#/message/system" target="_blank" rel="noopener noreferrer">
                                             系统公告
@@ -177,14 +164,9 @@ class HeaderNav extends Component {
                                     </Menu.Item>
                                 </SubMenu>
                                 <Menu.Item key="signOut" icon={<LogoutOutlined />}
-                                    style={{ display: this.state.isSignOutMenu,}} >
+                                onClick={this.logoutClick}
+                                >
                                         登出
-                                </Menu.Item>
-                                <Menu.Item key="signIn" icon={<LoginOutlined />}
-                                    style={{ display: this.state.isSignInMenu,float:'right'}}>
-                                    <a href="#/login" target="_blank" rel="noopener noreferrer">
-                                        登录
-                                    </a>
                                 </Menu.Item>
                             </Menu>
                         </div>
@@ -195,6 +177,7 @@ class HeaderNav extends Component {
                 <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:23 }}/>
                 <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:24 }}/>
             </div>
+            :<LogoutHeaderNav/>
         )
     }
 }
