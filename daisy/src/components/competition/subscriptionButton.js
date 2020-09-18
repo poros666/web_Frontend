@@ -23,15 +23,15 @@ export default class SubscriptionButton extends Component {
 
 
 handleClick(){
-    if(!isLogined())
+    /*if(!isLogined())
           {
             window.alert("未登录，确定后跳转至登陆界面")
             window.location.hash ='#/login'
             return 
          }
-        else{
+        else{*/
             this.postData()
-        }
+        //}
 }
 
 

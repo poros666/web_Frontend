@@ -19,6 +19,7 @@ export default class CompetitionList extends Component {
 
   componentDidMount() {
     this.getData() //页面刷新时回到刷新前的page
+    this.handleAnchor()
   }
 
   handleAnchor() {
@@ -55,7 +56,7 @@ export default class CompetitionList extends Component {
         {
           data:response.data,
           total:response.data.length
-        },this.handleAnchor()
+        }
     )
   })
   .catch(error=>{
@@ -72,15 +73,15 @@ export default class CompetitionList extends Component {
             <List
               itemLayout="vertical"
               size="large"
-              dataSource={this.state.currentData}
+              dataSource={this.state.data}
               renderItem={item => (
                 <List.Item>
                     <List.Item.Meta
-                    title={<a href={"#/compPage/id="+item.ID+'/'}>{item.competitionname}</a>
+                    title={<a href={"#/compPage/id="+item.projectId+'/'}>{item.name}</a>
                     }
                     description={item.description}
                     />
-                    {item.content}
+                    {item.introduction}
                 </List.Item>
               )}
             />

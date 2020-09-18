@@ -21,7 +21,7 @@ export default class DiscussList extends Component {
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
 
-     axios.get('/Discussion?ProjectId=1'/*+this.state.compID*/)
+     axios.get('/Discussion?ProjectId='+this.state.compID)
      .then(response=>{
         console.log(response);
         this.setState(
