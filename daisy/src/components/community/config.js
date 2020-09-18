@@ -4,7 +4,7 @@ const CONSTURL={
     GetMomentList:'/Moment?OrderBy=',
     GetMomentCount:'/Moment/count',
     CreatMoment:'/Moment',
-    GetMoment:'/Momment/',
+    GetMoment:'/Moment/',
     CreateComment:'/Comment',
     CreateReply:'/Reply',
     GetCommentList:'/Comment?MomentId=',
