@@ -14,7 +14,6 @@ import Axios from 'axios'
 import CONSTURL from '../../components/community/config'
 import moment from 'moment-timezone'
 import { isLogined } from '../../utils/auth'
-Axios.defaults.baseURL='/api'
 
 
 
@@ -47,20 +46,22 @@ export default class Moment extends Component {
     createComment(content){
       if(isLogined()){
         var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
-
+        console.log("sdasd", JSON.parse(localStorage.userData))
         var json=
         {
-          "MomentId":this.state.Pid,
-          "Account":123,
+          "MomentId": Number(this.state.Pid) ,
+          "Account":JSON.parse(localStorage.userData).account.toString(),
           "Content":content,
           "Time":t
         }
         console.log(json)
         var url=CONSTURL.CreateComment
-        Axios.post(url,json).then((res)=>{
-      //    console.log(res.data)
+        var token = JSON.parse(localStorage.getItem('token')).token
+        Axios.post(url,json, {
+          headers: { Authorization: 'Bearer ' + token },
+        }).then((res)=>{
+          console.log(res)
           window.location.reload()
-  
         })
   
       }

@@ -20,8 +20,8 @@ import CONSTURL from './config';
 import Axios from 'axios';
 import {isLogined} from '../../utils/auth'
 import unLogined from './Unlogined'
+import Loading from './Loading'
 
-Axios.defaults.baseURL='/api'
 
 const { Panel } = Collapse;
 
@@ -47,23 +47,30 @@ export default class CommentList extends Component {
           renderAdComponent:[],
           data:[],
           Pid:tempId,
+          isLoading:true
          }
          this.updateADComp()
       }
 
       componentDidMount(){
+        console.log("commmentlist running")
         var url=CONSTURL.GetCommentList+this.state.Pid
         Axios.get(url).then((res)=>{
+          console.log("get daole :",res.data)
           var result=res.data
           for(var i=0;i<result.length;i++){
-            result[i].Time=this.deleteLetter(result[i].Time)
+            result[i].Time=this.deleteLetter(result[i].time)
           }
           this.setState({data:result})
-        //  console.log(this.state.data)
+          this.setState({isLoading:false})
+         console.log("保存下来的：",this.state.data)
         })
       }
 
       deleteLetter(str) {
+        if(str===undefined){
+          str="this is undefined"
+        }
         var result;
       
         var reg = /[a-zA-Z]+/;  //[a-zA-Z]表示匹配字母，g表示全局匹配
@@ -83,15 +90,20 @@ export default class CommentList extends Component {
           var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
           var json=
           {
-            "CommentId":this.state.Pid,
-            "Account":"account",
-            "Content":content,
-            "Time":t,
+            CommentId:Number( this.state.Pid),
+            Account:"account",
+            Content:content,
+            Time:t
           }
-          console.log(json)
+          console.log("to reply data",json)
 
           var url=CONSTURL.CreateReply
-          Axios.post(url,json).then((res)=>{
+          var token = JSON.parse(localStorage.getItem('token')).token
+          Axios.post(url,json,
+            {
+              headers: { Authorization: 'Bearer ' + token },
+            }
+            ).then((res)=>{
             window.location.reload()
           })
         }
@@ -134,9 +146,11 @@ export default class CommentList extends Component {
 
     render() {      
       //初始化render数组状态
-      let objArr=this.state.data
-   //   console.log(objArr)
+      console.log("state",this.state)
+      var objArr=this.state.data
+      console.log("obj data",objArr)
         return (
+            this.state.isLoading?<Loading />:
             <div id="firstLayer">
                 {
                   objArr.map((item,index)=>(
@@ -165,18 +179,18 @@ export default class CommentList extends Component {
                             </span>,
                             
                           ]}
-                      author={item.Nickname}
+                      author={item.nickname}
                       avatar={
                         <a href='#/personal'>
                         <Avatar
-                          src={item.Icon}
+                          src={item.icon}
                         />
                         </a>
                       }
-                      content={item.Content}
-                      datetime={item.Time}
+                      content={item.content}
+                      datetime={item.time}
                       >
-                      <Reply replyId={item.CommentId}/>
+                      <Reply replyId={item.commentId}/>
                    
                       </Comment>
                     </li>
