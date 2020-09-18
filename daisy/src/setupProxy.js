@@ -1,12 +1,15 @@
-const { createProxyMiddleware } = require('http-proxy-middleware')
-
+const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = function (app) {
-  app.use(createProxyMiddleware('/api', {
-    target: 'http://fwdarling2020.cn:8080',
-    secure: false,
-    changeOrigin: true,
-    pathRewrite: {
-      "^/api": "/api"
-    }
-  }))
-}
+	app.use(
+		"/api",
+		createProxyMiddleware({
+			target: "49.234.209.5:8080",
+			changeOrigin: true,
+			pathRewrite: {
+				"/api": "",
+			},
+			
+		})
+    );
+    // 更多代理配置...
+};
