@@ -19,17 +19,17 @@ export default class teamNav extends Component {
     axios.get('/Project/'+matchId)
     .then(response=>{
       console.log(response.data)
-      this.state={
+      this.setState({
         matchName:response.data.name,
         matchIntroduction:response.data.introduction,
         matchMaxMemberNum:response.data.participantsNumber
-      }
+      })
   })
   .catch(error=>{
-    this.state={
+    this.setState({
       matchName:'未找到该比赛',
       matchIntroduction:'未找到该比赛'
-    }
+    })
     console.log(error);
   })
 }
