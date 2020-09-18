@@ -84,6 +84,9 @@ export default class ReadMoment extends Component {
       }).then((res) => {
         window.location.reload()
       })
+      .catch((info) => {
+        console.log(info)
+      })
       
     } else {
       window.alert('未登录，跳转至登陆界面')
