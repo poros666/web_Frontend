@@ -13,6 +13,7 @@ import ReadMoment from '../../components/community/ReadMoment'
 import Axios from 'axios'
 import CONSTURL from '../../components/community/config'
 import moment from 'moment-timezone'
+import { isLogined } from '../../utils/auth'
 
 
 
@@ -43,24 +44,30 @@ export default class Moment extends Component {
     // }
 
     createComment(content){
+      if(isLogined()){
+        var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
 
-      var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
-
-      var json=
-      {
-        "MomentId":this.state.Pid,
-        "Account":123,
-        "Content":content,
-        "Time":t
+        var json=
+        {
+          "MomentId":this.state.Pid,
+          "Account":123,
+          "Content":content,
+          "Time":t
+        }
+        console.log(json)
+        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.CreateComment
+        Axios.post(url,json).then((res)=>{
+      //    console.log(res.data)
+          window.location.reload()
+  
+        })
+  
       }
-      console.log(json)
-      var url=CONSTURL.hosturl+CONSTURL.CreateComment
-      Axios.post(url,json).then((res)=>{
-    //    console.log(res.data)
-        window.location.reload()
-
-      })
-
+      else{
+        window.alert("未登录，将跳转至登陆界面")
+        window.location.hash='#/home'
+      }
+     
     }
 
 

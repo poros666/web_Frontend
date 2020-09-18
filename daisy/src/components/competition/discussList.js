@@ -145,24 +145,20 @@ export default class DiscussList extends Component {
  }
 /*
   getData(){
-    axios.get('/api/Discussion',{
-      params: {
-        projectId: this.state.compID,
-      }
-    })
-          .then(function (response) {
-            console.log(response);
-            this.setstate(
-                {
-                  data:response.data
-                  total:response.data.length
-                }
-            )
-          })
-          .catch(function (error) {
-            console.log(error);
-            window.alter("连接似乎出现问题")
-          });
+    axios.get('/api/Discussion?ProjectId='+this.state.compID)
+      .then(function (response) {
+        console.log(response);
+        this.setstate(
+            {
+              data:response.data
+              total:response.data.length
+            }
+        )
+      })
+      .catch(function (error) {
+        console.log(error);
+        window.alter("连接似乎出现问题")
+      });
   }
 */
   render() {

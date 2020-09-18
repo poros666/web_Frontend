@@ -7,6 +7,8 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
+import { isLogined } from '../../utils/auth';
+import Unlogined from './Unlogined';
 
 const { TextArea } = Input;
 
@@ -72,15 +74,16 @@ export default class ToComment extends React.Component {
 
   render() {
     const { comments, submitting, value } = this.state;
+    var islog=isLogined()
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
+        
         <Comment
           avatar={
-            <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
-            />
+            <a href='#/personal'>
+              {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
+            </a>
           }
           content={
             <Editor
@@ -96,3 +99,7 @@ export default class ToComment extends React.Component {
   }
 }
 
+
+// {isLogined()
+//   ?<Avatar src={localStorage.getItem('userData').Icon}/>
+//   :<unLogined>}

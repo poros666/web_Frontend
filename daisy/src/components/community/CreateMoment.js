@@ -4,6 +4,8 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
+import { isLogined } from '../../utils/auth';
+import Unlogined from './Unlogined'
 
 const { TextArea } = Input;
 
@@ -131,20 +133,16 @@ export default class CreateMoment extends React.Component {
     const { comments, submitting, value,valuetitle } = this.state;
     
 
+    var islog=isLogined()
 
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           avatar={
-            <a href={"#/Moment/"+1}>
-            <Avatar
-              src={require("../../img/avatar/"+this.state.avatarSrc+".jpg")}
-              alt={this.state.avatarAlt}
-            >
-
-            </Avatar>
-          </a>
+            <a href={"#/personal"}>
+              {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
+            </a>
           }
           content={
             <Editor

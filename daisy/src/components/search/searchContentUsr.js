@@ -20,10 +20,12 @@ const data = [
 ];
 
 export default class SearchContentUsr extends Component {
-
-  state = {
-    value: 1,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      kw: this.props.match.params.kw
+    }
+  }
 
 onChange = e => {
     console.log('radio checked', e.target.value);
@@ -37,21 +39,6 @@ onChange = e => {
         return (
 
           <Layout>
-          <Form
-          layout="inline"
-          className="components-table-demo-control-bar"
-          style={{ marginBottom: 16, marginLeft: 20 }}
-        >
-            <Form.Item label="">
-            <Radio.Group
-                onChange={this.onChange} value={this.state.value}
-            >
-            <Radio value={1}><FieldTimeOutlined/>最新注册</Radio>
-            <Radio value={2}><BellOutlined/>最多订阅</Radio>
-            </Radio.Group>
-            </Form.Item>
-        </Form>
-
             <List
                 itemLayout="horizontal"
                 dataSource={data}
