@@ -106,7 +106,10 @@ const CompNotice = (e) => {
       Time: values.time
     }
     console.log("data:",data);
-    axios.post('/api/Notification',data).then(res=>{
+    var token = JSON.parse(localStorage.getItem('token')).token
+    axios.post('/Notification',data, {
+      headers: { Authorization: 'Bearer ' + token },
+    }).then(res=>{
       console.log(res);
     })
     setVisible(false)

@@ -37,7 +37,10 @@ export default class DeliverSystemAnnouncement extends Component {
         Time: moment().format("YYYY-MM-DD")
       }
       console.log("data:",data);
-      axios.post('/api/Notice', data).then(res => {
+      var token = JSON.parse(localStorage.getItem('token')).token
+      axios.post('/Notice', data, {
+        headers: { Authorization: 'Bearer ' + token },
+      }).then(res => {
         console.log(res);
       });
     }
