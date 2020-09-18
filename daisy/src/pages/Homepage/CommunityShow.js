@@ -6,6 +6,7 @@ import { MessageOutlined, LikeOutlined, StarOutlined} from '@ant-design/icons'
 import CONSTURL from './config'
 import Axios from 'axios';
 import '../../style/homepage.css'
+Axios.defaults.baseURL='/api'
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -93,7 +94,7 @@ class CommunityShow extends Component {
 
     componentDidMount(){
         const _this=this;    //先存一下this，以防使用箭头函数this会指向我们不希望它所指向的对象。
-        Axios.get('http://fwdarling2020.cn:8080/api/Moment/Random')
+        Axios.get('/Moment/Random')
         .then(function (response) {
           _this.setState({
             currentData:response.data,
@@ -110,11 +111,11 @@ class CommunityShow extends Component {
     }
 
     render() {
-        // if(!this.state.isLoaded){
-        //     return <div>Loading</div>
-        // }
-        // else{
-            if(1){
+        if(!this.state.isLoaded){
+            return <div>Loading</div>
+        }
+        else{
+            // if(1){
         return ( 
             // <div style={{height: '400px',width:'600px',margin:'10px 10px',float:'right'}}>
             <div style={{height: '100%',margin:'10px'}}>
@@ -148,26 +149,27 @@ class CommunityShow extends Component {
                             itemLayout="horizontal"
                             dataSource={this.state.currentData}
                             renderItem={item => (
-                            <List.Item>
-
+                            <List.Item
+                                key={item.MomentId}
+                            >
                                 <List.Item.Meta
                                 //帖子的名字和指向的地址，传一个pid，post_id
-                                title={<a href ={"#/Moment/"+item.Pid} target="_blank" rel="noopener noreferrer">{limitTxt(item.title,30)}</a>}
+                                title={<a href ={"#/Moment/"+item.Title} target="_blank" rel="noopener noreferrer">{limitTxt(item.title,30)}</a>}
                                 // description={<p>{item.description}</p>}
                                 description={
                                     <div>
                                         <Row>
                                             <Col span={4} offset={0}>
-                                                {item.name}
+                                                {item.Nickname}
                                             </Col>
                                             <Col span={2} offset={10}>
-                                                <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />
+                                                <IconText icon={StarOutlined}  text={item.StarCount} key="list-vertical-star-o" />
                                             </Col>
                                             <Col span={2} offset={1}>
-                                                <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />
+                                                <IconText icon={LikeOutlined} text={item.LikeCount} key="list-vertical-like-o" />
                                             </Col>
                                             <Col span={2} offset={1}>
-                                                <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />
+                                                <IconText icon={MessageOutlined} text={item.CommentCount} key="list-vertical-message" />
                                             </Col>
                                             {/* <Col span={5} offset={2}>
                                                 {item.time}
@@ -176,8 +178,8 @@ class CommunityShow extends Component {
                                     </div>
                                 }
                                 avatar={
-                                    <a href={"#/ReadPost/"+item.Uid}>
-                                      <Avatar src={require("../../img/avatar/"+item.avatarSrc+".jpg")}></Avatar>
+                                    <a href={"#/personal"}>
+                                      <Avatar src={this.state.data.Icon}></Avatar>
                                     </a>
                                   }
 

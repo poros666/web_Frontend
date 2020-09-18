@@ -83,7 +83,7 @@ class CompShow extends Component {
                                         key={item.title}
                                         // actions={[]}
                                         extra={
-                                            <div style={{width:'100%',padding:'10%'}}>
+                                            <div style={{width:'100%',}}>
                                                 <Tag icon={<CalendarOutlined />} color="success">开始时间：{item.startTime}</Tag>
                                                 <br></br>
                                                 <Tag icon={<CalendarOutlined />} color="success">结束时间：{item.endTime}</Tag>
