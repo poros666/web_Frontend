@@ -4,6 +4,8 @@ import { FireOutlined, FieldTimeOutlined, CommentOutlined, BellOutlined } from '
 import { List, Avatar, Space } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
+import axios from 'axios'
+axios.defaults.baseURL='/api';
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
