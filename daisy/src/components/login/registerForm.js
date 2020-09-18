@@ -188,7 +188,7 @@ function compress(
     _canvas.getContext('2d').drawImage(this, 0, 0, w, h)
     var base64 = _canvas.toDataURL('image/jpeg')
     _canvas.toBlob(function (blob) {
-      if (blob.size > 450 * 450) {
+      if (blob.size > 100 * 100) {
         //如果还大，继续压缩
         compress(base64, rate, callback)
       } else {
@@ -203,6 +203,7 @@ const RegistrationForm = () => {
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values)
+  
     var base64 = values.upload[0].thumbUrl
     compress(base64,1.5, function (base64) {
       console.log("new base64:",base64)
@@ -212,18 +213,18 @@ const RegistrationForm = () => {
       Name: values.name,
       Password: values.password,
       Nickname: values.nickname,
-      PhoneNum: values.phone,
+      PhoneNum: values.phone.toString(),
       EmailAddress: values.email,
       Sex: values.sex,
       School: values.school,
       College: values.major,
       Grade: values.grade,
-      StudentNumber: values.student_num,
+      StudentNumber:values.student_num.toString(),
       Intro: values.intro,
-      Icon: base64,
+      Icon: base64
     }
     console.log("dataSent:",dataSent)
-    axios.post('/api/Users', dataSent).then((response) => {
+    axios.post('/Users', JSON.stringify( dataSent)).then((response) => {
       console.log(response)
       window.alert('注册成功')
     })
