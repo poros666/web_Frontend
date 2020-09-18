@@ -31,7 +31,7 @@ export default class MomentColletion extends Component {
         if(this.state.account===JSON.parse( localStorage.getItem('userData')).account)
         {
             var token=JSON.parse( localStorage.getItem('token')).token
-            Axios.delete('/MomentStar?MomentId='+mommentid+'&Account='+this.state.account+'&Name='+this.state.filename,
+            Axios.delete('/MomentStar?MomentId='+momentId+'&Account='+this.state.account+'&Name='+this.state.filename,
             {headers: { "Authorization": 'Bearer ' +token }})
             .then(()=>{
                 let fdata=[...this.state.data]

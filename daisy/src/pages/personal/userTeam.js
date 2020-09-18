@@ -25,23 +25,6 @@ export default class UserTeam extends Component {
 
     render() {
 
-        var editicon= ()=>{
-            if(this.state.account===JSON.parse( localStorage.getItem('userData')).account)
-            {
-                return(<div>
-                    <Link to={{pathname:"#/editteam/"+item.teamID,
-                                query:{
-                                    GroupId:item.groupId,
-                                    ProjectId:item.projectId,
-                                }}}>
-                        <EditOutlined/>
-                        </Link>
-                      </div>)
-            }
-            else{
-                return
-            }
-        }
         return (
             <div>
                 <List
@@ -52,7 +35,23 @@ export default class UserTeam extends Component {
                     <List.Item>
                         <Card
                         title={item.teamname}
-                        extra={editicon}>
+                        extra={()=>{
+                                if(this.state.account===JSON.parse( localStorage.getItem('userData')).account)
+                                {
+                                    return(<div>
+                                        <Link to={{pathname:"#/editteam/"+item.teamID,
+                                        query:{
+                                            GroupId:item.groupId,
+                                            ProjectId:item.projectId,
+                                        }}}>
+                                        <EditOutlined/>
+                                        </Link>
+                                        </div>)
+                                }
+                                else{
+                                        return
+                                    }
+                                }}>
                             <p>
                                 简介：{item.introduction}
                             </p>

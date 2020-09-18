@@ -40,6 +40,7 @@ export default class EditTeam extends Component{
     }
     //删除队员
     deleteMember(account){
+        var token=JSON.parse( localStorage.getItem('token')).token
         Axios.delete('/Member',{ProjectId:parseInt(this.state.ProjectId),GroupId:parseInt(this.state.GroupId),Account:account},
         {headers: { "Authorization": 'Bearer ' +token }})
         .catch(function(error){
