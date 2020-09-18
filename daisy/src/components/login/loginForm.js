@@ -18,6 +18,8 @@ const NormalLoginForm = () => {
     .then(response=>{
       console.log(response)
       setToken(response.data.jwt, values.username)
+      console.log('close window')
+      window.close()
       window.alert("登陆成功")
     })
   };

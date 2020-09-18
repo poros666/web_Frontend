@@ -13,14 +13,18 @@ class LogoutHeaderNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loginNum:1
         };
         // 这个绑定是必要的，使`this`在回调中起作用
-        this.handleClick = this.handleClick.bind(this);
+        this.loginClick = this.loginClick.bind(this);
     }
-    
-    handleClick() {
-        this.setState(prevState => ({
-        }));
+    loginClick(){
+        window.open("#/login")
+        setTimeout(()=>{ 
+            this.setState({
+                loginNum:2
+            })
+        })
     }
     searchJump(value){
         console.log(value)
@@ -88,10 +92,12 @@ class LogoutHeaderNav extends Component {
                                 >
                                         消息
                                 </Menu.Item>
-                                <Menu.Item key="signIn" icon={<LoginOutlined />}>
-                                    <a href="#/login" target="_blank" rel="noopener noreferrer">
+                                <Menu.Item key="signIn" icon={<LoginOutlined />}
+                                    onClick={this.loginClick}
+                                >
+                                    {/* <a href="#/login" target="_blank" rel="noopener noreferrer"> */}
                                         登录
-                                    </a>
+                                    {/* </a> */}
                                 </Menu.Item>
                             </Menu>
                         </div>
