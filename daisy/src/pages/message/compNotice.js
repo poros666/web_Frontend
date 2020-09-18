@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import {Card,Avatar,List} from 'antd'
 
+import CONSTURL from '../../components/community/config';
+import Axios from 'axios';
+
+
 const data = [
     {
       title: 'Ant Design Title 1',
@@ -16,8 +20,16 @@ const data = [
     },
   ];
 
+
 export default class CompNotice extends Component {
-    render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      //Account
+    };
+  }
+  
+  render() {
         return (
             <div className='notice'>
                 <Card id='notice_card' bordered={false}>

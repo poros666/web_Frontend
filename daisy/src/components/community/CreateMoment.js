@@ -52,7 +52,7 @@ const Editor = ({ onChange,onChangeTitle, onSubmit, value,valuetitle }) => (
 
     <Form.Item>
       <Button htmlType="submit" onClick={onSubmit} type="primary">
-        Add Comment
+        创建动态
       </Button>
     </Form.Item>
 

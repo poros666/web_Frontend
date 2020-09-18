@@ -53,8 +53,11 @@ const ReportDetail = (props) => {
   
   const [time, setTime] = useState()
   const [detail, setDetail] = useState()
+  var token = JSON.parse(localStorage.getItem('token')).token
   axios
-  .get(`http://mock-api.com/ZgBbVmgB.mock/api/Report/[${props.id}]`)
+  .get(`/Report/[${props.id}]`, {
+    headers: { Authorization: 'Bearer ' + token },
+  })
   .then((res) => {
     console.log('res1:', res.data)
     setTime(res.data.Time) 

@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { List, Avatar, Form, Radio, Layout } from 'antd';
 import { FireOutlined, LikeOutlined, FieldTimeOutlined, CommentOutlined, BellOutlined } from '@ant-design/icons';
 
+import CONSTURL from '../../components/community/config';
+import Axios from 'axios';
+
+/*
 const data = [
   {
     title: 'Ant Design Title 1',
@@ -16,34 +20,53 @@ const data = [
     title: 'Ant Design Title 4',
   },
 ];
+*/
 
 export default class SearchContentComp extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        kw: this.props.match.params.kw,
-        order: 1
+        kw: window.location.hash.slice(25),
+        order: 1,
+        data: []
       };
     }
 
-onChange = e => {
-    console.log('radio checked', e.target.value);
-    this.setState({
-      value: e.target.value,
-    });
-};
-orderChange(e){
-  console.log('radio checked', e.target.value);
-  this.setState({
-    order: e.target.value
-  })
-  console.log('radio checked', this.state.order);
-}
+    componentDidMount(){
+      var url=CONSTURL.local+CONSTURL.searchComp+this.state.kw+'&OrderBy='+this.state.order
+      Axios.get(url).then((res)=>{
+        var result=res.data
+        /*
+        for(var i=0;i<result.length;i++){
+          result[i].Time=this.deleteLetter(result[i].Time)
+        }
+        */
+        this.setState({data:result})
+        console.log(this.state.data)
+        console.log(res)
+      })
+    }
+
+    onChange = e => {
+        console.log('radio checked', e.target.value);
+        this.setState({
+          value: e.target.value,
+        });
+    };
+
+    orderChange(e){
+      console.log('radio checked', e.target.value);
+      this.setState({
+        order: e.target.value
+      })
+      console.log('radio checked', this.state.order);
+    }
 
     render() {
+        //初始化render数组状态
+        let objArr=this.state.data
 
         return (
-
               <Layout>
                 <Form
                 layout="inline"
@@ -64,14 +87,21 @@ orderChange(e){
 
               <List
                   itemLayout="horizontal"
-                  dataSource={data}
+                  dataSource={objArr}
+                  style={{ marginLeft: '20px' }}
                   renderItem={item => (
                   <List.Item>
                       <List.Item.Meta
-                      avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                      title={
+                        <a href={"#/compPage/id="+item.projectId+'/'}>
+                          {item.name}
+                        </a>
+                      }
+                      description={
+                        "发布时间："+item.startTime+"      "+"结束时间："+item.endTime
+                      }
                       />
+                      {item.introduction}
                   </List.Item>
                   )}
                 />                
@@ -80,4 +110,4 @@ orderChange(e){
         );
     }
 }
-SearchContentComp.contextTypes = {router:()=> React.PropTypes.func.isRequired };
+//SearchContentComp.contextTypes = {router:()=> React.PropTypes.func.isRequired };

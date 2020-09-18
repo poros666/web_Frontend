@@ -39,19 +39,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
           })
           .catch((info) => {
             console.log('Validate Failed:', info)
-            var data = {
-              ProjectId: record.Record.id,
-              Name: info.name,
-              Introduction: info.description,
-              ParticipantsNumber: info.number,
-              StartTime: info.start,
-              EndTime: info.end,
-              Host: info.sponsor,
-            }
-            console.log(data);
-            axios.put('http://mock-api.com/ZgBbVmgB.mock/api/Project/[id]', data).then(res => {
-              console.log(res);
-            })
           })
       }}>
       <Form
@@ -70,7 +57,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
               required: true,
               message: '请输入比赛名称',
             },
-            
           ]}>
           <Input />
         </Form.Item>
@@ -83,7 +69,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
               required: true,
               message: '请输入参与人数',
             },
-            
           ]}>
           <Input />
         </Form.Item>
@@ -124,14 +109,16 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name='description' label='比赛简介' initialValue={record.Record.intro}>
+        <Form.Item
+          name='description'
+          label='比赛简介'
+          initialValue={record.Record.intro}>
           <Input.TextArea
             allowClear={true}
             autoSize={{ minRows: 3, maxRows: 30 }}
           />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
-        
       </Form>
     </Modal>
   )
@@ -145,17 +132,25 @@ const CompDetail = (e) => {
     console.log('Received values of form: ', values)
     //处理数据
     var data = {
+      ProjectId: e.Record.id  ,
       Name: values.name,
       Introduction: values.description,
-      ParticipantsNumber: values.number,
+      ParticipantsNumber: Number(values.number) ,
       StartTime: values.start,
       EndTime: values.end,
-      Host: values.sponsor
+      Host: values.sponsor,
     }
-    console.log("data:",data);
-    axios.post('/api/Project', data).then(res => {
-      console.log(res);
-    })
+    data = JSON.stringify(data)
+    console.log("thhis :", data)
+    console.log("thhis :", typeof data)
+    var token = JSON.parse(localStorage.getItem('token')).token
+    axios
+      .put(`/Project/[${e.Record.id}]`, data, {
+        headers: { Authorization: 'Bearer ' + token },
+      })
+      .then((res) => {
+        console.log(res)
+      })
     setVisible(false)
   }
 
