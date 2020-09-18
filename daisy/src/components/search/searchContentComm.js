@@ -124,7 +124,7 @@ export default class SearchContentComm extends Component {
                       </a>
                     }
                     description={
-                      "发布时间："+item.startTime+"      "+"结束时间："+item.endTime
+                      "发布时间："+item.startTime+"         "+"结束时间："+item.endTime
                     }
                     />
                     {/*item.content*/}
