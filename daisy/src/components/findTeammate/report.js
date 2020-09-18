@@ -33,9 +33,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         form={form}
         layout="vertical"
         name="report_form_in_modal"
-        initialValues={{
-          tags: "not_started",
-        }}
       >
         <Form.Item
           name="time"
@@ -97,7 +94,8 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
         targetId:values.target_id
       }
       console.log(dataSent)
-      if(dataSent.Account.length>0){
+      if(dataSent.account.length>0){
+        console.log(dataSent)
       axios.post('/Report',dataSent)
           .then(response=>{
             console.log(response)

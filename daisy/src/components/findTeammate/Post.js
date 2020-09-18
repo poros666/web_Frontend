@@ -94,11 +94,11 @@ export default class Post extends Component {
                                   groupId:this.state.GroupId
                                 }
                                 console.log(dataSent)
-                                /*axios.post('/Application',dataSent)
+                                axios.post('/Application',dataSent)
                                 .then(response=>{
                                   console.log(response)
                                   window.alert("申请成功")
-                                })*/      
+                                })      
                         }
                         else{
                             window.alert("申请失败")
@@ -122,11 +122,11 @@ export default class Post extends Component {
                                       postId:this.state.PostId
                                     }
                                     console.log(dataSent)
-                                    /*axios.post('/PostStar',dataSent)
+                                    axios.post('/PostStar',dataSent)
                                     .then(response=>{
                                       console.log(response)
                                       window.alert("收藏成功")
-                                    })*/      
+                                    })      
                             }
                             else{
                                 window.alert("收藏失败")
