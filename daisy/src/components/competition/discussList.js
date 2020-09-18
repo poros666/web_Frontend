@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import axios from 'axios'
 import moment from 'moment'
 import Report from './Report'
+import { isLogined } from '../../utils/auth';
 
 
 
@@ -93,7 +94,7 @@ export default class DiscussList extends Component {
                         <div className={'detailDiscussBox'}>
                         <List.Item
                         actions={[
-                          <Report ReportUID={item.discussionId} ReporterUID={JSON.parse(localStorage.getItem('userData')).account} Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
+                          <Report ReportUID={item.discussionId} ReporterUID={isLogined()? JSON.parse(localStorage.getItem('userData')).account:''} Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
                           ]}>
                             <List.Item.Meta
                                 avatar={
