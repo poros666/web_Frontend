@@ -17,13 +17,13 @@ const IconText = ({ icon, text }) => (
 
 const { Header, Footer, Sider, Content } = Layout;
  
-function limitTxt(txt,count) {
-    var str = txt;
-    if(txt.length>count){
-        str = str.substr(0,count) + '...' ;
-    }
-    return str;
-}
+// function limitTxt(txt,count) {
+//     var str = txt;
+//     if(txt.length>count){
+//         str = str.substr(0,count) + '...' ;
+//     }
+//     return str;
+// }
 
 class CommunityShow extends Component {
     constructor(props){
@@ -148,36 +148,33 @@ class CommunityShow extends Component {
                             dataSource={this.state.currentData}
                             renderItem={item => (
                             <List.Item
-                                key={item.MomentId}
+                                key={item.moment.momentId}
                             >
                                 <List.Item.Meta
                                 //帖子的名字和指向的地址，传一个pid，post_id
-                                title={<a href ={"#/Moment/"+item.Title} target="_blank" rel="noopener noreferrer">{limitTxt(item.title,30)}</a>}
+                                title={<a href ={"#/Moment/"+item.moment.momentID} target="_blank" rel="noopener noreferrer">{item.moment.title}</a>}
                                 // description={<p>{item.description}</p>}
                                 description={
                                     <div>
                                         <Row>
                                             <Col span={4} offset={0}>
-                                                {item.Nickname}
+                                                {item.nickname}
                                             </Col>
                                             <Col span={2} offset={10}>
-                                                <IconText icon={StarOutlined}  text={item.StarCount} key="list-vertical-star-o" />
+                                                <IconText icon={StarOutlined}  text={item.starCount} key="list-vertical-star-o" />
                                             </Col>
                                             <Col span={2} offset={1}>
-                                                <IconText icon={LikeOutlined} text={item.LikeCount} key="list-vertical-like-o" />
+                                                <IconText icon={LikeOutlined} text={item.likeCount} key="list-vertical-like-o" />
                                             </Col>
                                             <Col span={2} offset={1}>
-                                                <IconText icon={MessageOutlined} text={item.CommentCount} key="list-vertical-message" />
+                                                <IconText icon={MessageOutlined} text={item.commentCount} key="list-vertical-message" />
                                             </Col>
-                                            {/* <Col span={5} offset={2}>
-                                                {item.time}
-                                            </Col> */}
                                         </Row>
                                     </div>
                                 }
                                 avatar={
                                     <a href={"#/personal"}>
-                                      <Avatar src={item.Icon}></Avatar>
+                                      <Avatar src={item.icon}></Avatar>
                                     </a>
                                   }
 

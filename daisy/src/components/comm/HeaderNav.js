@@ -5,8 +5,7 @@ import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
 import { isLogined } from '../../utils/auth';
-// import logo from './logo2.png'
-// import logo from './logo3.png'
+import LogoutHeaderNav from './LogoutHeaderNav';
 
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -37,13 +36,6 @@ class HeaderNav extends Component {
             isSignOutMenu: prevState.isLogin ? 'none': '',
         }));
     }
-    // state = {
-    //     current: 'mail',
-    //   };
-    // handleClick = e => {
-    //     console.log('click ', e);
-    //     this.setState({ current: e.key });
-    // };
     searchJump(value){
         console.log(value)
         console.log(value.length)
@@ -56,14 +48,9 @@ class HeaderNav extends Component {
         }
     }
     
-    keyDown(e){
-        if(e.keyCode === 13){
-        }
-    }
-
     render() {
-        // const { current } = this.state;
         return (
+            islog?
             <div >
                 <Layout>
                     <Space size={20}  style={{ position: 'fixed', zIndex: 1, width: '100%', background:'white'}}>
@@ -109,14 +96,12 @@ class HeaderNav extends Component {
                                     placeholder="请输入想要搜索的内容"
                                     // onChange={this.inputChange.bind(this)}
                                     onSearch={value => this.searchJump(value)}
-                                    onKeyDown={e=>this.keyDown(e)}
                                     style={{ width: 400 }}
                                 />
                                 </Menu.Item>              
                                 
                                 <SubMenu icon={<UserOutlined />} 
                                 key='personalMenu'
-                                style={{ visibility: this.state.isVisibility}}
                                 title={"我的"}>
                                     
                                     <Menu.Item key="userHome">
@@ -143,10 +128,8 @@ class HeaderNav extends Component {
 
                                 <SubMenu icon={<CommentOutlined />} 
                                 key='messageMenu'
-                                style={{ visibility: this.state.isVisibility,}}
-                                title={"消息"
-                                // <a href ={"#/message"}>{"消息"}</a>
-                                    }>
+                                // style={{ visibility: this.state.isVisibility,}}
+                                title={"消息"}>
                                     <Menu.Item key="systemNotice">
                                         <a href="#/message/system" target="_blank" rel="noopener noreferrer">
                                             系统公告
@@ -178,15 +161,8 @@ class HeaderNav extends Component {
                                         </a>
                                     </Menu.Item>
                                 </SubMenu>
-                                <Menu.Item key="signOut" icon={<LogoutOutlined />}
-                                    style={{ display: this.state.isSignOutMenu,}} >
+                                <Menu.Item key="signOut" icon={<LogoutOutlined />}>
                                         登出
-                                </Menu.Item>
-                                <Menu.Item key="signIn" icon={<LoginOutlined />}
-                                    style={{ display: this.state.isSignInMenu,float:'right'}}>
-                                    <a href="#/login" target="_blank" rel="noopener noreferrer">
-                                        登录
-                                    </a>
                                 </Menu.Item>
                             </Menu>
                         </div>
@@ -197,6 +173,7 @@ class HeaderNav extends Component {
                 <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:23 }}/>
                 <Divider style={{ position: 'fixed', zIndex: 1, width: '100%', top:24 }}/>
             </div>
+            :<LogoutHeaderNav/>
         )
     }
 }
