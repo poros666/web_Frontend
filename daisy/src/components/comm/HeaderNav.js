@@ -9,18 +9,18 @@ import LogoutHeaderNav from './LogoutHeaderNav';
 
 const { SubMenu } = Menu;
 const { Search } = Input;
-var islog;
+// var islog;
 class HeaderNav extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
         //   isLogin: false,
-        //   islog:false,
+          islog:false,
         };
 
         // 这个绑定是必要的，使`this`在回调中起作用
-        // this.handleClick = this.handleClick.bind(this);
+        this.logoutClick = this.logoutClick.bind(this);
     }
     
     // handleClick() {
@@ -30,7 +30,11 @@ class HeaderNav extends Component {
     // }
     logoutClick(){
         clearToken()
-        // this.setState{}
+        setTimeout(()=>{ 
+            this.setState({
+                islog:false,
+            })
+        })
     }
     searchJump(value){
         console.log(value)
@@ -45,10 +49,10 @@ class HeaderNav extends Component {
     }
     
     render() {
-        islog=isLogined()
-        console.log(islog)
+        this.state.islog=isLogined()
+        // console.log(islog)
         return (
-            islog?
+            this.state.islog?
             <div >
                 <Layout>
                     <Space size={20}  style={{ position: 'fixed', zIndex: 1, width: '100%', background:'white'}}>
