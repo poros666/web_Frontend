@@ -86,6 +86,7 @@ export default class ReadMoment extends Component {
       })
       .catch((info) => {
         console.log(info)
+        window.alert("不可重复点赞")
       })
       
     } else {
@@ -107,6 +108,10 @@ export default class ReadMoment extends Component {
         headers: { Authorization: 'Bearer ' + token },
       }).then((res) => {
         window.location.reload()
+      })
+      .catch((info) => {
+        console.log(info)
+        window.alert("不可重复收藏")
       })
     } else {
       window.alert('未登录，跳转至登陆界面')
