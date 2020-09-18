@@ -1,46 +1,7 @@
 import React, { Component } from 'react'
 import {List,Col, Pagination} from 'antd'
 import 'antd/dist/antd.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios'
-const data = [
-    {
-        ID:1,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    },
-    {
-        ID:2,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    },
-    {
-        ID:3,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    },
-    {
-        ID:4,
-        logosrc: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        competitionname: 'ant design part 1',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-    }
-];
 
 
 export default class CompetitionList extends Component {
@@ -57,8 +18,8 @@ export default class CompetitionList extends Component {
   }
 
   componentDidMount() {
-    //getData()
-    this.handleAnchor() //页面刷新时回到刷新前的page
+    this.getData() //页面刷新时回到刷新前的page
+    this.handleAnchor()
   }
 
   handleAnchor() {
@@ -77,7 +38,7 @@ export default class CompetitionList extends Component {
       state.currentData.pop();
     }
     for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
-      state.currentData.push(data[i]);
+      state.currentData.push(this.state.data[i]);
     }
       return{
         currentData:state.currentData,
@@ -86,24 +47,24 @@ export default class CompetitionList extends Component {
    );
  }
  
- /*getData()
+ getData()
  {
-   axios.get('/api/Project')
-   .then(function (response) {
+   axios.get('/Project')
+   .then(response=>{
     console.log(response);
-    this.setstate(
+    this.setState(
         {
-          data:response.data
+          data:response.data,
           total:response.data.length
         }
     )
   })
-  .catch(function (error) {
+  .catch(error=>{
     console.log(error);
-    window.alter("连接出现问题，点击确定跳转回主页")
+    window.alert("连接出现问题，点击确定跳转回主页")
     window.location.hash ='#/home'
   });
- }*/
+ }
 
 
     render() {
@@ -112,20 +73,15 @@ export default class CompetitionList extends Component {
             <List
               itemLayout="vertical"
               size="large"
-              dataSource={this.state.currentData}
+              dataSource={this.state.data}
               renderItem={item => (
                 <List.Item>
-                    <img
-                      width={272}
-                      alt="logo"
-                      src={item.logosrc}
-                    />
                     <List.Item.Meta
-                    title={<a href={"#/compPage/id="+item.ID+'/'}>{item.competitionname}</a>
+                    title={<a href={"#/compPage/id="+item.projectId+'/'}>{item.name}</a>
                     }
                     description={item.description}
                     />
-                    {item.content}
+                    {item.introduction}
                 </List.Item>
               )}
             />

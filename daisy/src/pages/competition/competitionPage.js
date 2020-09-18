@@ -5,7 +5,6 @@ import Footer from '../../components/comm/Footer'
 import Header from '../../components/comm/HeaderNav'
 import Helper from '../../components/comm/FloatHelper'
 
-import CompetitionImage from '../../components/competition/competitionImage'
 import CompetitionName from '../../components/competition/competitionName'
 import FindTeamBotton from '../../components/competition/findTeamButton'
 import CompetitionInformation from '../../components/competition/competitionInformation'
@@ -33,37 +32,35 @@ export default class CompetitionPage extends Component
         }
     }
     
-   /* 
+   
    componentDidMount(){
-       getData()
+       this.getData()
    }
 
 
    getData()
     {
-        var requesturl='/api/Project/'+this.state.compID
+        var requesturl='/Project/'+this.state.compID
         axios.get(requesturl)
-          .then(function (response) {
+        .then(response=>{
             console.log(response);
-            this.setstate(
+            this.setState(
                 {
-                    compName:response.data.Name,
-                    compInformation:response.data.Introduction,
-                    compHost:response.data.Host,
-                    compParticipantsNumber:response.data.ParticipantsNumber,
-                    compStartTime:response.data.StartTime,
-                    compEndTime:response.data.EndTime
-                }
-            )
+                    compName:response.data.name,
+                    compInformation:response.data.introduction,
+                    compHost:response.data.host,
+                    compParticipantsNumber:response.data.participantsNumber,
+                    compStartTime:response.data.startTime,
+                    compEndTime:response.data.endTime
+                })
           })
-          .catch(function (error) {
+          .catch(error=>{
             console.log(error);
-            window.alter("连接出现问题，点击确定跳转回主页")
+            window.alert("连接出现问题，点击确定跳转回主页")
             window.location.hash ='#/home'
-
           });
     }
-    */ 
+     
 
     render() 
     {
@@ -75,10 +72,7 @@ export default class CompetitionPage extends Component
             <div className='CompetionContentBox'>
                 <div className={'CompetitionNameBox'}>
                 <Row gutter={16} align={"middle"} >
-                    <Col span={7} offset={2}>
-                        <CompetitionImage compImgUrl={this.state.compImgUrl}/>
-                    </Col>
-                    <Col span={6}>
+                    <Col span={6} offset={9}>
                         <CompetitionName compName={this.state.compName}/>
                     </Col>
                     <Col span={6}>
