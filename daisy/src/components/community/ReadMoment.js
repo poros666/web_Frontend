@@ -21,6 +21,7 @@ import Loading from './Loading'
 import moment from 'moment'
 import {isLogined} from '../../utils/auth'
 
+Axios.defaults.baseURL='/api'
 
 
 
@@ -66,7 +67,7 @@ export default class ReadMoment extends Component {
 
     getMomentContent(Mid){
         //do something
-        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.GetMoment+Mid
+        var url=CONSTURL.GetMoment+Mid
         Axios.get(url).then((res)=>{
             console.log(res)
             this.setState({data:res.data})
@@ -81,7 +82,7 @@ export default class ReadMoment extends Component {
                 "MomentId":this.state.Mid,
                 "Account":'ddd'
             }
-        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.LikeMoment
+        var url=CONSTURL.LikeMoment
 
         Axios.post(url,json).then((res)=>{
             console.log(res)
@@ -102,7 +103,7 @@ export default class ReadMoment extends Component {
                 "Account":"ddd",
                 "Name":"Moment"
             }
-            var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.StarMoment
+            var url=CONSTURL.StarMoment
             Axios.post(url,json).then((res)=>{
                 console.log(res)
                 window.location.reload()

@@ -14,6 +14,7 @@ import Axios from 'axios'
 import CONSTURL from '../../components/community/config'
 import moment from 'moment-timezone'
 import { isLogined } from '../../utils/auth'
+Axios.defaults.baseURL='/api'
 
 
 
@@ -55,7 +56,7 @@ export default class Moment extends Component {
           "Time":t
         }
         console.log(json)
-        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.CreateComment
+        var url=CONSTURL.CreateComment
         Axios.post(url,json).then((res)=>{
       //    console.log(res.data)
           window.location.reload()

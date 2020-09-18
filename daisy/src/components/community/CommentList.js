@@ -21,7 +21,7 @@ import Axios from 'axios';
 import {isLogined} from '../../utils/auth'
 import unLogined from './Unlogined'
 
-
+Axios.defaults.baseURL='/api'
 
 const { Panel } = Collapse;
 
@@ -52,7 +52,7 @@ export default class CommentList extends Component {
       }
 
       componentDidMount(){
-        var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.GetCommentList+this.state.Pid
+        var url=CONSTURL.GetCommentList+this.state.Pid
         Axios.get(url).then((res)=>{
           var result=res.data
           for(var i=0;i<result.length;i++){
@@ -90,7 +90,7 @@ export default class CommentList extends Component {
           }
           console.log(json)
 
-          var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.CreateReply
+          var url=CONSTURL.CreateReply
           Axios.post(url,json).then((res)=>{
             window.location.reload()
           })

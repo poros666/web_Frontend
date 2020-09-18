@@ -13,6 +13,7 @@ import Axios from 'axios';
 import CONSTURL from '../../components/community/config';
 import '../../style/community/community.css'
 import { isLogined } from '../../utils/auth';
+Axios.defaults.baseURL='/api'
 
 export default class Community extends Component {
     constructor(props){
@@ -48,7 +49,7 @@ export default class Community extends Component {
            }
          
            console.log(json)
-         var url=CONSTURL.local+CONSTURL.hosturl+CONSTURL.CreatMoment
+         var url=CONSTURL.CreatMoment
            
    
          Axios.post(url,json).then((res)=>{
