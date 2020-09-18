@@ -81,6 +81,8 @@ export default class NewCollection extends Component {
         this.setState(o)
     }
     createFile(){
+        var content={Account:this.props.location.state,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:,Privacy:,Type:,}
+        Axios.post('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
         console.log(this.state)
     }
 }

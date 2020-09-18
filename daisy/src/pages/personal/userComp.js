@@ -26,8 +26,10 @@ export default class UserComp extends Component {
     this.state={
       data:compData
     }
+    var token=JSON.parse( localStorage.getItem('token')).token
+
     axios
-      .get()
+      .get('/Subscribe?Account='+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
       .then((res)=>{
         let tmpData=[]
         for(let i=0;i<res.data.length;i++){

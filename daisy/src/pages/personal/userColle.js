@@ -26,6 +26,13 @@ export default class UserColle extends Component {
                 }
             ]
         }
+        Axios.get('/FavouritePakcage/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            res.data//这里是collec数据
+        })
+        .catch(function(error){
+            console.log(error)
+         })
     }
     changePrivacy(fileID){
         let fdata=[...this.state.data]
@@ -54,7 +61,7 @@ export default class UserColle extends Component {
     render() {
         return (
             <div>
-                <Link to='/newColle'>
+                <Link to={{pathname:'/newColle',state:this.props.account}}>
                     <Button
                     type="text" 
                     size='large'

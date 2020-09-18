@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Card,List,Avatar} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 const teamData = [
     {
@@ -74,6 +75,14 @@ export default class UserTeam extends Component {
         this.state={
           data:teamData
         }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/Usergroups/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            res.data//这里是team数据
+        })
+        .catch(function(error){
+            console.log(error)
+         })
     }
 
     render() {
@@ -88,9 +97,10 @@ export default class UserTeam extends Component {
                         <Card
                         title={item.teamname}
                         extra={<div>
-                                <a href={"#/editteam/"+item.teamID}>
+                                <Link to={{pathname:"#/editteam/"+item.teamID,
+                                            query:{/*这里放比赛id队伍id名字和简介*/}}}>
                                     <EditOutlined/>
-                                    </a>
+                                    </Link>
                                   </div>
                         }>
                             <p>

@@ -35,6 +35,29 @@ export default class UserPost extends Component {
             discussionData:Data,
             postData:Data
         }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/Users/Post/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            res.data//这里是post数据
+        })
+        .catch(function(error){
+            console.log(error)
+         })
+         Axios.get('/Users/Moment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+         .then((res)=>{
+             res.data//这里是moment数据
+         })
+         .catch(function(error){
+             console.log(error)
+          })
+          Axios.get('/Users/Comment/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+         .then((res)=>{
+             res.data//这里是Discuss数据
+         })
+         .catch(function(error){
+             console.log(error)
+          })
+
     }
     render() {
         return (

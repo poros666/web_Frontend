@@ -41,6 +41,7 @@ export default class Colletion extends Component {
             data:colleData,
             showInput:false
         }
+        
     }
     deleteColle(ID){
         let fdata=[...this.state.data]

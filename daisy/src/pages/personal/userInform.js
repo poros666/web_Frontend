@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Card,Divider, Descriptions} from 'antd'
+import Axios from 'axios'
 
 export default class UserInform extends Component {
     constructor(props){
@@ -17,6 +18,14 @@ export default class UserInform extends Component {
             intro:'请在这里这里阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴一大串', 
             icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
         }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/Users/'+this.props.account,{headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            res.data//这里是数据
+        })
+        .catch(function(error){
+            console.log(error)
+         })
     }
     render() {
         return (

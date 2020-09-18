@@ -10,26 +10,17 @@ import Axios from 'axios'
 
 const { TextArea } = Input;
 
-
+var data=JSON.parse(localStorage.getItem("userData"))
+//当前登录的用户数据
 export default class EditInform extends Component {
     constructor(props){
         super(props)
         this.inputChange=this.inputChange.bind(this)
         this.saveEdit=this.saveEdit.bind(this)
         this.state={
-            nameVl:'名字',
-            nickname:'同济大学今天放暑假了吗',
-            phone_num:12345677654,
-            email_address:'12345677654@136.com',
-            sex:'男',
-            stuNum:1850000,
-            school:'同济大学',
-            major:'软件学院',
-            grade:'2018级',
-            intro:'请在这里这里阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴一大串',
-            icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+            data:JSON.parse(localStorage.getItem("userData"))
+            //当前登录的用户数据
         }
-        let informData=getUserInfor()
         //给this.state赋值
     }
 
@@ -171,7 +162,7 @@ export default class EditInform extends Component {
                         <div className='saveButtons'>
                             <Button 
                             type='primary'
-                            onClick={this.saveEdit}
+                            onClick={()=>{this.saveEdit}}
                             >
                                 保存
                             </Button>
@@ -186,8 +177,9 @@ export default class EditInform extends Component {
         )
     }
     saveEdit(){
-        
+        var token=JSON.parse( localStorage.getItem('token')).token
 
+        Axios.put("/Users/"+this.data.account,this.state.data,{headers: { "Authorization": 'Bearer ' +token }})
         console.log(this.state)
     }
     inputChange(e){

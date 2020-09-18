@@ -16,7 +16,8 @@ export default class PersonalSpace extends Component {
   constructor(props){
     super(props)
     this.state={
-      role:1,       //role=1表示本人视角，role=0表示其他人视角
+      role:isLogined()?(this.props.match.params.account===JSON.parse(localStorage.getItem('userData')).account?1:0):0,
+      account:this.props.match.params.account,       //role=1表示本人视角，role=0表示其他人视角
     }
   }
   
@@ -33,7 +34,7 @@ export default class PersonalSpace extends Component {
             <div>
             {
               personalRoutes.map((item,index)=>{
-                return (<Route key={index} path={item.path} component={item.component}/>)
+                return (<Route key={index} path={item.path} component={item.component} account={this.state.account}/>)
               })
             }
             </div>
