@@ -14,17 +14,6 @@ import { searchRoutes } from '../../routes/index'
 const { Search } = Input;
 
 export default class SearchAssort extends Component {
-<<<<<<< HEAD
-    constructor(props){
-      super(props);
-      this.State={
-          searchWord:'',
-      }
-    }
-    state = {
-      current: 'mail',
-    };
-=======
 
     constructor(props) {
       super(props)
@@ -34,7 +23,6 @@ export default class SearchAssort extends Component {
         type: this.props.match.params.type
       }
     }
->>>>>>> zhw
 
     inputChange(e){
       this.setState({
@@ -124,13 +112,8 @@ export default class SearchAssort extends Component {
           >
           {
             searchRoutes.map((item,index)=>{
-<<<<<<< HEAD
-              console.log(item.path)
-              return (<Route key={index} path={item.path} component={item.component}/>)
-=======
               //console.log(item.path+this.state.kw)
               return (<Route key={index} path={item.path+this.state.kw} component={item.component}/>)
->>>>>>> zhw
             })
           }
           {/* 对应每个组件的内容 */}
