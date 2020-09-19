@@ -3,11 +3,7 @@ import 'antd/dist/antd.css';
 import { Card,Avatar,Select,Button,Input,Form} from 'antd';
 import '../../style/comm/comm.css'
 import PostPageReport from '../findTeammate/report'
-<<<<<<< HEAD
-// import StarPost from '../findTeammate/StarPost'
-=======
 //import StarPost from '../findTeammate/StarPost'
->>>>>>> 85c32c05a24e7dbcfbe281f12f569edff95b01d4
 import moment from 'moment'
 import axios from 'axios'
 import Axios from 'axios'

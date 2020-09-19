@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
-import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
+import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, SearchOutlined,LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
 import { isLogined,clearToken } from '../../utils/auth';
 import LogoutHeaderNav from './LogoutHeaderNav';
@@ -32,19 +32,19 @@ class HeaderNav extends Component {
             })
         })
     }
-    searchJump(value){
-        console.log(value)
-        console.log(value.length)
-        var w=window.open('about:blank')
-        if(value.length === 0){
-            // window.open="#/search"
-            w.location.href="#/search"
-        }
-        else{
-            // var w=window.open('about:blank')
-            w.location.href="#/searchResult/type=comp?"+String(value)
-        }
-    }
+    // searchJump(value){
+    //     console.log(value)
+    //     console.log(value.length)
+    //     var w=window.open('about:blank')
+    //     if(value.length === 0){
+    //         // window.open="#/search"
+    //         w.location.href="#/search"
+    //     }
+    //     else{
+    //         // var w=window.open('about:blank')
+    //         w.location.href="#/searchResult/type=comp?"+String(value)
+    //     }
+    // }
     
     render() {
         this.state.islog=isLogined()
@@ -91,13 +91,16 @@ class HeaderNav extends Component {
                                     </a>
                                 </Menu.Item>
 
-                                <Menu.Item>
-                                <Search 
+                                <Menu.Item  key="searchMenu" icon={<SearchOutlined />}>
+                                    <a href="#/search" target="_blank" rel="noopener noreferrer">
+                                        搜索
+                                    </a>
+                                {/* <Search 
                                     placeholder="请输入想要搜索的内容"
                                     // onChange={this.inputChange.bind(this)}
                                     onSearch={value => this.searchJump(value)}
                                     style={{ width: 400 }}
-                                />
+                                /> */}
                                 </Menu.Item>              
                                 
                                 <SubMenu icon={<UserOutlined />} 
@@ -105,22 +108,22 @@ class HeaderNav extends Component {
                                 title={"我的"}>
                                     
                                     <Menu.Item key="userHome">
-                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)} target="_blank">
+                                        <a href={"#/personal/account="+JSON.parse(localStorage.getItem('userData'))?null:JSON.parse(localStorage.getItem('userData')).account} target="_blank" rel="noopener noreferrer">
                                             个人主页
                                         </a>
                                     </Menu.Item>
                                     <Menu.Item key="userTeam">
-                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)+"/team"} target="_blank" rel="noopener noreferrer">
+                                        <a href="#/personal/team" target="_blank" rel="noopener noreferrer">
                                             我的队伍
                                         </a>
                                         </Menu.Item>
                                     <Menu.Item key="userComp">
-                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)+"/comp"} target="_blank" rel="noopener noreferrer">
+                                        <a href="#/personal/comp" target="_blank" rel="noopener noreferrer">
                                             我的比赛
                                         </a>
                                     </Menu.Item>
                                     <Menu.Item key="userCollege">
-                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)+"/colle"} target="_blank" rel="noopener noreferrer">
+                                        <a href="#/personal/colle" target="_blank" rel="noopener noreferrer">
                                             我的收藏
                                         </a>
                                     </Menu.Item>

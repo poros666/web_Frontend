@@ -1,6 +1,7 @@
 .CompetitionPage{
     min-height: 100%;
-    background: linear-gradient(#FFFAD0,#ffffff);
+    /* background: linear-gradient(#FFFAD0,#ffffff); */
+    background: #ececec;;
 }
 .CompetionContentBox
 {

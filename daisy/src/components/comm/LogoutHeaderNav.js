@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 // import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
-import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
+import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, SearchOutlined,LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
-import { isLogined } from '../../utils/auth';
-import { withRouter } from 'react-router-dom'
+import { isLogined,clearToken } from '../../utils/auth';
+import {Link} from 'react-router-dom'
 
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -20,23 +20,24 @@ class LogoutHeaderNav extends Component {
         this.loginClick = this.loginClick.bind(this);
     }
     loginClick(){
-        window.open("#/login")
+        window.location.href='#/login'
+        // window.open("#/login")
     }
-    searchJump(value){
-        console.log(value)
-        console.log(value.length)
-        // var website=this.props.location.pathname
-        console.log(this.props)
-        var w=window.open('about:blank')
-        if(value.length === 0){
-            // window.open="#/search"
-            w.location.href="#/search"
-        }
-        else{
-            // var w=window.open('about:blank')
-            w.location.href="#/searchResult/type=comp?"+String(value)
-        }
-    }
+    // searchJump(value){
+    //     console.log(value)
+    //     console.log(value.length)
+    //     // var website=this.props.location.pathname
+    //     console.log(this.props)
+    //     var w=window.open('about:blank')
+    //     if(value.length === 0){
+    //         // window.open="#/search"
+    //         w.location.href="#/search"
+    //     }
+    //     else{
+    //         // var w=window.open('about:blank')
+    //         w.location.href="#/searchResult/type=comp?"+String(value)
+    //     }
+    // }
 
     render() {
         return (
@@ -72,14 +73,17 @@ class LogoutHeaderNav extends Component {
                                     </a>
                                 </Menu.Item>
 
-                                <Menu.Item>
-                                <Search 
+                                <Menu.Item  key="searchMenu" icon={<SearchOutlined />}>
+                                    <a href="#/search" target="_blank" rel="noopener noreferrer">
+                                        搜索
+                                    </a>
+                                {/* <Search 
                                     placeholder="请输入想要搜索的内容"
                                     // onChange={this.inputChange.bind(this)}
                                     onSearch={value => this.searchJump(value)}
                                     style={{ width: 400 }}
-                                />
-                                </Menu.Item>              
+                                /> */}
+                                </Menu.Item>                  
                                 
                                 <Menu.Item  icon={<LogoutOutlined />}
                                      style={{ visibility: 'hidden'}}
@@ -112,4 +116,4 @@ class LogoutHeaderNav extends Component {
     }
 }
 
-export default withRouter(LogoutHeaderNav);
+export default LogoutHeaderNav;
