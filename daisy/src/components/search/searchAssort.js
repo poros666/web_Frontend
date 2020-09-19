@@ -23,14 +23,12 @@ export default class SearchAssort extends Component {
         //type: this.props.match.params.type
         type: this.props.type
       }
-      console.log(this.state.kw)
     }
-
+    
     inputChange(e){
       this.setState({
         kw: e.target.value
       })
-      console.log(this.state.kw)
     }
 
     handleClick(e){
@@ -42,7 +40,7 @@ export default class SearchAssort extends Component {
     };
 
     searchJump(value){
-        //console.log(value)
+        console.log(value)
         window.location.hash=`#/searchResult/type=${this.state.type}/${this.state.kw}`
     }
 /*

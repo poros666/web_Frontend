@@ -120,11 +120,11 @@ export default class SearchContentComm extends Component {
                     <List.Item.Meta
                     title={
                       <a href={'#/Moment/'+item.momentId}>
-                        {item.name}
+                        {item.moment.title}
                       </a>
                     }
                     description={
-                      "发布时间："+item.startTime+"         "+"结束时间："+item.endTime
+                      "发布时间："+item.moment.time
                     }
                     />
                     {/*item.content*/}

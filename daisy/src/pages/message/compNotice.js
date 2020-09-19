@@ -25,13 +25,14 @@ export default class CompNotice extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      account:'',
+      account:this.state.match.params.account,
       data:[]
     };
   }
   
   componentDidMount(){
     if(isLogined()){
+      /*
       var tempAccount = JSON.parse(localStorage.userData).account;
       this.state.account = tempAccount;
       var url=CONSTURL.local+CONSTURL.getCompNotice+this.state.account
@@ -40,6 +41,19 @@ export default class CompNotice extends Component {
         this.setState({data:result})
         //console.log(this.state.data)
         //console.log(res)
+      })
+      */
+      var token = JSON.parse(localStorage.getItem('token')).token;
+      //var tempAccount = JSON.parse(localStorage.userData).account;
+      //this.state.account = tempAccount;
+      Axios
+        .get('/Notification/' + this.state.account,  {
+        headers: { "Authorization": 'Bearer ' + token },
+      })
+      .then((res) => {
+        console.log(res)
+        var result=res.data
+        this.setState({data:result})
       })
     }
   }

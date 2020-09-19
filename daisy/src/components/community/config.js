@@ -27,7 +27,7 @@ const CONSTURL={
     //回复我的
     getApply:'/api/Application?ProjectId=[]&GroupId=[]',
     //获取队伍申请列表（组队申请）
-    getSystemNotice:'/Notice/',
+    getSystemNotice:'/Notice',
     //系统公告
 
     //私信未做

@@ -4,6 +4,18 @@ import {Card,Tabs,Button} from 'antd'
 const {TabPane}=Tabs;
 
 export default class Apply extends Component {
+
+    constructor(props) {
+        
+        super(props)
+        this.state = {
+          myAccount:"",
+          myProjectID:"",
+          myGroupID:"",
+          myResult:""
+        }
+    }
+
     render() {
         return (
             <div>

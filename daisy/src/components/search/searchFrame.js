@@ -19,7 +19,6 @@ export default class SearchFrame extends Component {
           kw: this.props.kw,
           type: "comp"
         }
-
     }
 
     inputChange(e){
@@ -28,17 +27,18 @@ export default class SearchFrame extends Component {
         })
         console.log(this.state.kw)
     }
-
+/*
     keyDown(e){
         if(e.keyCode === 13){
         }
     }
-
+*/
     searchJump(value){
-        console.log(1)
         console.log(this.state.kw)
+        //console.log(this.state.type)
         //console.log(value)
         //var w=window.open('about:blank')
+        console.log(this.state.kw.type)
         window.location.hash=`#/searchResult/type=${this.state.type}/${this.state.kw}`
         //console.log(this.state.type)
     }
@@ -69,7 +69,7 @@ export default class SearchFrame extends Component {
 
         return (
             <div style={{ marginLeft: '22%' }}>
-                <Select defaultValue="比赛" initialValues="比赛" style={{ width: '80px' }} onChange={this.orderChange.bind(this)}>
+                <Select defaultValue="比赛" style={{ width: '80px' }} onChange={this.orderChange.bind(this)}>
                 <Option value="比赛">比赛</Option>
                 <Option value="社区">社区</Option>
                 <Option value="用户">用户</Option>
@@ -78,11 +78,10 @@ export default class SearchFrame extends Component {
                 <Search
                     placeholder="搜搜看你感兴趣的内容吧～"                  
                     style={{ width: '65%'}}
-
+                    onChange={this.inputChange.bind(this)}
                     value={this.state.kw}
                     onSearch={value => this.searchJump(value)}
                     //onKeyDown={e=>this.keyDown(e)}
-                    onChange={this.inputChange.bind(this)}
                 />
             </div>
         )

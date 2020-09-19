@@ -26,14 +26,28 @@ export default class SystemNotice extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //account:'',
       data: []
     };
   } 
 
   componentDidMount(){
-    if(isLogined()){
+    if(isLogined()){ 
+
       //var tempAccount = JSON.parse(localStorage.userData).account;
       //this.state.account = tempAccount;
+
+      var token = JSON.parse(localStorage.getItem('token')).token;
+      Axios
+        .put('/Notice/', {
+        headers: { "Authorization": 'Bearer ' + token },
+      })
+      .then((res) => {
+        console.log(res)
+        var result=res.data
+        this.setState({data:result})
+      })
+      /*
       var url=CONSTURL.local+CONSTURL.getSystemNotice
       Axios.get(url).then((res)=>{
         var result=res.data
@@ -41,6 +55,7 @@ export default class SystemNotice extends Component {
         //console.log(this.state.data)
         //console.log(res)
       })
+      */
     }
   }
 
