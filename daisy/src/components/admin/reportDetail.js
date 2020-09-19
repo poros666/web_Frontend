@@ -33,7 +33,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,time,detail,id }) =>
             onCreate(values)
           })
           .catch((info) => {
-            console.log("Validate Failed:", info)
+            console.log("Validate F ailed:", info)
           })
       }}
     >
