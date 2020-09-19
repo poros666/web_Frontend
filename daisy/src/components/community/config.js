@@ -29,7 +29,7 @@ const CONSTURL={
 
     getCompNotice:'/Notification/',
     //比赛通知
-    getTeamMessage:'/api/User/GroupMessage/',
+    getTeamMessage:'/User/GroupMessage/',
     //队伍消息
     getReply:'/User/Reply/',
     //回复我的
