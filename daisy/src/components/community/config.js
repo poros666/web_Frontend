@@ -1,6 +1,14 @@
+
 const CONSTURL={
   //  hosturl:'http://fwdarling2020.cn:8080',
   //  hosturl:'/api',
+    UserAva1:'../../img/avatar/boss.jpg',
+    UserAva2:'../../img/avatar/strange.jpg',
+    UserAva3:'../../img/avatar/bear.jpg',
+    UserAva4:'../../img/avatar/eeyore.jpg',
+    UserAva5:'../../img/avatar/tigger.jpg',
+
+
     GetMomentList:'/Moment?OrderBy=',
     GetMomentCount:'/Moment/count',
     CreatMoment:'/Moment',

@@ -86,7 +86,9 @@ export default class ToComment extends React.Component {
         <Comment
           avatar={
             <a href='#/personal'>
-              {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
+              {/* {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>} */}
+              {islog?<Avatar src={this.state.ava}/>:<Unlogined/>}
+
             </a>
           }
           content={

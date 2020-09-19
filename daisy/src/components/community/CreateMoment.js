@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import { isLogined } from '../../utils/auth';
 import Unlogined from './Unlogined'
+import CONSTURL from './config';
 
 const { TextArea } = Input;
 
@@ -74,7 +75,8 @@ export default class CreateMoment extends React.Component {
       value: '',
       valuetitle:'',
       avatarSrc:tempSrc,
-      avatarAlt:tempAlt
+      avatarAlt:tempAlt,
+      ava:CONSTURL.UserAva1
     }
   }
 
@@ -140,8 +142,13 @@ export default class CreateMoment extends React.Component {
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           avatar={
-            <a href={"#/personal/account="+JSON.parse(localStorage.userData).account.toString()}>
-              {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
+            <a href={"#/personal"}>
+
+            {/* <a href={"#/personal/account="+JSON.parse(localStorage.userData).account.toString()}> */}
+         {/*      {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>} */}
+
+            {islog?<Avatar src={this.state.ava}/>:<Unlogined/>}
+
             </a>
           }
           content={
