@@ -13,14 +13,18 @@ class LogoutHeaderNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loginNum:1
+            // loginNum:1
         };
         // 这个绑定是必要的，使`this`在回调中起作用
-        // this.loginClick = this.loginClick.bind(this);
+        this.loginClick = this.loginClick.bind(this);
     }
     loginClick(){
         window.open("#/login")
-        // this.props.logoutClick(isLogined())
+        setTimeout(()=>{ 
+            this.setState({
+                islog:isLogined(),
+            })
+        })
     }
     searchJump(value){
         console.log(value)

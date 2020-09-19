@@ -22,12 +22,7 @@ class HeaderNav extends Component {
         // 这个绑定是必要的，使`this`在回调中起作用
         this.logoutClick = this.logoutClick.bind(this);
     }
-    
-    // handleClick() {
-    //     this.setState(prevState => ({
-    //         // isLogin: !prevState.isLogin,
-    //     }));
-    // }
+
     logoutClick(){
         clearToken()
         setTimeout(()=>{ 
