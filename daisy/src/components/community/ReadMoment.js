@@ -125,7 +125,7 @@ export default class ReadMoment extends Component {
     ) : (
       <div className='site-card-border-less-wrapper'>
         <Card
-          title={this.state.data.title}
+          title={this.state.data.moment.title}
           bordered={false}
           extra={
             //之后可以用button之类的包装一下做成超链接
@@ -142,7 +142,7 @@ export default class ReadMoment extends Component {
             <Button type='text' onClick={this.starMoment.bind(this)}>
               <IconText
                 icon={StarOutlined}
-                text={this.state.data.StarCount}
+                text={this.state.data.starCount}
                 key='list-vertical-star-o'
               />
             </Button>,
@@ -150,7 +150,7 @@ export default class ReadMoment extends Component {
             <Button type='text' onClick={this.likeMoment.bind(this)}>
               <IconText
                 icon={LikeOutlined}
-                text={this.state.data.LikeCount}
+                text={this.state.data.likeCount}
                 key='list-vertical-like-o'
               />
             </Button>,
@@ -158,7 +158,7 @@ export default class ReadMoment extends Component {
             <Button type='text'>
               <IconText
                 icon={CommentOutlined}
-                text={this.state.data.CommentCount}
+                text={this.state.data.commentCount}
                 key='list-vertical-share-o'
               />
             </Button>,
@@ -173,7 +173,7 @@ export default class ReadMoment extends Component {
           {
             //下面是帖子的内容部分
           }
-          <p>{this.state.data.content}</p>
+          <p>{this.state.data.moment.content}</p>
         </Card>
         <br />
       </div>

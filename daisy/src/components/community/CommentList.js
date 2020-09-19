@@ -85,16 +85,28 @@ export default class CommentList extends Component {
 
 
 
-      createReply(content){
+      createReply(content,isReply){
         if(isLogined()){
+
           var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
-          var json=
-          {
-            CommentId:Number( this.state.Pid),
-            Account:JSON.parse(localStorage.userData).account.toString(),
-            Content:content,
-            Time:t
+          if(isReply!=-1){
+            var json=
+            {
+              CommentId:isReply,
+              Account:JSON.parse(localStorage.userData).account.toString(),
+              Content:content,
+              Time:t
+            }
+          }else{
+            var json=
+            {
+              CommentId:Number(this.state.Pid),
+              Account:JSON.parse(localStorage.userData).account.toString(),
+              Content:content,
+              Time:t
+            }
           }
+
           console.log("to reply data",json)
 
           var url=CONSTURL.CreateReply
@@ -154,6 +166,7 @@ export default class CommentList extends Component {
             <div id="firstLayer">
                 {
                   objArr.map((item,index)=>(
+
                     <li style={{listStyle:"none"}} key={item+index}>
                       <Comment
                       className='middle'
@@ -175,7 +188,9 @@ export default class CommentList extends Component {
                               />
                             </>,
                             <span>
-                              {this.state.renderAdComponent[index] ? <ToComment  className="childComment" createComment={this.createReply}/> : null}
+                              {this.state.renderAdComponent[index] ?
+                               <ToComment  className="childComment" createComment={this.createReply} isReply={item.commentId}/> : 
+                               null}
                             </span>,
                             
                           ]}
