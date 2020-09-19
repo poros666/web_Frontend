@@ -6,9 +6,9 @@ import { Divider } from 'antd';
 import axios from 'axios'
 
 let ProjctId;
-let PostPerPage=4;
+let PostPerPage=10;
 axios.defaults.baseURL='/api';
-
+var image
 export default class CommunityContent extends Component {
 
   constructor(props){
@@ -23,7 +23,7 @@ export default class CommunityContent extends Component {
      this.onPageChange=this.onPageChange.bind(this);
      axios.get('/Post?ProjctId='+ProjctId)
      .then(response=>{
-       console.log(response)
+       //console.log(response)
        this.setState({
          total:Math.ceil(response.data.length)
         });
@@ -48,7 +48,7 @@ export default class CommunityContent extends Component {
     })
     axios.get('/Post?ProjctId='+ProjctId)
     .then(response=>{
-      console.log(response)
+
       this.setState((state)=>{
           for(let i=0;i<PostPerPage;i++){
             state.currentData.pop();
@@ -56,6 +56,12 @@ export default class CommunityContent extends Component {
           if((page-1)*PostPerPage+PostPerPage<=response.data.length){
             for(let i=(page-1)*PostPerPage;i<(page-1)*PostPerPage+PostPerPage;i++){
               state.currentData.push(response.data[i]);
+              if(state.currentData[i].icon>0){
+              axios.get(state.currentData[i].icon)
+              .then(res=>{
+                state.currentData.map((item,key)=>key==i?{item,icon:res.data}:item)
+              })
+            }
             }
           }
           else{
@@ -80,8 +86,18 @@ export default class CommunityContent extends Component {
    });
   })
  }
-  
+
+ getimag(url)
+ {
+  axios.get(url)
+  .then(res=>{
+    image=res.data
+  })
+  return image
+ }
+
     render() {
+      console.log(this.state.currentData)
         const agriculturalListData = this.state.currentData;
         return (
             <div style={{padding:'0 50px'}}>
@@ -96,7 +112,7 @@ export default class CommunityContent extends Component {
                                  avatar={
                                   //头像的来源和指向的地址
                                   <a href={"#/personal"}>
-                                    <Avatar src={item.icon}></Avatar>
+                                    <Avatar src={this.getimag(item.icon)}></Avatar>
                                   </a>
                                 }
                                 title={<p>{item.nickname}的组队帖</p>}

@@ -59,7 +59,7 @@ export default class EditTeam extends Component{
             introduction:this.state.Introduction
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.put('/Usergroups',content,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.put('/Usergroup',content,{headers: { "Authorization": 'Bearer ' +token }})
         .then(
             window.alert("修改成功")
         )

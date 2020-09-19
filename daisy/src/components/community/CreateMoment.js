@@ -6,7 +6,8 @@ import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import { isLogined } from '../../utils/auth';
 import Unlogined from './Unlogined'
-
+import CONSTURL from './config';
+import Axios from 'axios'
 const { TextArea } = Input;
 
 const CommentList = ({ comments }) => (
@@ -74,11 +75,18 @@ export default class CreateMoment extends React.Component {
       value: '',
       valuetitle:'',
       avatarSrc:tempSrc,
-      avatarAlt:tempAlt
+      avatarAlt:tempAlt,
+      ava:CONSTURL.UserAva1
     }
   }
 
-  
+  componentDidMount(){
+    if(isLogined()){
+      Axios.get(JSON.parse(localStorage.userData).icon.toString()).then((res)=>{
+        this.setState({ava:res.data})
+      })
+    }
+  }
 
 
 
@@ -127,21 +135,18 @@ export default class CreateMoment extends React.Component {
     });
   };
 
-
-
   render() {
     const { comments, submitting, value,valuetitle } = this.state;
-    
-
     var islog=isLogined()
-
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           avatar={
             <a href={"#/personal"}>
-              {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
+            {/* <a href={"#/personal/account="+JSON.parse(localStorage.userData).account.toString()}> */}
+            {/*      {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>} */}
+            {islog?<Avatar src={this.state.ava}/>:<Unlogined/>}
             </a>
           }
           content={

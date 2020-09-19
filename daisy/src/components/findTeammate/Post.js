@@ -3,9 +3,14 @@ import 'antd/dist/antd.css';
 import { Card,Avatar,Select,Button,Input,Form} from 'antd';
 import '../../style/comm/comm.css'
 import PostPageReport from '../findTeammate/report'
+<<<<<<< HEAD
 // import StarPost from '../findTeammate/StarPost'
+=======
+//import StarPost from '../findTeammate/StarPost'
+>>>>>>> 85c32c05a24e7dbcfbe281f12f569edff95b01d4
 import moment from 'moment'
 import axios from 'axios'
+import Axios from 'axios'
 import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
@@ -20,7 +25,12 @@ const Editor = ({onChange}) => (
 
 export default class Post extends Component {
     
+    
     constructor(props){
+        if(!isLogined()){
+            window.alert('连接出错，点击确定返回主页.')
+            window.location.hash ='#/home'
+        }
         super(props)
 
         var groupId=this.props.groupId
@@ -29,7 +39,7 @@ export default class Post extends Component {
         
         this.state={
             NickName:"",
-            Icon:"strange",
+            Icon:"",
             Content:"",
             PostTime:"",
             Apply:'',
@@ -38,10 +48,6 @@ export default class Post extends Component {
             PostId:parseInt(postId),
             ProjctId:parseInt(MatchId),
         }
-
-        console.log(this.state)
-
-        console.log(userdata);
         
         axios.get('/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         .then(response=>{
@@ -52,9 +58,13 @@ export default class Post extends Component {
                 PostTime:response.data.postTime,
                 Account:response.data.leaderAccount
             })
-            if(response.data.Icon!=null){
-                this.setState({
-                    Icon:response.data.Icon
+            if(response.data.icon!=null){
+                axios.get(response.data.icon)
+                .then(res=>{
+                    this.setState({
+                        Icon:res.data
+                    })
+
                 })
             }
         })
@@ -70,6 +80,7 @@ export default class Post extends Component {
       };
     
     render() {
+        console.log(this.state.Icon)
         return (
             <div style={{backgroundColor:'whitesmoke'}}>
                 <Card    
@@ -77,11 +88,11 @@ export default class Post extends Component {
                         //这里的头像要动态生成
                         <div align="right">
 
-                        <a href={"#/personal"}>
+                        <a href={"#/personal/Account="+this.state.Account}>
                             <Avatar src={this.state.Icon}></Avatar>
                         </a>
                         <br/>                
-                        <a href={"#/personal"}>{this.state.NickName}</a>
+                        <a href={"#/personal/Account="+this.state.Account}>{this.state.NickName}</a>
                         </div>
                         }
                     actions={[
@@ -117,16 +128,16 @@ export default class Post extends Component {
                             window.location.hash ='#/login'
                         }
                     }}><p>申请进入小队</p></Button>,
-                    // <StarPost 
-                    // userdata={userdata} 
-                    // ProjctId={this.state.ProjctId} 
-                    // GroupId={this.state.GroupId} 
-                    // PostId={this.state.PostId}/>,
+                    /*<StarPost 
+                    userdata={userdata} 
+                    ProjctId={this.state.ProjctId} 
+                    GroupId={this.state.GroupId} 
+                    PostId={this.state.PostId}/>,
                     <PostPageReport 
                     ReportUID={this.state.PostId}
                     ReporterUID={userdata.account}
                     Time={moment().format("YYYY-MM-DDTHH:mm:ssC")}
-                    />
+                    />*/
                     ]}      
                 >
                     <div>

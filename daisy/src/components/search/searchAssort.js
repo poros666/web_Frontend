@@ -43,7 +43,7 @@ export default class SearchAssort extends Component {
 
     searchJump(value){
         //console.log(value)
-        window.location.hash=`#/searchResult/type=${this.state.type}?${this.state.kw}`
+        window.location.hash=`#/searchResult/type=${this.state.type}/${this.state.kw}`
     }
 /*
     keyDown(e){
@@ -86,13 +86,13 @@ export default class SearchAssort extends Component {
               })
           */}
             <Menu.Item key="comp">
-            <Link to={'/searchResult/type=comp?'+this.state.kw } >比赛</Link>
+            <Link to={'/searchResult/type=comp/'+this.state.kw } >比赛</Link>
             </Menu.Item>
             <Menu.Item key="comm">
-            <Link to={ '/searchResult/type=comm?'+this.state.kw } >社区</Link>
+            <Link to={ '/searchResult/type=comm/'+this.state.kw } >社区</Link>
             </Menu.Item>
             <Menu.Item key="user">
-            <Link to={ '/searchResult/type=user?'+this.state.kw } >用户</Link>
+            <Link to={ '/searchResult/type=user/'+this.state.kw } >用户</Link>
             </Menu.Item>
           {/* 头部导航栏菜单内容 */}
           </Menu>

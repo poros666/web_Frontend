@@ -14,6 +14,7 @@ import Axios from 'axios'
 import CONSTURL from '../../components/community/config'
 import moment from 'moment-timezone'
 import { isLogined } from '../../utils/auth'
+import Reply from '../../components/community/Reply'
 
 
 
@@ -43,18 +44,29 @@ export default class Moment extends Component {
 
     // }
 
-    createComment(content){
+    createComment(content,isReply){
       if(isLogined()){
         var t=moment().format('YYYY-MM-DDTHH:mm:ssC')
         console.log("sdasd", JSON.parse(localStorage.userData))
-        var json=
-        {
-          "MomentId": Number(this.state.Pid) ,
-          "Account":JSON.parse(localStorage.userData).account.toString(),
-          "Content":content,
-          "Time":t
+        if(isReply!=-1){
+          var json=
+          {
+            "MomentId": isReply ,
+            "Account":JSON.parse(localStorage.userData).account.toString(),
+            "Content":content,
+            "Time":t
+          }
+        }else{
+          var json=
+          {
+            "MomentId": Number(this.state.Pid) ,
+            "Account":JSON.parse(localStorage.userData).account.toString(),
+            "Content":content,
+            "Time":t
+          }
         }
-        console.log(json)
+
+        console.log("reply final data",json)
         var url=CONSTURL.CreateComment
         var token = JSON.parse(localStorage.getItem('token')).token
         Axios.post(url,json, {
@@ -90,7 +102,7 @@ export default class Moment extends Component {
 
                         <ReadMoment momentId={Pid}/>
 
-                        <ToComment createComment={this.createComment}/>
+                        <ToComment createComment={this.createComment} isReply={-1}/>
 
                         <CommentList 
                           momentId={Pid} 

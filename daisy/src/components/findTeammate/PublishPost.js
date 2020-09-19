@@ -40,7 +40,8 @@ export default class CreatePost extends React.Component {
         Content:'',
         matchName:'',
         matchMaxMemberNum:0,
-        Name:''
+        Name:'',
+        Icon:''
       }
 
       console.log(userdata);
@@ -60,6 +61,15 @@ export default class CreatePost extends React.Component {
       })
       console.log(error);
     })
+
+    if(isLogined()){
+      axios.get(userdata.icon)
+      .then(res=>{
+          this.setState({
+              Icon:res.data
+          })
+      })
+    }
   }
 
   TeamNameChange=e=>{
@@ -183,7 +193,7 @@ export default class CreatePost extends React.Component {
             <Avatar style={{
               margin: '0 10px 0 50px',
               }}
-              src={isLogined()?userdata.icon:''}
+              src={isLogined()?this.state.Icon:''}
             />
           }
           content={

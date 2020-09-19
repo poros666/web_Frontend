@@ -151,17 +151,17 @@ export const mainRoutes = [{
     
 export const searchRoutes = [
 {
-    path: "/searchResult/type=comp?:kw",
+    path: "/searchResult/type=comp/:kw",
     title: "比赛",
     component: SearchContentComp
 },
 {
-    path: "/searchResult/type=comm?:kw",
+    path: "/searchResult/type=comm/:kw",
     title: "社区",
     component: SearchContentComm
 },
 {
-    path: "/searchResult/type=user?:kw",
+    path: "/searchResult/type=user/:kw",
     title: "用户",
     component: SearchContentUsr
 }

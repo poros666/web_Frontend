@@ -140,12 +140,9 @@ const CompDetail = (e) => {
       EndTime: values.end,
       Host: values.sponsor,
     }
-    data = JSON.stringify(data)
-    console.log("thhis :", data)
-    console.log("thhis :", typeof data)
     var token = JSON.parse(localStorage.getItem('token')).token
     axios
-      .put(`/Project/[${e.Record.id}]`, data, {
+      .put(`/Project/${e.Record.id}`, data, {
         headers: { Authorization: 'Bearer ' + token },
       })
       .then((res) => {
