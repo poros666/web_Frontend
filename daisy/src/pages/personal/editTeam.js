@@ -4,6 +4,8 @@ import HeaderNav from '../../components/comm/HeaderNav'
 import '../../style/personal/editteam.css'
 import { CloseOutlined } from '@ant-design/icons'
 import Footer from '../../components/comm/Footer'
+import Axios from 'axios'
+import { List } from 'antd/lib/form/Form'
 
 const { TextArea } = Input;
 
@@ -13,38 +15,58 @@ export default class EditTeam extends Component{
         super(props)
         this.inputChange=this.inputChange.bind(this)
         this.state={
-            teamID:1,
-            compID:1,
-            teamname:'team 1',
-            limit:10,
-            compname: 'comp 1',
-            description:
-                'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-            member:[
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            ]
+           name:[],
+           Introduction:[],
+           GroupId:this.props.location.query.GroupId,
+           ProjectId:this.props.location.query.ProjectId,
         }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/Usergroup?GroupId='+this.props.location.query.GroupId+'&ProjectId='+this.props.location.query.ProjectId,
+        {headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            this.setState({
+                name:res.data.name,
+                Introduction:res.data.introduction,
+                memberList:res.data.memberList
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+         })
+
     }
     inputChange(e){
         let o={}
         o[e.target.name]=e.target.value
         this.setState(o)
     }
-    deleteMember(index){
-        const member=[...this.state.member]
-        member.splice(index,1)
-        this.setState({
-            member:member
-        })
+    //删除队员
+    deleteMember(account){
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.delete('/Member',{ProjectId:parseInt(this.state.ProjectId),GroupId:parseInt(this.state.GroupId),Account:account},
+        {headers: { "Authorization": 'Bearer ' +token }})
+        .catch(function(error){
+            console.log(error)
+            window.alert("删除失败")
+         })
+    }
+
+    handleClick(){
+        var content={
+            groupId:this.state.GroupId,
+            projectId:this.state.ProjectId,
+            name:this.state.name,
+            introduction:this.state.Introduction
+        }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.put('/Usergroups',content,{headers: { "Authorization": 'Bearer ' +token }})
+        .then(
+            window.alert("修改成功")
+        )
+        .catch(function(error){
+            console.log(error)
+            window.alert("修改失败")
+         })
     }
     render(){
         return(
@@ -53,7 +75,7 @@ export default class EditTeam extends Component{
                 <div id='edteam_content'>
                     <Card
                     id='editteam_card'>
-                        <p>teamID:{this.props.match.params.teamID}</p>
+                        <p>teamName:{this.props.match.params.teamID}</p>
                         <Descriptions 
                         bordered
                         column={1}>
@@ -62,18 +84,8 @@ export default class EditTeam extends Component{
                                 <TextArea
                                 autoSize 
                                 bordered={false} 
-                                name="teamname" 
-                                value={this.state.teamname} 
-                                onChange={this.inputChange}
-                                />
-                            </Descriptions.Item>
-                            <Descriptions.Item
-                            label='人数上限'>
-                                <TextArea
-                                autoSize 
-                                bordered={false} 
-                                name="limit" 
-                                value={this.state.limit} 
+                                name="name" 
+                                defaultValue={this.state.name} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -82,8 +94,8 @@ export default class EditTeam extends Component{
                                 <TextArea
                                 autoSize
                                 bordered={false} 
-                                name="description" 
-                                value={this.state.description} 
+                                name="Introduction" 
+                                defaultValue={this.state.Introduction} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -91,8 +103,12 @@ export default class EditTeam extends Component{
                             label='成员'>
                                 <div style={{width:700}}>
                                 {
-                                this.state.member.map((item,index)=>{
-                                    return(
+                                    <List
+                                        style={{margin:20}}
+                                        grid={{ gutter: 20, column: 3 }}
+                                        dataSource={this.state.memberList}
+                                        renderItem={item => (
+                                        <List.Item>
                                         <span className="avatar-item">
                                             <Badge 
                                             count={
@@ -103,24 +119,26 @@ export default class EditTeam extends Component{
                                                 shape='circle' 
                                                 size='small'
                                                 icon={<CloseOutlined/>}
-                                                onClick={this.deleteMember.bind(this,index)}
+                                                onClick={this.deleteMember(item.account)}
                                                 />
                                             }>
                                                 <Avatar 
                                                 size={64} 
                                                 shape="circle" 
-                                                src={item}
+                                                src={item.icon}
                                                 />
+                                                <p>{item.name}</p>
                                             </Badge>
                                         </span>
-                                    )
-                                })
+                                        </List.Item>
+                                    )}
+                                    />   
                                 }
                                 </div>
                             </Descriptions.Item>
                         </Descriptions>
                         <div className='saveButtons'>
-                            <Button type='primary'>保存</Button>
+                            <Button type='primary' onClick={()=>{this.handleClick()}}>保存</Button>
                             <Button>取消</Button>
                         </div>
                     </Card>

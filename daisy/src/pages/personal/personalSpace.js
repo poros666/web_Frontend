@@ -8,15 +8,17 @@ import { personalRoutes } from '../../routes/index'
 import OtherMenuItem from '../../components/personal/otherMenuItem'
 import MyMenuItem from '../../components/personal/myMenuItem'
 import Footer from '../../components/comm/Footer'
+import { isLogined } from '../../utils/auth'
+
 
 
 export default class PersonalSpace extends Component {  
   constructor(props){
     super(props)
-      this.state={
-        role:1,       //role=1表示本人视角，role=0表示其他人视角
-        
-      }
+    this.state={
+      role:isLogined()?(this.props.match.params.account===JSON.parse(localStorage.getItem('userData')).account?1:0):0,
+      account:this.props.match.params.account,       //role=1表示本人视角，role=0表示其他人视角
+    }
   }
   
   render() {
@@ -28,7 +30,7 @@ export default class PersonalSpace extends Component {
             <MastHead role={this.state.role}/>
           </div>
           <div id='menuItem'>
-            {this.state.role?<MyMenuItem/>:<OtherMenuItem/>}
+            {this.state.role?<MyMenuItem account={this.state.account}/>:<OtherMenuItem account={this.state.account}/>}
             <div>
             {
               personalRoutes.map((item,index)=>{

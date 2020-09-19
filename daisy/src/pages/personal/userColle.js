@@ -1,94 +1,86 @@
 import React, { Component } from 'react'
-import {Card,Button,Col,List} from 'antd'
-import {LockOutlined,LockFilled,DeleteOutlined} from '@ant-design/icons'
+import {Card,Button,Modal,Form,Input,Select,Popconfirm,Popover,List} from 'antd'
+import {LockOutlined,LockFilled,DeleteOutlined,PlusCircleOutlined} from '@ant-design/icons'
+import { Link } from 'react-router-dom'
+import Axios from 'axios'
 
 
+const {Meta}=Card
 
 export default class UserColle extends Component {
     constructor(props){
         super(props)
-        this.deleteFile.bind(this)
-        this.changePrivacy.bind(this)
         this.state={
-            data:[
+            data:[],
+            account:this.props.match.params.account
+        }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/FavouritePackage/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            this.setState(
                 {
-                    fileID:1,
-                    filename:'file1',
-                    private:0
-                },
-                {
-                    fileID:2,
-                    filename:'file2',
-                    private:1
+                    data:res.data
                 }
-            ]
-        }
-    }
-    changePrivacy(fileID){
-        let fdata=[...this.state.data]
-        for(let i=0;i<fdata.length;i++){
-            if(fdata[i].fileID==fileID){
-                fdata[i].private=!fdata[i].private
-            }
-        }
-        this.setState({
-            data:fdata
+            )
         })
+        .catch(function(error){
+            console.log(error)
+         })
     }
-    deleteFile(fileID){
-        let fdata=[...this.state.data]
-        for(let i=0;i<fdata.length;i++){
-            if(fdata[i].fileID==fileID){
-                fdata.splice(i,1)
-            }
+    changePrivacy(file){
+        var content={
+            Account:this.state.account,
+            Name:file.name,
+            Privacy:file.privacy
         }
-        this.setState({
-            data:fdata
-        })
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.put('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
     }
+
+    
+    
     render() {
         return (
             <div>
-              <List
+                <Link to={'/newColle/account='+this.state.account}>
+                    <Button
+                    type="text" 
+                    size='large'
+                    icon={<PlusCircleOutlined/>}
+                    style={{margin:20}}
+                    >
+                        新建收藏夹
+                    </Button>
+                </Link>
+                
+
+                <List
                 style={{margin:20}}
                 grid={{ gutter: 20, column: 3 }}
                 dataSource={this.state.data}
                 renderItem={item => (
                     <List.Item>
                         <Card
-                        title={<a href={"#/collection/"+item.fileID}>{item.filename}</a>}
-                        extra={
-                            <div>
-                                <Button 
-                                type="text" 
-                                size='small'
-                                icon={item.private?<LockFilled style={{color:'#1890ff'}}/>:<LockOutlined style={{color:'#1890ff'}}/>}
-                                onClick={()=>this.changePrivacy(item.fileID)}
-                                />
-                                <Button 
-                                type="text" 
-                                size='small'
-                                icon={<DeleteOutlined style={{color:'#ff0000'}}/>}
-                                onClick={()=>this.deleteFile(item.fileID)}
-                                />
-                                
-                            </div>}
+                        actions={[/*
+                                <Popover content='更改收藏夹隐私状态'>
+                                    <Button 
+                                    type="text" 
+                                    size='small'
+                                    icon={item.privacy?<LockFilled style={{color:'#1890ff'}}/>:<LockOutlined style={{color:'#1890ff'}}/>}
+                                    onClick={()=>this.changePrivacy(item)}
+                                    />
+                                </Popover>,*/
+                        ]}
                         >
-                            2020-8-15更新，阿巴阿巴一点东西，删掉也可以
+                            <Meta
+                            title={<a href={"#/"+item.type+"Collection/account="+this.state.account+"/fileName="+item.name+"/fileType="+item.type}>{item.name}</a>}
+                            description={item.type+' file'}
+                            />
                         </Card>
                     </List.Item>
                 )}
                 />
             </div>
         )
-    }
-    handleChangePage(fileID)
-    {
-      this.context.router.push(
-        {
-          path:'#/collection/'+fileID,
-          ID:fileID
-        }
-      )
     }
 }

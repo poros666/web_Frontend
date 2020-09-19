@@ -1,38 +1,26 @@
 import React, { Component } from 'react'
-import {Card,List,Col} from 'antd'
-
-const compData = [
-  {
-      ID:1,
-      competitionname: 'comp 1',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-  },
-  {
-      ID:2,
-      competitionname: 'comp 2',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-  },
-  {
-      ID:3,
-      competitionname: 'comp 3',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-  },
-  {
-      ID:4,
-      competitionname: 'comp 4',
-      description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-  }]
+import {Card,List} from 'antd'
+import axios from 'axios'
 
 export default class UserComp extends Component {
   constructor(props){
     super(props)
     this.state={
-      data:compData
+      data:[],
+      account:this.props.match.params.account
     }
+    var token=JSON.parse( localStorage.getItem('token')).token
+
+    axios
+      .get('/Subscribe?Account='+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+      .then((res)=>{
+        this.setState({
+          data:res.data
+        })
+      })
+      .catch(function(error){
+        console.log(error)
+      })
   }
     render() {
         return (
@@ -42,16 +30,13 @@ export default class UserComp extends Component {
                 grid={{ gutter: 20, column: 3 }}
                 dataSource={this.state.data}
                 renderItem={item => (
-                    <List.Item>
-                        <Card
-                        title={
-                            <a href={"#/compPage/"+item.ID+"=id"+item.ID}>
-                                {item.competitionname}
-                            </a>
-                        }>
-                            {item.description}
-                        </Card>
-                    </List.Item>
+                  <List.Item>
+                      <Card>
+                          <a href={"#/compPage/id="+item.projectId+'/'}>
+                            {item.name}
+                          </a>
+                      </Card>
+                  </List.Item>
                 )}
                 />
             </div>

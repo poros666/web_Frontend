@@ -15,7 +15,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/admin" render={(routeProps)=>(isLogined()?(<AdminIndex {...routeProps} />):(<Redirect to="/login"/>))}/>
       <Route path="/message" render={routeProps=><MessageIndex {...routeProps} />}/>
-      <Route path="/personal" render={routeProps=><PersonalSpace {...routeProps} />}/>
+      <Route path="/personal/account=:account" render={props=><PersonalSpace {...props} />}/>
       {mainRoutes.map(route=>{
         return <Route key={route.path} {...route}/>
       })}

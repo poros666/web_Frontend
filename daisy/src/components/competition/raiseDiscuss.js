@@ -54,6 +54,9 @@ export default class RaiseDiscuss extends React.Component {
     if (!this.state.value) {
       return;
     }
+     this.setState({
+      submitting: true,
+    });
 
     if(!isLogined()){
       window.alert("未登录，确定后跳转至登陆界面")
@@ -63,10 +66,10 @@ export default class RaiseDiscuss extends React.Component {
     else{
       this.postData()
     }
-    
     this.setState({
-      submitting: true,
+      submitting: false,
     });
+   
   };
 
   handleChange = e => {
@@ -77,12 +80,12 @@ export default class RaiseDiscuss extends React.Component {
 
   
   postData(){
-    var token=localStorage.getItem('token')
-    var userData=localStorage.getItem('userData')
-    var data={account:userData.account,projectId:this.props.compID,time:moment().format("YYYY-MM-DDTHH:mm:ssC"),
+    var token=JSON.parse( localStorage.getItem('token')).token
+    var userData=JSON.parse(localStorage.getItem('userData'))
+    var data={account:userData.account,projectId:parseInt(this.props.compID),time:moment().format("YYYY-MM-DDTHH:mm:ssC"),
     content:this.state.value,picture:userData.icon}
 
-    axios.post('/Discussion',data)
+    axios.post('/Discussion',data, {headers: { "Authorization": 'Bearer ' +token }})
     .then(response=>{
       console.log(response);
     })

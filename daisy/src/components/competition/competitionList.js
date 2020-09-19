@@ -3,22 +3,31 @@ import {List,Col, Pagination} from 'antd'
 import 'antd/dist/antd.css';
 import axios from 'axios'
 
-
 export default class CompetitionList extends Component {
   constructor(props)
   {
     super(props)
     this.state={
       data:[],
+      total:0,
       currentData:[],
-      total: 0,
-      pageSize: 3,
+      pageSize: 5,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
+     axios.get('/Project')
+     .then(response=>{
+       console.log(response)
+       this.setState({
+         total:response.data.length
+        });
+   })
+   .catch(error=>{
+     console.log(error);
+   })
   }
 
   componentDidMount() {
-    this.getData() //页面刷新时回到刷新前的page
+    //页面刷新时回到刷新前的page
     this.handleAnchor()
   }
 
@@ -33,31 +42,35 @@ export default class CompetitionList extends Component {
     }, () => {
       window.location.hash = `#/allCompPage/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
-    this.setState((state)=>{
-    for(let i=0;i<state.pageSize;i++){
-      state.currentData.pop();
-    }
-    for(let i=pageSize*(page-1);i<state.total&&i<pageSize*page;i++){
-      state.currentData.push(this.state.data[i]);
-    }
-      return{
-        currentData:state.currentData,
-      }
-    }
-   );
- }
+    axios.get('/Project')
+    .then(response=>{
+      console.log(response)
+      this.setState((state)=>{
+          for(let i=0;i<this.state.pageSize;i++){
+            state.currentData.pop();
+          }
+          if((page-1)*this.state.pageSize+this.state.pageSize<=response.data.length){
+            for(let i=(page-1)*this.state.pageSize;i<(page-1)*this.state.pageSize+this.state.pageSize;i++){
+              state.currentData.push(response.data[i]);
+            }
+          }
+          else{
+            for(let i=(page-1)*this.state.pageSize;i<response.data.length;i++){
+              state.currentData.push(response.data[i]);
+            }
+          }
+          return{
+            currentData:state.currentData,
+          }
+       });
+ });
+}
  
  getData()
  {
    axios.get('/Project')
    .then(response=>{
     console.log(response);
-    this.setState(
-        {
-          data:response.data,
-          total:response.data.length
-        }
-    )
   })
   .catch(error=>{
     console.log(error);
@@ -73,7 +86,7 @@ export default class CompetitionList extends Component {
             <List
               itemLayout="vertical"
               size="large"
-              dataSource={this.state.data}
+              dataSource={this.state.currentData}
               renderItem={item => (
                 <List.Item>
                     <List.Item.Meta
