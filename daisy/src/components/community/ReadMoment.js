@@ -19,7 +19,7 @@ import Loading from './Loading'
 import moment from 'moment'
 import { isLogined } from '../../utils/auth'
 
-Axios.defaults.baseURL = '/api'
+// Axios.defaults.baseURL = '/api'
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -46,6 +46,7 @@ export default class ReadMoment extends Component {
       },
       isLoading: true,
       Mid: props.momentId,
+      image:''
     }
 
     this.getMomentContent(this.state.Mid)
@@ -64,7 +65,14 @@ export default class ReadMoment extends Component {
       this.setState({ data: res.data })
       this.setState({ isLoading: false })
 
-      console.log(" detail moment data:",res.data)
+
+  //    console.log(" detail moment data:",res.data.icon)      
+
+      Axios.get(res.data.icon).then((ress)=>{
+        console.log(ress.data)
+        this.setState({image:ress.data})
+      })
+
     })
   }
 
@@ -133,7 +141,7 @@ export default class ReadMoment extends Component {
             //这里的头像要动态生成
             <div align='right'>
               <a href={'#/personal/account='+this.state.data.account}>
-                <Avatar src={this.state.data.icon}></Avatar>
+                <Avatar src={this.state.image}></Avatar>
               </a>
 
               <p>{this.state.data.nickname}</p>
