@@ -105,22 +105,22 @@ class HeaderNav extends Component {
                                 title={"我的"}>
                                     
                                     <Menu.Item key="userHome">
-                                        <a href={"#/personal/account="+JSON.parse(localStorage.getItem('userData'))?null:JSON.parse(localStorage.getItem('userData')).account} target="_blank" rel="noopener noreferrer">
+                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)} target="_blank">
                                             个人主页
                                         </a>
                                     </Menu.Item>
                                     <Menu.Item key="userTeam">
-                                        <a href="#/personal/team" target="_blank" rel="noopener noreferrer">
+                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)+"/team"} target="_blank" rel="noopener noreferrer">
                                             我的队伍
                                         </a>
                                         </Menu.Item>
                                     <Menu.Item key="userComp">
-                                        <a href="#/personal/comp" target="_blank" rel="noopener noreferrer">
+                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)+"/comp"} target="_blank" rel="noopener noreferrer">
                                             我的比赛
                                         </a>
                                     </Menu.Item>
                                     <Menu.Item key="userCollege">
-                                        <a href="#/personal/colle" target="_blank" rel="noopener noreferrer">
+                                        <a href={"#/personal/account="+(JSON.parse(localStorage.getItem('userData'))?JSON.parse(localStorage.getItem('userData')).account:null)+"/colle"} target="_blank" rel="noopener noreferrer">
                                             我的收藏
                                         </a>
                                     </Menu.Item>
