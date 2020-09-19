@@ -83,6 +83,7 @@ class CommunityShow extends Component {
             // data:sourceData,
             currentData:[],
             isLoaded:false,
+            ava:'../../img/avatar/ava.jpg',
         }
         
         // 这个绑定是必要的，使`this`在回调中起作用
@@ -117,6 +118,7 @@ class CommunityShow extends Component {
             isLoaded:true
           });
         })
+    
         .catch(function (error) {
           console.log(error);
           _this.setState({
@@ -191,8 +193,11 @@ class CommunityShow extends Component {
                                     </div>
                                 }
                                 avatar={
-                                    <a href={"#/personal"}>
-                                      <Avatar src={item.icon}></Avatar>
+                                    <a href={"#/personal/account="+item.moment.account} target="_blank" rel="noopener noreferrer">
+                                    {/* <a href={"#/personal/account="+JSON.parse(localStorage.userData).account}> */}
+                                      <Avatar 
+                                        src={require("../../img/avatar/ava.jpg")}
+                                      ></Avatar>
                                     </a>
                                   }
 

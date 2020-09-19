@@ -79,7 +79,7 @@ class ActivityShow extends Component {
                                             <div style={{margin:'0 auto',position:'relative'}}>
                                                <img 
                                                 width='100%'
-                                                height= 'auto'
+                                                height= '400px'
                                                 src={require("../../img/activity/"+slide.imgSrc+".jpg")}
                                                 /> 
                                             </div>
