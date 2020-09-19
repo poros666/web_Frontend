@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://daisydata.oss-cn-shanghai.aliyuncs.com',
+      target: 'http://fwdarling2020.cn:8080',
       changeOrigin: true
     })
   )
