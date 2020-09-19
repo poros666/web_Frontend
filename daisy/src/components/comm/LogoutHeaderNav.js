@@ -5,6 +5,7 @@ import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
 import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
 import { isLogined } from '../../utils/auth';
+import { withRouter } from 'react-router-dom'
 
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -20,21 +21,20 @@ class LogoutHeaderNav extends Component {
     }
     loginClick(){
         window.open("#/login")
-        setTimeout(()=>{ 
-            this.setState({
-                islog:isLogined(),
-            })
-        })
     }
     searchJump(value){
         console.log(value)
         console.log(value.length)
+        // var website=this.props.location.pathname
+        console.log(this.props)
         var w=window.open('about:blank')
         if(value.length === 0){
+            // window.open="#/search"
             w.location.href="#/search"
         }
         else{
-            w.location.href="#/searchResult"
+            // var w=window.open('about:blank')
+            w.location.href="#/searchResult/type=comp?"+String(value)
         }
     }
 
@@ -112,4 +112,4 @@ class LogoutHeaderNav extends Component {
     }
 }
 
-export default LogoutHeaderNav;
+export default withRouter(LogoutHeaderNav);

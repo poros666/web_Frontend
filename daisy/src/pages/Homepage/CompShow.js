@@ -51,7 +51,7 @@ class CompShow extends Component {
             // currentData:[],
             isLoaded:false,
         }
-        this.switchComp = this.switchComp.bind(this);
+        // this.switchComp = this.switchComp.bind(this);
     }
     // switchComp(){
     //     this.componentDidMount()

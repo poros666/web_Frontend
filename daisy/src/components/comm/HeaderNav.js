@@ -6,6 +6,7 @@ import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartO
 import logo from './logo-re.png'
 import { isLogined,clearToken } from '../../utils/auth';
 import LogoutHeaderNav from './LogoutHeaderNav';
+import {Link} from 'react-router-dom'
 
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -36,10 +37,12 @@ class HeaderNav extends Component {
         console.log(value.length)
         var w=window.open('about:blank')
         if(value.length === 0){
+            // window.open="#/search"
             w.location.href="#/search"
         }
         else{
-            w.location.href="#/searchResult"
+            // var w=window.open('about:blank')
+            w.location.href="#/searchResult/type=comp?"+String(value)
         }
     }
     
