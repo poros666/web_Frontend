@@ -48,7 +48,6 @@ class HeaderNav extends Component {
     
     render() {
         this.state.islog=isLogined()
-        console.log(JSON.parse(localStorage.getItem('userData'))?null:JSON.parse(localStorage.getItem('userData')).account)
         return (
             this.state.islog?
             <div >
