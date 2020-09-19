@@ -18,7 +18,7 @@ export default class EasySearchFrame extends Component {
     searchJump(value){
         console.log(value)
         var w=window.open('about:blank')
-        w.location.href="#/searchResult/type=mixed"+this.props.keyword
+        w.location.href="#/searchResult/type=mixed?"+this.props.keyword
     }
     
     render() {
