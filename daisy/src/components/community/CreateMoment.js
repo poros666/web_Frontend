@@ -129,26 +129,18 @@ export default class CreateMoment extends React.Component {
     });
   };
 
-
-
   render() {
     const { comments, submitting, value,valuetitle } = this.state;
-    
-
     var islog=isLogined()
-
     return (
       <>
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           avatar={
             <a href={"#/personal"}>
-
             {/* <a href={"#/personal/account="+JSON.parse(localStorage.userData).account.toString()}> */}
-         {/*      {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>} */}
-
+            {/*      {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>} */}
             {islog?<Avatar src={this.state.ava}/>:<Unlogined/>}
-
             </a>
           }
           content={
