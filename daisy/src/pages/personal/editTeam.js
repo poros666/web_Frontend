@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import {Card,Badge,Avatar,Input, Descriptions, Button} from 'antd'
+import {Card,Input, Descriptions, Button} from 'antd'
 import HeaderNav from '../../components/comm/HeaderNav'
 import '../../style/personal/editteam.css'
-import { CloseOutlined } from '@ant-design/icons'
 import Footer from '../../components/comm/Footer'
 import Axios from 'axios'
-import { List } from 'antd/lib/form/Form'
 
 const { TextArea } = Input;
 
@@ -98,43 +96,6 @@ export default class EditTeam extends Component{
                                 defaultValue={this.state.Introduction} 
                                 onChange={this.inputChange}
                                 />
-                            </Descriptions.Item>
-                            <Descriptions.Item
-                            label='成员'>
-                                <div style={{width:700}}>
-                                {
-                                    <List
-                                        style={{margin:20}}
-                                        grid={{ gutter: 20, column: 3 }}
-                                        dataSource={this.state.memberList}
-                                        renderItem={item => (
-                                        <List.Item>
-                                        <span className="avatar-item">
-                                            <Badge 
-                                            count={
-                                                <Button 
-                                                id='delete_button'
-                                                type="primary" 
-                                                danger 
-                                                shape='circle' 
-                                                size='small'
-                                                icon={<CloseOutlined/>}
-                                                onClick={this.deleteMember(item.account)}
-                                                />
-                                            }>
-                                                <Avatar 
-                                                size={64} 
-                                                shape="circle" 
-                                                src={item.icon}
-                                                />
-                                                <p>{item.name}</p>
-                                            </Badge>
-                                        </span>
-                                        </List.Item>
-                                    )}
-                                    />   
-                                }
-                                </div>
                             </Descriptions.Item>
                         </Descriptions>
                         <div className='saveButtons'>
