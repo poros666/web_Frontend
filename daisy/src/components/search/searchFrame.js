@@ -39,7 +39,7 @@ export default class SearchFrame extends Component {
         console.log(this.state.kw)
         //console.log(value)
         //var w=window.open('about:blank')
-        window.location.hash=`#/searchResult/type=${this.state.type}?${this.state.kw}`
+        window.location.hash=`#/searchResult/type=${this.state.type}/${this.state.kw}`
         //console.log(this.state.type)
     }
 
