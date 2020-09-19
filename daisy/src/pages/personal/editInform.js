@@ -51,8 +51,8 @@ export default class EditInform extends Component {
                                 <TextArea
                                 autoSize 
                                 bordered={false} 
-                                name="Name" 
-                                value={this.state.data.name} 
+                                name="Name"
+                                defaultValue={this.state.data.name} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -63,7 +63,7 @@ export default class EditInform extends Component {
                                 autoSize 
                                 bordered={false}
                                 name="Sex" 
-                                value={this.state.data.sex} 
+                                defaultValue={this.state.data.sex} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -74,7 +74,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="Nickname" 
-                                value={this.state.data.nickname} 
+                                defaultValue={this.state.data.nickname} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -85,7 +85,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="PhoneNum" 
-                                value={this.state.data.phoneNum} 
+                                defaultValue={this.state.data.phoneNum} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -96,7 +96,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="EmailAddress" 
-                                value={this.state.data.emailAddress} 
+                                defaultValue={this.state.data.emailAddress} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -107,7 +107,7 @@ export default class EditInform extends Component {
                                 autoSize
                                 bordered={false}  
                                 name="school" 
-                                value={this.state.data.school} 
+                                defaultValue={this.state.data.school} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -118,7 +118,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 name="StudentNumber" 
                                 bordered={false}
-                                value={this.state.data.studentNumber} 
+                                defaultValue={this.state.data.studentNumber} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -129,7 +129,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="College" 
-                                value={this.state.data.college} 
+                                defaultValue={this.state.data.college} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -140,7 +140,7 @@ export default class EditInform extends Component {
                                 autoSize 
                                 bordered={false}
                                 name="Grade" 
-                                value={this.state.data.grade} 
+                                defaultValue={this.state.data.grade} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -154,7 +154,7 @@ export default class EditInform extends Component {
                                 autoSize  
                                 bordered={false}
                                 name="Intro" 
-                                value={this.state.data.intro} 
+                                defaultValue={this.state.data.intro} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -166,7 +166,7 @@ export default class EditInform extends Component {
                             >
                                 保存
                             </Button>
-                            <a href='#/personal/team'>
+                            <a href={'#/personal/account='+this.state.data.account+'/team'}>
                                 <Button>取消</Button>
                             </a>
                         </div>

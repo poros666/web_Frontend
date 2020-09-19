@@ -127,7 +127,7 @@ export const mainRoutes = [{
     component: PostCollection
 },
 {
-    path: "/MomentCollection/account=:account/fileName=:fileName",
+    path: "/momentCollection/account=:account/fileName=:fileName",
     title: "评论收藏夹",
     component: MomentCollection
 },

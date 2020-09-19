@@ -5,6 +5,7 @@ import '../../style/personal/editteam.css'
 import { CloseOutlined } from '@ant-design/icons'
 import Footer from '../../components/comm/Footer'
 import Axios from 'axios'
+import { List } from 'antd/lib/form/Form'
 
 const { TextArea } = Input;
 
@@ -14,7 +15,7 @@ export default class EditTeam extends Component{
         super(props)
         this.inputChange=this.inputChange.bind(this)
         this.state={
-           Name:[],
+           name:[],
            Introduction:[],
            GroupId:this.props.location.query.GroupId,
            ProjectId:this.props.location.query.ProjectId,
@@ -24,8 +25,9 @@ export default class EditTeam extends Component{
         {headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState({
-                Name:res.data.name,
-                Introduction:res.data.introduction
+                name:res.data.name,
+                Introduction:res.data.introduction,
+                memberList:res.data.memberList
             })
         })
         .catch(function(error){
@@ -51,10 +53,10 @@ export default class EditTeam extends Component{
 
     handleClick(){
         var content={
-            GroupId:this.state.GroupId,
-            ProjectId:this.state.ProjectId,
-            Name:this.state.name,
-            Introduction:this.state.Introduction
+            groupId:this.state.GroupId,
+            projectId:this.state.ProjectId,
+            name:this.state.name,
+            introduction:this.state.Introduction
         }
         var token=JSON.parse( localStorage.getItem('token')).token
         Axios.put('/Usergroups',content,{headers: { "Authorization": 'Bearer ' +token }})
@@ -73,7 +75,7 @@ export default class EditTeam extends Component{
                 <div id='edteam_content'>
                     <Card
                     id='editteam_card'>
-                        <p>teamID:{this.props.match.params.teamID}</p>
+                        <p>teamName:{this.props.match.params.teamID}</p>
                         <Descriptions 
                         bordered
                         column={1}>
@@ -82,8 +84,8 @@ export default class EditTeam extends Component{
                                 <TextArea
                                 autoSize 
                                 bordered={false} 
-                                name="teamname" 
-                                value={this.state.data.teamname} 
+                                name="name" 
+                                defaultValue={this.state.name} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -92,8 +94,8 @@ export default class EditTeam extends Component{
                                 <TextArea
                                 autoSize
                                 bordered={false} 
-                                name="description" 
-                                value={this.state.data.description} 
+                                name="Introduction" 
+                                defaultValue={this.state.Introduction} 
                                 onChange={this.inputChange}
                                 />
                             </Descriptions.Item>
@@ -101,8 +103,12 @@ export default class EditTeam extends Component{
                             label='成员'>
                                 <div style={{width:700}}>
                                 {
-                                this.state.data.member.map((item)=>{
-                                    return(
+                                    <List
+                                        style={{margin:20}}
+                                        grid={{ gutter: 20, column: 3 }}
+                                        dataSource={this.state.memberList}
+                                        renderItem={item => (
+                                        <List.Item>
                                         <span className="avatar-item">
                                             <Badge 
                                             count={
@@ -119,18 +125,20 @@ export default class EditTeam extends Component{
                                                 <Avatar 
                                                 size={64} 
                                                 shape="circle" 
-                                                src={item}
+                                                src={item.icon}
                                                 />
+                                                <p>{item.name}</p>
                                             </Badge>
                                         </span>
-                                    )
-                                })
+                                        </List.Item>
+                                    )}
+                                    />   
                                 }
                                 </div>
                             </Descriptions.Item>
                         </Descriptions>
                         <div className='saveButtons'>
-                            <Button type='primary' onClick={this.handleClick}>保存</Button>
+                            <Button type='primary' onClick={()=>{this.handleClick()}}>保存</Button>
                             <Button>取消</Button>
                         </div>
                     </Card>

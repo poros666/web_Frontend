@@ -12,7 +12,7 @@ export default class UserTeam extends Component {
           account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/Usergroups/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.get('/Usergroup/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState({
                 data:res.data,
@@ -34,24 +34,16 @@ export default class UserTeam extends Component {
                 renderItem={item => (
                     <List.Item>
                         <Card
-                        title={item.teamname}
-                        extra={()=>{
-                                if(this.state.account===JSON.parse( localStorage.getItem('userData')).account)
-                                {
-                                    return(<div>
-                                        <Link to={{pathname:"#/editteam/"+item.teamID,
+                        title={item.name}
+                        extra={<div>
+                                        <Link to={{pathname:"/editteam/"+item.name,
                                         query:{
                                             GroupId:item.groupId,
                                             ProjectId:item.projectId,
                                         }}}>
                                         <EditOutlined/>
                                         </Link>
-                                        </div>)
-                                }
-                                else{
-                                        return
-                                    }
-                                }}>
+                                        </div>}>
                             <p>
                                 简介：{item.introduction}
                             </p>

@@ -98,11 +98,11 @@ export default class DiscussList extends Component {
                           ]}>
                             <List.Item.Meta
                                 avatar={
-                                  <a href={"#/ReadPost"}>
+                                  <a href={"#/personal/account="+item.account}>
                                     <Avatar src={item.pictureUrl?item.pictureUrl:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}></Avatar>
                                   </a>
                                 }
-                                title={<a href="#/ReadPost">{item.account}</a>}
+                                title={<a href={"#/personal/account="+item.account}>{item.account}</a>}
                                 description={<p>{item.content}</p>}
                             />  
                             <p>{"发表时间:"+item.time}</p>   

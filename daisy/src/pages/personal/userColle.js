@@ -15,7 +15,7 @@ export default class UserColle extends Component {
             account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/FavouritePakcage/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.get('/FavouritePackage/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState(
                 {
@@ -73,7 +73,7 @@ export default class UserColle extends Component {
                         ]}
                         >
                             <Meta
-                            title={<a href={"#/collection/account="+this.state.account+"/fileName="+item.name+"/fileType="+item.type}>{item.name}</a>}
+                            title={<a href={"#/"+item.type+"Collection/account="+this.state.account+"/fileName="+item.name+"/fileType="+item.type}>{item.name}</a>}
                             description={item.type+' file'}
                             />
                         </Card>

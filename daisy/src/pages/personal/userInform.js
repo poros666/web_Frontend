@@ -10,7 +10,7 @@ export default class UserInform extends Component {
             account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/Users/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.get('/User/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState({
                 data:res.data

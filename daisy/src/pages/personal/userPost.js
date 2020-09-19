@@ -14,7 +14,7 @@ export default class UserPost extends Component {
             account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        axios.get('/Users/Post/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.get('/User/Post/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
             this.setState({
                 postData:res.data
@@ -23,7 +23,7 @@ export default class UserPost extends Component {
         .catch(function(error){
             console.log(error)
          })
-         axios.get('/Users/Moment/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+         axios.get('/User/Moment/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
          .then((res)=>{
             this.setState({
                 momentData:res.data
@@ -32,7 +32,7 @@ export default class UserPost extends Component {
          .catch(function(error){
              console.log(error)
           })
-          axios.get('/Users/Comment/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+          axios.get('/User/Discussion/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
          .then((res)=>{
             this.setState({
                 discussionData:res.data
