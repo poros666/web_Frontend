@@ -156,11 +156,6 @@ class HeaderNav extends Component {
                                             回复我的
                                         </a></Menu.Item>
 
-                                    <Menu.Item key="letterNotice">
-                                        <a href="#/message/letter" target="_blank" rel="noopener noreferrer">
-                                            私信
-                                        </a></Menu.Item>
-
                                     <Menu.Item key="teamNotice">
                                         <a href="#/message/team" target="_blank" rel="noopener noreferrer">
                                             队伍消息
