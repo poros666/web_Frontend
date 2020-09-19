@@ -55,6 +55,7 @@ export default class ReadMoment extends Component {
   componentDidMount() {
     // console.log("123123131312")
     this.getMomentContent(this.state.Mid)
+    
   }
 
   getMomentContent(Mid) {
@@ -72,6 +73,8 @@ export default class ReadMoment extends Component {
         console.log(ress.data)
         this.setState({image:ress.data})
       })
+
+      console.log(this.state.data)
 
     })
   }
@@ -140,7 +143,7 @@ export default class ReadMoment extends Component {
             //之后可以用button之类的包装一下做成超链接
             //这里的头像要动态生成
             <div align='right'>
-              <a href={'#/personal/account='+this.state.data.account}>
+              <a href={'#/personal/account='+this.state.data.moment.account}>
                 <Avatar src={this.state.image}></Avatar>
               </a>
 
