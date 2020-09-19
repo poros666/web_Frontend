@@ -290,7 +290,7 @@ export default class MomentList extends Component {
                             avatar={
 
                               //头像的来源和指向的地址
-                              <a href={"#/personal"}>
+                              <a href={"#/personal/account="+item.moment.account}>
                                 {item.icon}
                               </a>
                             }

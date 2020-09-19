@@ -196,7 +196,7 @@ export default class CommentList extends Component {
                           ]}
                       author={item.nickname}
                       avatar={
-                        <a href='#/personal'>
+                        <a href={'#/personal/account='+item.account}>
                         <Avatar
                           src={item.icon}
                         />

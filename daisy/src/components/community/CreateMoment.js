@@ -140,7 +140,7 @@ export default class CreateMoment extends React.Component {
         {comments.length > 0 && <CommentList comments={comments} />}
         <Comment
           avatar={
-            <a href={"#/personal"}>
+            <a href={"#/personal/account="+JSON.parse(localStorage.userData).account.toString()}>
               {islog?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
             </a>
           }

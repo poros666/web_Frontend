@@ -132,7 +132,7 @@ export default class ReadMoment extends Component {
             //之后可以用button之类的包装一下做成超链接
             //这里的头像要动态生成
             <div align='right'>
-              <a href={'#/personal'}>
+              <a href={'#/personal/account='+this.state.data.account}>
                 <Avatar src={this.state.data.icon}></Avatar>
               </a>
 
