@@ -110,7 +110,7 @@ export default class SearchContentComm extends Component {
 
                 renderItem={item => (
                 <List.Item
-                    key={item.momentId}
+                    key={item.moment.momentId}
                     actions={[
                     <IconText icon={StarOutlined} text={item.starCount} key="list-vertical-star-o" />,
                     <IconText icon={LikeOutlined} text={item.likeCount} key="list-vertical-like-o" />,
@@ -119,15 +119,15 @@ export default class SearchContentComm extends Component {
                 >
                     <List.Item.Meta
                     title={
-                      <a href={'#/Moment/'+item.momentId}>
-                        {item.name}
+                      <a href={'#/Moment/'+item.moment.momentId}>
+                        {item.moment.title}
                       </a>
                     }
                     description={
-                      "发布时间："+item.startTime+"         "+"结束时间："+item.endTime
+                      "发布时间："+item.moment.time
                     }
                     />
-                    {/*item.content*/}
+                    {item.moment.content}
                 </List.Item>
                 )}
             />              
