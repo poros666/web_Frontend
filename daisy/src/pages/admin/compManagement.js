@@ -214,7 +214,7 @@ export default class CompManagement extends Component {
               onConfirm={() => {
                 console.log('confirm')
                 var token = JSON.parse(localStorage.getItem('token')).token
-                axios.delete(`/Project/[${record.id}]`, {
+                axios.delete(`/Project/${record.id}`, {
                   headers: { Authorization: 'Bearer ' + token },
                 })
                 // this.deleteNode(record.id)
