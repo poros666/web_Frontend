@@ -53,27 +53,37 @@ class LogoutHeaderNav extends Component {
                                 />
                             </a>
                         </div>
-                        <div style={{position:'relative',width:'100%',left:'20%'}}>
+                        <div style={{position:'relative',width:'100%',}}>
                             <Menu 
+                            id='headerNav'
+                            style={{position:'relative',width:'100%',left:'15%'}}
                              mode="horizontal" 
                             >
-                                <Menu.Item key="home" icon={<HomeOutlined />}>
+                                <Menu.Item key="home" icon={<HomeOutlined />}
+                                style={{margin:'0 50px'}}
+                                >
                                     <a href="#/home" target="_blank" rel="noopener noreferrer">
                                         首页
                                     </a>
                                 </Menu.Item>
-                                <Menu.Item key="compPage" icon={<RadarChartOutlined />}>
+                                <Menu.Item key="compPage" icon={<RadarChartOutlined />}
+                                style={{margin:'0 50px'}}
+                                >
                                     <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
                                         比赛
                                     </a>
                                 </Menu.Item>
-                                <Menu.Item key="community" icon={<LayoutOutlined />}>
+                                <Menu.Item key="community" icon={<LayoutOutlined />}
+                                style={{margin:'0 50px'}}
+                                >
                                     <a href="#/community" target="_blank" rel="noopener noreferrer">
                                         社区
                                     </a>
                                 </Menu.Item>
 
-                                <Menu.Item  key="searchMenu" icon={<SearchOutlined />}>
+                                <Menu.Item  key="searchMenu" icon={<SearchOutlined />}
+                                style={{margin:'0 50px'}}
+                                >
                                     <a href="#/search" target="_blank" rel="noopener noreferrer">
                                         搜索
                                     </a>
@@ -86,17 +96,18 @@ class LogoutHeaderNav extends Component {
                                 </Menu.Item>                  
                                 
                                 <Menu.Item  icon={<LogoutOutlined />}
-                                     style={{ visibility: 'hidden'}}
+                                     style={{ visibility: 'hidden',margin:'0 50px'}}
                                 >
                                         我的
                                 </Menu.Item>
                                 
                                 <Menu.Item icon={<LogoutOutlined />}
-                                     style={{ visibility: 'hidden'}}
+                                     style={{ visibility: 'hidden',margin:'0 50px'}}
                                 >
                                         消息
                                 </Menu.Item>
                                 <Menu.Item key="signIn" icon={<LoginOutlined />}
+                                style={{left:'100px',float:'right'}}
                                     onClick={this.loginClick}
                                 >
                                     {/* <a href="#/login" target="_blank" rel="noopener noreferrer"> */}

@@ -84,13 +84,31 @@ class CommunityShow extends Component {
             currentData:[],
             isLoaded:false,
         }
+        
+        // 这个绑定是必要的，使`this`在回调中起作用
+        this.switchComm = this.switchComm.bind(this);
     }
 
-    onSwitch() {
-
-    }
 
     componentDidMount(){
+        const _this=this;    //先存一下this，以防使用箭头函数this会指向我们不希望它所指向的对象。
+        Axios.get('/Moment/Random')
+        .then(function (response) {
+          _this.setState({
+            currentData:response.data,
+            isLoaded:true
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+          _this.setState({
+            isLoaded:false,
+            error:error
+          })
+        })
+    }
+
+    switchComm(){
         const _this=this;    //先存一下this，以防使用箭头函数this会指向我们不希望它所指向的对象。
         Axios.get('/Moment/Random')
         .then(function (response) {
@@ -129,7 +147,7 @@ class CommunityShow extends Component {
                                 </Col>
                                 <Col span={2} offset={16}>
                                     <Button type="primary" style={{float:'right',top:'15px'}}
-                                    // onClick={this.onSwitch.bind(this)}
+                                    onClick={this.switchComm.bind(this)}
                                     >换一换</Button>
                                 </Col>
                                 <Col span={2} offset={2}>
@@ -152,7 +170,7 @@ class CommunityShow extends Component {
                             >
                                 <List.Item.Meta
                                 //帖子的名字和指向的地址，传一个pid，post_id
-                                title={<a href ={"#/Moment/"+item.moment.momentID} target="_blank" rel="noopener noreferrer">{item.moment.title}</a>}
+                                title={<a href ={"#/Moment/"+item.moment.momentId} target="_blank" rel="noopener noreferrer">{item.moment.title}</a>}
                                 // description={<p>{item.description}</p>}
                                 description={
                                     <div>

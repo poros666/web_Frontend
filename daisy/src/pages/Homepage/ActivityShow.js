@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Layout, Carousel} from 'antd';
-import './activityShow.css'
 const { Header,Footer, Content } = Layout;
   
 function limitTxt(txt,count) {

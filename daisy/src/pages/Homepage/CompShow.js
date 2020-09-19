@@ -51,11 +51,26 @@ class CompShow extends Component {
             currentData:[],
             isLoaded:false,
         }
-        // this.switchComp = this.switchComp.bind(this);
+        this.switchComp = this.switchComp.bind(this);
     }
-    // switchComp(){
-    //     this.componentDidMount()
-    // }
+    switchComp(){
+        const _this=this;    //先存一下this，以防使用箭头函数this会指向我们不希望它所指向的对象。
+        Axios.get('/Project/Random')
+        .then(function (response) {
+          _this.setState({
+            currentData:response.data,
+            isLoaded:true
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+          _this.setState({
+            isLoaded:false,
+            error:error
+          })
+        })
+    }
+
     componentDidMount(){
         const _this=this;    //先存一下this，以防使用箭头函数this会指向我们不希望它所指向的对象。
         Axios.get('/Project/Random')
