@@ -28,6 +28,7 @@ export default class Reply extends Component {
       data: sourceData,
       Rid: props.replyId,
       isLoading: true,
+      image:''
     }
   }
 
@@ -42,6 +43,17 @@ export default class Reply extends Component {
       }
       this.setState({ data: temp })
       this.setState({ isLoading: false })
+
+      console.log("reply  list data",this.state.data)
+      if(this.state.data.length>0){
+        for(var i=0;i<1;i++){
+          Axios.get(this.state.data[i].icon).then((ress)=>{
+            this.setState({image:ress.data})
+          })
+        }
+      }
+
+
     })
   }
 
@@ -85,7 +97,7 @@ export default class Reply extends Component {
               author={item.nickname}
               avatar={
                 <a href={'#/personal/account='+item.account}>
-                  <Avatar src={item.icon} />
+                  <Avatar src={this.state.image} />
                 </a>
               }
               content={item.content}

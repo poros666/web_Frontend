@@ -47,7 +47,8 @@ export default class CommentList extends Component {
           renderAdComponent:[],
           data:[],
           Pid:tempId,
-          isLoading:true
+          isLoading:true,
+          image:''
          }
          this.updateADComp()
       }
@@ -64,6 +65,14 @@ export default class CommentList extends Component {
           this.setState({data:result})
           this.setState({isLoading:false})
          console.log("保存下来的：",this.state.data)
+
+         for(var i=0;i<1;i++){
+           Axios.get(this.state.data[i].icon).then((ress)=>{
+             console.log(ress.data)
+             this.setState({image:ress.data})
+           })
+         }
+
         })
       }
 
@@ -198,7 +207,7 @@ export default class CommentList extends Component {
                       avatar={
                         <a href={'#/personal/account='+item.account}>
                         <Avatar
-                          src={item.icon}
+                          src={this.state.image}
                         />
                         </a>
                       }

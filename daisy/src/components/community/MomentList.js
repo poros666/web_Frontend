@@ -20,7 +20,6 @@ const IconText = ({ icon, text }) => (
 
 Axios.defaults.baseURL='/api'
 
-
 export default class MomentList extends Component {
     constructor(props){
         super(props)
@@ -154,6 +153,8 @@ export default class MomentList extends Component {
           currentData:[],
           total:10,//这里的total也是要获取的数据
           pageSize: 10,
+          temp:'',
+          image:'',
           pageNumber:parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
 
         }
@@ -168,14 +169,29 @@ export default class MomentList extends Component {
       console.log(url)
       Axios.get(url).then((res)=>{
         console.log("momentlist data:",res.data)
+        this.setState({temp:res.data})
         this.setState({data:res.data})
         this.setState({total:res.data.length})
      //   console.log(res.data.length)
     //    console.log(this.state)
         //数据读取完成之后更新页面
+
+      //  console.log(this.state.data)
+        for(var i=0;i<this.state.data.length;i++){
+          console.log(this.state.data[i].icon)
+          Axios.get(this.state.data[i].icon).then((res)=>{
+            this.setState({image:res.data})
+            console.log(this.state.image)
+            this.setState({image:res.data})
+        //    console.log(this.state.image)
+          })
+        }
+      
+
         this.handleAnchor()
       })
     }
+
 
     sortByTime(){
       var temp=this.state.data
@@ -291,7 +307,8 @@ export default class MomentList extends Component {
 
                               //头像的来源和指向的地址
                               <a href={"#/personal/account="+item.moment.account}>
-                                {item.icon}
+                                <Avatar src={this.state.image}
+                                />
                               </a>
                             }
 
