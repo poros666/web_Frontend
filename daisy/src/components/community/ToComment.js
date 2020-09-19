@@ -9,6 +9,8 @@ import 'antd/dist/antd.css';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import { isLogined } from '../../utils/auth';
 import Unlogined from './Unlogined';
+import Axios from 'axios';
+import CONSTURL from './config';
 
 const { TextArea } = Input;
 
@@ -48,7 +50,16 @@ export default class ToComment extends React.Component {
     comments: [],
     submitting: false,
     value: '',
+    ava:CONSTURL.UserAva1
   };
+
+  componentDidMount(){
+    if(isLogined()){
+      Axios.get(JSON.parse(localStorage.userData).icon.toString()).then((res)=>{
+        this.setState({ava:res.data})
+      })
+    }
+  }
 
   handleSubmit = () => {
     if (!this.state.value) {

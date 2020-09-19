@@ -7,7 +7,7 @@ import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import { isLogined } from '../../utils/auth';
 import Unlogined from './Unlogined'
 import CONSTURL from './config';
-
+import Axios from 'axios'
 const { TextArea } = Input;
 
 const CommentList = ({ comments }) => (
@@ -80,7 +80,13 @@ export default class CreateMoment extends React.Component {
     }
   }
 
-  
+  componentDidMount(){
+    if(isLogined()){
+      Axios.get(JSON.parse(localStorage.userData).icon.toString()).then((res)=>{
+        this.setState({ava:res.data})
+      })
+    }
+  }
 
 
 
