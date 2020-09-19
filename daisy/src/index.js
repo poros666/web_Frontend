@@ -19,7 +19,7 @@ ReactDOM.render(
       {mainRoutes.map(route=>{
         return <Route key={route.path} {...route}/>
       })}
-      <Redirect to="/404"/>
+      <Redirect to="/home"/>
     </Switch>
   </Router>,
   document.getElementById('root')
