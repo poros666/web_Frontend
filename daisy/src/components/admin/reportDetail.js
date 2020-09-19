@@ -12,11 +12,11 @@ const layout = {
 }
 
 //添加比赛的弹出框
-const CollectionCreateForm = ({ visible, onCreate, onCancel,time,detail }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel,time,detail,id }) => {
   const [form] = Form.useForm()
   // var time = props.time
   // var detail = props.detail
-  console.log("time:",time,"detail:",detail)
+  console.log("time:",time,"detail:",detail,"id",id)
   return (
     <Modal
       visible={visible}
@@ -33,7 +33,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,time,detail }) => {
             onCreate(values)
           })
           .catch((info) => {
-            console.log("Validate Failed:", info)
+            console.log("Validate F ailed:", info)
           })
       }}
     >
@@ -50,18 +50,19 @@ const ReportDetail = (props) => {
 
   // console.log("chuli:",props.id)
 
-  
+  const [id, setId] = useState()
   const [time, setTime] = useState()
   const [detail, setDetail] = useState()
   var token = JSON.parse(localStorage.getItem('token')).token
   axios
-  .get(`/Report/[${props.id}]`, {
+  .get(`/Report/${props.id}`, {
     headers: { Authorization: 'Bearer ' + token },
   })
   .then((res) => {
     console.log('res1:', res.data)
-    setTime(res.data.Time) 
-    setDetail(res.data.Content) 
+    setId(res.data[0].reportId)
+    setTime(res.data[0].time) 
+    setDetail(res.data[0].content) 
   })
   .catch(function (error) {
     console.log(error)
@@ -72,7 +73,13 @@ const ReportDetail = (props) => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     //处理数据
-    axios.put('/api/Report?status=successful').then(res => {
+    var token = JSON.parse(localStorage.getItem('token')).token
+    console.log("token",token)
+    var data = 1
+    axios.put(`/Report/${id}?status=successful`,data, {
+      headers: { 'Authorization': 'Bearer ' + token },
+    })
+    .then(res => {
       console.log(res);
     })
     setVisible(false)
@@ -90,6 +97,7 @@ const ReportDetail = (props) => {
       </Button>
       <CollectionCreateForm
         time={time}
+        id={id}
         detail={detail}
         visible={visible}
         onCreate={onCreate}

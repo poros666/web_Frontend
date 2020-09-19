@@ -72,13 +72,7 @@ export default class ReportManagement extends Component {
         key: 'reporter',
         render: (text) => <a href=''>{text}</a>,
       },
-      {
-        title: '被举报者',
-        dataIndex: 'target',
-        key: 'target',
-        render: (text) => <a href=''>{text}</a>,
-        //...this.getColumnSearchProps("target"),
-      },
+
       {
         title: '类别',
         key: 'type',
