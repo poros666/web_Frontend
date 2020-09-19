@@ -59,7 +59,11 @@ export default class ToComment extends React.Component {
       submitting: true,
     });
 
-    this.props.createComment(this.state.value)
+    var isReply=this.props.isReply
+
+    console.log(" is reply",isReply)
+
+    this.props.createComment(this.state.value,isReply)
 
     this.setState({
       submitting: false,

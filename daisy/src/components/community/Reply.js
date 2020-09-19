@@ -35,17 +35,20 @@ export default class Reply extends Component {
     console.log("RId shi ",this.state.Rid)
     var url = CONSTURL.GetReplyList + this.state.Rid
     Axios.get(url).then((res) => {
+      console.log("replylist data:",res.data)
       var temp = res.data
       for (var i = 0; i < temp.length; i++) {
-        temp[i].Time = this.deleteLetter(temp[i].Time)
+        temp[i].time = this.deleteLetter(temp[i].time)
       }
       this.setState({ data: temp })
       this.setState({ isLoading: false })
-      console.log("replylist data",res.data)
     })
   }
 
   deleteLetter(str) {
+    if(str===undefined){
+      str="this is undefined"
+    }
     var result
 
     var reg = /[a-zA-Z]+/ //[a-zA-Z]表示匹配字母，g表示全局匹配
@@ -79,16 +82,14 @@ export default class Reply extends Component {
                   />
                 </>,
               ]}
-              author={item.Nickname}
+              author={item.nickname}
               avatar={
                 <a href='#/personal'>
-
-                  <Avatar src={item.Icon} />
-                  
+                  <Avatar src={item.icon} />
                 </a>
               }
-              content={item.Content}
-              datetime={item.Time}></Comment>
+              content={item.content}
+              datetime={item.time}></Comment>
           </li>
         ))}
       </div>

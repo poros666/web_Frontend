@@ -94,7 +94,7 @@ const CollectionsPageReport = ({
     console.log('Received values of form: ', values)
     if (isLogined()) {
       let dataSent = {
-        Account: values.reporter_id,
+        Account: JSON.parse(localStorage.userData).account.toString(),
         ReportType: values.types,
         Content: values.description,
         Time: values.time,

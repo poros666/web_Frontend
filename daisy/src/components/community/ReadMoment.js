@@ -63,6 +63,8 @@ export default class ReadMoment extends Component {
       console.log(res)
       this.setState({ data: res.data })
       this.setState({ isLoading: false })
+
+      console.log(" detail moment data:",res.data)
     })
   }
 
@@ -70,8 +72,10 @@ export default class ReadMoment extends Component {
     if (isLogined()) {
       var json = {
         MomentId: Number(this.state.Mid),
-        Account: 'ddd',
+        Account: JSON.parse(localStorage.userData).account.toString(),
       }
+
+      console.log("点赞数据",json)
       var url = CONSTURL.LikeMoment
 
       var token = JSON.parse(localStorage.getItem('token')).token
@@ -80,6 +84,11 @@ export default class ReadMoment extends Component {
       }).then((res) => {
         window.location.reload()
       })
+      .catch((info) => {
+        console.log(info)
+        window.alert("不可重复点赞")
+      })
+      
     } else {
       window.alert('未登录，跳转至登陆界面')
       window.location.hash = '#/login'
@@ -101,6 +110,10 @@ export default class ReadMoment extends Component {
       }).then((res) => {
         window.location.reload()
       })
+      .catch((info) => {
+        console.log(info)
+        window.alert("不可重复收藏")
+      })
     } else {
       window.alert('未登录，跳转至登陆界面')
       window.location.hash = '#/login'
@@ -113,24 +126,24 @@ export default class ReadMoment extends Component {
     ) : (
       <div className='site-card-border-less-wrapper'>
         <Card
-          title={this.state.data.Title}
+          title={this.state.data.moment.title}
           bordered={false}
           extra={
             //之后可以用button之类的包装一下做成超链接
             //这里的头像要动态生成
             <div align='right'>
               <a href={'#/personal'}>
-                <Avatar src={this.state.data.Icon}></Avatar>
+                <Avatar src={this.state.data.icon}></Avatar>
               </a>
 
-              <p>{this.state.data.Nickname}</p>
+              <p>{this.state.data.nickname}</p>
             </div>
           }
           actions={[
             <Button type='text' onClick={this.starMoment.bind(this)}>
               <IconText
                 icon={StarOutlined}
-                text={this.state.data.StarCount}
+                text={this.state.data.starCount}
                 key='list-vertical-star-o'
               />
             </Button>,
@@ -138,7 +151,7 @@ export default class ReadMoment extends Component {
             <Button type='text' onClick={this.likeMoment.bind(this)}>
               <IconText
                 icon={LikeOutlined}
-                text={this.state.data.LikeCount}
+                text={this.state.data.likeCount}
                 key='list-vertical-like-o'
               />
             </Button>,
@@ -146,7 +159,7 @@ export default class ReadMoment extends Component {
             <Button type='text'>
               <IconText
                 icon={CommentOutlined}
-                text={this.state.data.CommentCount}
+                text={this.state.data.commentCount}
                 key='list-vertical-share-o'
               />
             </Button>,
@@ -161,7 +174,7 @@ export default class ReadMoment extends Component {
           {
             //下面是帖子的内容部分
           }
-          <p>{this.state.data.Content}</p>
+          <p>{this.state.data.moment.content}</p>
         </Card>
         <br />
       </div>

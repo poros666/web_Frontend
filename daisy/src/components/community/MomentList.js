@@ -167,7 +167,7 @@ export default class MomentList extends Component {
       var url=CONSTURL.GetMomentList+this.state.sortType
       console.log(url)
       Axios.get(url).then((res)=>{
-        console.log(res)
+        console.log("momentlist data:",res.data)
         this.setState({data:res.data})
         this.setState({total:res.data.length})
      //   console.log(res.data.length)
@@ -179,21 +179,21 @@ export default class MomentList extends Component {
 
     sortByTime(){
       var temp=this.state.data
-    //  console.log("temp:", temp)
+      //console.log("temp:", temp)
       temp.sort(this.sortTime)
-//console.log(temp)
+      //console.log(temp)
       this.setState({data:temp})
-   //   console.log(this.state.data)
+      //console.log(this.state.data)
       this.handleAnchor()
     }
 
     sortByLike(){
       var temp=this.state.data
-      //console.log("temp:", temp)
+      console.log("temp:", temp)
       temp.sort(this.sortLike)
-      //console.log(temp)
+      console.log("ans", temp)
       this.setState({data:temp})
-      //console.log(this.state.data)
+      console.log("result",this.state.data)
       this.handleAnchor()
 
     }
@@ -221,19 +221,19 @@ export default class MomentList extends Component {
     }
     
     sortTime(a,b){
-      return b.Time-a.Time
+      return b.moment.time-a.moment.time
     }
 
     sortLike(a,b){
-      return b.LikeNum-a.LikeNum
+      return b.likeCount-a.likeCount
     }
       
     sortComment(a,b){
-      return b.CommentNum-a.CommentNum
+      return b.commentCount-a.commentCount
     }
 
     sortStar(a,b){
-      return b.StarNum-a.StarNum
+      return b.starCount-a.starCount
     }
 
     handleAnchor() {
@@ -279,11 +279,11 @@ export default class MomentList extends Component {
                     dataSource={this.state.currentData}
                     renderItem={item => (
                       <List.Item
-                          key={item.MomentId}
+                          key={item.moment.momentId}
                           actions={[
-                                    <IconText icon={StarOutlined} text={item.StarNum} key="list-vertical-star-o" />,
-                                    <IconText icon={LikeOutlined} text={item.LikeNum} key="list-vertical-like-o" />,
-                                    <IconText icon={MessageOutlined} text={item.CommentNum} key="list-vertical-message" />,
+                                    <IconText icon={StarOutlined} text={item.starCount} key="list-vertical-star-o" />,
+                                    <IconText icon={LikeOutlined} text={item.likeCount} key="list-vertical-like-o" />,
+                                    <IconText icon={MessageOutlined} text={item.commentCount} key="list-vertical-message" />,
                                   ]}
                                   >
                           <List.Item.Meta
@@ -291,14 +291,14 @@ export default class MomentList extends Component {
 
                               //头像的来源和指向的地址
                               <a href={"#/personal"}>
-                                {isLogined()?<Avatar src={localStorage.getItem('userData').Icon}/>:<Unlogined/>}
+                                {item.icon}
                               </a>
                             }
 
                             //帖子的名字和指向的地址，传一个pid，moment_id
-                              title={<a href ={"#/Moment/"+item.MomentId}>{item.Title}</a>}
+                              title={<a href ={"#/Moment/"+item.moment.momentId}>{item.moment.title}</a>}
 
-                              description={<p>{item.Content}</p>}
+                              description={<p>{item.moment.content}</p>}
                               
                           />
 
