@@ -55,7 +55,7 @@ const ReportDetail = (props) => {
   const [detail, setDetail] = useState()
   var token = JSON.parse(localStorage.getItem('token')).token
   axios
-  .get(`/Report/[${props.id}]`, {
+  .get(`/Report/${props.id}status=successful`, {
     headers: { Authorization: 'Bearer ' + token },
   })
   .then((res) => {
