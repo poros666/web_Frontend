@@ -1,25 +1,30 @@
 import React, { Component } from 'react'
 import {Card,Avatar} from 'antd'
-import {UserOutlined,EditOutlined} from '@ant-design/icons'
+import {EditOutlined} from '@ant-design/icons'
 import { Link} from "react-router-dom";
+import axios from 'axios'
+
+const data=JSON.parse(localStorage.getItem("userData"))
 
 export default class MastHead extends Component {
     constructor(props){
         super(props)
         this.state={
-            nickname:'同济大学今天放暑假了吗',
-            slogan:'是个疯子'
+            Icon:data.icon?'':data.icon,
+            nickname:data.nickname
         }
     }
     
     render() {
-        
         return (
             <div className="mastHead_card">
                 <Card bordered={false} style={{textAlign:"center"}}>
-                <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined />}/>
+                <Avatar 
+                src={this.state.Icon}
+                size='large'
+                style={{marginBottom:20}}
+                />
                 <p>{this.state.nickname}</p>
-                <p>{this.state.slogan}</p>
                 {this.props.role?<Link to='/editinform'><EditOutlined/></Link>:null}
             </Card>
             </div>

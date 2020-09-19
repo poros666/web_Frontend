@@ -23,7 +23,9 @@ import UserInform from "../pages/personal/userInform"
 import UserPost from "../pages/personal/userPost"
 import Editinform from "../pages/personal/editInform"
 import EditTeam from "../pages/personal/editTeam"
-import Collection from "../pages/personal/collection"
+import PostCollection from "../pages/personal/Postcollection"
+import MomentCollection from "../pages/personal/MomentCollection"
+import NewColle from "../pages/personal/newCollection"
 
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
@@ -110,15 +112,26 @@ export const mainRoutes = [{
     component: Editinform
 },
 {
+    path: "/newColle/account=:account",
+    title: "新建收藏夹",
+    component: NewColle
+},
+{
     path: "/editTeam/:teamID",
     title: "编辑小队",
     component: EditTeam
 },
 {
-    path: "/collection/:fileID",
-    title: "收藏夹",
-    component: Collection
+    path: "/postCollection/account=:account/fileName=:fileName",
+    title: "帖子收藏夹",
+    component: PostCollection
 },
+{
+    path: "/momentCollection/account=:account/fileName=:fileName",
+    title: "评论收藏夹",
+    component: MomentCollection
+},
+
 {
     path: "/login",
     title: "登录",
@@ -187,27 +200,27 @@ export const messageRoutes = [
 }]
 
 export const personalRoutes = [{
-    path: "/personal/team",
+    path: "/personal/account=:account/team",
     title: "队伍",
     component: UserTeam
 },
 {
-    path: "/personal/comp",
+    path: "/personal/account=:account/comp",
     title: "比赛",
     component: UserComp
 },
 {
-    path: "/personal/colle",
+    path: "/personal/account=:account/colle",
     title: "收藏",
     component: UserColle
 },
 {
-    path: "/personal/inform",
+    path: "/personal/account=:account/inform",
     title: "资料",
     component: UserInform
 },
 {
-    path: "/personal/post",
+    path: "/personal/account=:account/post",
     title: "发布",
     component: UserPost
 }]

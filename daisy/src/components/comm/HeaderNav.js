@@ -105,7 +105,7 @@ class HeaderNav extends Component {
                                 title={"我的"}>
                                     
                                     <Menu.Item key="userHome">
-                                        <a href="#/personal" target="_blank" rel="noopener noreferrer">
+                                        <a href={"#/personal/account="+JSON.parse(localStorage.getItem('userData'))?null:JSON.parse(localStorage.getItem('userData')).account} target="_blank" rel="noopener noreferrer">
                                             个人主页
                                         </a>
                                     </Menu.Item>

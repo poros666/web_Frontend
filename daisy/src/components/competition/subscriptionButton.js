@@ -7,22 +7,8 @@ import { isLogined } from '../../utils/auth'
 
 export default class SubscriptionButton extends Component {
 
-
-    postData(){
-        axios.post('/subscribe',{account:localStorage.getItem('userData').account,projectId:this.propos.compID})
-        .then(response=>{
-            console.log(response);
-            window.alter("订阅成功")
-          })
-          .catch(error=>{
-            console.log(error);
-            window.alert("连接似乎出现问题")
-          });
-        
-    }
-
-
-handleClick(){
+   
+handleClick(id){
     /*if(!isLogined())
           {
             window.alert("未登录，确定后跳转至登陆界面")
@@ -30,10 +16,12 @@ handleClick(){
             return 
          }
         else{*/
-            axios.post('/subscribe',{account:localStorage.getItem('userData').account,projectId:this.propos.compID})
+            var token=JSON.parse( localStorage.getItem('token')).token
+            axios.post('/subscribe',{Account:JSON.parse(localStorage.getItem('userData')).account,ProjectId:parseInt(id)},
+            {headers: { "Authorization": 'Bearer ' +token }})
             .then(response=>{
                 console.log(response);
-                window.alter("订阅成功")
+                window.alert("订阅成功")
               })
               .catch(error=>{
                 console.log(error);
@@ -47,7 +35,7 @@ handleClick(){
     render() {
         return (
             <div>
-               <Button type="primary" icon={<PlusCircleTwoTone />} onClick={this.handleClick}>订阅</Button>
+               <Button type="primary" icon={<PlusCircleTwoTone />} onClick={()=>this.handleClick(this.props.compID)}>订阅</Button>
             </div>
         )
     }

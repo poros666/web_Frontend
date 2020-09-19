@@ -16,3 +16,17 @@
 .saveButtons Button{
   margin-left: 20px;
 }
+#newColle_page{
+  background-color:#f0f2f5;
+  height: 100%;
+}
+#content{
+  width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  padding-top: 60px;
+}
+#colle_card{
+  background-color: white;
+  padding: 20px;
+}

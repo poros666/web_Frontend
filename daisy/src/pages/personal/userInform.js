@@ -1,28 +1,24 @@
 import React, { Component } from 'react'
 import {Card,Divider, Descriptions} from 'antd'
-import {WeiboOutlined} from '@ant-design/icons'
-import { Link} from "react-router-dom";
+import Axios from 'axios'
 
 export default class UserInform extends Component {
     constructor(props){
         super(props)
         this.state={
-            nameVl:'名字',
-            nickname:'同济大学今天放暑假了吗',
-            phone_num:12345677654,
-            email_address:'12345677654@136.com',
-            sex:'男',
-            stuNum:1850000,
-            school:'同济大学',
-            major:'软件学院',
-            grade:'2018级',
-            intro:'请在这里这里阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴阿巴一大串', 
-            slogan:'是个疯子',
-            qq: 1235678454,
-            wechat:'12345677654',
-            weibo:'https://weibo.com/wflanker',
-            icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+            data:[],
+            account:this.props.match.params.account
         }
+        var token=JSON.parse( localStorage.getItem('token')).token
+        Axios.get('/User/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        .then((res)=>{
+            this.setState({
+                data:res.data
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+         })
     }
     render() {
         return (
@@ -31,58 +27,43 @@ export default class UserInform extends Component {
                     <Divider orientation="left">基本信息</Divider>
                     <Descriptions>
                         <Descriptions.Item label='名字'>
-                            {this.state.nameVl}
+                            {this.state.data.name}
                         </Descriptions.Item>
                         <Descriptions.Item label='昵称'>
-                            {this.state.nickname}
+                            {this.state.data.nickname}
                         </Descriptions.Item>
                         <Descriptions.Item label='性别'>
-                            {this.state.sex}
+                            {this.state.data.sex}
                         </Descriptions.Item>
                         <Descriptions.Item label='手机号'>
-                            {this.state.phone_num}
+                            {this.state.data.phoneNum}
                         </Descriptions.Item>
                         <Descriptions.Item label='邮箱'>
-                            {this.state.email_address}
+                            {this.state.data.emailAddress}
                         </Descriptions.Item>
                         </Descriptions>
                     <Divider orientation="left">教育信息</Divider>
                     <Descriptions>
                         <Descriptions.Item label='学校'>
-                            {this.state.school}
+                            {this.state.data.school}
                         </Descriptions.Item>
                         <Descriptions.Item label='学号'>
-                            {this.state.stuNum}
+                            {this.state.data.studentNumber}
                         </Descriptions.Item>
                         <Descriptions.Item label='学院'>
-                            {this.state.major}
+                            {this.state.data.college}
                         </Descriptions.Item>
                         <Descriptions.Item label='年级'>
-                            {this.state.grade}
+                            {this.state.data.grade}
                         </Descriptions.Item>
                     </Descriptions>
                     <Divider orientation="left">了解更多</Divider>
                     <Descriptions>
-                        <Descriptions.Item label='qq'>
-                            {this.state.qq}
-                        </Descriptions.Item>
-                        <Descriptions.Item label='微信'>
-                            {this.state.wechat}
-                        </Descriptions.Item>
-                        <Descriptions.Item label='微博'>
-                            <Link to={this.state.weibo}>
-                                <WeiboOutlined/>
-                            </Link>
-                        </Descriptions.Item>
-                        <Descriptions.Item label='签名'>
-                            {this.state.slogan}
-                        </Descriptions.Item>
                         <Descriptions.Item label='简介'>
-                            {this.state.intro}
+                            {this.state.data.intro}
                         </Descriptions.Item>
                     </Descriptions>
                 </Card>
-                
             </div>
         )
     }
