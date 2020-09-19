@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import { Card,Avatar,Select,Button,Input,Form} from 'antd';
 import '../../style/comm/comm.css'
 import PostPageReport from '../findTeammate/report'
-import StarPost from '../findTeammate/StarPost'
+// import StarPost from '../findTeammate/StarPost'
 import moment from 'moment'
 import axios from 'axios'
 import {isLogined} from "../../utils/auth"
@@ -117,11 +117,11 @@ export default class Post extends Component {
                             window.location.hash ='#/login'
                         }
                     }}><p>申请进入小队</p></Button>,
-                    <StarPost 
-                    userdata={userdata} 
-                    ProjctId={this.state.ProjctId} 
-                    GroupId={this.state.GroupId} 
-                    PostId={this.state.PostId}/>,
+                    // <StarPost 
+                    // userdata={userdata} 
+                    // ProjctId={this.state.ProjctId} 
+                    // GroupId={this.state.GroupId} 
+                    // PostId={this.state.PostId}/>,
                     <PostPageReport 
                     ReportUID={this.state.PostId}
                     ReporterUID={userdata.account}
