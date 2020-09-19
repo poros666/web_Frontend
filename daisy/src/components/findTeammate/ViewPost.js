@@ -56,12 +56,12 @@ export default class CommunityContent extends Component {
           if((page-1)*PostPerPage+PostPerPage<=response.data.length){
             for(let i=(page-1)*PostPerPage;i<(page-1)*PostPerPage+PostPerPage;i++){
               state.currentData.push(response.data[i]);
-              if(state.currentData[i].icon>0){
+              /*if(state.currentData[i].icon>0){
               axios.get(state.currentData[i].icon)
               .then(res=>{
                 state.currentData.map((item,key)=>key==i?{item,icon:res.data}:item)
               })
-            }
+            }*/
             }
           }
           else{
