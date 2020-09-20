@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { List, Avatar, Form, Radio, Layout } from 'antd';
+import { Divider } from 'antd';
 import { FireOutlined, LikeOutlined, FieldTimeOutlined, CommentOutlined, BellOutlined } from '@ant-design/icons';
+
+import { Tag } from 'antd';
+import { CalendarOutlined } from '@ant-design/icons';
 
 import CONSTURL from '../../components/community/config';
 import Axios from 'axios';
@@ -86,24 +90,29 @@ export default class SearchContentComp extends Component {
               </Form>
 
               <List
-                  itemLayout="horizontal"
+                  itemLayout="vertical"
                   dataSource={objArr}
                   style={{ marginLeft: '20px' }}
+                  split={true}
                   renderItem={item => (
-                  <List.Item>
+                  <List.Item
+                    extra={
+                      <div>
+                          <Tag icon={<CalendarOutlined />} color="orange">发布时间：{item.startTime}</Tag>
+                      </div>
+                    }
+                  >
                       <List.Item.Meta
                       title={
                         <a href={"#/compPage/id="+item.projectId+'/'}>
                           {item.name}
                         </a>
                       }
-                      description={
-                        "发布时间："+item.startTime+"      "+"结束时间："+item.endTime
-                      }
+                      description={item.introduction}
                       />
-                      {item.introduction}
                   </List.Item>
-                  )}
+                  )
+                }
                 />                
               </Layout>
 

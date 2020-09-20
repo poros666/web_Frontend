@@ -33,7 +33,7 @@ const CONSTURL={
     //队伍消息
     getReply:'/User/Reply/',
     //回复我的
-    getApply:'/api/Application?ProjectId=[]&GroupId=[]',
+    getApply:'/Application?ProjectId=[]&GroupId=[]',
     //获取队伍申请列表（组队申请）
     getSystemNotice:'/Notice/',
     //系统公告

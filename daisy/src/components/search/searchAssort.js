@@ -44,6 +44,7 @@ export default class SearchAssort extends Component {
     searchJump(value){
         //console.log(value)
         window.location.hash=`#/searchResult/type=${this.state.type}/${this.state.kw}`
+        window.location.reload()
     }
 /*
     keyDown(e){

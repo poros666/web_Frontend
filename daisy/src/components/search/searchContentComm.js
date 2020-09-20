@@ -4,6 +4,9 @@ import { Form, Radio, Layout } from 'antd';
 import { FireOutlined, FieldTimeOutlined, CommentOutlined, BellOutlined } from '@ant-design/icons';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
+import { Tag } from 'antd';
+import { CalendarOutlined } from '@ant-design/icons';
+
 import CONSTURL from '../../components/community/config';
 import Axios from 'axios';
 
@@ -96,6 +99,7 @@ export default class SearchContentComm extends Component {
                         
             <List
                 itemLayout="vertical"
+                split={true}
                 /*
                 split="true"
                 pagination={{
@@ -111,6 +115,11 @@ export default class SearchContentComm extends Component {
                 renderItem={item => (
                 <List.Item
                     key={item.moment.momentId}
+                    extra={
+                      <div>
+                          <Tag icon={<CalendarOutlined />} color="orange">发布时间：{item.moment.time}</Tag>
+                      </div>
+                    }
                     actions={[
                     <IconText icon={StarOutlined} text={item.starCount} key="list-vertical-star-o" />,
                     <IconText icon={LikeOutlined} text={item.likeCount} key="list-vertical-like-o" />,
@@ -123,11 +132,8 @@ export default class SearchContentComm extends Component {
                         {item.moment.title}
                       </a>
                     }
-                    description={
-                      "发布时间："+item.moment.time
-                    }
+                    description={item.moment.content}
                     />
-                    {item.moment.content}
                 </List.Item>
                 )}
             />              

@@ -169,19 +169,14 @@ export const searchRoutes = [
 
 export const messageRoutes = [
 {
-    path: "/message/comp",
-    title: "比赛通知",
-    component: CompNotice
-},
-{
     path: "/message/system",
     title: "系统公告",
     component: SystemNotice
 },
 {
-    path: "/message/letter",
-    title: "私信",
-    component: PrivateLetter
+    path: "/message/comp",
+    title: "比赛通知",
+    component: CompNotice
 },
 {
     path: "/message/reply",
