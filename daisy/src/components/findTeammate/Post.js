@@ -60,7 +60,12 @@ export default class Post extends Component {
                     this.setState({
                         Icon:res.data
                     })
-
+                })
+                .catch(err=>{
+                    console.log(err)
+                    this.setState({
+                        Icon:''
+                    })
                 })
             }
         })
@@ -112,7 +117,12 @@ export default class Post extends Component {
                                   window.alert("申请成功")
                                 })
                                 .catch(error=>{
+                                    if(error.response.status===409){
                                     window.alert("您已经发送过申请")
+                                    }
+                                    else{
+                                        window.alert('申请失败')
+                                    }
                                   })         
                         }
                         else{

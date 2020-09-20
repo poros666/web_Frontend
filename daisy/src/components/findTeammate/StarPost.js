@@ -84,9 +84,14 @@ export default class StarPost extends Component {
                                   console.log(response)
                                   window.alert("收藏成功")
                                 })
-                                .catch(response=>{
-                                    console.log(response)
-                                    window.alert('您已经收藏了该帖子/动态')
+                                .catch(error=>{
+                                    console.log(error)
+                                    if(error.response.status===409){
+                                    window.alert('您已经收藏了该帖子')
+                                    }
+                                    else{
+                                        window.alert('收藏失败')
+                                    }
                                 })     
                         }
                         else{
