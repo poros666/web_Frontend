@@ -48,7 +48,7 @@ export default class CommunityContent extends Component {
     })
     axios.get('/Post?ProjctId='+ProjctId)
     .then(response=>{
-
+      console.log(response.data)
       this.setState((state)=>{
           for(let i=0;i<PostPerPage;i++){
             state.currentData.pop();
