@@ -18,7 +18,7 @@ import Loading from './Loading'
 //import Report from '../findTeammate/report'
 import moment from 'moment'
 import { isLogined } from '../../utils/auth'
-
+import StarMoment from './StarMoment'
 // Axios.defaults.baseURL = '/api'
 
 const IconText = ({ icon, text }) => (
@@ -46,7 +46,8 @@ export default class ReadMoment extends Component {
       },
       isLoading: true,
       Mid: props.momentId,
-      image:''
+      image:'',
+      isStar:false
     }
 
     this.getMomentContent(this.state.Mid)
@@ -108,23 +109,10 @@ export default class ReadMoment extends Component {
 
   starMoment() {
     if (isLogined()) {
-      var json = {
-        MomentId: Number(this.state.Mid),
-        Account: JSON.parse(localStorage.userData).account.toString(),
-        Name: 'Moment',
-      }
-      console.log()
-      var url = CONSTURL.StarMoment
-      var token = JSON.parse(localStorage.getItem('token')).token
-      Axios.post(url, json, {
-        headers: { Authorization: 'Bearer ' + token },
-      }).then((res) => {
-        window.location.reload()
-      })
-      .catch((info) => {
-        console.log(info)
-        window.alert("不可重复收藏")
-      })
+      var t=this.state.isStar
+      this.setState({isStar:!t})
+      console.log("starmoment data",JSON.parse(localStorage.userData))
+
     } else {
       window.alert('未登录，跳转至登陆界面')
       window.location.hash = '#/login'
@@ -187,6 +175,13 @@ export default class ReadMoment extends Component {
           }
           <p>{this.state.data.moment.content}</p>
         </Card>
+        {
+            this.state.isStar?
+            <StarMoment 
+            className='StarMoment'
+             userdata={JSON.parse(localStorage.userData)}
+              MomentId={this.state.Mid}/>:null
+        }
         <br />
       </div>
     )
