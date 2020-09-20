@@ -16,32 +16,19 @@ export default class MastHead extends Component {
             role:this.props.role,
             image:null,
         }
-        if(this.state.role)
-      {
-        Axios.get(data.icon)
-        .then(res=>{
-          this.setState({
-            image:res.data,
-            nickname:data.nickname})
-        })
-      }
-      else
-      {
         if(isLogined()){
         var token=JSON.parse( localStorage.getItem('token')).token
           Axios.get('/Users/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
           .then(respons=>{
               var pictureurl=respons.data.icon
-              this.setState(
-                {
-                  nickname:respons.data.nickname
-                }
-              )
-              Axios.get(pictureurl)
+            Axios.get(pictureurl)
               .then(res=>{
+                Axios.get(res.data).then(re=>{
                   this.setState({
-                    image:res.data,
-                  })
+                    image:re.data,
+                    nickname:respons.data.nickname
+                  })}
+                  )
                 }
               )
           })}
@@ -51,7 +38,7 @@ export default class MastHead extends Component {
             window.location.hash="#/home"
           }
       }
-    }
+    
 
 
 

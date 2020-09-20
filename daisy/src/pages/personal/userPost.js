@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {Card,List,Tabs} from 'antd'
 import axios from 'axios'
-
+import {DeleteOutlined} from '@ant-design/icons';
+import { isLogined } from '../../utils/auth';
 const {TabPane}=Tabs
 
 export default class UserPost extends Component {
@@ -11,7 +12,8 @@ export default class UserPost extends Component {
             momentData:[],
             discussionData:[],
             postData:[],
-            account:this.props.match.params.account
+            account:this.props.match.params.account,
+            role:isLogined?(this.props.match.params.account===JSON.parse(localStorage.getItem('userData')).account?1:0):0,
         }
         var token=JSON.parse( localStorage.getItem('token')).token
         axios.get('/User/Post/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
@@ -43,6 +45,19 @@ export default class UserPost extends Component {
           })
 
     }
+
+    deleteDiscuss(disId,ProId)
+    {
+        axios.delete('/Discussion?ProjId='+disId+'&DiscId='+ProId)
+        .catch(error=>{console.log(error)})
+        window.location.reload()
+    }
+    deleteMoment(Mid)
+    {
+        axios.delete('/api/Moment/'+Mid)
+        .catch(error=>{console.log(error)})
+        window.location.reload()
+    }
     render() {
         return (
             <div>
@@ -54,7 +69,10 @@ export default class UserPost extends Component {
                         dataSource={this.state.momentData}
                         renderItem={item => (
                             <List.Item>
-                                <Card>
+                                <Card
+                                 actions={
+                                    <DeleteOutlined onClick={()=>{this.deleteMoment(item.momentId)}}/>
+                                    }>
                                     <a href={"#/Moment/"+item.momentId}>
                                         {item.title}
                                     </a>
@@ -70,7 +88,10 @@ export default class UserPost extends Component {
                         dataSource={this.state.discussionData}
                         renderItem={item => (
                             <List.Item>
-                                <Card>
+                                <Card
+                                 actions={
+                                    <DeleteOutlined onClick={()=>{this.deleteDiscuss(item.discussionId,item.projectId)}}/>
+                                    }>
                                         {item.discussionId}
                                 </Card>
                             </List.Item>
@@ -85,9 +106,7 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card>
-                                    
                                         {item.name}
-                                    
                                 </Card>
                             </List.Item>
                         )}
