@@ -63,7 +63,8 @@ export default class RaiseDiscuss extends React.Component {
       userData=JSON.parse(localStorage.getItem('userData'))
     axios.get(userData.icon)
     .then(res=>{
-      this.setState({image:res.data})
+      axios.get(res).then(this.setState({image:res.data})
+      )
     })
     }
     else

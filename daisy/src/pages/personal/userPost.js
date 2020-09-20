@@ -3,6 +3,7 @@ import {Card,List,Tabs} from 'antd'
 import axios from 'axios'
 import {DeleteOutlined} from '@ant-design/icons';
 import { isLogined } from '../../utils/auth';
+import Meta from 'antd/lib/card/Meta';
 const {TabPane}=Tabs
 
 export default class UserPost extends Component {
@@ -15,6 +16,10 @@ export default class UserPost extends Component {
             account:this.props.match.params.account,
             role:isLogined?(this.props.match.params.account===JSON.parse(localStorage.getItem('userData')).account?1:0):0,
         }
+    }
+
+    componentDidMount()
+    {
         var token=JSON.parse( localStorage.getItem('token')).token
         axios.get('/User/Post/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
         .then((res)=>{
@@ -47,16 +52,16 @@ export default class UserPost extends Component {
     }
 
     deleteDiscuss(disId,ProId)
-    {
-        axios.delete('/Discussion?ProjId='+disId+'&DiscId='+ProId)
+    {   
+        var token=JSON.parse( localStorage.getItem('token')).token
+        axios.delete('/discussion?discussionId='+disId+'&projectId='+ProId,{headers: { "Authorization": 'Bearer ' +token }})
         .catch(error=>{console.log(error)})
-        window.location.reload()
     }
     deleteMoment(Mid)
     {
-        axios.delete('/api/Moment/'+Mid)
+        var token=JSON.parse( localStorage.getItem('token')).token
+        axios.delete('/Moment/'+Mid,{headers: { "Authorization": 'Bearer ' +token }})
         .catch(error=>{console.log(error)})
-        window.location.reload()
     }
     render() {
         return (
@@ -70,12 +75,15 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card
-                                 actions={
+                                 actions={[
                                     <DeleteOutlined onClick={()=>{this.deleteMoment(item.momentId)}}/>
-                                    }>
-                                    <a href={"#/Moment/"+item.momentId}>
-                                        {item.title}
-                                    </a>
+                                 ]}>
+                                    <Meta
+                                        title={
+                                            <a href={"#/Moment/"+item.momentId}>
+                                            {item.content}
+                                            </a>}
+                                        description="This is the description"/>
                                 </Card>
                             </List.Item>
                         )}
@@ -89,10 +97,12 @@ export default class UserPost extends Component {
                         renderItem={item => (
                             <List.Item>
                                 <Card
-                                 actions={
+                                 actions={[
                                     <DeleteOutlined onClick={()=>{this.deleteDiscuss(item.discussionId,item.projectId)}}/>
-                                    }>
-                                        {item.discussionId}
+                                 ]}>
+                                    <Meta
+                                        title={item.discussionId}
+                                        description={item.content}/>
                                 </Card>
                             </List.Item>
                         )}
