@@ -17,12 +17,11 @@ export default class DiscussList extends Component {
       sortMethod:'time',
       currentData:[],
       data:[],
+      image:null,
       total: 0,
       pageSize: 5,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
-     }
-
-    
+     } 
   }
 
   componentDidMount() {
@@ -55,7 +54,6 @@ export default class DiscussList extends Component {
  }
 
   getData(){
-    
     axios.get('/Discussion?ProjectId='+this.state.compID)
     .then(response=>{
        console.log(response);
@@ -97,11 +95,6 @@ export default class DiscussList extends Component {
                           <Report ReportUID={item.discussionId} ReporterUID={isLogined()? JSON.parse(localStorage.getItem('userData')).account:''} Time={moment().format("YYYY-MM-DD HH:mm:ss")}/>
                           ]}>
                             <List.Item.Meta
-                                avatar={
-                                  <a href={"#/personal/account="+item.account}>
-                                    <Avatar src={item.pictureUrl?item.pictureUrl:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}></Avatar>
-                                  </a>
-                                }
                                 title={<a href={"#/personal/account="+item.account}>{item.account}</a>}
                                 description={<p>{item.content}</p>}
                             />  

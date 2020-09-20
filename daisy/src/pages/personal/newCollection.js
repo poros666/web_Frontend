@@ -85,6 +85,17 @@ export default class NewCollection extends Component {
         var token=JSON.parse( localStorage.getItem('token')).token
         var content={Account:this.state.account,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:this.state.fileName,Privacy:this.state.private,Type:this.state.type}
         Axios.post('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
+        .catch(error=>{
+            console.log(error);
+            console.log(error.response.status);
+            if(error.response.status===409)
+            {
+                window.alert("已有同名收藏夹，创建失败")
+            }
+            else{
+            window.alert("连接似乎出现问题,创建失败")
+            }
+        })
         window.location.hash="#/personal/account="+this.state.account
     }
 }

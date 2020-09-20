@@ -40,6 +40,7 @@ export default class UserTeam extends Component {
                                         query:{
                                             GroupId:item.groupId,
                                             ProjectId:item.projectId,
+                                            Account:this.state.account
                                         }}}>
                                         <EditOutlined/>
                                         </Link>

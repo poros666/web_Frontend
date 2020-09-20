@@ -48,7 +48,30 @@ export default class RaiseDiscuss extends React.Component {
     comments: [],
     submitting: false,
     value: '',
+    image:'',
   };
+  componentDidMount()
+  {
+    this.getimage()
+  }
+
+  getimage()
+  {
+    var userData
+    if(isLogined())
+    {
+      userData=JSON.parse(localStorage.getItem('userData'))
+    axios.get(userData.icon)
+    .then(res=>{
+      axios.get(res).then(this.setState({image:res.data})
+      )
+    })
+    }
+    else
+    {
+      this.setState({image:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'})
+    }
+  }
 
   handleSubmit = () => {
     if (!this.state.value) {
@@ -79,6 +102,7 @@ export default class RaiseDiscuss extends React.Component {
   };
 
   
+
   postData(){
     var token=JSON.parse( localStorage.getItem('token')).token
     var userData=JSON.parse(localStorage.getItem('userData'))
@@ -91,7 +115,9 @@ export default class RaiseDiscuss extends React.Component {
     })
     .catch(error=>{
       console.log(error);
+      window.alert("似乎出现问题，请重试")
     });
+    window.location.reload()
   }
 
   render() {
@@ -108,7 +134,7 @@ export default class RaiseDiscuss extends React.Component {
         <Comment
           avatar={
             <Avatar
-              src={userData ? 'data:image/png;base64,'+userData.icon:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}
+              src={userData ? this.state.image:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'}
               alt={userData ? userData.nickName:''}
             />
           }
