@@ -30,7 +30,7 @@ export default class MessageIndex extends Component{
                     {/* 左侧导航栏菜单内容 */}
                   </Menu>
                 </Sider>
-                <Layout style={{ padding: '16px' }}>              
+                <Layout style={{ padding: '16px', height: '1500px' }}>              
                   <Content
                     className="site-layout-background"
                     style={{
