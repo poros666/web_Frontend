@@ -63,11 +63,16 @@ export default class CreatePost extends React.Component {
     })
 
     if(isLogined()){
+      console.log(userdata.icon)
       axios.get(userdata.icon)
       .then(res=>{
+        console.log(res.data)
           this.setState({
               Icon:res.data
           })
+      })
+      .catch(err=>{
+        console.log(err)
       })
       console.log(this.state.Icon)
     }

@@ -51,7 +51,7 @@ export default class Post extends Component {
                 PostTime:response.data.postTime,
                 Account:response.data.leaderAccount
             })
-            /*if(response.data.icon!=null){
+            if(response.data.icon!=null){
                 axios.get(response.data.icon)
                 .then(res=>{
                     this.setState({
@@ -64,7 +64,7 @@ export default class Post extends Component {
                         Icon:''
                     })
                 })
-            }*/
+            }
         })
         .catch(error=>{
             console.log(error)
