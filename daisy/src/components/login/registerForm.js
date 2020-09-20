@@ -174,40 +174,39 @@ const normFile = (e) => {
 function compress(
   base64, // 源图片
   rate, // 缩放比例
-  callback // 回调
+  // callback // 回调
 ) {
   //处理缩放，转格式
   var _img = new Image()
   _img.src = base64
-  _img.onload = function () {
-    var _canvas = document.createElement('canvas')
-    var w = this.width / rate
-    var h = this.height / rate
+  console.log("w",_img.width)
+  var _canvas = document.createElement('canvas')
+    var w = _img.width / rate
+    var h = _img.height / rate
     _canvas.setAttribute('width', w)
     _canvas.setAttribute('height', h)
-    _canvas.getContext('2d').drawImage(this, 0, 0, w, h)
-    var base64 = _canvas.toDataURL('image/jpeg')
-    _canvas.toBlob(function (blob) {
-      if (blob.size > 100 * 100) {
-        //如果还大，继续压缩
-        compress(base64, rate, callback)
-      } else {
-        callback(base64)
-      }
-    }, 'image/jpeg')
-  }
+    _canvas.getContext('2d').drawImage(_img, 0, 0, w, h)
+    var nbase64 = _canvas.toDataURL('image/jpeg')
+    console.log("bbb",nbase64)
+  return nbase64
 }
 
 const RegistrationForm = () => {
   const [form] = Form.useForm()
+  const [so, setSo] = useState(false)
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values)
   
     var base64 = values.upload[0].thumbUrl
-    compress(base64,1.5, function (base64) {
-      console.log("new base64:",base64)
-    })
+    console.log(base64)
+    var newbase64 = compress(base64,2)
+    console.log(newbase64)
+    // , function (base64) {
+    //   console.log("new base64:",base64)
+    //   setSo(base64)
+    // }
+
     let dataSent = {
       Account: values.account,
       Name: values.name,
@@ -221,10 +220,10 @@ const RegistrationForm = () => {
       Grade: values.grade,
       StudentNumber:values.student_num.toString(),
       Intro: values.intro,
-      Icon: base64
+      Icon: newbase64
     }
     console.log("dataSent:",dataSent)
-    axios.post('/Users', JSON.stringify( dataSent)).then((response) => {
+    axios.post('/Users', dataSent).then((response) => {
       console.log(response)
       window.alert('注册成功')
     })
