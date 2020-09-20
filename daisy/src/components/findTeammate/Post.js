@@ -40,6 +40,7 @@ export default class Post extends Component {
             PostId:parseInt(postId),
             ProjctId:parseInt(MatchId),
         }
+        console.log(this.state.ProjctId)
         console.log('/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         axios.get('/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         .then(response=>{

@@ -69,6 +69,7 @@ export default class CreatePost extends React.Component {
               Icon:res.data
           })
       })
+      console.log(this.state.Icon)
     }
   }
 
@@ -171,7 +172,10 @@ export default class CreatePost extends React.Component {
           axios.post('/Post',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
           .then(response=>{
             console.log(response)
-            window.location.reload()
+            //window.location.reload()
+          })
+          .catch(error=>{
+            console.log(error)
           })
         }
       }

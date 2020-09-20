@@ -14,6 +14,8 @@ export default class CommunityContent extends Component {
   constructor(props){
     super(props)
     ProjctId=this.props.matchId;
+    console.log(ProjctId)
+ 
     this.state={
       currentData:[],
       total:0,
@@ -21,7 +23,7 @@ export default class CommunityContent extends Component {
       pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
-     axios.get('/Post?ProjctId='+ProjctId)
+     axios.get('/Post?ProjectId='+ProjctId)
      .then(response=>{
        //console.log(response)
        this.setState({
@@ -46,7 +48,7 @@ export default class CommunityContent extends Component {
     }, () => {
       window.location.hash = `#/findteam/id=${ProjctId}/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
-    axios.get('/Post?ProjctId='+ProjctId)
+    axios.get('/Post?ProjectId='+ProjctId)
     .then(response=>{
       console.log(response.data)
       this.setState((state)=>{

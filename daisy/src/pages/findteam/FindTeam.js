@@ -18,6 +18,7 @@ export default class FindTeam extends Component {
         this.state={
           matchId:this.props.match.params.compID
          }
+         console.log(this.state.matchId)
       }
     render() {
         return (
