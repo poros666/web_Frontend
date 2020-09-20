@@ -111,9 +111,7 @@ export default class CommunityContent extends Component {
                             <List.Item.Meta
                                  avatar={
                                   //头像的来源和指向的地址
-                                  <a href={"#/personal"}>
                                     <Avatar src={this.getimag(item.icon)}></Avatar>
-                                  </a>
                                 }
                                 title={<p>{item.nickname}的组队帖</p>}
                                 description={<a href={"#/PostPage/MatchId="+ProjctId+"/groupId="+item.groupId+"/Pid="+item.postId}>查看帖子详情</a>}
