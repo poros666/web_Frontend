@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Card,List,Drawer,Button} from 'antd'
+import {Card,List,Drawer,Button, Alert} from 'antd'
 import { Form, Col, Row, Input, Select, DatePicker } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -9,28 +9,11 @@ import { CheckCircleTwoTone, NotificationOutlined } from '@ant-design/icons';
 //import CONSTURL from '../../components/community/config';
 import Axios from 'axios';
 const { Option } = Select;
-const data = [
-    {
-        account:"hhhh",
-        nickname:"lalalalala",
-        time:"2020-09-20"
-    },
-    {
-        account:"hhhh",
-        nickname:"lalalalala",
-        time:"2020-09-20"
-    },
-    {
-        account:"hhhh",
-        nickname:"lalalalala",
-        time:"2020-09-20"
-    },
-    {
-        account:"hhhh",
-        nickname:"lalalalala",
-        time:"2020-09-20"
-    }
-]
+
+const onAlertClose = (e) => {
+    console.log(e, 'I was closed.');
+    window.location.reload()
+  };
 
 export default class Apply extends Component {
 
@@ -38,13 +21,12 @@ export default class Apply extends Component {
         super(props);
         this.state = {
           account:'',
-          projectId:'',
-          groupId:'',
-          
           data:[],
-          visible: false
+          visible: false,
+          flag: "",
+          choice: ""
         };
-      }
+    }
 
       showDrawer = () => {
         this.setState({
@@ -57,20 +39,70 @@ export default class Apply extends Component {
           visible: false,
         });
       };
-    /*
+
+      handleChange(value) {
+        console.log(`selected ${value}`);
+        this.setState({ 
+            flag: value
+          });
+      };
+      
+      putData(value1, value2) {
+        var data = {
+            projectId: value1,
+            account: this.state.account,
+            groupId: value2,
+            result: this.state.choice,
+
+        }
+       console.log("data:",data)
+        var token = JSON.parse(localStorage.getItem('token')).token
+        Axios
+        .put(`/Application`, data, {
+          headers: { Authorization: 'Bearer ' + token },
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch(erro=>{
+            console.log(erro)
+        })
+      }
+
+      handleClick(valueProjectId, valueGroupId) {
+          if(this.state.flag==true){
+            this.setState({ 
+                choice: "successful"
+            });               
+          }
+          else if(this.state.flag==false){
+            this.setState({ 
+                choice: "failed"
+            }); 
+          }
+        this.putData(valueProjectId, valueGroupId);
+        this.onClose();
+        this.render=()=>{
+            return(
+
+                <Alert
+                message="Success Tips"
+                description="Detailed description and advice about successful copywriting."
+                type="success"
+                closable
+                showIcon
+                onClose={onAlertClose}
+                />   
+
+            )
+        }
+      }
+
     componentDidMount(){
         if(isLogined()){
             var token = JSON.parse(localStorage.getItem('token')).token
             var tempAccount = JSON.parse(localStorage.userData).account;
             this.state.account = tempAccount;
-            
-            var json={
-                "":,
-                "":,
-                "":,
-                ""
-            }
-            
 
             Axios
             .get(`/Application/`+this.state.account,{
@@ -79,38 +111,39 @@ export default class Apply extends Component {
             .then((res) => { 
                 var result=res.data
                 this.setState({data:result})
-                console.log(res)
+                //console.log(res)
             })
         }
     }
-    */
+    
 
     render() {
 
         //初始化render数组状态
-        //let objArr=this.state.data
+        let objArr=this.state.data
 
         return (
             <div>
-                <Card id='apply_card' bordered={false}>
-                    <List 
-                    itemLayout="vertical" 
-                    //dataSource={objArr}
-                    dataSource={data} 
-                    renderItem={item => (
-                        <List.Item>
+                <List 
+                itemLayout="vertical" 
+                dataSource={objArr}
+                renderItem={item => (
+                    <List.Item>
+                        <Row>
+                            <Col span={18}>
+                                <List.Item.Meta
+                                    //avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                                    title={
+                                    <a href={"#/personal/account="+item.account}>{item.account}申请加入你的小队！</a>
+                                    }
+                                    description={"小队名称："+item.name}
+                                    style={{width:"50%"}}
+                                />                            
+                            </Col>
 
-                            <List.Item.Meta
-                            //avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                            title={
-                            <a href={"#/personal/account="+item.account}>{item.nickname}回复了你，快来看看吧！</a>
-                            }
-                            description={"原动态发于"+item.time}
-                            style={{width:"50%"}}
-                            />
-
+                            <Col span={6}>
                                 <Button onClick={this.showDrawer}>
-                                    审核
+                                        审核
                                 </Button>
                                 <Drawer
                                     title="是否允许该用户加入小队？"
@@ -120,22 +153,30 @@ export default class Apply extends Component {
                                     visible={this.state.visible}
                                 >
                                     <Form layout="vertical" hideRequiredMark>
-                                        <Form.Item
-                                            name="name"
-                                            label="Name"
-                                            rules={[{ required: true, message: 'Please enter user name' }]}
-                                        >
-                                            <Input placeholder="Please enter user name" />
+                                        <Form.Item>
+                                                <Select defaultValue="approve" style={{ width: 120 }} onChange={this.handleChange.bind(this)}>
+                                                    <Option value="approve">同意</Option>
+                                                    <Option value="refuse">拒绝</Option>
+                                                </Select>
+                                        </Form.Item>
+
+                                        <Form.Item>
+                                            <Button type="primary" htmlType="submit" onClick={()=>{this.handleClick(item.projectId, item.groupId)}}>
+                                            Submit
+                                            </Button>
                                         </Form.Item>
                                     </Form>
-                                    
-                                </Drawer>                               
-
-
-                        </List.Item>
-                    )}
-                    />
-                </Card>
+                                </Drawer>  
+                            </Col>
+                        </Row>
+                        
+                        <Row>
+                            {"申请理由："+item.content}                            
+                        </Row>
+                                
+                    </List.Item>
+                )}
+                />
             </div>
         )
     }

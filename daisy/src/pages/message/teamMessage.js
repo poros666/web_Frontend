@@ -26,7 +26,7 @@ export default class TeamMesage extends Component {
             var tempAccount = JSON.parse(localStorage.userData).account;
             this.state.account = tempAccount;
             Axios
-            .get(`/User/GroupMessage/`+this.state.account,{
+            .get(`/groupMessage/`+this.state.account,{
                 headers: { Authorization: 'Bearer ' + token },
             })
             .then((res) => { 
