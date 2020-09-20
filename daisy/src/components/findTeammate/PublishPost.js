@@ -69,6 +69,7 @@ export default class CreatePost extends React.Component {
               Icon:res.data
           })
       })
+      console.log(this.state.Icon)
     }
   }
 
@@ -117,7 +118,7 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <Input placeholder={isLogined()?userdata.name:'请先登录'} disabled/>
+          <Input placeholder={isLogined()?userdata.nickname:'请先登录'} disabled/>
         </Form.Item>
       </Col>,
     );
@@ -171,7 +172,10 @@ export default class CreatePost extends React.Component {
           axios.post('/Post',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
           .then(response=>{
             console.log(response)
-            window.alert("发布成功")
+            //window.location.reload()
+          })
+          .catch(error=>{
+            console.log(error)
           })
         }
       }

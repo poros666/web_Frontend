@@ -101,6 +101,15 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
             console.log(response)
             window.alert("举报成功")
           })
+          .catch(error=>{
+            console.log(error)
+            if(error.response.status===409){
+              window.alert('您已经举报过该帖子')
+            }
+            else{
+              window.alert('举报失败')
+            }
+          })
         }
         else{
           window.alert("缺少需要填写项,举报失败")

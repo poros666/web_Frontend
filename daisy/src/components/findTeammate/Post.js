@@ -23,10 +23,6 @@ export default class Post extends Component {
     
     
     constructor(props){
-        if(!isLogined()){
-            window.alert('连接出错，点击确定返回主页.')
-            window.location.hash ='#/home'
-        }
         super(props)
 
         var groupId=this.props.groupId
@@ -44,7 +40,8 @@ export default class Post extends Component {
             PostId:parseInt(postId),
             ProjctId:parseInt(MatchId),
         }
-        
+        console.log(this.state.ProjctId)
+        console.log('/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         axios.get('/Post/'+postId+'?projectId='+MatchId+'&groupId='+groupId)
         .then(response=>{
             console.log(response)
@@ -54,15 +51,20 @@ export default class Post extends Component {
                 PostTime:response.data.postTime,
                 Account:response.data.leaderAccount
             })
-            if(response.data.icon!=null){
+            /*if(response.data.icon!=null){
                 axios.get(response.data.icon)
                 .then(res=>{
                     this.setState({
                         Icon:res.data
                     })
-
                 })
-            }
+                .catch(err=>{
+                    console.log(err)
+                    this.setState({
+                        Icon:''
+                    })
+                })
+            }*/
         })
         .catch(error=>{
             console.log(error)
@@ -112,7 +114,12 @@ export default class Post extends Component {
                                   window.alert("申请成功")
                                 })
                                 .catch(error=>{
+                                    if(error.response.status===409){
                                     window.alert("您已经发送过申请")
+                                    }
+                                    else{
+                                        window.alert('申请失败')
+                                    }
                                   })         
                         }
                         else{
