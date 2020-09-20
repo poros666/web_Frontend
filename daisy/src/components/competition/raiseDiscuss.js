@@ -61,11 +61,15 @@ export default class RaiseDiscuss extends React.Component {
     if(isLogined())
     {
       userData=JSON.parse(localStorage.getItem('userData'))
-    }
     axios.get(userData.icon)
     .then(res=>{
       this.setState({image:res.data})
     })
+    }
+    else
+    {
+      this.setState({image:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'})
+    }
   }
 
   handleSubmit = () => {
@@ -110,7 +114,9 @@ export default class RaiseDiscuss extends React.Component {
     })
     .catch(error=>{
       console.log(error);
+      window.alert("似乎出现问题，请重试")
     });
+    window.location.reload()
   }
 
   render() {

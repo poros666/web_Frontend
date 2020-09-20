@@ -19,6 +19,7 @@ export default class EditTeam extends Component{
            Introduction:[],
            GroupId:this.props.location.query.GroupId,
            ProjectId:this.props.location.query.ProjectId,
+           account:this.props.location.query.Account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
         Axios.get('/Usergroup?GroupId='+this.props.location.query.GroupId+'&ProjectId='+this.props.location.query.ProjectId,
@@ -67,6 +68,7 @@ export default class EditTeam extends Component{
             console.log(error)
             window.alert("修改失败")
          })
+         window.location.hash="#/personal/account"+this.state.account
     }
     render(){
         return(
@@ -98,43 +100,6 @@ export default class EditTeam extends Component{
                                 defaultValue={this.state.Introduction} 
                                 onChange={this.inputChange}
                                 />
-                            </Descriptions.Item>
-                            <Descriptions.Item
-                            label='成员'>
-                                <div style={{width:700}}>
-                                {
-                                    <List
-                                        style={{margin:20}}
-                                        grid={{ gutter: 20, column: 3 }}
-                                        dataSource={this.state.memberList}
-                                        renderItem={item => (
-                                        <List.Item>
-                                        <span className="avatar-item">
-                                            <Badge 
-                                            count={
-                                                <Button 
-                                                id='delete_button'
-                                                type="primary" 
-                                                danger 
-                                                shape='circle' 
-                                                size='small'
-                                                icon={<CloseOutlined/>}
-                                                onClick={this.deleteMember(item.account)}
-                                                />
-                                            }>
-                                                <Avatar 
-                                                size={64} 
-                                                shape="circle" 
-                                                src={item.icon}
-                                                />
-                                                <p>{item.name}</p>
-                                            </Badge>
-                                        </span>
-                                        </List.Item>
-                                    )}
-                                    />   
-                                }
-                                </div>
                             </Descriptions.Item>
                         </Descriptions>
                         <div className='saveButtons'>

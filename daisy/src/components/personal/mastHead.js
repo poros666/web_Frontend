@@ -3,6 +3,7 @@ import {Card,Avatar} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
 import { Link} from "react-router-dom";
 import Axios from 'axios';
+import { isLogined } from '../../utils/auth';
 
 const data=JSON.parse(localStorage.getItem("userData"))
 
@@ -11,47 +12,56 @@ export default class MastHead extends Component {
         super(props)
         this.state={
             account:this.props.account,
-            nickname:data.nickname,
+            nickname:null,
             role:this.props.role,
             image:null,
         }
-    }
-
-    componentDidMount()
-    {
-      this.getimage()
-    }
-  
-    getimage()
-    {
-      if(this.state.role)
+        if(this.state.role)
       {
         Axios.get(data.icon)
         .then(res=>{
-          this.setState({image:res.data})
+          this.setState({
+            image:res.data,
+            nickname:data.nickname})
         })
       }
       else
       {
-          Axios.get('/User/'+this.state.account)
+        if(isLogined()){
+        var token=JSON.parse( localStorage.getItem('token')).token
+          Axios.get('/Users/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
           .then(respons=>{
               var pictureurl=respons.data.icon
-              Axios.get(pictureurl)
-              .then(res=>{
-                  this.setState({image:res.data})
+              this.setState(
+                {
+                  nickname:respons.data.nickname
                 }
               )
-          })
+              Axios.get(pictureurl)
+              .then(res=>{
+                  this.setState({
+                    image:res.data,
+                  })
+                }
+              )
+          })}
+          else
+          {
+            window.alert("请登录查看他人信息")
+            window.location.hash="#/home"
+          }
       }
     }
-  
+
+
+
     
     render() {
         return (
             <div className="mastHead_card">
                 <Card bordered={false} style={{textAlign:"center"}}>
                 <Avatar 
-                src={this.state.Icon}
+                src={this.state.image}
                 size='large'
                 style={{marginBottom:20}}
                 />

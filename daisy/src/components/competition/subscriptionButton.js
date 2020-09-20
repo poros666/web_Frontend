@@ -25,8 +25,15 @@ handleClick(id){
               })
               .catch(error=>{
                 console.log(error);
+                console.log(error.response.status);
+                if(error.response.status===409)
+                {
+                    window.alert("已经订阅过比赛")
+                }
+                else{
                 window.alert("连接似乎出现问题")
-              });
+                }
+            });
         //}
 }
 

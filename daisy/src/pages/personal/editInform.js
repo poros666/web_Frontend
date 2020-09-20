@@ -17,10 +17,15 @@ export default class EditInform extends Component {
         this.inputChange=this.inputChange.bind(this)
         //this.saveEdit=this.saveEdit.bind(this)
         this.state={
-            data:JSON.parse(localStorage.getItem("userData"))
+            data:JSON.parse(localStorage.getItem("userData")),
             //当前登录的用户数据
+            image:null
         }
         console.log(this.state.data)
+        Axios.get(this.state.data.icon)
+        .then(res=>{
+          this.setState({image:res.data})
+        })
         //给this.state赋值
     }
 
@@ -35,7 +40,7 @@ export default class EditInform extends Component {
                             <Descriptions.Item label="头像">
                                 <Avatar 
                                 size={128}
-                                src={this.state.data.icon} />
+                                src={this.state.image} />
                                 <Upload name="logo" action="/upload.do" listType="picture">
                                     <Button>
                                         <UploadOutlined /> 点击上传
@@ -186,6 +191,7 @@ export default class EditInform extends Component {
             console.log(error);
           });
         console.log(this.state)
+        window.location.hash="#/personal/account="+this.state.data.account
     }
     inputChange(e){
         let o={}
