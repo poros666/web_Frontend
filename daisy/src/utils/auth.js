@@ -36,6 +36,7 @@ export function isLogined() {
 //退出登录
 export function clearToken() {
   localStorage.removeItem("token")
+  localStorage.removeItem("userData")
 }
 
 
