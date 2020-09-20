@@ -21,6 +21,9 @@ const NormalLoginForm = () => {
       window.alert("登陆成功")
       window.location.href='#/home'
     })
+    .catch(function (error) {
+      window.alert("登陆失败")
+    })
   };
 
   return (
