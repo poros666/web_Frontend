@@ -23,10 +23,6 @@ export default class Post extends Component {
     
     
     constructor(props){
-        if(!isLogined()){
-            window.alert('连接出错，点击确定返回主页.')
-            window.location.hash ='#/home'
-        }
         super(props)
 
         var groupId=this.props.groupId

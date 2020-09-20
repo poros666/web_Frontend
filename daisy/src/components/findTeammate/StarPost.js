@@ -47,10 +47,6 @@ export default class StarPost extends Component {
         })
     }
     render() {
-        if(!isLogined()){
-            window.alert('连接出错，点击确定返回主页')
-            window.location.hash ='#/home'
-        }
         return(
             <div>
             <Form>
