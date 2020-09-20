@@ -57,6 +57,16 @@ export default class ToComment extends React.Component {
     if(isLogined()){
       Axios.get(JSON.parse(localStorage.userData).icon.toString()).then((res)=>{
         this.setState({ava:res.data})
+
+        console.log(" ava  ",this.state.ava)
+        Axios.get(this.state.ava).then((ress)=>{
+          if(ress.data.length>0){
+            this.setState({ava:ress.data})
+          }
+        }
+        )
+        .catch()
+        
       })
     }
   }

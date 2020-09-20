@@ -166,7 +166,7 @@ export default class MomentList extends Component {
 
     getMomentList(){
       var url=CONSTURL.GetMomentList+this.state.sortType
-      console.log(url)
+     // console.log(url)
       Axios.get(url).then((res)=>{
         console.log("momentlist data:",res.data)
         this.setState({temp:res.data})
@@ -178,10 +178,10 @@ export default class MomentList extends Component {
 
       //  console.log(this.state.data)
         for(var i=0;i<this.state.data.length;i++){
-          console.log(this.state.data[i].icon)
+     //     console.log(this.state.data[i].icon)
           Axios.get(this.state.data[i].icon).then((res)=>{
             this.setState({image:res.data})
-            console.log(this.state.image)
+       //     console.log(this.state.image)
             this.setState({image:res.data})
         //    console.log(this.state.image)
           })
