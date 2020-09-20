@@ -13,7 +13,7 @@ import { isLoginedAdmin } from "./utils/auth"
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route path="/admin" render={(routeProps)=>(!isLoginedAdmin()?(<AdminIndex {...routeProps} />):(<Redirect to="/login"/>))}/>
+      <Route path="/admin" render={(routeProps)=>(isLoginedAdmin()?(<AdminIndex {...routeProps} />):(<Redirect to="/login"/>))}/>
       <Route path="/message" render={routeProps=><MessageIndex {...routeProps} />}/>
       <Route path="/personal/account=:account" render={props=><PersonalSpace {...props} />}/>
       {mainRoutes.map(route=>{

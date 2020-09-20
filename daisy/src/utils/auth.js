@@ -39,11 +39,12 @@ export function  isLoginedAdmin() {
   var account = JSON.parse(localStorage.userData).account
   let result = false;
   console.log("here",account)
-  if(account === "fwdarling"){
+  if(account !== "fwdarling"){
     console.log("checked")
     window.alert("并非管理员！")
-    return true;
+    return false;
   }
+
   const time = new Date().getTime();
   if (storage) {
       if (time < storage.expire) {
